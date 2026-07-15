@@ -27,10 +27,20 @@ for full rationale.
       from CLAUDE.md into a concrete classify-apply-commit-log procedure
 
 ## Phase 3 — Demo pack (weeks 3-5)
-- [ ] `demo-script`
-- [ ] `demo-setup` (needs Storyblok MCP working in Cowork)
-- [ ] `build-deck` (needs example decks in `resources/deck-examples/`,
-      as .pptx exports from Google Slides — see style-guide.md)
+- [x] `build-deck` drafted — Walid dropped 5 real decks into
+      `resources/deck-examples/`; template structure reverse-engineered
+      and documented in style-guide.md. Adapts these decks, never
+      builds from scratch.
+- [x] `demo-script` drafted — chains off the account brief + the deck's
+      demo stations; Tell-Show-Tell per station, objections sourced from
+      `resources/battle-cards/` (currently empty — flag if used before
+      populated), verify-before-call checklist.
+- [x] `demo-setup` drafted, but **execution blocked**: no Storyblok MCP
+      tool present in this Cowork session (verified 2026-07-15, same
+      result as the original HANDOFF.md flag). Skill is fully specced
+      (dry-run preview → OK → write → verify, per CLAUDE.md guardrail 3)
+      and ready to run the moment the connector appears — don't attempt
+      to improvise around its absence.
 
 ## Phase 4 — Cadence (weeks 5-6)
 - [ ] `weekly-review`
@@ -64,3 +74,9 @@ for full rationale.
 - 2026-07-15: Phase 2 complete — drafted `darwin-improve`, `post-call-update`,
   `call-coach`. All of Phase 1 + Phase 2 now done; Phase 3 (demo pack) is
   next but blocked on Storyblok MCP + example decks.
+- 2026-07-15: Phase 3 mostly complete — 5 real decks landed in
+  `resources/deck-examples/`, unblocking `build-deck` (template
+  documented in style-guide.md). Drafted `build-deck` and `demo-script`.
+  `demo-setup` drafted but still can't run live — Storyblok MCP still
+  absent from this Cowork session. Phase 4 (`weekly-review`,
+  `monthly-review`, `todo-sync`, `dashboard`) is next.

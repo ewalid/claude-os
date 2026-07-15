@@ -175,6 +175,50 @@ Darwin has — no update, no memory.
 - Phase 2 of ROADMAP.md is now fully checked off. Updated ROADMAP.md
   and CHANGELOG.md accordingly, pushed everything to GitHub.
 
+### 2026-07-15 — Session 4 (Phase 3 build-out)
+- Walid said "phase 3 now." Found Walid had already dropped 5 real demo
+  decks into `resources/deck-examples/` (Stokke, fashioncheque, Payabl,
+  Cellbes AB, Orange Cyberdefense) — unblocking `build-deck`. Parsed all
+  5 with python-pptx to find the shared template: title (account + AE +
+  Walid as SE) → "What we know so far" (Key Business Result / Observed
+  constraints / What is needed / What does success look like / By when)
+  → themed demo-stations overview (2-4 stations, picked per account
+  priorities — seen: Commerce & Integrations, AI Capabilities, Developer
+  Experience & Integration, Structured Content & Reuse, Platform
+  Architecture & Security) → per-station triptych (transition slide /
+  blank "Demo" slide / "KEY TAKEAWAYS" slide with a real customer-proof
+  quote, e.g. Spendesk, Marc O'Polo) → optional Technical Topics
+  (FlowMotion, Storyblok MCP Server, Composable Headless, Performance &
+  Scalability, security) for more technical/enterprise accounts →
+  optional commercial section (Pricing, Partnership Orchestration,
+  Implementation Methodology, Premium vs Elite packages) for larger
+  deals → "Thank You for Joining!" close. Also noticed some source decks
+  still carry leftover instructional placeholder text on unfilled
+  slides (literal "Tell-Show-Tell" authoring instructions) — documented
+  that `build-deck` must treat this as empty scaffolding, never copy it
+  forward as real content. Wrote all of this into `style-guide.md`.
+- Built `build-deck` — adapts the closest-fitting example deck per the
+  account brief; demo slides always stay blank (never fake demo
+  content); never invents a slide type outside the 5-deck template.
+- Built `demo-script` — Tell-Show-Tell per demo station, chained off
+  `build-deck`'s stations + the account brief; objections sourced from
+  `resources/battle-cards/` (currently empty, flagged); verify-before-
+  call checklist. Output goes to a separate markdown file, not onto the
+  deck itself.
+- Built `demo-setup`, but confirmed it still can't run live — no
+  Storyblok MCP tool present in this Cowork session (checked the tool
+  list again, same absence as Session 1's original HANDOFF.md flag).
+  Fully specced with the dry-run-preview → OK → write → verify flow so
+  it's ready to go the moment the connector shows up; explicitly told
+  not to improvise around the absence (e.g. via browser automation).
+- Phase 3 of ROADMAP.md is now checked off except demo-setup's live
+  execution. Updated ROADMAP.md and CHANGELOG.md, pushed to GitHub.
+- New known gaps surfaced by this pass: `resources/battle-cards/` is
+  empty (demo-script has nothing to source objections from yet); no
+  `accounts/<customer>/brief.md` exists for any account yet (process-
+  customer hasn't had a real run, so build-deck/demo-script have
+  nothing to chain off until one is written).
+
 ---
 
 ## Standing facts (update if they change; don't duplicate HANDOFF.md)
@@ -217,5 +261,14 @@ Darwin has — no update, no memory.
 - [ ] MEDDPICC not populated for any account yet — needs Walid's input.
 - [ ] Scheduled `darwin-daily-briefing` task's prompt still describes
       chat-text output, not the live artifact — needs updating.
-- [ ] Phase 3 (demo pack) is next but blocked on Storyblok MCP + example
-      decks in `resources/deck-examples/`.
+- [x] Phase 3 (demo pack): `build-deck` and `demo-script` drafted
+      2026-07-15 Session 4, using the 5 real decks Walid dropped into
+      `resources/deck-examples/`. `demo-setup` drafted but still can't
+      run live — Storyblok MCP still absent.
+- [ ] `resources/battle-cards/` is empty — `demo-script`'s objection-
+      sourcing has nothing to draw on until it's populated.
+- [ ] No `accounts/<customer>/brief.md` exists for any account yet —
+      run `process-customer` for real before `build-deck`/`demo-script`
+      can actually be used on a live account.
+- [ ] Phase 4 (`weekly-review`, `monthly-review`, `todo-sync`,
+      `dashboard`) is next on the roadmap.

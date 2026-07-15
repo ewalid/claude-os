@@ -82,13 +82,46 @@ short, skimmable "what changed and when" record. Update it alongside any
   next, but blocked on Storyblok MCP reachability and example decks in
   `resources/deck-examples/`.
 
+## 2026-07-15 (Phase 3)
+
+- **`resources/deck-examples/` populated** — Walid dropped 5 real demo
+  decks (Stokke, fashioncheque, Payabl, Cellbes AB, Orange Cyberdefense).
+  Reverse-engineered the shared template across all 5 and documented it
+  in `style-guide.md`: title → "What we know so far" discovery recap →
+  themed demo-stations overview → per-station transition/blank-Demo/
+  key-takeaways triptych → optional Technical Topics → optional
+  commercial/pricing section → Thank You close.
+- **`build-deck` skill drafted** — adapts the closest-fitting example
+  deck per account brief; never invents a slide type outside the
+  documented template; demo slides always stay blank (that's
+  `demo-script`'s job, in a separate doc).
+- **`demo-script` skill drafted** — Tell-Show-Tell per demo station,
+  objections sourced from `resources/battle-cards/` (currently empty —
+  flagged), verify-before-call checklist. Chains off `build-deck` and
+  the account brief.
+- **`demo-setup` skill drafted but blocked** — fully specced (dry-run
+  preview → OK → write → verify, per CLAUDE.md guardrail 3), but the
+  Storyblok MCP connector is still absent from this Cowork session as
+  of 2026-07-15 (re-verified, same result as the original HANDOFF.md
+  flag). Will not run live until that connector appears.
+- **Phase 3 of ROADMAP.md is now mostly complete** — only `demo-setup`'s
+  live execution remains blocked on the Storyblok connector. Phase 4
+  (`weekly-review`, `monthly-review`, `todo-sync`, `dashboard`) is next.
+
 ## Known gaps / carried forward
 
 - Notion "Dashboard" view has no charts yet (API limitation hit today).
 - Implid and Cera RFP have no confirmed AE — need validation from Walid.
 - MEDDPICC not yet populated for any account — needs Walid's input per
   deal, or for `process-customer` (Phase 2 rebuild) to start capturing it.
-- `call-coach` and `post-call-update` are drafted but unused — first
-  real run will surface whatever the spec got wrong.
+- `call-coach`, `post-call-update`, `build-deck`, `demo-script` are all
+  drafted but unused — first real runs will surface whatever the specs
+  got wrong.
+- `demo-setup` cannot run live — Storyblok MCP connector still absent.
+- `resources/battle-cards/` is empty — `demo-script`'s objection-sourcing
+  step has nothing to draw on yet.
+- No `accounts/<customer>/brief.md` exists yet for any account —
+  `process-customer` hasn't been run for real; `build-deck`/`demo-script`
+  need one to chain off.
 - Scheduled `darwin-daily-briefing` task's prompt still describes chat-
   text output; it hasn't been updated to point at the live artifact.
