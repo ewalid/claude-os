@@ -50,6 +50,12 @@ Darwin has — no update, no memory.
 - Proposed Notion restructure (split Due date → Next call / Deadline,
   add AE property, add views, add Debriefs DB) — awaiting Walid's OK
   before executing.
+- Walid asked to keep moving on the roadmap and confirmed daily-briefing
+  should be a routine. Scheduled it via Cowork's native scheduler (task
+  `darwin-daily-briefing`, weekdays 9:00am Paris) — he explicitly chose to
+  skip the original "tune manually first" gate, and to use Cowork's
+  scheduler instead of n8n. Still watch its unattended output closely for
+  the first couple of weeks.
 
 ---
 
@@ -67,6 +73,8 @@ Darwin has — no update, no memory.
 
 ## Open items carried forward
 - [ ] Notion restructure: awaiting Walid's OK to execute.
+- [ ] Watch the scheduled daily-briefing's first several unattended runs
+      closely (weekdays 9am Paris) — correct anything wrong immediately.
 - [ ] Confirm Storyblok MCP reachability in Cowork (Phase 5, not urgent;
       currently not present as a tool in this session).
 - [ ] Build `call-coach`, `post-call-update`, `darwin-improve` (Phase 2).

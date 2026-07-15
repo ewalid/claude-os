@@ -6,7 +6,11 @@ for full rationale.
 
 ## Phase 1 — Foundation (now)
 - [x] `daily-briefing` skill drafted
-- [ ] Run daily, tune via corrections
+- [x] Scheduled: runs automatically weekdays at 9:00am Paris time via Cowork's
+      native scheduler (task `darwin-daily-briefing`) — Walid opted to skip
+      the original "tune manually first" gate and go straight to automation,
+      using Cowork's scheduler instead of n8n. Still watch its output closely
+      for the first couple weeks; correct anything wrong immediately.
 - [ ] Ship the Notion restructure proposal (see HANDOFF.md §2), execute on OK
 
 ## Phase 2 — Core loop (weeks 2-3)
@@ -25,7 +29,8 @@ for full rationale.
 - [ ] `monthly-review`
 - [ ] `todo-sync`
 - [ ] `dashboard`
-- [ ] n8n scheduling of the morning brief (once its output is trusted)
+- [x] Morning brief scheduling — done early via Cowork's native scheduler
+      (see Phase 1 note); n8n is no longer needed for this specific job.
 
 ## Phase 5 — Heavy artillery (weeks 6-10)
 - [ ] `rfp-answer` (+ Excel handling, + library harvesting)
@@ -40,3 +45,5 @@ for full rationale.
 - 2026-07-15: Repo scaffolded. Connectors verified: Calendar ✅, Notion ✅,
   Slack ✅, GitHub ✅ (repo `ewalid/claude-os`). Storyblok MCP: not present
   in this Cowork session — flagged, not urgent (Phase 5).
+- 2026-07-15: daily-briefing scheduled — weekdays 9:00am Paris, Cowork native
+  scheduler, task id `darwin-daily-briefing`.
