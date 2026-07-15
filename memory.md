@@ -71,6 +71,16 @@ Darwin has — no update, no memory.
 - GitHub repo: `ewalid/claude-os` (private).
 - Stokke: Ines Akrap's account, Walid is shadowing (not his to run).
 
+- Walid asked for the daily-briefing to be more visual with more context.
+  Built a live Cowork artifact (`darwin-daily-briefing`) instead of just
+  reformatting chat text — it calls Calendar/Notion/Slack directly via
+  callMcpTool on every open, and uses askClaude (Haiku) to classify
+  accounts as CALL vs. DEADLINE and triage Slack into needs-reply /
+  worth-claiming. Verified live: all 4 underlying tool calls succeeded
+  (calendar, notion-query-database-view, notion-fetch, slack x2) with
+  the expected shapes. Updated daily-briefing/SKILL.md to point future
+  sessions at this artifact instead of only the chat-text format.
+
 ## Open items carried forward
 - [ ] Notion restructure: awaiting Walid's OK to execute.
 - [ ] Watch the scheduled daily-briefing's first several unattended runs

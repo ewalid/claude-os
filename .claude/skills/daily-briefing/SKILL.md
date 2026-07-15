@@ -86,3 +86,15 @@ One-liner: Implid proposal is the tightest deadline this week — due July 17.
   silently omitting that section.
 - Never guess a date's meaning — if it can't be cross-checked, mark it
   "need validation" instead of asserting call vs. deadline.
+- Walid prefers this rendered visually, not as a chat wall of text. There is
+  a live Cowork artifact (`darwin-daily-briefing`) that pulls calendar,
+  Notion Accounts DB, Notion todos, and both Slack channels fresh on every
+  open, and uses a quick Haiku pass (via `askClaude`) to classify each
+  account's date as CALL vs. DEADLINE and to triage Slack into "needs
+  reply" / "worth claiming". Point Walid to that artifact for the visual
+  version; only fall back to a plain chat-text brief if artifacts aren't
+  available in context.
+- If Walid corrects the artifact's classification (e.g. it mislabels a
+  call as a deadline, or flags/misses a Slack item), that's a prompt-
+  wording fix inside the artifact's askClaude prompts, not a one-off
+  chat correction — update the HTML/JS and redeploy via update_artifact.
