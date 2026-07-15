@@ -117,6 +117,64 @@ Darwin has — no update, no memory.
   better tooling support for the future `build-deck` skill to parse.
   Recorded in `resources/style-guide.md` and `ROADMAP.md` Phase 3.
 
+### 2026-07-15 — Session 2 (scheduled daily-briefing, unattended)
+- First unattended run of `darwin-daily-briefing`. All connectors
+  reachable: Calendar, Notion, Slack (#se-requests + #se-sgm by ID),
+  GitHub. No Storyblok MCP tool present (still unresolved, Phase 5).
+- Accounts DB unchanged since last session: same 3 live rows (Jouet
+  club, Implid, Cera RFP), same 4 blank stubs. No new accounts.
+- Cross-checked Jouet club's Next call (2026-07-21) directly against
+  calendar — confirmed live: "JouéClub-LGR / Storyblok (CMS)" event at
+  17:00 Paris on July 21. Also spotted a "prep call Jouet club" on
+  Walid's own calendar July 16, 10:00-12:00 (self-created, not in
+  Notion) — worth having ready before then.
+- Resolved last session's open item: Rob Scholte's P&V Group RFP ask
+  in #se-requests. Read the full thread — Chakit Arora (SE colleague,
+  not AE) already asked Rob on July 14 "anything needed from the SE
+  team?"; Rob replied July 15 "yes I need help on the RFP document."
+  This is Chakit's engagement to follow up on, not Walid's — correctly
+  not flagged as a Walid obligation or worth-claiming.
+- New Slack finding: Play'n GO (Kristoffer Strindevall, AE pod) posted
+  in #se-requests July 14 — "Additional Discovery Needed," no SE has
+  replied in-thread. Flagged as "worth claiming?" this run.
+- Today's calendar (July 15) has no demo owned by Walid — Stokke Demo
+  Prep (11:00) is Ines's account (shadowing), QBR Q3 Strategic Growth
+  (14:00-17:00) is internal. Confirmed no false "demo today" trigger.
+- Notion ToDo checklist: "investigate white labelling feature" still
+  open; other two items checked off.
+- No corrections from Walid this run (unattended, no reply expected
+  before this entry was written).
+
+### 2026-07-15 — Session 3 (Phase 2 build-out)
+- Walid said "keep with the roadmap" — built the three remaining Phase 2
+  skills:
+  - `darwin-improve` — formalizes CLAUDE.md's "how I improve" loop:
+    identify friction -> classify (CLAUDE.md for recurring rules / a
+    skill's SKILL.md for task-specific procedure / resources/ for
+    reference material / accounts/<customer>/ for one-off account facts
+    / a live artifact via update_artifact+verify_artifact) -> apply
+    everywhere it touches in one pass -> commit as `improve: ...` -> log
+    in CHANGELOG.md -> update memory.md. Documents today's people-model
+    correction as its worked example.
+  - `post-call-update` — trigger "debrief [account]": writes a new row
+    to the Debriefs DB (Outcome/Objections/Next steps), updates the
+    Accounts DB row (Stage/Next call/Deadline/MEDDPICC — MEDDPICC only
+    from explicit statements, never inferred from attendee seniority),
+    appends to `accounts/<customer>/debriefs.md`, updates memory.md.
+    Never fabricates outcomes — asks Walid if the trigger message
+    doesn't already state what happened.
+  - `call-coach` — coaches from a pasted Gong transcript or notes (Gong
+    not connected, never claims otherwise): 3-5 things done well + 3-5
+    to improve, each quoting an actual moment, critiqued against the
+    call's stated goal from `accounts/<customer>/brief.md`, one focus
+    for next call. Feeds private `resources/coaching-log.md` — never
+    surfaced anywhere customer-facing.
+  All three are drafted only — none has had a real run yet, so treat
+  their first uses as a trial the same way the artifact's first runs
+  were watched closely.
+- Phase 2 of ROADMAP.md is now fully checked off. Updated ROADMAP.md
+  and CHANGELOG.md accordingly, pushed everything to GitHub.
+
 ---
 
 ## Standing facts (update if they change; don't duplicate HANDOFF.md)
@@ -145,12 +203,19 @@ Darwin has — no update, no memory.
 - [ ] Notion restructure: DONE (2026-07-15) — no longer open.
 - [ ] Watch the scheduled daily-briefing's first several unattended runs
       closely (weekdays 9am Paris) — correct anything wrong immediately.
+      (2026-07-15 unattended run: clean, no corrections needed.)
 - [ ] Confirm Storyblok MCP reachability in Cowork (Phase 5, not urgent;
       currently not present as a tool in this session).
-- [ ] Build `call-coach`, `post-call-update`, `darwin-improve` (Phase 2).
-- [ ] Rob Scholte's RFP help request in #se-requests (July 15) — confirm
-      whether Walid is picking this up.
+- [x] Build `call-coach`, `post-call-update`, `darwin-improve` (Phase 2)
+      — all drafted 2026-07-15 Session 3. Watch their first real runs.
+- [ ] Play'n GO (Kristoffer Strindevall, AE pod) — unclaimed discovery
+      follow-up in #se-requests (July 14) — "worth claiming?", not yet
+      picked up by any SE as of July 15.
 - [ ] Notion "Dashboard" view has no charts — needs a human touch in the
       Notion UI, or another scripted attempt later.
 - [ ] Implid and Cera RFP have no confirmed AE — ask Walid.
 - [ ] MEDDPICC not populated for any account yet — needs Walid's input.
+- [ ] Scheduled `darwin-daily-briefing` task's prompt still describes
+      chat-text output, not the live artifact — needs updating.
+- [ ] Phase 3 (demo pack) is next but blocked on Storyblok MCP + example
+      decks in `resources/deck-examples/`.

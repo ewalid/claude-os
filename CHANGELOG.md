@@ -31,9 +31,6 @@ short, skimmable "what changed and when" record. Update it alongside any
 - **daily-briefing artifact updated** to read the new Next call/Deadline/
   AE/MEDDPICC fields directly instead of guessing from one ambiguous
   date field, and to surface AE + MEDDPICC status on each account card.
-- **daily-briefing artifact links Slack permalinks** — every needs-reply
-  and worth-claiming item now links to the actual message in #se-requests
-  or #se-sgm (constructed from channel ID + Slack "Message TS").
 - **daily-briefing became a live Cowork artifact** (`darwin-daily-briefing`)
   instead of chat text — pulls Calendar/Notion/Slack fresh on every open,
   uses a Haiku pass (`askClaude`) to classify call-vs-deadline and triage
@@ -60,9 +57,38 @@ short, skimmable "what changed and when" record. Update it alongside any
 - **Deck format decided**: `resources/deck-examples/` will hold .pptx
   exports from Google Slides, not .odp — see `style-guide.md`.
 
+## 2026-07-15 (Phase 2)
+
+- **`darwin-improve` skill drafted** — formalizes CLAUDE.md's "how I
+  improve" loop into a concrete procedure: identify friction ->
+  classify (CLAUDE.md / a skill's SKILL.md / resources/ / accounts/ /
+  a live artifact) -> apply everywhere it touches in one pass -> commit
+  as `improve: ...` -> log in CHANGELOG.md -> update memory.md. Uses
+  today's people-model correction as its worked example.
+- **`post-call-update` skill drafted** — trigger "debrief [account]":
+  writes a new row to the Debriefs DB, updates the Accounts DB row's
+  Stage/Next call/Deadline/MEDDPICC, appends to
+  `accounts/<customer>/debriefs.md`, updates memory.md. Never fabricates
+  outcomes — asks Walid if his trigger message doesn't already state
+  what happened.
+- **`call-coach` skill drafted** — coaches from a pasted Gong transcript
+  or notes (Gong not connected, never claims otherwise): 3-5 things
+  done well + 3-5 to improve, each quoting an actual moment, critiqued
+  against the call's stated goal (from `accounts/<customer>/brief.md`),
+  one focus for next call. Feeds private `resources/coaching-log.md` —
+  never surfaced anywhere customer-facing.
+- **Phase 2 of ROADMAP.md now complete** (process-customer, call-coach,
+  post-call-update, darwin-improve all drafted). Phase 3 (demo pack) is
+  next, but blocked on Storyblok MCP reachability and example decks in
+  `resources/deck-examples/`.
+
 ## Known gaps / carried forward
 
 - Notion "Dashboard" view has no charts yet (API limitation hit today).
 - Implid and Cera RFP have no confirmed AE — need validation from Walid.
 - MEDDPICC not yet populated for any account — needs Walid's input per
   deal, or for `process-customer` (Phase 2 rebuild) to start capturing it.
+- `call-coach` and `post-call-update` are drafted but unused — first
+  real run will surface whatever the spec got wrong.
+- Scheduled `darwin-daily-briefing` task's prompt still describes chat-
+  text output; it hasn't been updated to point at the live artifact.

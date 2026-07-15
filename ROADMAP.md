@@ -19,9 +19,12 @@ for full rationale.
 
 ## Phase 2 — Core loop (weeks 2-3)
 - [x] `process-customer` skill drafted
-- [ ] `call-coach`
-- [ ] `post-call-update`
-- [ ] `darwin-improve`
+- [x] `call-coach` drafted — coaches from pasted Gong transcripts/notes
+      (Gong itself not connected), feeds private `resources/coaching-log.md`
+- [x] `post-call-update` drafted — "debrief [account]" writes to the
+      Debriefs DB, updates Accounts DB, updates `accounts/<customer>/`
+- [x] `darwin-improve` drafted — formalizes the "how I improve" loop
+      from CLAUDE.md into a concrete classify-apply-commit-log procedure
 
 ## Phase 3 — Demo pack (weeks 3-5)
 - [ ] `demo-script`
@@ -58,3 +61,6 @@ for full rationale.
 - 2026-07-15: Corrected AE-pod vs. SE-colleague vs. manager confusion risk
   (people.md updated); widened Slack scan to last-working-day-through-now;
   decided deck-examples format is .pptx, not .odp.
+- 2026-07-15: Phase 2 complete — drafted `darwin-improve`, `post-call-update`,
+  `call-coach`. All of Phase 1 + Phase 2 now done; Phase 3 (demo pack) is
+  next but blocked on Storyblok MCP + example decks.
