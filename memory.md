@@ -243,6 +243,43 @@ Darwin has — no update, no memory.
   yet, so this hasn't had a real run. First use will show whether the
   Confirmed/Partial/Gap bar is calibrated right.
 
+### 2026-07-15 — Session 6 (process-customer: full-row rewrite, not just MEDDPICC)
+- Walid: "I need the agent to be able to update everything inside the
+  Notion doc. Not just MEDDPICC, everything... my manual notes are
+  worthless, the agent handles everything, so from the SF and Gong info
+  you update everything." This is a bigger correction than the last
+  one — it's not just "add MEDDPICC," it's "stop treating Stage/
+  Priority/Notes/AE/dates as things that need my sign-off before you
+  touch them."
+- Checked CLAUDE.md guardrail 4 — it already said "I can edit Notion
+  freely, announce at the end." The friction was that
+  `process-customer/SKILL.md`'s Phase E had over-restricted itself
+  relative to that standing rule (added a "propose diff, wait for OK"
+  step for Stage/Priority/AE/dates, and a downgrade-gate on MEDDPICC)
+  — a task-specific procedure quietly contradicting the general rule.
+  Fixed in two places:
+  - CLAUDE.md guardrail 4: added an explicit sentence that "freely"
+    means the whole row, not one column, and that Walid's manual notes
+    are not the source of truth relative to real Gong/SF/Slack evidence.
+  - `process-customer/SKILL.md`: renamed Phase C to "Full account
+    analysis" — now derives Stage/Priority/AE/Next call/Deadline/Notes
+    in addition to MEDDPICC, all from real evidence only (still never
+    invents anything Salesforce/Gong-shaped that wasn't actually
+    pasted in). Phase E now writes all of it directly, no OK gate on
+    any field including MEDDPICC downgrades — just an old→new→evidence
+    announcement, so Walid can spot-check without having to greenlight
+    each write.
+- What did NOT change: the Phase B hard stop (still must have Walid
+  paste real Gong/SF content before analysis runs — nothing to analyze
+  otherwise), never-fabricate-Salesforce/Gong content, never touch
+  human-only columns, never touch "Due date (legacy)" (still deprecated,
+  Next call/Deadline are the real fields).
+- Logged in CHANGELOG.md, pushed to GitHub.
+- Untested live — same as the last MEDDPICC change, no account has had
+  a real process-customer run with actual Gong/SF pastes yet. Both
+  changes will get their first real exercise together whenever that
+  happens.
+
 ---
 
 ## Standing facts (update if they change; don't duplicate HANDOFF.md)
@@ -266,10 +303,9 @@ Darwin has — no update, no memory.
   Matthew Alberts.
 - deck-examples/ file format: .pptx (not .odp) — decks authored in
   Google Slides, exported to .pptx.
-- process-customer's MEDDPICC analysis (Phase C, added 2026-07-15
-  Session 5) tags every element Confirmed/Partial/Gap from real
-  Gong/SF/Slack input only, then auto-writes Confirmed elements to
-  Notion (announce, no OK needed) except downgrades (need OK first).
+- process-customer's Phase C/E (as of Session 6) rewrites the whole
+  Notion row from real evidence, no OK gate on any field — see
+  CLAUDE.md guardrail 4.
 
 ## Open items carried forward
 - [ ] Notion restructure: DONE (2026-07-15) — no longer open.
@@ -302,5 +338,8 @@ Darwin has — no update, no memory.
 - [x] `process-customer` now does a real MEDDPICC analysis from Gong/SF
       pastes and auto-updates Notion (2026-07-15 Session 5) — untested
       live, no account has real extracts pasted in yet.
+- [x] `process-customer` rewrites the ENTIRE Notion row (Stage/Priority/
+      Notes/AE/dates/MEDDPICC), no OK gate on any field (2026-07-15
+      Session 6) — untested live, same reason.
 - [ ] Phase 4 (`weekly-review`, `monthly-review`, `todo-sync`,
       `dashboard`) is next on the roadmap.

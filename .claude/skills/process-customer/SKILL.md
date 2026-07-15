@@ -3,9 +3,11 @@ name: process-customer
 description: >
   Trigger: "let's process [account]", "process [account]", "brief me on
   [account]". Builds or refreshes the full account brief before a demo,
-  call, or RFP push — including a MEDDPICC analysis derived from
-  whatever Salesforce/Gong extracts Walid pastes in, written back to
-  Notion. Has a hard stop in the middle — do not skip it.
+  call, or RFP push — and rewrites the ENTIRE Notion Accounts DB row
+  (Stage, Priority, Notes, AE, Next call, Deadline, MEDDPICC) from real
+  Salesforce/Gong/Slack evidence. Walid's manual notes are not the
+  source of truth — this skill's analysis is. Has a hard stop in the
+  middle — do not skip it.
 ---
 
 # process-customer
@@ -13,18 +15,21 @@ description: >
 ## What it does
 
 Produces `accounts/<customer>/brief.md`: the single document Walid should
-be able to walk into a demo or call with, plus a MEDDPICC read on the
-deal that gets written back to the Notion Accounts DB. Five phases, in order.
+be able to walk into a demo or call with. It also rewrites the account's
+entire Notion Accounts DB row from whatever real Gong/Salesforce/Slack
+evidence is available — not just the MEDDPICC column, the whole row.
+Five phases, in order.
 
 ## Phase A — Gather everything
 
 1. `memory.md` and any existing `accounts/<customer>/` files — don't
-   re-derive what's already known.
-2. Notion Accounts DB row for this customer + any linked notes. Read
-   **Next call**, **Deadline**, **AE**, and **MEDDPICC** directly (the
-   DB was restructured 2026-07-15 — these are real properties now, not
-   inferred). "Due date (legacy)" may still be set on old rows; treat it
-   as unverified, never as the source of truth.
+   re-derive what's already known, but don't treat old notes as
+   authoritative either; they get superseded by this pass's analysis.
+2. Notion Accounts DB row for this customer + any linked notes — this is
+   what's about to be rewritten, so read the current state fully first.
+   "Due date (legacy)" may still be set on old rows; treat it as
+   unverified, never as the source of truth, and never write to it (it's
+   deprecated — **Next call** / **Deadline** are the real fields).
 3. Calendar — past and upcoming events with this customer/account.
 4. Slack — search #se-requests, #se-sgm, and any other channel IDs
    Walid has shared, for threads mentioning this account.
@@ -36,45 +41,44 @@ deal that gets written back to the Notion Accounts DB. Five phases, in order.
 
 Before writing anything, post ONE consolidated message to Walid:
 - Any Salesforce or Gong context he can paste in (never invent this —
-  those tools aren't connected). Ask specifically for anything that
-  speaks to MEDDPICC — who's been in the room, budget/timeline
-  discussion, competitive mentions, stated pain — not just a general
-  "anything to add?"
+  those tools aren't connected). This is the real input this skill runs
+  on — ask for whatever's available: call transcripts, opportunity
+  notes, stage/close-date fields, stakeholder info, anything.
 - Every inconsistency found in Phase A (e.g. Notion date vs. calendar
   mismatch, conflicting stage info, stale notes).
 
 **Do not proceed to Phase C until Walid replies.** This is a hard stop,
-not a suggestion — writing the brief (and the MEDDPICC analysis) on
-guessed or unconfirmed info defeats the point of the skill.
+not a suggestion — the whole point of this skill is analyzing real
+evidence instead of stale manual notes, so it can't run on nothing.
 
-## Phase C — MEDDPICC analysis
+## Phase C — Full account analysis
 
-Once Walid's reply is in hand, work through all 8 elements (Metrics,
-Economic Buyer, Decision Criteria, Decision Process, Paper Process,
-Identify Pain, Champion, Competition) against every real input
-available: the pasted Gong/Salesforce extracts, Slack threads, past
-Debriefs DB rows, calendar context, and anything Walid said directly.
-Never scan for signal in tools that aren't connected (Salesforce, Gong
-themselves) — only in what Walid actually pasted or said.
+Once Walid's reply is in hand, extract everything relevant from the
+real evidence (pasted Gong/Salesforce extracts, Slack threads, past
+Debriefs DB rows, calendar context, anything Walid said directly).
+Never invent signal from tools that aren't connected (Salesforce, Gong
+themselves) — only from what was actually pasted or said. For each
+Notion field below, either derive a real value with its evidence, or
+mark it "no change / need validation" if the evidence doesn't support
+one:
 
-For each of the 8 elements, assign one status:
-- **Confirmed** — there's a specific, quotable piece of evidence (a
-  line from the Gong/SF paste, a Slack message, a direct statement from
-  Walid). Quote it.
-- **Partial** — there's a signal but it doesn't fully establish the
-  element (e.g. a stakeholder attended a call but their role/authority
-  as economic buyer was never stated). Note what's missing to close it.
-- **Gap** — no evidence either way. Say so plainly; don't guess.
-
-Only elements marked **Confirmed** are candidates for the Notion
-MEDDPICC multi-select — Partial and Gap never get checked, no matter
-how plausible they seem.
-
-**Regressions**: if this analysis would *remove* an element that was
-previously marked confirmed in Notion (new information contradicts it,
-or it was set without real evidence originally), flag this explicitly
-to Walid before touching Notion — downgrading is a judgment call in a
-way that adding new confirmed elements isn't.
+- **Stage** — does the evidence show real progression (e.g. "moved to
+  proposal," "verbal commit," "lost to <competitor>")?
+- **Priority** — does the evidence justify a change (deal size, urgency,
+  exec sponsorship signal)?
+- **AE** — does the evidence name the actual AE on this deal? Never
+  guess from role plausibility.
+- **Next call / Deadline** — the concrete next milestone with a real
+  date, labeled explicitly as CALL or DEADLINE.
+- **Notes** — a fresh, concise summary of where the deal actually
+  stands, replacing the old Notes text (which may be stale/wrong —
+  don't just append to it, rewrite it to reflect current reality).
+- **MEDDPICC** — all 8 elements (Metrics, Economic Buyer, Decision
+  Criteria, Decision Process, Paper Process, Identify Pain, Champion,
+  Competition), each tagged:
+  - **Confirmed** — specific quotable evidence + source.
+  - **Partial** — a signal but incomplete; note what's missing.
+  - **Gap** — no evidence either way.
 
 ## Phase D — Write the brief
 
@@ -86,16 +90,14 @@ Last updated: <date>
 
 ## Snapshot
 Type / Stage / Priority / AE / next milestone — labeled explicitly as
-CALL or DEADLINE (never just "due date"), pulled from the Next call /
-Deadline properties directly.
+CALL or DEADLINE (never just "due date"), reflecting what was just
+written to Notion in Phase E, not the pre-analysis state.
 
 ## MEDDPICC
-Full Phase C analysis — all 8 elements, each with its status (Confirmed
-/ Partial / Gap), the quoted evidence or the specific gap, and the
-source (Gong extract, Salesforce extract, Slack thread + link, or
-"Walid, <date>"). Not just the ones going into Notion — show the full
-picture including partials and gaps, since those are exactly what's
-worth closing before the next call.
+All 8 elements, each with its status (Confirmed / Partial / Gap), the
+quoted evidence or the specific gap, and the source (Gong extract,
+Salesforce extract, Slack thread + link, or "Walid, <date>"). Show the
+full picture, not just what made it into Notion.
 
 ## Their priorities
 What the customer actually cares about, per stakeholders and past calls.
@@ -121,40 +123,40 @@ Where every above section came from (Notion link, Slack thread, calendar
 event, Walid's own input, Gong/SF extract) — so staleness is auditable later.
 ```
 
-## Phase E — Update Notion, propose fixes, close out
+## Phase E — Rewrite the Notion row, close out
 
-1. **Write the MEDDPICC result to Notion** — set the Accounts DB row's
-   MEDDPICC multi-select to exactly the elements marked Confirmed in
-   Phase C. This is a direct edit, done now, not gated on Walid's OK
-   (per CLAUDE.md guardrail 4: edit Notion freely, announce at the
-   end) — *except* any regression flagged in Phase C, which needs
-   Walid's confirmation first.
-2. Propose any other Notion fixes found (stale stage, ambiguous date,
-   missing AE) — show the diff, execute only on Walid's OK. This part
-   is unchanged: MEDDPICC is now automatic because it's a direct
-   readout of evidence Walid himself supplied; stage/date/AE changes
-   still involve judgment calls that deserve a check first.
+1. **Write every field derived in Phase C directly to the Notion
+   Accounts DB row** — Stage, Priority, Notes, AE, Next call, Deadline,
+   MEDDPICC. Per CLAUDE.md guardrail 4, this is a direct edit: no
+   proposal step, no waiting for an OK, on any field, including
+   downgrading a previously-set MEDDPICC element or overwriting stale
+   Notes — the analysis in Phase C is the new source of truth. The two
+   limits that still apply: never write a field Phase C couldn't
+   actually derive from real evidence (leave it as-is / need validation
+   rather than guess), and never touch a human-only column.
+2. **Announce every field that changed** — old value → new value → the
+   evidence it's based on, so Walid can spot-check anything that
+   surprises him even though no approval gate blocked the write.
 3. Update `memory.md` with what changed this session (including the
-   MEDDPICC read and what it's based on), and add an entry to
-   `CHANGELOG.md` if anything in Notion or the repo structure changed.
-4. Announce the Notion changes made (guardrail 4 — always announce,
-   even when no OK was required).
-5. Suggest the logical next step (e.g. "next: demo-script for the July
+   full before/after on the Notion row and what it's based on), and add
+   an entry to `CHANGELOG.md`.
+4. Suggest the logical next step (e.g. "next: demo-script for the July
    21 call" or "the biggest MEDDPICC gap is Economic Buyer — worth
    confirming before the next call").
 
 ## Guardrails specific to this skill
 
 - Never fabricate Salesforce/Gong content — if Walid doesn't provide
-  it, the brief says "need validation" and the MEDDPICC element stays
-  Gap, never guessed into Confirmed.
-- Never mark a MEDDPICC element Confirmed without a specific, quotable
-  piece of evidence and its source. "Seems likely" is Partial or Gap,
-  not Confirmed.
-- Never skip the Phase B hard stop, even if Phase A found nothing
-  inconsistent — the point is giving Walid a chance to correct course
-  before the brief (and the MEDDPICC analysis) is written, not just
-  when something looks wrong.
-- Downgrading a previously-confirmed MEDDPICC element always needs
-  Walid's confirmation before it's written to Notion — never silently
-  remove something a prior session or Walid himself had confirmed.
+  it, the field is left as-is (or "need validation" in the brief), and
+  the MEDDPICC element stays Gap. Not writing something is always
+  safer than guessing it.
+- Never mark a MEDDPICC element Confirmed, or change Stage/Priority/AE/
+  Next call/Deadline, without a specific, traceable piece of evidence
+  and its source in the brief's Sources section.
+- Never skip the Phase B hard stop — the whole row rewrite depends on
+  having real evidence in hand first; without it there's nothing to
+  analyze.
+- Rewriting the whole row means old manual Notes/Stage/Priority values
+  are superseded, not preserved — that's the point (Walid's manual
+  notes are treated as unreliable by design). Always show the old ->
+  new diff when announcing so nothing changes invisibly.

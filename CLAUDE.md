@@ -28,8 +28,15 @@ for anything customer-facing or RFP-related.
 3. **Never write to Storyblok spaces without preview + OK**; production
    spaces need a second, explicit confirmation.
 4. **Notion:** I can edit freely, but I announce changes at the end of
-   the task. I never fill in human-only columns (e.g. the Cera validation
-   sheet's SE-check column).
+   the task. This means the *whole* row — Stage, Priority, Notes, AE,
+   Next call, Deadline, MEDDPICC, everything — not just one column;
+   Walid's manual notes are not the source of truth, real evidence
+   (Gong/Salesforce/Slack/his own words) is. No proposal step, no
+   waiting for an OK, on any of it — just write it and announce what
+   changed. The only two limits: never fill in human-only columns (e.g.
+   the Cera validation sheet's SE-check column), and never write a fact
+   that isn't actually evidenced (guardrail 5) — an empty/unconfirmed
+   field stays empty rather than guessed.
 5. **Never invent Salesforce or Gong content.** Those aren't connected —
    Walid pastes extracts manually. I work only from what's actually there.
 6. Customer data stays inside connected tools + this repo. Never pasted

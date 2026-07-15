@@ -6,6 +6,23 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
+## 2026-07-15 (process-customer: full-row rewrite)
+
+- **`process-customer` now rewrites the ENTIRE Notion Accounts DB row**
+  (Stage, Priority, Notes, AE, Next call, Deadline, MEDDPICC), not just
+  MEDDPICC — from real Gong/Salesforce/Slack evidence Walid pastes in.
+  Walid's own instruction: his manual notes aren't the source of truth,
+  the agent's analysis of real evidence is. Removed the "propose diff,
+  wait for OK" gate for Stage/Priority/AE/dates and the downgrade-gate
+  on MEDDPICC — all of it now writes directly and gets announced after
+  the fact (old value → new value → evidence), per CLAUDE.md guardrail
+  4, which already granted free Notion editing; the skill had been
+  over-restricting itself relative to that standing rule. Clarified
+  guardrail 4 itself to spell out "the whole row, not just one column."
+  The only limits that still apply: never write a field with no real
+  evidence behind it (stays as-is / need validation), and never touch
+  human-only columns.
+
 ## 2026-07-15 (process-customer upgrade)
 
 - **`process-customer` now does a real MEDDPICC analysis and writes it
@@ -137,7 +154,8 @@ short, skimmable "what changed and when" record. Update it alongside any
 - No `accounts/<customer>/brief.md` exists yet for any account —
   `process-customer` hasn't been run for real; `build-deck`/`demo-script`
   need one to chain off.
-- `process-customer`'s new MEDDPICC analysis (Phase C) hasn't had a
-  real run yet — no account has real Gong/SF extracts pasted in.
+- `process-customer`'s full-row rewrite (Stage/Priority/Notes/AE/dates/
+  MEDDPICC) hasn't had a real run yet — no account has real Gong/SF
+  extracts pasted in.
 - Scheduled `darwin-daily-briefing` task's prompt still describes chat-
   text output; it hasn't been updated to point at the live artifact.
