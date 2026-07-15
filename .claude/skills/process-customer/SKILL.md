@@ -17,11 +17,17 @@ be able to walk into a demo or call with. Four phases, in order.
 
 1. `memory.md` and any existing `accounts/<customer>/` files — don't
    re-derive what's already known.
-2. Notion Accounts DB row for this customer + any linked notes.
+2. Notion Accounts DB row for this customer + any linked notes. Read
+   **Next call**, **Deadline**, **AE**, and **MEDDPICC** directly (the
+   DB was restructured 2026-07-15 — these are real properties now, not
+   inferred). "Due date (legacy)" may still be set on old rows; treat it
+   as unverified, never as the source of truth.
 3. Calendar — past and upcoming events with this customer/account.
 4. Slack — search #se-requests, #se-sgm, and any other channel IDs
    Walid has shared, for threads mentioning this account.
 5. Google Drive — decks, docs, RFP files tied to this account.
+6. Notion "📞 Debriefs" database — any past debrief rows related to this
+   account (relation property), once `post-call-update` starts populating it.
 
 ## Phase B — Ask Walid once, then HARD STOP
 
@@ -45,7 +51,14 @@ Last updated: <date>
 
 ## Snapshot
 Type / Stage / Priority / AE / next milestone — labeled explicitly as
-CALL or DEADLINE (never just "due date").
+CALL or DEADLINE (never just "due date"), pulled from the Next call /
+Deadline properties directly.
+
+## MEDDPICC
+Which elements (Metrics, Economic Buyer, Decision Criteria, Decision
+Process, Paper Process, Identify Pain, Champion, Competition) are
+confirmed per the Notion MEDDPICC property, and which are still open —
+call these out explicitly as gaps to close, not just a checklist.
 
 ## Their priorities
 What the customer actually cares about, per stakeholders and past calls.
@@ -73,8 +86,10 @@ event, Walid's own input) — so staleness is auditable later.
 ## Phase D — Propose + close out
 
 1. Propose any Notion fixes found (stale stage, ambiguous date, missing
-   AE property) — show the diff, execute only on Walid's OK.
-2. Update `memory.md` with what changed this session.
+   AE, unconfirmed MEDDPICC elements) — show the diff, execute only on
+   Walid's OK.
+2. Update `memory.md` with what changed this session, and add an entry
+   to `CHANGELOG.md` if anything in Notion or the repo structure changed.
 3. Suggest the logical next step (e.g. "next: demo-script for the July
    21 call").
 

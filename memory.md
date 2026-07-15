@@ -56,6 +56,49 @@ Darwin has — no update, no memory.
   skip the original "tune manually first" gate, and to use Cowork's
   scheduler instead of n8n. Still watch its unattended output closely for
   the first couple of weeks.
+- Walid asked for the daily-briefing to be more visual with more context.
+  Built a live Cowork artifact (`darwin-daily-briefing`) instead of just
+  reformatting chat text — it calls Calendar/Notion/Slack directly via
+  callMcpTool on every open, and uses askClaude (Haiku) to classify
+  accounts as CALL vs. DEADLINE and triage Slack into needs-reply /
+  worth-claiming. Verified live: all 4 underlying tool calls succeeded
+  (calendar, notion-query-database-view, notion-fetch, slack x2) with
+  the expected shapes. Updated daily-briefing/SKILL.md to point future
+  sessions at this artifact instead of only the chat-text format.
+- Executed the Notion restructure (Walid gave full latitude — "execute
+  now, feel free to change statuses or types, maybe a dashboard is better
+  than a table"): split "Due date" -> "Due date (legacy)" + new **Next
+  call** / **Deadline** date properties; added **AE** select (4 pod names
+  + Unassigned/need validation) and **MEDDPICC** multi-select (8 standard
+  elements) to the Accounts DB. Populated the 3 live rows: Jouet club ->
+  Next call 2026-07-21 + AE Thibault de Maison Rouge (confirmed via
+  Slack); Implid -> Deadline 2026-07-17; Cera RFP -> Deadline 2026-07-31
+  (Implid/Cera AE left unassigned, not guessed). Added views: This week,
+  Demos upcoming (Type=Demo), Overdue, and a Dashboard tab. IMPORTANT
+  LIMITATION: Notion's CHART configure DSL rejected every syntax I tried
+  via this API this session (quote handling errors, then "Unknown
+  directive: CAPTION", then the view stopped resolving entirely on
+  retry) — the Dashboard tab exists but is empty. Needs a human to add
+  charts in the Notion UI, or another attempt once the DSL quirk is
+  understood (see CHANGELOG.md).
+- Created a new "📞 Debriefs" database (Call/Account relation/Call date/
+  Outcome/Objections/Next steps/Notes), linked inline on Walid's space,
+  for the future `post-call-update` skill (Phase 2).
+- Added `CHANGELOG.md` at repo root — short newest-first log of concrete
+  changes, separate from this file's longer narrative. Updated CLAUDE.md
+  to make maintaining it part of the standing "how I improve" practice.
+- Updated `process-customer/SKILL.md` to read Next call/Deadline/AE/
+  MEDDPICC directly, added a MEDDPICC section to the brief template, and
+  pointed Phase A at the new Debriefs DB.
+- Updated the `darwin-daily-briefing` artifact twice more: (1) to use the
+  new Next call/Deadline/AE/MEDDPICC fields instead of guessing from one
+  ambiguous date, surfacing AE and MEDDPICC status per account card; (2)
+  to link every Slack needs-reply/worth-claiming item to its real message
+  permalink (constructed client-side from the channel ID + "Message TS"
+  already present in the raw Slack text — format confirmed against real
+  forwarded-message links seen in #se-sgm: https://storyblok.slack.com/
+  archives/<channel_id>/p<ts with dot removed>). Verified via
+  verify_artifact after each change — all live tool calls succeeded.
 
 ---
 
@@ -70,19 +113,13 @@ Darwin has — no update, no memory.
   Always cross-check before treating a date as a deadline.
 - GitHub repo: `ewalid/claude-os` (private).
 - Stokke: Ines Akrap's account, Walid is shadowing (not his to run).
-
-- Walid asked for the daily-briefing to be more visual with more context.
-  Built a live Cowork artifact (`darwin-daily-briefing`) instead of just
-  reformatting chat text — it calls Calendar/Notion/Slack directly via
-  callMcpTool on every open, and uses askClaude (Haiku) to classify
-  accounts as CALL vs. DEADLINE and triage Slack into needs-reply /
-  worth-claiming. Verified live: all 4 underlying tool calls succeeded
-  (calendar, notion-query-database-view, notion-fetch, slack x2) with
-  the expected shapes. Updated daily-briefing/SKILL.md to point future
-  sessions at this artifact instead of only the chat-text format.
+- Notion Accounts DB schema (as of 2026-07-15): Name, Type, Stage,
+  Priority, Notes, Owner(s), AE, Next call, Deadline, Due date (legacy),
+  MEDDPICC. New Debriefs DB exists (empty). Dashboard view exists but
+  has no charts (API limitation).
 
 ## Open items carried forward
-- [ ] Notion restructure: awaiting Walid's OK to execute.
+- [ ] Notion restructure: DONE (2026-07-15) — no longer open.
 - [ ] Watch the scheduled daily-briefing's first several unattended runs
       closely (weekdays 9am Paris) — correct anything wrong immediately.
 - [ ] Confirm Storyblok MCP reachability in Cowork (Phase 5, not urgent;
@@ -90,3 +127,7 @@ Darwin has — no update, no memory.
 - [ ] Build `call-coach`, `post-call-update`, `darwin-improve` (Phase 2).
 - [ ] Rob Scholte's RFP help request in #se-requests (July 15) — confirm
       whether Walid is picking this up.
+- [ ] Notion "Dashboard" view has no charts — needs a human touch in the
+      Notion UI, or another scripted attempt later.
+- [ ] Implid and Cera RFP have no confirmed AE — ask Walid.
+- [ ] MEDDPICC not populated for any account yet — needs Walid's input.

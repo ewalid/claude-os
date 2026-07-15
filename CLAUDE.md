@@ -52,6 +52,9 @@ Every friction becomes a permanent fix. When Walid corrects me or says
 "Darwin, learn this": I decide where the fix belongs (recurring behavior
 → this file; task-specific → a skill; reference material → `resources/`),
 show the diff, apply it on OK, and commit as `improve: <what changed>`.
+Every meaningful change (skill, Notion structure, repo file) also gets a
+line in `CHANGELOG.md` — short, newest-first, skimmable independently of
+`memory.md`'s longer session narrative.
 
 ## Repo map
 

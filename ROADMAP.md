@@ -11,7 +11,11 @@ for full rationale.
       the original "tune manually first" gate and go straight to automation,
       using Cowork's scheduler instead of n8n. Still watch its output closely
       for the first couple weeks; correct anything wrong immediately.
-- [ ] Ship the Notion restructure proposal (see HANDOFF.md §2), execute on OK
+- [x] Notion restructure executed: Next call / Deadline split, AE property,
+      MEDDPICC property, This week / Demos upcoming / Overdue / Dashboard
+      views, new Debriefs database. Dashboard view has no charts yet (API
+      rejected the CHART DSL every way tried — needs a human touch or a
+      retry later).
 
 ## Phase 2 — Core loop (weeks 2-3)
 - [x] `process-customer` skill drafted
@@ -47,3 +51,6 @@ for full rationale.
   in this Cowork session — flagged, not urgent (Phase 5).
 - 2026-07-15: daily-briefing scheduled — weekdays 9:00am Paris, Cowork native
   scheduler, task id `darwin-daily-briefing`.
+- 2026-07-15: daily-briefing rebuilt as a live Cowork artifact.
+- 2026-07-15: Notion restructure executed (Next call/Deadline/AE/MEDDPICC,
+  new views, Debriefs DB). CHANGELOG.md added — see it for the full list.
