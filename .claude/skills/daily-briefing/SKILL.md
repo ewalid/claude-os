@@ -24,12 +24,21 @@ fixes are proposed separately, not folded into this skill).
    recent Slack to determine whether it's actually a **call** or a
    **deadline** (see known issue, HANDOFF.md §2 / memory.md). Mislabel
    this and the whole brief is wrong.
-3. **Slack**: scan #se-requests for (a) deals Walid has claimed —
-   these are obligations, (b) unclaimed deals involving his AE pod
-   (Thibault de Maison Rouge, Rob Scholte, Mine Heck, Kristoffer
-   Strindevall) — these are "worth claiming?" flags, never tasks, and
-   (c) any thread awaiting Walid's reply. Scan #se-sgm for anything
-   relevant to his live accounts.
+3. **Slack**: scan from the start of the last WORKING day through now
+   (so a Monday run also covers Friday + the weekend, not just today) —
+   never a flat message-count cutoff, or asks posted overnight/over a
+   weekend get silently dropped. Scan #se-requests for (a) deals Walid
+   has claimed — these are obligations, (b) unclaimed deals involving
+   his AE pod (Thibault de Maison Rouge, Rob Scholte, Mine Heck,
+   Kristoffer Strindevall) — these are "worth claiming?" flags, never
+   tasks, and (c) any thread awaiting Walid's reply. Scan #se-sgm for
+   anything relevant to his live accounts.
+   **People check** (see `resources/people.md`): Chakit Arora, Roberto
+   Butti, and Ines Akrap are Walid's SE colleagues/peers, NOT AEs — if
+   one of them has already replied to or claimed a request, it's
+   handled, never flag it as "worth claiming", and never confuse one
+   of their names with an AE. Matthew Alberts is Walid's manager, not
+   an AE or SE peer — his messages are normal context, not a flag.
 4. **Assemble** using the priority logic (CLAUDE.md): demo today first,
    deadline closing today/this week second, everything else after.
 

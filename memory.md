@@ -99,6 +99,23 @@ Darwin has — no update, no memory.
   forwarded-message links seen in #se-sgm: https://storyblok.slack.com/
   archives/<channel_id>/p<ts with dot removed>). Verified via
   verify_artifact after each change — all live tool calls succeeded.
+- Correction from Walid: Chakit Arora, Roberto Butti, Ines Akrap are his
+  SE colleagues/peers, NOT AEs (current output wasn't wrong, but this
+  context needed to be recorded — e.g. Chakit had already replied "I'll
+  take it" to an ask, which is a valid claim from an SE, not something
+  to flag as unclaimed). Matthew Alberts is Walid's manager. Recorded in
+  `resources/people.md`, and wired into the `darwin-daily-briefing`
+  artifact's Slack triage prompt + `daily-briefing/SKILL.md` so these
+  three groups (AE pod / SE colleagues / manager) are never confused.
+- Correction from Walid: check Slack "from the last working day to the
+  day of the routine", not just the most recent N messages. Added a
+  last-working-day window (skips weekends: Monday runs also cover Friday)
+  to the artifact's Slack calls (`oldest` param), replacing the flat
+  limit:25 cap. Updated `daily-briefing/SKILL.md` to describe this.
+- Answered Walid's question on deck-examples file format: .pptx, not
+  .odp — Google Slides round-trips to .pptx natively, and pptx has much
+  better tooling support for the future `build-deck` skill to parse.
+  Recorded in `resources/style-guide.md` and `ROADMAP.md` Phase 3.
 
 ---
 
@@ -117,6 +134,12 @@ Darwin has — no update, no memory.
   Priority, Notes, Owner(s), AE, Next call, Deadline, Due date (legacy),
   MEDDPICC. New Debriefs DB exists (empty). Dashboard view exists but
   has no charts (API limitation).
+- People groups (see resources/people.md): AE pod = Thibault de Maison
+  Rouge, Rob Scholte, Mine Heck, Kristoffer Strindevall. SE colleagues
+  (peers, not AEs) = Chakit Arora, Roberto Butti, Ines Akrap. Manager =
+  Matthew Alberts.
+- deck-examples/ file format: .pptx (not .odp) — decks authored in
+  Google Slides, exported to .pptx.
 
 ## Open items carried forward
 - [ ] Notion restructure: DONE (2026-07-15) — no longer open.

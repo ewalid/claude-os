@@ -45,6 +45,21 @@ short, skimmable "what changed and when" record. Update it alongside any
   from HANDOFF.md — CLAUDE.md, ROADMAP.md, `.claude/skills/{daily-
   briefing,process-customer}`, `resources/`, `accounts/`.
 
+## 2026-07-15 (later same day)
+
+- **People model corrected**: `resources/people.md` now distinguishes
+  the AE pod from SE colleagues (Chakit Arora, Roberto Butti, Ines
+  Akrap) and Walid's manager (Matthew Alberts). Wired into the
+  `darwin-daily-briefing` artifact's Slack triage prompt and
+  `daily-briefing/SKILL.md` so an SE peer's reply/claim is never
+  mistaken for an unclaimed AE opportunity.
+- **Slack scan window widened**: from a flat 25-message cap to "start
+  of the last working day through now" (a Monday run also covers
+  Friday + the weekend). Applied in the artifact and documented in
+  `daily-briefing/SKILL.md`.
+- **Deck format decided**: `resources/deck-examples/` will hold .pptx
+  exports from Google Slides, not .odp — see `style-guide.md`.
+
 ## Known gaps / carried forward
 
 - Notion "Dashboard" view has no charts yet (API limitation hit today).

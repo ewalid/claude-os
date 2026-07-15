@@ -26,7 +26,8 @@ for full rationale.
 ## Phase 3 — Demo pack (weeks 3-5)
 - [ ] `demo-script`
 - [ ] `demo-setup` (needs Storyblok MCP working in Cowork)
-- [ ] `build-deck` (needs example decks in `resources/deck-examples/`)
+- [ ] `build-deck` (needs example decks in `resources/deck-examples/`,
+      as .pptx exports from Google Slides — see style-guide.md)
 
 ## Phase 4 — Cadence (weeks 5-6)
 - [ ] `weekly-review`
@@ -54,3 +55,6 @@ for full rationale.
 - 2026-07-15: daily-briefing rebuilt as a live Cowork artifact.
 - 2026-07-15: Notion restructure executed (Next call/Deadline/AE/MEDDPICC,
   new views, Debriefs DB). CHANGELOG.md added — see it for the full list.
+- 2026-07-15: Corrected AE-pod vs. SE-colleague vs. manager confusion risk
+  (people.md updated); widened Slack scan to last-working-day-through-now;
+  decided deck-examples format is .pptx, not .odp.
