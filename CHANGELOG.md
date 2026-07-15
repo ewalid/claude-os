@@ -6,6 +6,20 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
+## 2026-07-15 (process-customer upgrade)
+
+- **`process-customer` now does a real MEDDPICC analysis and writes it
+  to Notion.** New Phase C: works through all 8 MEDDPICC elements
+  against whatever Salesforce/Gong extracts Walid pastes in (plus
+  Slack/Debriefs/calendar context), tagging each Confirmed (quoted
+  evidence + source) / Partial (signal but incomplete) / Gap (nothing).
+  Only Confirmed elements get written to the Notion MEDDPICC
+  multi-select — done automatically per CLAUDE.md guardrail 4 (edit
+  Notion freely, announce at the end), except a *downgrade* of a
+  previously-confirmed element, which still needs Walid's OK first.
+  The brief's MEDDPICC section now shows the full picture (Confirmed/
+  Partial/Gap for all 8), not just a checklist of what's in Notion.
+
 ## 2026-07-15
 
 - **Notion — Accounts DB restructured.** Split the ambiguous "Due date"
@@ -113,7 +127,7 @@ short, skimmable "what changed and when" record. Update it alongside any
 - Notion "Dashboard" view has no charts yet (API limitation hit today).
 - Implid and Cera RFP have no confirmed AE — need validation from Walid.
 - MEDDPICC not yet populated for any account — needs Walid's input per
-  deal, or for `process-customer` (Phase 2 rebuild) to start capturing it.
+  deal, or for `process-customer` to gather real Gong/SF extracts first.
 - `call-coach`, `post-call-update`, `build-deck`, `demo-script` are all
   drafted but unused — first real runs will surface whatever the specs
   got wrong.
@@ -123,5 +137,7 @@ short, skimmable "what changed and when" record. Update it alongside any
 - No `accounts/<customer>/brief.md` exists yet for any account —
   `process-customer` hasn't been run for real; `build-deck`/`demo-script`
   need one to chain off.
+- `process-customer`'s new MEDDPICC analysis (Phase C) hasn't had a
+  real run yet — no account has real Gong/SF extracts pasted in.
 - Scheduled `darwin-daily-briefing` task's prompt still describes chat-
   text output; it hasn't been updated to point at the live artifact.

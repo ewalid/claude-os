@@ -219,6 +219,30 @@ Darwin has — no update, no memory.
   customer hasn't had a real run, so build-deck/demo-script have
   nothing to chain off until one is written).
 
+### 2026-07-15 — Session 5 (process-customer MEDDPICC upgrade)
+- Walid asked: process-customer should analyze pasted Gong + Salesforce
+  notes for MEDDPICC and update Notion accordingly — not just report
+  whatever was already checked in the MEDDPICC property. Rewrote
+  `process-customer/SKILL.md`:
+  - New Phase C: works through all 8 MEDDPICC elements against the
+    pasted Gong/SF extracts + Slack/Debriefs/calendar context, tagging
+    each Confirmed (with a quoted piece of evidence + source) / Partial
+    (signal but incomplete) / Gap (nothing) — never inferred from tools
+    that aren't connected, only from what Walid actually provided.
+  - Phase E now writes Confirmed elements straight to the Notion
+    MEDDPICC multi-select automatically (CLAUDE.md guardrail 4: edit
+    Notion freely, announce at the end) — except a *downgrade* of a
+    previously-confirmed element, which still needs Walid's OK first
+    since removing something is a different kind of judgment call than
+    adding.
+  - The brief's MEDDPICC section now shows all 8 elements' full status
+    (Confirmed/Partial/Gap + evidence), not just a checklist mirroring
+    Notion — so gaps are visible even if Notion only shows confirmed ones.
+- Logged in CHANGELOG.md, pushed to GitHub.
+- Not yet tested live — no account has real Gong/SF extracts pasted in
+  yet, so this hasn't had a real run. First use will show whether the
+  Confirmed/Partial/Gap bar is calibrated right.
+
 ---
 
 ## Standing facts (update if they change; don't duplicate HANDOFF.md)
@@ -242,6 +266,10 @@ Darwin has — no update, no memory.
   Matthew Alberts.
 - deck-examples/ file format: .pptx (not .odp) — decks authored in
   Google Slides, exported to .pptx.
+- process-customer's MEDDPICC analysis (Phase C, added 2026-07-15
+  Session 5) tags every element Confirmed/Partial/Gap from real
+  Gong/SF/Slack input only, then auto-writes Confirmed elements to
+  Notion (announce, no OK needed) except downgrades (need OK first).
 
 ## Open items carried forward
 - [ ] Notion restructure: DONE (2026-07-15) — no longer open.
@@ -258,7 +286,8 @@ Darwin has — no update, no memory.
 - [ ] Notion "Dashboard" view has no charts — needs a human touch in the
       Notion UI, or another scripted attempt later.
 - [ ] Implid and Cera RFP have no confirmed AE — ask Walid.
-- [ ] MEDDPICC not populated for any account yet — needs Walid's input.
+- [ ] MEDDPICC not populated for any account yet — needs real Gong/SF
+      extracts pasted into a `process-customer` run to populate it.
 - [ ] Scheduled `darwin-daily-briefing` task's prompt still describes
       chat-text output, not the live artifact — needs updating.
 - [x] Phase 3 (demo pack): `build-deck` and `demo-script` drafted
@@ -270,5 +299,8 @@ Darwin has — no update, no memory.
 - [ ] No `accounts/<customer>/brief.md` exists for any account yet —
       run `process-customer` for real before `build-deck`/`demo-script`
       can actually be used on a live account.
+- [x] `process-customer` now does a real MEDDPICC analysis from Gong/SF
+      pastes and auto-updates Notion (2026-07-15 Session 5) — untested
+      live, no account has real extracts pasted in yet.
 - [ ] Phase 4 (`weekly-review`, `monthly-review`, `todo-sync`,
       `dashboard`) is next on the roadmap.
