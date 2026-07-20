@@ -20,7 +20,7 @@ entire Notion Accounts DB row from whatever real Gong/Salesforce/Slack
 evidence is available — not just the MEDDPICC column, the whole row.
 Five phases, in order.
 
-## Phase A — Gather everything
+## Step 1 — Self-research (gather what I can find myself)
 
 1. `memory.md` and any existing `accounts/<customer>/` files — don't
    re-derive what's already known, but don't treat old notes as
@@ -37,7 +37,7 @@ Five phases, in order.
 6. Notion "📞 Debriefs" database — any past debrief rows related to this
    account (relation property).
 
-## Phase B — Ask Walid once, then HARD STOP
+## Step 2 — Ask Walid once, then HARD STOP
 
 Before writing anything, post ONE consolidated message to Walid asking
 for three concrete things (not a vague "anything you have"):
@@ -46,22 +46,22 @@ for three concrete things (not a vague "anything you have"):
 2. **Gong** — call extract(s)/summary for this account (transcripts,
    call notes, next steps).
 3. **A Slack channel ID for this specific account/deal**, if one exists
-   (separate from the standing #se-requests/#se-sgm scan in Phase A —
+   (separate from the standing #se-requests/#se-sgm scan in Step 1 —
    deal-specific channels often carry the richest thread). If Walid
    doesn't have one or none exists, that's a fine answer — don't block
    on it, just proceed without it.
 
-Also surface every inconsistency found in Phase A (e.g. Notion date vs.
+Also surface every inconsistency found in Step 1 (e.g. Notion date vs.
 calendar mismatch, conflicting stage info, stale notes) in the same
 message.
 
-**Do not proceed to Phase C until Walid replies.** This is a hard stop,
+**Do not proceed to Step 3 until Walid replies.** This is a hard stop,
 not a suggestion — the whole point of this skill is analyzing real
 evidence instead of stale manual notes, so it can't run on nothing. (If
 Walid pastes the evidence unprompted, before this message even goes out,
 that satisfies the hard stop — no need to ask again.)
 
-## Phase C — Full account analysis
+## Step 3 — Analyze the evidence
 
 Once Walid's reply is in hand, extract everything relevant from the
 real evidence (pasted Gong/Salesforce extracts, Slack threads, past
@@ -90,7 +90,7 @@ one:
   - **Partial** — a signal but incomplete; note what's missing.
   - **Gap** — no evidence either way.
 
-## Phase D — Write the brief
+## Step 4 — Write the brief
 
 `accounts/<customer>/brief.md` — **local-only, never committed to git**
 (see CLAUDE.md guardrail 6; `.gitignore` already excludes `accounts/*/*.md`).
@@ -109,7 +109,7 @@ that should come before any deal mechanics.
 ## Snapshot
 Type / Stage / Priority / AE / next milestone — labeled explicitly as
 CALL or DEADLINE (never just "due date"), reflecting what was just
-written to Notion in Phase E, not the pre-analysis state.
+written to Notion in Step 5, not the pre-analysis state.
 
 ## Who's in the meeting
 Explicit list for the next call: name, role, confirmed vs. inferred.
@@ -141,7 +141,7 @@ What the customer actually cares about, per stakeholders and past calls.
 ## Demo — what to show
 Concrete, specific use cases to actually demo — not a generic feature
 tour. Each item should trace back to a real pain point, decision
-criterion, or MEDDPICC gap found in Phase C, with the "why" stated
+criterion, or MEDDPICC gap found in Step 3, with the "why" stated
 explicitly (e.g. "AI auto-metadata on upload — directly answers their
 under-resourced-editorial-team pain point," not just "show AI features").
 If there are multiple upcoming calls/demos at different depths (e.g. a
@@ -177,7 +177,7 @@ Tailor the actual items to what this account genuinely needs next —
 don't include a deck/script item if there's no upcoming demo to prep for.
 
 ## Need validation
-Anything Phase A/B/C couldn't confirm that ISN'T already covered above
+Anything Steps 1-3 couldn't confirm that ISN'T already covered above
 (attendees have their own section now). Never silently dropped.
 
 ## Sources
@@ -185,15 +185,15 @@ Where every above section came from (Notion link, Slack thread, calendar
 event, Walid's own input, Gong/SF extract) — so staleness is auditable later.
 ```
 
-## Phase E — Rewrite the Notion row, close out
+## Step 5 — Update Notion and announce
 
-1. **Write every field derived in Phase C directly to the Notion
+1. **Write every field derived in Step 3 directly to the Notion
    Accounts DB row** — Stage, Priority, Notes, AE, Next call, Deadline,
    MEDDPICC. Per CLAUDE.md guardrail 4, this is a direct edit: no
    proposal step, no waiting for an OK, on any field, including
    downgrading a previously-set MEDDPICC element or overwriting stale
-   Notes — the analysis in Phase C is the new source of truth. The two
-   limits that still apply: never write a field Phase C couldn't
+   Notes — the analysis in Step 3 is the new source of truth. The two
+   limits that still apply: never write a field Step 3 couldn't
    actually derive from real evidence (leave it as-is / need validation
    rather than guess), and never touch a human-only column.
 2. **Announce every field that changed** — old value → new value → the
@@ -215,7 +215,7 @@ event, Walid's own input, Gong/SF extract) — so staleness is auditable later.
 - Never mark a MEDDPICC element Confirmed, or change Stage/Priority/AE/
   Next call/Deadline, without a specific, traceable piece of evidence
   and its source in the brief's Sources section.
-- Never skip the Phase B hard stop — the whole row rewrite depends on
+- Never skip the Step 2 hard stop — the whole row rewrite depends on
   having real evidence in hand first; without it there's nothing to
   analyze.
 - Rewriting the whole row means old manual Notes/Stage/Priority values

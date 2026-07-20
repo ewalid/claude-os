@@ -6,6 +6,10 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
+## 2026-07-20 (process-customer: renamed Phase A-E to explicit step names)
+
+- **`process-customer/SKILL.md` phases renamed** for clarity: Phase A → Step 1 (Self-research), B → Step 2 (Ask Walid, hard stop), C → Step 3 (Analyze), D → Step 4 (Write the brief), E → Step 5 (Update Notion and announce). No behavior change, just clearer naming.
+
 ## 2026-07-20 (Akeneo RFP claimed — Notion row from a parallel session)
 
 - **New Notion row: "Akeneo RFP"** — created in a different session
