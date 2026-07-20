@@ -399,6 +399,25 @@ Darwin has — no update, no memory.
   account's own Notion page content, plus a next-steps checklist block —
   not just left in the Notion property fields / a separate git file.
 
+### 2026-07-20 — Session 9 (Jouet club: attendee ambiguity resolved, Notion board+calendar views)
+
+- Walid confirmed there are two separate calls tomorrow for Jouet club —
+  cross-checked both against the calendar directly (real invite lists,
+  not inferred) and resolved the Session 8 need-validation item about
+  Salesforce/Gong disagreeing on attendees: they were each describing a
+  different one of the two calls. Updated the local-only brief and the
+  Notion page/Notes accordingly — no names/specifics repeated here per
+  guardrail 6.
+- **Notion Accounts DB — two new views**: a "Pipeline board" (Kanban,
+  grouped by Stage, minimal card display — hide-empty-groups on) and a
+  "Calendar" view (by Next call). Walid referenced a differently-styled
+  board (richer Stage taxonomy: To follow-up/Waiting feedback/Preparing/
+  In procurement/etc., "color columns" toggle) as a style preference —
+  asked him whether he wants that exact Stage taxonomy adopted or just
+  the visual style; not yet resolved.
+- Going forward: skill output (briefs, etc.) should be posted in the chat
+  response itself AND written to Notion — not just one or the other.
+
 ## Standing facts (update if they change; don't duplicate HANDOFF.md)
 
 - AE pod: Thibault de Maison Rouge, Rob Scholte, Mine Heck, Kristoffer
