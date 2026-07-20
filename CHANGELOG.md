@@ -6,6 +6,22 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
+## 2026-07-20 (Kanban rebuild — Cowork artifact + Notion board view)
+- `walid-deals-dashboard` artifact rebuilt as an actual Kanban board:
+  deals grouped into columns by real Notion Stage values (Not started /
+  Discovery / Demo / Deep Dive-Demo / Proposal / In progress /
+  Contracting / Done / Closed Won). Any owned deal with no Stage set is
+  flagged in an error banner rather than silently dropped.
+- Notion "Pipeline board" view renamed to "🗂️ Sales Pipeline (Board)"
+  and enriched with real card properties (Priority, Type, AE, Next
+  call, Deadline) — previously showed only the account name.
+- Notion "Dashboard" (chart-based) view renamed to "📊 Analytics
+  (charts)" to stop it being confused with the new card board — a
+  `dashboard`-type Notion view can only hold chart/table widgets, not a
+  Kanban board, so the two stay separate views.
+- Notion "By status" view renamed to "By AE" — it groups by AE, not
+  Stage; the old name was actively misleading.
+
 ## 2026-07-20 (deals dashboard artifact: 24h Slack window + visual redesign)
 - `walid-deals-dashboard` artifact: "Worth Claiming" Slack scan now windowed
   to the last 24h (`oldest` param) instead of a flat 40-message pull.
