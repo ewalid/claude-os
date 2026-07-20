@@ -837,3 +837,15 @@ Darwin has — no update, no memory.
   Monthly-review's scheduled prompt explicitly limits it to low-risk,
   clearly-scoped auto-fixes; anything judgment-call-shaped gets flagged
   as backlog instead of auto-decided, matching the skill's own step 4.
+- Walid reinforced: no artifact for ANY routine, daily/weekly/monthly,
+  full stop. Immediately followed by a request for a genuinely
+  different thing — an on-demand, interactive Cowork artifact (not a
+  routine) as a deals dashboard: his owned deals from the Notion
+  Accounts DB, plus unclaimed AE-pod opportunities scanned from
+  #se-requests with a one-click Claim button. Built as
+  `walid-deals-dashboard`. Claim writes directly to Notion (permitted
+  freely per guardrail 4); it does NOT auto-post to Slack (guardrail 2
+  — never send without showing a draft and getting an OK) — instead it
+  shows a copy-ready suggested reply Walid sends himself. Verified live:
+  the Notion query and Slack scan both returned real data on first
+  load.

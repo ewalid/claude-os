@@ -19,6 +19,15 @@ short, skimmable "what changed and when" record. Update it alongside any
   per-account directory stays local-only, matching CLAUDE.md guardrail
   6's actual intent.
 
+## 2026-07-20 (feat: deals dashboard artifact — Notion + Slack, claim-in-one-click)
+
+- New Cowork artifact `walid-deals-dashboard`: "My Deals" (live Notion
+  Accounts DB query) + "Worth Claiming" (Slack #se-requests scanned and
+  AI-triaged for unclaimed AE-pod opportunities). Claim button creates
+  the Notion row directly; shows a copy-ready Slack reply rather than
+  auto-sending (guardrail 2). Explicitly NOT a routine — an on-demand
+  tool, per Walid's own distinction.
+
 ## 2026-07-20 (feat: weekly-review built; weekly + monthly routines scheduled; no-artifact preference)
 
 - **Standing preference**: no artifacts from routines — plain chat
