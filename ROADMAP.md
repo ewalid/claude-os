@@ -27,20 +27,29 @@ for full rationale.
       from CLAUDE.md into a concrete classify-apply-commit-log procedure
 
 ## Phase 3 — Demo pack (weeks 3-5)
-- [x] `build-deck` drafted — Walid dropped 5 real decks into
-      `resources/deck-examples/`; template structure reverse-engineered
-      and documented in style-guide.md. Adapts these decks, never
-      builds from scratch.
-- [x] `demo-script` drafted — chains off the account brief + the deck's
-      demo stations; Tell-Show-Tell per station, objections sourced from
-      `resources/battle-cards/` (currently empty — flag if used before
-      populated), verify-before-call checklist.
-- [x] `demo-setup` drafted, but **execution blocked**: no Storyblok MCP
-      tool present in this Cowork session (verified 2026-07-15, same
-      result as the original HANDOFF.md flag). Skill is fully specced
-      (dry-run preview → OK → write → verify, per CLAUDE.md guardrail 3)
-      and ready to run the moment the connector appears — don't attempt
-      to improvise around its absence.
+- [x] `build-deck` — drafted AND now proven on a real account: Jouet
+      club deck built from the Cellbes AB example, French, 3 confirmed
+      stations, 19 slides. Gained a confirm-the-station-shortlist gate
+      and a title-slide-headshot step (`resources/AEs & SEs/<Name>.jpeg`)
+      from real mistakes caught this session.
+- [x] `demo-script` — drafted, overwritten by mistake, then restored +
+      improved: Tell-Show-Tell per station, objections sourced from
+      `resources/battle-cards/` (still empty — flag if used before
+      populated), verify-before-call checklist, PLUS a new
+      confirm-the-outline gate before finalizing (framing is a judgment
+      call, not a lookup). Real run done for Jouet club.
+- [x] `demo-setup` — drafted, overwritten by mistake, then restored +
+      improved: still **execution-blocked** (Storyblok MCP re-verified
+      absent, 2026-07-20). Kept its guarded dry-run-preview → OK → write
+      → verify identity (CLAUDE.md guardrail 3), added a
+      confirm-the-space-structure gate (single space vs. per-brand) for
+      when it's drafted ahead of the connector existing, which is what
+      actually happened for Jouet club.
+- Phase 3 is now genuinely exercised end-to-end on one real account,
+  not just specced. Two self-caught mistakes this session (station/
+  photo inference without confirming; overwriting real prior skill
+  content without reading it first) — both fixed and documented rather
+  than repeated.
 
 ## Phase 4 — Cadence (weeks 5-6)
 - [ ] `weekly-review`
@@ -80,3 +89,14 @@ for full rationale.
   `demo-setup` drafted but still can't run live — Storyblok MCP still
   absent from this Cowork session. Phase 4 (`weekly-review`,
   `monthly-review`, `todo-sync`, `dashboard`) is next.
+- 2026-07-20: Phase 3 exercised for real, first time — Jouet club:
+  `build-deck` (French, 19 slides), `demo-script`, `demo-setup` all run
+  against a real account brief. Storyblok MCP re-verified still absent.
+  Two mistakes caught and fixed same-day: silent station/photo
+  inference (now gated behind explicit confirmation in `build-deck`)
+  and an accidental overwrite of `demo-script`/`demo-setup`'s real
+  Phase 3 content (restored, merged with the new confirmation gates).
+  New reference resource: `resources/AEs & SEs/<Full Name>.jpeg` for
+  deck title-slide photos — only Walid's exists so far, Thibault's (AE)
+  still missing. `resources/battle-cards/` still empty. Phase 4 is next
+  and genuinely unstarted.
