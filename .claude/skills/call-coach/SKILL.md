@@ -55,7 +55,14 @@ of resetting every call.
    Focus for next call: <the one thing>
    ```
 
-7. **Never surface this outside chat + coaching-log.md.** Not in
+7. **The chat reply mirrors that same bullet structure — always.**
+   Two clearly labeled bullet lists ("Things I did well" / "Things I
+   did wrong" or similar), not prose paragraphs, then the one focus.
+   (Learned 2026-07-20, Implid: first real run went out as prose
+   paragraphs in chat even though the log entry itself was already
+   bulleted — Walid asked for bullets explicitly.)
+
+8. **Never surface this outside chat + coaching-log.md.** Not in
    account briefs, not in Notion, not in anything Walid might later
    paste into a customer-facing doc.
 

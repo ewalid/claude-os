@@ -759,3 +759,9 @@ Darwin has — no update, no memory.
   lost (rewrote from what was still in context) — but worth noting as
   a near-miss: `git checkout --` is destructive to uncommitted work,
   not a safe no-op.
+- Walid's feedback on the chat output itself: wanted the "did well"/
+  "to improve" split as bullet lists, not prose paragraphs — even
+  though the `coaching-log.md` entry was already bulleted, the chat
+  reply I gave first went out as prose. Fixed in `call-coach/SKILL.md`
+  (new step 7: chat reply mirrors the log's bullet structure, always)
+  and applied immediately to the Implid feedback already given.

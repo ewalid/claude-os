@@ -19,6 +19,13 @@ short, skimmable "what changed and when" record. Update it alongside any
   per-account directory stays local-only, matching CLAUDE.md guardrail
   6's actual intent.
 
+## 2026-07-20 (improve: call-coach chat output always mirrors bulleted log format)
+
+- **`call-coach/SKILL.md`** new step 7: the chat reply always uses the
+  same two-bullet-list structure ("did well" / "to improve") as the
+  `coaching-log.md` entry — first real run (Implid) went out as prose
+  in chat despite the log entry already being bulleted.
+
 ## 2026-07-20 (improve: untrack coaching-log.md from git)
 
 - **`resources/coaching-log.md`** was tracked in git since the initial
