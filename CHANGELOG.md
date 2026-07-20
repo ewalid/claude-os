@@ -6,6 +6,16 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
+## 2026-07-20 (process-customer: added a "Demo — what to show" section)
+
+- **`process-customer/SKILL.md` template gains a "Demo — what to show"
+  section** in Phase D, between "Their priorities" and "Stakeholders" —
+  concrete use cases tied explicitly to real pain points/decision
+  criteria/MEDDPICC gaps (not a generic feature tour), split by occasion
+  when there are calls at different depths, with mock-data caveats
+  flagged rather than assumed. Applied to the Jouet club brief
+  (local-only) and pasted into its Notion page too.
+
 ## 2026-07-20 (process-customer: first real run + quality upgrade, Jouet club)
 
 - **First real `process-customer` run** — `accounts/jouet-club/brief.md`

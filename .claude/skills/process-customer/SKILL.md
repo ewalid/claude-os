@@ -138,6 +138,20 @@ actually say something useful instead of just tagging elements:
 ## Their priorities
 What the customer actually cares about, per stakeholders and past calls.
 
+## Demo — what to show
+Concrete, specific use cases to actually demo — not a generic feature
+tour. Each item should trace back to a real pain point, decision
+criterion, or MEDDPICC gap found in Phase C, with the "why" stated
+explicitly (e.g. "AI auto-metadata on upload — directly answers their
+under-resourced-editorial-team pain point," not just "show AI features").
+If there are multiple upcoming calls/demos at different depths (e.g. a
+light discovery-call glimpse vs. a fuller contextualized demo later),
+split the list by occasion and keep the near-term one deliberately light
+if that's what the evidence calls for — matching the actual call's scope
+beats cramming in everything at once. Flag anything that needs data the
+team doesn't have yet (e.g. no live client API → use mock/fictional data
+and say so, don't silently assume it'll be ready).
+
 ## Stakeholders
 Names, roles, notes on each (technical buyer, economic buyer, etc.) —
 this can overlap with "Who's in the meeting" but covers the full cast,
