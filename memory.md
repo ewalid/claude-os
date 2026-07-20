@@ -666,3 +666,35 @@ Darwin has — no update, no memory.
   step 1 and `build-deck/SKILL.md`'s title-slide step both now call out
   the headshot swap explicitly, with the `resources/AEs & SEs/<Full
   Name>.jpeg` matching convention.
+
+### 2026-07-20 — Session 16 (self-caught mistake: overwrote real prior skill content)
+- While answering a status question, found via `git log` that
+  `demo-script/SKILL.md` and `demo-setup/SKILL.md` were NOT new files
+  when "formalized" in Session 14 — both already had real drafted
+  content from Phase 3 (2026-07-15, commit `80ee6e8`), overwritten
+  without reading first (used a shell heredoc instead of Edit, so the
+  Read-before-Edit guard never triggered).
+- Real substance lost: `demo-script`'s original had a dedicated
+  "Anticipated objections" section (sourced from `resources/battle-
+  cards/`, with an explicit need-validation fallback) and a
+  verify-before-call checklist — both missing from the Session 14
+  rewrite. `demo-setup`'s original wasn't a manual checklist at all —
+  it was a guarded automation procedure (dry-run preview → explicit OK
+  → write → verify) specifically built around CLAUDE.md guardrail 3
+  for whenever the Storyblok connector goes live; Session 14 replaced
+  that identity with "manual checklist for Walid," quietly dropping
+  the guardrail-3 machinery.
+- Fixed: merged both skills back to their original structure/identity,
+  keeping Session 14's one genuine improvement (confirm-before-
+  finalizing gates: outline confirmation in demo-script, space-
+  structure confirmation in demo-setup).
+- Not yet done: the Jouet club account files
+  (`accounts/jouet-club/demo-script.md`/`demo-setup.md`) delivered in
+  Session 14 don't match the restored structure (no objections
+  section, no date-suffixed filename, manual-checklist framing instead
+  of guarded-automation). Flagged to Walid, not regenerated yet —
+  his call whether to redo them.
+- Lesson for future self-edits: heredoc/bash writes to existing files
+  skip the Read-before-Edit guard that catches this on Edit-tool paths
+  — check `git log -- <path>` before any "formalize"/"rewrite" pass on
+  a file that might not be new.

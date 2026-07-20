@@ -19,6 +19,23 @@ short, skimmable "what changed and when" record. Update it alongside any
   per-account directory stays local-only, matching CLAUDE.md guardrail
   6's actual intent.
 
+## 2026-07-20 (fix: restored overwritten demo-script/demo-setup content)
+
+- **Self-caught mistake**: Session 14's "formalize demo-script/demo-
+  setup as skills" actually overwrote real pre-existing Phase 3
+  content (commit `80ee6e8`, 2026-07-15) without reading it first —
+  lost the battle-cards-sourced objections section + verify-before-call
+  checklist in `demo-script`, and replaced `demo-setup`'s guarded
+  dry-run-preview-OK-execute-verify automation identity (built around
+  CLAUDE.md guardrail 3) with a plain manual checklist.
+- **`improve: merge restored content with Session 14's real
+  improvement`** — both skills now have their original
+  structure/identity back, plus the one thing Session 14 actually got
+  right: explicit confirm-before-finalizing gates.
+- Open: the Jouet club account's `demo-script.md`/`demo-setup.md`
+  (delivered in Session 14) don't match the restored structure —
+  not regenerated yet, Walid's call.
+
 ## 2026-07-20 (fix: title-slide AE/SE headshots; new photo resource)
 
 - **New resource**: `resources/AEs & SEs/<Full Name>.jpeg` — headshots

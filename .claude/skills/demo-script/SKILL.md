@@ -1,69 +1,110 @@
 ---
 name: demo-script
 description: >
-  Trigger: "write the demo script for [account]", "script the talk
-  track for [X]'s deck". Writes the Tell-Show-Tell talk track for a
-  deck already built by `build-deck` — never scripts content onto the
-  deck's blank Demo slides themselves.
+  Trigger: "script the [account] demo", "write a demo script for [X]".
+  Produces the talk track Walid actually speaks during a demo — chains
+  off `accounts/<customer>/brief.md` and the deck built by `build-deck`.
 ---
 
 # demo-script
 
 ## What it does
 
-Produces the internal talk track (Tell-Show-Tell per demo station) that
-Walid uses to actually run the live demo behind a deck's blank "Demo"
-slides. Always in English, regardless of the deck's language — this is
-an internal working doc, not customer-facing (style-guide.md's FR/EN
-rule: decks match the customer's language, internal notes/briefs stay
-English).
+The deck (`build-deck`) has blank "Demo" slides by design — this skill
+writes what Walid actually says and does at each one: Tell-Show-Tell
+per station, anticipated objections pulled from `resources/battle-cards/`,
+and a pre-call verify checklist. Output lives in
+`accounts/<customer>/demo-script-<date>.md`, not on the slides themselves.
+Always in English regardless of the deck's language — this is an
+internal working doc, not customer-facing (style-guide.md's FR/EN rule:
+decks match the customer's language, internal notes/briefs stay English).
 
 ## Prerequisites
 
-- The account's deck must already exist (`build-deck` output) — the
-  script is structured around that deck's actual stations and slide
-  numbers, not invented independently.
-- `accounts/<customer>/brief.md` for the real pain points/evidence each
-  station should tie back to.
+- `accounts/<customer>/brief.md` (from `process-customer`) — the
+  script is critiqued against this account's actual priorities and
+  MEDDPICC gaps, not generic Storyblok talking points.
+- Ideally the deck itself (from `build-deck`), so the script's demo
+  stations match the deck's actual station names/order/slide numbers
+  exactly — if no deck exists yet, ask whether to build one first or
+  script against a station list Walid gives directly.
 
 ## Steps
 
-1. **Read the deck and the brief.** Confirm the station names/order and
-   slide numbers directly from the built deck — don't assume they match
-   whatever the brief's "Demo — what to show" section implied, since
-   station naming can change during `build-deck`.
+1. **Read the brief and the deck's demo stations** (confirm station
+   names/order/slide numbers from the actual built deck — don't assume
+   they match whatever the brief implied, since naming can change
+   during `build-deck`). If no deck exists yet, ask Walid for the
+   station list directly.
 
-2. **Draft the outline first**, before writing full prose: station
-   order, and for each station, the one-line Tell/Show/Tell angle and
-   which specific pain point or MEDDPICC element it's answering.
+2. **Draft the outline first**, before writing full prose: for each
+   station, the Tell (opening)/Show/Tell (closing) angle and which
+   specific pain point or MEDDPICC element it answers.
 
 3. **Confirm the outline with Walid before writing the final doc.**
-   Present the draft angles and ask for edits or an OK. This is a
-   judgment call about framing and emphasis (what to lead with, what to
-   downplay) — not a factual lookup, so it needs a real checkpoint, not
-   an assumption. (Learned 2026-07-20, Jouet club: the first version was
-   written end-to-end with no chance to adjust framing before it was
-   finalized.)
+   This is a judgment call about framing and emphasis (what to lead
+   with, what to downplay) — not a factual lookup, so it needs a real
+   checkpoint, not an assumption. (Learned 2026-07-20, Jouet club: a
+   first version was written end-to-end with no chance to adjust
+   framing before it was finalized.)
 
-4. **Write the full script** once confirmed: opening framing, then
-   per-station Tell (opening) / Show (what to actually click through,
-   live) / Tell (closing — tie back to the pain point), a closing
-   section with direct questions to ask the room, and a "Don't" list for
-   known traps (e.g. showing mock data without saying so).
+4. **Write the full script** once confirmed:
+   - **Tell (opening)**: 2-3 sentences setting up the problem/context —
+     tied to something specific from the brief (a stated pain point, a
+     constraint from discovery), not a generic Storyblok pitch.
+   - **Show**: the concrete sequence of actions Walid will actually
+     perform in Storyblok — numbered steps, not vague ("open the Visual
+     Editor, drag in a Teaser component, publish").
+   - **Tell (close)**: the "so what" — the specific business outcome
+     this ties back to for this account (their KPI/pain, not a generic
+     benefit).
 
-5. **Flag open dependencies** — an unconfirmed date, an attendee list
-   not yet locked, data caveats (mock/fictional data, no live API) —
-   rather than writing around them silently.
+5. **Anticipated objections** — check `resources/battle-cards/` for
+   this account's known competitors/objection patterns. If
+   battle-cards is empty or has nothing relevant, say so rather than
+   inventing objections; ask Walid what he's actually heard from this
+   account so far (Salesforce/Gong context he'd need to paste in
+   manually — never invented).
 
-6. **Save** to `accounts/<customer>/demo-script.md` (local-only, per
-   guardrail 6 — never committed).
+6. **Verify-before-call checklist** — concrete things to check live
+   before the call, not assumed: demo environment data is current, any
+   account-specific config still working, whether stakeholders
+   confirmed for the call match who the script assumes is in the room,
+   any open dependencies (unconfirmed date, unlocked attendee list,
+   mock-vs-live data caveats to remember to say out loud).
+
+7. **Save** to `accounts/<customer>/demo-script-<date>.md`:
+   ```
+   # <Account> — Demo Script — <date>
+   Deck: <link/filename from build-deck, if any>
+
+   ## Station 1: <name>
+   Tell (open): ...
+   Show: 1. ... 2. ... 3. ...
+   Tell (close): ...
+
+   ## Anticipated objections
+   - <objection> — <response>, source: battle-cards/<file> or "Walid,
+     <date>" if given directly, or "need validation" if neither.
+
+   ## Verify before the call
+   - [ ] ...
+   ```
+
+8. **Suggest the logical next step**: run through it once with Walid
+   before the call, or flag if `resources/battle-cards/` is thin and
+   could use populating.
 
 ## Guardrails
 
-- Never invent talking points not grounded in the brief's real
-  evidence — if a station's benefit framing isn't backed by something
-  actually in the brief, flag it as need-validation rather than
-  inventing a plausible-sounding one.
+- Never invent objections or competitor claims not sourced from
+  battle-cards or something Walid directly told you — label the
+  source on every objection, or mark "need validation."
+- Never fabricate Salesforce/Gong-derived context (CLAUDE.md guardrail
+  5) — if Walid hasn't pasted it in, don't assume it.
 - Always confirm the outline (step 3) before finalizing — this is the
-  one skill in the demo-prep chain that's pure judgment/framing, not
-  a factual writeup, so it gets a real checkpoint every time.
+  one skill in the demo-prep chain that's pure judgment/framing, not a
+  factual writeup, so it gets a real checkpoint every time.
+- This is customer-facing prep material, not a deliverable sent to the
+  customer — but should still follow style-guide.md tone since it may
+  shape what Walid actually says live.
