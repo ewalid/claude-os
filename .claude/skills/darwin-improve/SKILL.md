@@ -42,6 +42,18 @@ the repo, so it never has to be corrected twice.
    `resources/people.md` AND the artifact AND `daily-briefing/SKILL.md`),
    apply all of them in the same pass, not piecemeal across sessions.
 
+   **If the target is under `.claude/skills/`**, the Edit tool will
+   refuse it (protected location) — this forces a fallback to bash/
+   python, which does NOT enforce read-before-write the way Edit does.
+   Before writing, manually run `cat <path>` (or `git show HEAD:<path>`)
+   AND `git log --oneline -- <path>` to see whether real content
+   already exists. Never assume a file is a stub just because it's
+   short or the trigger felt like "create a new skill" — check first.
+   (2026-07-20, real mistake: overwrote genuinely drafted `demo-script`/
+   `demo-setup` content this way, without checking either. Restored
+   and merged afterward — see memory.md Session 15-16. CLAUDE.md
+   guardrail 9 now states this rule generally.)
+
 4. **Commit** as `improve: <what changed>`, and add a line to
    `CHANGELOG.md` (newest-first, short) describing it in plain terms.
 

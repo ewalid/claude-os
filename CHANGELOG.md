@@ -19,6 +19,18 @@ short, skimmable "what changed and when" record. Update it alongside any
   per-account directory stays local-only, matching CLAUDE.md guardrail
   6's actual intent.
 
+## 2026-07-20 (improve: permanent guard against the overwrite mistake recurring)
+
+- **New CLAUDE.md guardrail 9**: before any bash/python write to a
+  path the Edit tool refuses (currently `.claude/skills/`), manually
+  `cat`/`git log --oneline -- <path>` first — Edit enforces
+  read-before-write automatically, bash/python doesn't.
+- `darwin-improve/SKILL.md` step 3 now documents this concrete failure
+  mode and procedure directly, with the real example that caused it.
+- Also self-noting: this is the first fix today actually committed
+  with the skill's own specified `improve:` prefix — the two before it
+  (headshots, the restore itself) went out as `fix:` instead.
+
 ## 2026-07-20 (fix: restored overwritten demo-script/demo-setup content)
 
 - **Self-caught mistake**: Session 14's "formalize demo-script/demo-

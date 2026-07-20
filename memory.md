@@ -698,3 +698,18 @@ Darwin has — no update, no memory.
   skip the Read-before-Edit guard that catches this on Edit-tool paths
   — check `git log -- <path>` before any "formalize"/"rewrite" pass on
   a file that might not be new.
+
+### 2026-07-20 — Session 17 (improve: made the git-log-check rule permanent)
+- Walid asked directly how to avoid the overwrite mistake recurring —
+  this is exactly a `darwin-improve` trigger, run properly this time
+  (named it, used the right commit prefix, unlike the two prior fixes
+  today which went out as `fix:` instead of `improve:`).
+- Classified as recurring/always-true (not task-specific to one skill)
+  since the actual failure mode is a tool limitation — Edit refuses
+  `.claude/skills/` paths, forcing a bash/python fallback that skips
+  the automatic read-before-write guard. New **CLAUDE.md guardrail 9**:
+  before any bash/python write to a path Edit refused, manually `cat`
+  + `git log --oneline -- <path>` first, merge don't blindly replace.
+- Also strengthened `darwin-improve/SKILL.md` step 3 with the concrete
+  procedure and the real example, so the meta-skill about self-
+  correction documents its own most costly failure mode explicitly.

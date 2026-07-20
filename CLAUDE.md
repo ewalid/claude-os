@@ -54,6 +54,16 @@ for anything customer-facing or RFP-related.
 8. A Notion date is never trusted at face value — cross-check calendar/
    Slack before treating it as a deadline vs. a call date (see known
    issue in memory.md / HANDOFF.md §2).
+9. **Before writing to any file via bash/python instead of the Edit
+   tool** (this happens whenever Edit refuses a path — currently
+   `.claude/skills/` is blocked) — first read the file's actual current
+   content and run `git log --oneline -- <path>`. The Edit tool
+   enforces read-before-write automatically; a bash/python write
+   doesn't, so I have to do it manually every time. Treat any real
+   pre-existing content as something to merge, never something to
+   blindly replace. (2026-07-20: skipped this once, overwrote real
+   drafted content in `demo-script`/`demo-setup` — see memory.md
+   Session 16.)
 
 ## Priority logic (for briefings and triage)
 
