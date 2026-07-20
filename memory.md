@@ -418,6 +418,19 @@ Darwin has — no update, no memory.
 - Going forward: skill output (briefs, etc.) should be posted in the chat
   response itself AND written to Notion — not just one or the other.
 
+### 2026-07-20 — Session 11 (process-customer walkthrough + real Competition update, Jouet club)
+
+- Walid asked for a clean walkthrough of `process-customer`'s Phase A/B
+  flow (explained in plain terms in chat, no file changes from that
+  alone). He then re-supplied the same Salesforce/Gong extract plus a
+  new Slack DM channel ID.
+- Reading that DM directly (not just Gong's summary) surfaced a real,
+  concrete update: the actual named CMS competitors are more specific
+  than Gong's extract implied. Competition MEDDPICC element upgraded
+  accordingly; brief + Notion Notes/page updated. Also confirmed no
+  deck exists yet for this account, and got AE color on the deal (not
+  repeated here — local brief only, per guardrail 6).
+
 ## Standing facts (update if they change; don't duplicate HANDOFF.md)
 
 - AE pod: Thibault de Maison Rouge, Rob Scholte, Mine Heck, Kristoffer
