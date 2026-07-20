@@ -3,5 +3,8 @@
 .env.*
 node_modules/
 resources/deck-examples/*.pptx
+resources/AEs & SEs/*.jpeg
+resources/AEs & SEs/*.jpg
+resources/AEs & SEs/*.png
 accounts/*/*
 !accounts/*/.gitkeep

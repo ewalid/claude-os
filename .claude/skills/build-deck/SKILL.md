@@ -41,7 +41,12 @@ is fixed — this skill fills it in, it doesn't invent new slide types.
 3. **Customize per the template** (see style-guide.md for the full
    structure):
    - Title slide: account name, the actual AE's name (from Notion AE
-     property — never guess), Walid as the SE.
+     property — never guess), Walid as the SE. Also swap the two
+     headshot PICTURE shapes (easy to miss — they don't show up in a
+     text-only shape scan): match each person by name against
+     `resources/AEs & SEs/<Full Name>.jpeg`. If a headshot is missing
+     for the AE or SE, flag it — never leave the source deck's original
+     (wrong) person's photo in place unnoticed.
    - "What we know so far": Key Business Result / Observed constraints
      / What is needed / What does success look like / By when — pulled
      directly from the brief's "Their priorities" and MEDDPICC sections.

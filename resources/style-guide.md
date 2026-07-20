@@ -26,7 +26,16 @@ underlying template — `build-deck` adapts this template, it never
 invents slide types that aren't in it.
 
 **1. Title** — "Storyblok for \<Account\>", with the AE's name/title and
-the SE's name/title (Walid, "Solutions Engineer") on the slide.
+the SE's name/title (Walid, "Solutions Engineer") on the slide, each
+paired with a small headshot photo (confirmed present in all 5 example
+decks — 2 PICTURE shapes on slide 1, one per person, easy to miss since
+they don't show up in a text-only scan of the slide). Headshots live in
+`resources/AEs & SEs/<Full Name>.jpeg` — swap in whichever exists for
+the real AE/SE, matched by name (never guess/reuse a different
+person's photo from the source deck). If a headshot is missing for
+someone, flag it rather than leaving the source deck's wrong person in
+place. Discovered 2026-07-20 (Jouet club): the first build left the
+source deck's original AE/SE photos in place unnoticed.
 
 **2. "What we know so far."** — the discovery recap, one row per line:
 Key Business Result → Observed constraints → What is needed? → What

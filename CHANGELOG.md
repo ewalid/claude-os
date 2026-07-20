@@ -19,6 +19,19 @@ short, skimmable "what changed and when" record. Update it alongside any
   per-account directory stays local-only, matching CLAUDE.md guardrail
   6's actual intent.
 
+## 2026-07-20 (fix: title-slide AE/SE headshots; new photo resource)
+
+- **New resource**: `resources/AEs & SEs/<Full Name>.jpeg` — headshots
+  for use on deck title slides. Walid added his own; others still
+  missing.
+- **Bug fix**: all 5 example decks carry 2 headshot PICTURE shapes on
+  slide 1 (AE + SE), invisible to a text-only shape scan. The Jouet
+  club deck had shipped with the original Cellbes AE/SE's photos still
+  in place. Fixed Walid's photo in place; Thibault's is still wrong
+  (no headshot on file for him yet) — flagged, not silently left.
+- `style-guide.md` and `build-deck/SKILL.md` updated to call out the
+  headshot swap explicitly going forward.
+
 ## 2026-07-20 (improve: confirmation checkpoints added to demo-prep skills)
 
 - **`improve: build-deck confirms demo station shortlist before building`**

@@ -648,3 +648,21 @@ Darwin has — no update, no memory.
   confirmation checkpoint (script: confirm the outline/framing before
   writing the full doc; setup: flag space-structure decisions like
   single-space-vs-per-brand before finalizing).
+
+### 2026-07-20 — Session 15 (title-slide headshot bug caught; AEs & SEs photo resource)
+- Walid added a real headshot to `resources/AEs & SEs/Walid EL
+  M'SELMI.jpeg` and flagged it for use in decks going forward.
+- Checking this surfaced a real bug in the Jouet club deck: all 5
+  example decks have 2 headshot PICTURE shapes on slide 1 (AE + SE) —
+  invisible to a text-only shape scan, which is exactly how I'd
+  inspected the source deck earlier this session. The built deck still
+  had the original Cellbes AE/SE's photos in place, unnoticed.
+- Fixed Walid's own photo in place (swapped the SE picture part's
+  image bytes directly, matched PNG content-type to avoid a
+  declared-vs-actual mismatch). **Thibault's AE photo is still wrong**
+  — no headshot exists for him in the resource yet, so his slot still
+  shows the original Cellbes AE. Flagged to Walid, not silently left.
+- Documented this properly so it isn't missed again: `style-guide.md`
+  step 1 and `build-deck/SKILL.md`'s title-slide step both now call out
+  the headshot swap explicitly, with the `resources/AEs & SEs/<Full
+  Name>.jpeg` matching convention.
