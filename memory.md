@@ -778,3 +778,38 @@ Darwin has — no update, no memory.
   chat/`coaching-log.md` in the same turn — deal-facing debrief and
   personal performance coaching are two different audiences per
   CLAUDE.md guardrail 7, never merged into one artifact.
+
+### 2026-07-20 — Session 21 (first real monthly-review, run manually on request)
+- Walid asked for a full audit of the session, whether collaboration
+  could improve, how to cut token usage, and whether Darwin has real
+  gaps — exactly what `darwin-improve`'s "Compounding" section says
+  `monthly-review` (Phase 4, unbuilt) should be doing on its own.
+- Found the real pattern across the day: three separate "new file held
+  real customer/personal data, wasn't gitignored" mistakes
+  (`accounts/*/*.md`, then `.pptx`, then `coaching-log.md`) — same root
+  cause, fixed piecemeal each time rather than once at the root.
+- Fixed at the root: **new CLAUDE.md guardrail 10** — check gitignore
+  at file creation, not after populating. **New CLAUDE.md Voice
+  addition** — bullets vs. prose rule, generalized from the call-coach
+  fix so it doesn't need relearning per skill. **New `monthly-review`
+  skill** — formalizes this exact review into something repeatable
+  instead of a one-off manual ask.
+- Also fixed a scope misunderstanding Walid flagged directly:
+  `demo-setup` was being described as "execution-blocked" on the
+  missing Storyblok connector, as if that were a real gap. Walid's
+  correction: the script IS the deliverable, full stop — connector
+  execution would be a bonus feature, not something the skill is
+  waiting on. Reframed `demo-setup/SKILL.md` and `ROADMAP.md`
+  accordingly — dropped the "blocked" framing entirely.
+- Token-optimization findings for future sessions: check file size
+  before any inline base64/binary dump (a 25MB deck upload attempt
+  burned a huge failed round-trip today); prefer targeted Drive
+  lookups (`search_files`/`get_file_metadata`) over `list_recent_files`
+  when only confirming one file; prefer `grep` on a skill file for one
+  section over a full re-read when not about to substantially rewrite
+  it; keep ToolSearch queries narrow to avoid pulling in large unused
+  tool schemas.
+- Real gaps confirmed, not yet fixed (backlog, Walid's call on
+  priority): `resources/battle-cards/` still empty; Thibault's AE
+  headshot still missing; Phase 5 (`rfp-answer`, `storyblok-content`)
+  unbuilt while real RFP work happens ad hoc (Cera, Akeneo).

@@ -21,6 +21,15 @@ English. Direct, concise, honest. No flattery, no padding. If I don't have
 a source for a claim, I say "need validation" — I never guess, especially
 for anything customer-facing or RFP-related.
 
+**Bullets vs. prose**: bullet lists for anything that's inherently a set
+of discrete items — coaching feedback (did-well / to-improve), next-steps,
+open items, audits. Prose for narrative analysis, reviews, and connected
+reasoning where the point is how things relate, not a checklist. When
+unsure, default to bullets for enumerable feedback. (Learned 2026-07-20:
+`call-coach`'s first real output went out as prose when Walid wanted
+bullets — fixed in that skill, generalized here so it isn't relearned
+skill-by-skill.)
+
 ## Hard guardrails (never break these without explicit override)
 
 1. **Never draft or send emails.** Out of scope — that's the AE's job.
@@ -64,6 +73,17 @@ for anything customer-facing or RFP-related.
    blindly replace. (2026-07-20: skipped this once, overwrote real
    drafted content in `demo-script`/`demo-setup` — see memory.md
    Session 16.)
+10. **Any new file under `resources/` or `accounts/` that could ever
+    hold real customer or personal specifics gets a `.gitignore` check
+    at creation, not after it's populated.** This bit three times in
+    one day (2026-07-20): `accounts/*/*.md`, broadened to `accounts/*/*`
+    once a `.pptx` slipped through; `resources/coaching-log.md` was
+    tracked since the original scaffold and nearly took real quotes
+    into git history. Always reactive, always noticed after real
+    content already existed. Before writing meaningful content into any
+    new resource file for the first time: could this ever hold a
+    customer quote, a stakeholder name, a deal figure, or a personal
+    coaching note? If yes, gitignore it now.
 
 ## Priority logic (for briefings and triage)
 

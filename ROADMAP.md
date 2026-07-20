@@ -39,12 +39,13 @@ for full rationale.
       confirm-the-outline gate before finalizing (framing is a judgment
       call, not a lookup). Real run done for Jouet club.
 - [x] `demo-setup` — drafted, overwritten by mistake, then restored +
-      improved: still **execution-blocked** (Storyblok MCP re-verified
-      absent, 2026-07-20). Kept its guarded dry-run-preview → OK → write
-      → verify identity (CLAUDE.md guardrail 3), added a
-      confirm-the-space-structure gate (single space vs. per-brand) for
-      when it's drafted ahead of the connector existing, which is what
-      actually happened for Jouet club.
+      improved, then reframed (2026-07-20): this skill's job is the
+      written setup script itself, full stop — not a placeholder
+      waiting on the Storyblok MCP connector. Real run done for Jouet
+      club. If a connector ever exists, the same script becomes
+      directly executable (dry-run → OK → write → verify, CLAUDE.md
+      guardrail 3) — a bonus, not the point. Gained a
+      confirm-the-space-structure gate (single space vs. per-brand).
 - Phase 3 is now genuinely exercised end-to-end on one real account,
   not just specced. Two self-caught mistakes this session (station/
   photo inference without confirming; overwriting real prior skill

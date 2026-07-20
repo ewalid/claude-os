@@ -19,6 +19,22 @@ short, skimmable "what changed and when" record. Update it alongside any
   per-account directory stays local-only, matching CLAUDE.md guardrail
   6's actual intent.
 
+## 2026-07-20 (improve: root-cause fix for the recurring gitignore pattern, new monthly-review skill, demo-setup reframed)
+
+- **New CLAUDE.md guardrail 10**: check `.gitignore` at file creation
+  for anything under `resources/`/`accounts/` that could hold real
+  customer/personal data — fixes the root cause behind three separate
+  same-day incidents (`accounts/*/*.md`, a `.pptx`, `coaching-log.md`).
+- **New CLAUDE.md Voice rule**: bullets vs. prose, generalized from the
+  `call-coach` fix so the preference doesn't need relearning per skill.
+- **New skill: `monthly-review`** — formalizes pattern-mining across
+  `memory.md`/`CHANGELOG.md` (previously only theorized in
+  `darwin-improve`'s "Compounding" section, never actually built).
+- **`demo-setup/SKILL.md` + `ROADMAP.md` reframed**: dropped the
+  "execution-blocked" framing entirely — the written setup script is
+  the deliverable, connector execution is a future bonus, not a
+  dependency. Correction from Walid.
+
 ## 2026-07-20 (post-call-update: Implid backfilled from real transcript)
 
 - Notion Debriefs DB: new row for Implid's July 9 call. Notion Accounts
