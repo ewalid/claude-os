@@ -6,6 +6,16 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
+## 2026-07-20 (Akeneo RFP claimed — Notion row from a parallel session)
+
+- **New Notion row: "Akeneo RFP"** — created in a different session
+  (same repo) after Walid claimed it live off a briefing flag. Repurposed
+  a blank template stub row. Deadline **2026-07-31** — same date as Cera
+  RFP, plus Implid still overdue since July 17 — three accounts stacking
+  up end-of-month. Real evidence moved to `accounts/akeneo/notes.md`
+  (local-only); that session's memory.md entry had customer specifics
+  inline, trimmed retroactively to meta-level here.
+
 ## 2026-07-20 (process-customer: added a "Demo — what to show" section)
 
 - **`process-customer/SKILL.md` template gains a "Demo — what to show"

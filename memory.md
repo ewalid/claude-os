@@ -500,3 +500,24 @@ Darwin has — no update, no memory.
       needs Walid to paste real Salesforce/Gong extracts for one account
       (Implid, given the overdue deadline, is the obvious candidate).
       Holding off on drafting Phase 4 until then.
+
+### 2026-07-20 — Session 10 (new account: Akeneo RFP, claimed live in a separate session)
+
+- Found as an uncommitted local diff to this file, written by a
+  different session than this one (same repo, same machine) — Walid had
+  claimed a new RFP (flagged worth-claiming in that morning's briefing)
+  and that session did a live Notion-row update: new "Akeneo RFP" row
+  (repurposed a blank template stub), Type RFP, Priority High, AE
+  Thibault de Maison Rouge, joint SE ownership with Ines Akrap (Cera-RFP
+  pattern), MEDDPICC ["Identify Pain"] only, Deadline **2026-07-31**
+  (same date as Cera RFP — two RFPs now converging end-of-month, plus
+  Implid still overdue since July 17; worth flagging explicitly in the
+  next briefing). Verified live against Notion — matches exactly.
+  Real evidence (quotes, stakeholder names, Slack channel) moved to
+  `accounts/akeneo/notes.md` (local-only) rather than repeated here, per
+  guardrail 6 — that other session's memory.md entry had the customer
+  specifics inline; trimmed retroactively.
+- No full `process-customer` run yet for Akeneo — this was a live
+  Notion-row update per Walid's direct ask, not the full skill (no Gong/
+  SF extract pasted, RFP document in Drive not yet opened).
+- Only 2 blank template stub rows remain in the Accounts DB after this.
