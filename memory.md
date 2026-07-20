@@ -736,3 +736,26 @@ Darwin has — no update, no memory.
   (a direct reflection question), named that darwin-improve was
   running, reread the file before editing it, used the correct
   `improve:` prefix.
+
+### 2026-07-20 — Session 19 (improve: coaching-log.md untracked from git)
+- Ran `call-coach` for real for the first time — a Gong-style
+  transcript for Implid, full write-up in `resources/coaching-log.md`
+  (private, per guardrail 7, never referenced here or anywhere
+  customer-facing).
+- Self-caught mid-task: `coaching-log.md` was already tracked in git
+  (committed as an empty stub in the original scaffold). Once it held
+  a real entry (customer quotes, names, deal specifics), committing it
+  would have repeated exactly the mistake guardrail 6 already exists
+  to prevent for `accounts/<customer>/` — just in a file nobody had
+  thought to gitignore yet.
+- Fixed: added `resources/coaching-log.md` to `.gitignore`, ran
+  `git rm --cached` to untrack it going forward (content on disk is
+  untouched — 70 lines, real entry intact). No customer specifics were
+  pushed; caught before any commit went out.
+- Also nearly lost the coaching content itself mid-fix: ran `git
+  checkout -- resources/coaching-log.md` to "revert," not realizing
+  that reverts to the last commit (the empty stub), wiping the
+  uncommitted real entry. Caught immediately, content wasn't actually
+  lost (rewrote from what was still in context) — but worth noting as
+  a near-miss: `git checkout --` is destructive to uncommitted work,
+  not a safe no-op.

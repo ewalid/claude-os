@@ -8,3 +8,4 @@ resources/AEs & SEs/*.jpg
 resources/AEs & SEs/*.png
 accounts/*/*
 !accounts/*/.gitkeep
+resources/coaching-log.md

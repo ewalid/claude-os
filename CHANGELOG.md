@@ -19,6 +19,16 @@ short, skimmable "what changed and when" record. Update it alongside any
   per-account directory stays local-only, matching CLAUDE.md guardrail
   6's actual intent.
 
+## 2026-07-20 (improve: untrack coaching-log.md from git)
+
+- **`resources/coaching-log.md`** was tracked in git since the initial
+  scaffold (as an empty stub) — once `call-coach` wrote a real entry
+  into it (Implid), that would have pushed customer quotes/names to
+  GitHub, the same risk guardrail 6 exists to prevent for
+  `accounts/<customer>/`. Added to `.gitignore`, untracked via
+  `git rm --cached` before any commit went out. Content on disk
+  unaffected.
+
 ## 2026-07-20 (improve: darwin-improve triggers more reliably, not just from memory)
 
 - **CLAUDE.md "How I improve"** rewritten: concrete trigger signals
