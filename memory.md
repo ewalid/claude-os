@@ -358,6 +358,48 @@ Darwin has — no update, no memory.
   (e.g. a small Python/sed rewrite) to edit skill files instead, then
   `git add`/commit from the same sandbox.
 
+### 2026-07-20 — Session 8 (process-customer: first real run, Jouet club)
+
+- **First-ever real `process-customer` run**, on Jouet club — Walid pasted
+  real Salesforce next-steps and a full Gong call-extract summary
+  unprompted (satisfying Phase B before the hard-stop message even went
+  out). Phase A also pulled: Notion Accounts DB row, a rich Notion
+  meeting-notes page from 2026-07-10 ("Briefing Jouet Club avec Decade")
+  found via search, the July 21 calendar event (MS Teams, 15:00-16:00
+  UTC / 17:00-18:00 Paris), and confirmed the Debriefs DB has no rows for
+  this account yet. Slack/Drive searches for "Jouet" turned up nothing
+  useful (2 empty Gong-bot posts in #gong-calls-sgt, unrelated decks in
+  Drive).
+- **Notion row rewritten** (Phase E, direct write per guardrail 4):
+  - Stage: "In progress" → **"Discovery"** (evidence: DECADE described as
+    still in "architectural reflection," shortlisting 2-3 CMS vendors —
+    more precise than the generic prior value).
+  - Notes: rewritten from the stale "First demo on july 21" to a real
+    summary of the July 21 discovery call, the end-of-August full-demo
+    plan, and two open need-validation items.
+  - MEDDPICC: null → **Decision Criteria, Decision Process, Identify
+    Pain, Competition** (Confirmed only, per convention — Metrics/
+    Economic Buyer/Champion are Partial and Paper Process is a Gap; full
+    breakdown with quoted evidence lives in the brief, not the multi-select).
+  - Priority (High) and AE (Thibault de Maison Rouge) — evidence
+    confirmed both, no change. Next call (2026-07-21) — already correct,
+    no change. Deadline — left null; no concrete near-term SE deadline
+    beyond the already-captured Next call (the end-of-August demo has no
+    firm date yet, and the Sept-2027 go-live is a multi-year business
+    target, not an SE deadline).
+- **`accounts/jouet-club/brief.md` written** — full MEDDPICC breakdown
+  (4 Confirmed / 3 Partial / 1 Gap), stakeholders (Caroline WU/DECADE,
+  Alexis/IT, Anaïs/E-commerce, an unnamed "new President" as likely
+  Economic Buyer), risks, and a real inconsistency surfaced between
+  sources: Salesforce's next-steps note describes the July 21 session
+  partly as a "technical enablement session for the Decade team," while
+  Gong/Notion describe it as a client-facing discovery call — flagged as
+  need-validation (who's actually attending) rather than guessed at.
+- This is the first proof of the Phase C/E rewrite behavior from Sessions
+  5-6 (MEDDPICC analysis + full-row rewrite, no OK gate) on real evidence
+  — worked as specced. `build-deck`/`demo-script` can now chain off a
+  real brief for the first time.
+
 ## Standing facts (update if they change; don't duplicate HANDOFF.md)
 
 - AE pod: Thibault de Maison Rouge, Rob Scholte, Mine Heck, Kristoffer
@@ -409,9 +451,16 @@ Darwin has — no update, no memory.
       run live — Storyblok MCP still absent.
 - [ ] `resources/battle-cards/` is empty — `demo-script`'s objection-
       sourcing has nothing to draw on until it's populated.
-- [ ] No `accounts/<customer>/brief.md` exists for any account yet —
-      run `process-customer` for real before `build-deck`/`demo-script`
-      can actually be used on a live account.
+- [x] `accounts/jouet-club/brief.md` written 2026-07-20 Session 8 —
+      first real `process-customer` run. Implid still has none — same
+      gap, not yet run.
+- [ ] Jouet club need-validation from Session 8: who's actually attending
+      the July 21 call (SF vs. Gong disagree slightly), exact end-of-
+      August full-demo date, whether SF's "Decade technical enablement
+      session" is the same event as the July 21 discovery call.
+- [ ] Jouet club MEDDPICC gaps to close: Paper Process (Gap), Champion/
+      Economic Buyer (Partial) — confirm if Anaïs is an internal champion,
+      get the new President's name.
 - [x] `process-customer` now does a real MEDDPICC analysis from Gong/SF
       pastes and auto-updates Notion (2026-07-15 Session 5) — untested
       live, no account has real extracts pasted in yet.

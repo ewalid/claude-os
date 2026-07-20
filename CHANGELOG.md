@@ -6,6 +6,21 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
+## 2026-07-20 (process-customer: first real run, Jouet club)
+
+- **`accounts/jouet-club/brief.md` created** — the first real
+  `process-customer` run, off real Salesforce + Gong extracts Walid
+  pasted in. Full MEDDPICC breakdown (4 Confirmed, 3 Partial, 1 Gap),
+  stakeholders, risks, and a cross-source inconsistency flagged as
+  need-validation rather than resolved by guessing.
+- **Notion Jouet club row rewritten**: Stage "In progress" → "Discovery";
+  Notes rewritten from the stale "First demo on july 21" to a real
+  summary of the July 21 discovery call + end-of-August demo plan;
+  MEDDPICC set to [Decision Criteria, Decision Process, Identify Pain,
+  Competition] (Confirmed elements only). Priority/AE/Next call
+  confirmed unchanged; Deadline left blank (no firm near-term date beyond
+  the already-captured Next call).
+
 ## 2026-07-20 (account-switch recovery: git, scheduler, artifact, GitHub connector)
 
 - **Git repo reconciled with the real GitHub history.** `~/dev/claude-os`
