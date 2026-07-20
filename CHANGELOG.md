@@ -19,6 +19,17 @@ short, skimmable "what changed and when" record. Update it alongside any
   per-account directory stays local-only, matching CLAUDE.md guardrail
   6's actual intent.
 
+## 2026-07-20 (feat: weekly-review built; weekly + monthly routines scheduled; no-artifact preference)
+
+- **Standing preference**: no artifacts from routines — plain chat
+  text, blank line between sections. `daily-briefing/SKILL.md` fixed
+  (its scheduled run was already compliant; its docs weren't).
+- **New skill: `weekly-review`** — pipeline/account-health pulse,
+  distinct from `monthly-review`'s self-audit scope.
+- **Both `weekly-review` and `monthly-review` are now real scheduled
+  tasks** (`darwin-weekly-review` Mondays 08:30, `darwin-monthly-review`
+  1st of month 08:00, Paris time) — not just skill files.
+
 ## 2026-07-20 (improve: root-cause fix for the recurring gitignore pattern, new monthly-review skill, demo-setup reframed)
 
 - **New CLAUDE.md guardrail 10**: check `.gitignore` at file creation

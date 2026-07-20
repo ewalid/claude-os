@@ -63,7 +63,10 @@ CLAUDE.md guardrail 4 applies to that follow-up).
 
 ## Output format
 
-```
+Plain chat text, not an artifact (see Notes — 2026-07-20, standing
+preference: no artifacts from routines). Leave a blank line between
+every section so it's actually scannable, not a wall of text.
+
 🎯 DEMOS TODAY
 - [Account] at [time] — [one-line context]. Check before call: [items].
   (or: "None today.")
@@ -84,7 +87,6 @@ CLAUDE.md guardrail 4 applies to that follow-up).
 - [from Notion ToDo checklist]
 
 One-liner: [the single most important thing today, in one sentence]
-```
 
 ## Good output example
 
@@ -122,23 +124,14 @@ One-liner: Implid proposal is the tightest deadline this week — due July 17.
   silently omitting that section.
 - Never guess a date's meaning — if it can't be cross-checked, mark it
   "need validation" instead of asserting call vs. deadline.
-- Walid prefers this rendered visually, not as a chat wall of text. There is
-  a live Cowork artifact (`darwin-morning-brief` — NOT `darwin-daily-briefing`;
-  that id got orphaned under a different Claude account on 2026-07-15 and
-  Cowork won't let it be reused, so the rebuilt artifact lives under this new
-  id) that pulls calendar, the Notion Accounts DB (Next call/Deadline/AE/
-  MEDDPICC), and both Slack channels fresh on every open, and uses a quick
-  Haiku pass (via `askClaude`) to triage Slack into "needs reply" / "worth
-  claiming" (demo-vs-deadline classification is now read directly from the
-  explicit Next call/Deadline fields post-restructure, no guessing needed).
-  Point Walid to that artifact for the visual version; only fall back to a
-  plain chat-text brief if artifacts aren't available in context. Gmail is
-  not yet wired into the artifact itself (added to the chat-text skill
-  2026-07-20) — add it to the artifact's callMcpTool calls next time the
-  artifact gets touched, using the same last-working-day window as Slack.
-- If Walid corrects the artifact's classification (e.g. it mislabels a
-  call as a deadline, or flags/misses a Slack item), that's a prompt-
-  wording fix inside the artifact's askClaude prompts, not a one-off
-  chat correction — update the HTML/JS and redeploy via update_artifact.
+- **Standing preference (2026-07-20): no artifacts for routines.** This
+  brief — and `weekly-review`/`monthly-review` — always output as plain,
+  well-formatted chat text with blank lines between sections. There is
+  a legacy Cowork artifact (`darwin-morning-brief`) from an earlier
+  design that pulled the same sources into a live visual dashboard —
+  it's no longer the preferred output and isn't actively maintained;
+  leave it alone rather than updating it going forward. If Walid ever
+  wants a visual dashboard again, that's a new explicit ask, not a
+  default to fall back into.
 - Never draft or send emails from this skill or any other — CLAUDE.md
   guardrail 1 is absolute, read-only email access only.

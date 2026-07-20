@@ -813,3 +813,27 @@ Darwin has — no update, no memory.
   priority): `resources/battle-cards/` still empty; Thibault's AE
   headshot still missing; Phase 5 (`rfp-answer`, `storyblok-content`)
   unbuilt while real RFP work happens ad hoc (Cera, Akeneo).
+
+### 2026-07-20 — Session 22 (no-artifact standing preference; weekly-review built; both new routines scheduled)
+- Walid: no artifacts from routines, plain well-formatted chat text
+  with real spacing between sections. `daily-briefing/SKILL.md`'s
+  actual scheduled run was already chat-text-only (verified via its
+  task file) — the gap was in the skill's own documentation, which
+  still pointed to the legacy `darwin-morning-brief` artifact as the
+  *preferred* way to consume the brief. Fixed: artifact framing
+  dropped entirely, output format section now explicitly calls for
+  blank-line spacing, legacy artifact left alone/unmaintained rather
+  than deleted.
+- New skill: `weekly-review` — a pipeline/account-health pulse (stage
+  movement, stalled accounts, week-ahead calls/deadlines, RFP deadline
+  collisions, MEDDPICC gaps on High-priority accounts). Deliberately
+  distinct scope from `monthly-review` (which audits Darwin's own
+  behavior, not the pipeline) — two different "monthly/weekly" things
+  that happen to share a cadence word.
+- Both `weekly-review` (Mondays 08:30 Paris) and `monthly-review` (1st
+  of month, 08:00 Paris) are now real scheduled tasks
+  (`darwin-weekly-review`, `darwin-monthly-review`), not just skill
+  files sitting unused — same pattern as `darwin-daily-briefing`.
+  Monthly-review's scheduled prompt explicitly limits it to low-risk,
+  clearly-scoped auto-fixes; anything judgment-call-shaped gets flagged
+  as backlog instead of auto-decided, matching the skill's own step 4.
