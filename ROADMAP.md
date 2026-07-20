@@ -53,10 +53,20 @@ for full rationale.
   than repeated.
 
 ## Phase 4 — Cadence (weeks 5-6)
-- [ ] `weekly-review`
-- [ ] `monthly-review`
+- [x] `weekly-review` — drafted, output is plain chat text (no artifact,
+      standing preference), scheduled Mondays 08:30 Paris
+      (`darwin-weekly-review`). Not yet exercised on a real Monday.
+- [x] `monthly-review` — drafted, self-audits memory.md/CHANGELOG.md for
+      recurring friction and runs `darwin-improve` on real patterns,
+      scheduled 1st of month 08:00 Paris (`darwin-monthly-review`). Not
+      yet exercised on a real run.
 - [ ] `todo-sync`
-- [ ] `dashboard`
+- [x] `dashboard` — not a routine skill, but a live Cowork artifact
+      (`walid-deals-dashboard`): "My Deals" from Notion + "Worth
+      Claiming" (AI-triaged from #se-requests, last 24h) with a one-click
+      Claim button (writes to Notion, never auto-sends to Slack). This
+      is explicitly the exception to the no-artifact-for-routines rule —
+      it's on-demand/interactive, not a recurring report.
 - [x] Morning brief scheduling — done early via Cowork's native scheduler
       (see Phase 1 note); n8n is no longer needed for this specific job.
 
@@ -99,5 +109,12 @@ for full rationale.
   Phase 3 content (restored, merged with the new confirmation gates).
   New reference resource: `resources/AEs & SEs/<Full Name>.jpeg` for
   deck title-slide photos — only Walid's exists so far, Thibault's (AE)
-  still missing. `resources/battle-cards/` still empty. Phase 4 is next
-  and genuinely unstarted.
+  still missing. `resources/battle-cards/` still empty.
+- 2026-07-20 (cont'd): Phase 4 started and mostly landed same day —
+  `call-coach`/`post-call-update` exercised for real (Implid), full
+  audit run + monthly-review skill built, no-artifact-for-routines
+  standing preference set, `weekly-review` drafted and scheduled,
+  `monthly-review` scheduled, and a live `walid-deals-dashboard`
+  Cowork artifact built (Notion "My Deals" + Slack-triaged "Worth
+  Claiming", 24h window, Claim writes to Notion only). Only
+  `todo-sync` remains genuinely unstarted in Phase 4.
