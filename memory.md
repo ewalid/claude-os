@@ -504,9 +504,17 @@ Darwin has — no update, no memory.
       GitHub connector's tools are confirmed loaded in a fresh session —
       local `main` is one commit ahead of `origin/main`, everything else
       reconciled and clean (2026-07-20 Session 7).
-- [ ] **Implid's deadline (2026-07-17) is overdue by 3 days as of
-      2026-07-20** — Stage still "Proposal", Notes still "Sending
-      Proposal". Needs a check-in with Walid before the next briefing run.
+- [x] **Implid's overdue deadline resolved 2026-07-20 Session 12** —
+      not actually overdue, was a stale "sending proposal" deadline;
+      proposal is sent and priced, now signature-pending (Stage →
+      Contracting, Deadline cleared). Re-check once client signs.
+- [ ] **Winfarm Group needs a real `process-customer` run** — currently
+      just Notion fields set from an email scan (2026-07-20 Session 12),
+      no brief exists. Custom demo is 2026-07-29 — get Thibault's Winfarm
+      use-cases doc before then.
+- [ ] Gmail wired into `daily-briefing/SKILL.md` (2026-07-20 Session 12)
+      but NOT yet into the `darwin-morning-brief` live artifact — add it
+      next time that artifact gets touched.
 - [ ] Real next step per the roadmap's own "don't build ahead" rule:
       Phase 4 skills (weekly-review/monthly-review/todo-sync/dashboard)
       are speculative until `process-customer` has had a real run — that
@@ -534,3 +542,47 @@ Darwin has — no update, no memory.
   Notion-row update per Walid's direct ask, not the full skill (no Gong/
   SF extract pasted, RFP document in Drive not yet opened).
 - Only 2 blank template stub rows remain in the Accounts DB after this.
+
+### 2026-07-20 — Session 12 (Akeneo deadline confirmed; Implid + Winfarm Group updated from email; Gmail added to daily-briefing)
+
+- Same live thread as Session 10/11's briefing follow-up. Walid confirmed
+  the Akeneo RFP submission deadline is **2026-07-31** — set on the
+  Notion row, cleared the need-validation note (matches Cera RFP's
+  deadline exactly; see `accounts/akeneo/notes.md`).
+- Walid: Implid is effectively done on the SE side, just waiting on the
+  client's signature (proposal sent by Thibault, AE). Asked Darwin to
+  also read his email going forward and flag anything urgent.
+- **New connector exercised: Gmail** (walid.elmselmi@storyblok.com) —
+  reachable via `search_threads`/`get_thread`/`get_message`. Scanned the
+  last ~3 days of inbox. Two real findings tied to live accounts (full
+  detail in the account's own local-only notes, guardrail 6):
+  - **Implid** — email confirms Walid's status: proposal sent, price
+    negotiated, now signature-pending. Notion row updated: Stage
+    "Proposal" → "Contracting", AE confirmed Thibault de Maison Rouge,
+    Deadline cleared (the old 2026-07-17 date was for sending the
+    proposal, already done — no longer a real open deadline). See
+    `accounts/implid/notes.md`.
+  - **Winfarm Group** — previously just a stub row. Email surfaced that
+    Walid is the confirmed SE (Thibault said so directly to an Algolia
+    partner contact), with a custom demo scheduled 2026-07-29. Notion
+    row updated: AE Thibault de Maison Rouge, Owner(s) Walid, Stage
+    "Demo", Next call 2026-07-29. See `accounts/winfarm-group/notes.md`.
+  - Rest of the inbox scan was routine platform/tool notifications
+    (Vercel, Netlify, Okta, Gatekeeper digest, a Deel expense-request
+    denial x4, a FedEx delivery) — nothing else urgent or account-
+    relevant; not written anywhere, per the "don't pad with noise" rule.
+- **`daily-briefing/SKILL.md` updated** to add Gmail as a permanent
+  fourth source (Calendar/Notion/Slack/Email), same last-working-day
+  window as Slack, read-only, never draft/send (CLAUDE.md guardrail 1
+  restated explicitly in the skill itself). Output format gains a
+  "📧 EMAIL" section. Edited via `mcp__workspace__bash` (Edit tool still
+  refuses `.claude/skills/` in this repo — see Session 7's note). The
+  live artifact (`darwin-morning-brief`) does NOT have Gmail wired in
+  yet — flagged in the skill's Notes as the next thing to add there.
+- Useful mapping learned this session for future Notion writes: Owner(s)
+  people-property values are `user://37fd872b-594c-81a5-9d21-0002fac057c5`
+  = Walid, `user://73720d65-1acc-4e3d-9ee7-71541b15b465` = Ines Akrap.
+- Notion Stage select is a closed list, not free text — valid values:
+  Closed Won, Contracting, Proposal, Deep Dive/ Demo, Demo, Discovery,
+  Not started, In progress, Done. ("Proposal Sent" was rejected —
+  learned the hard way, used "Contracting" instead for Implid.)

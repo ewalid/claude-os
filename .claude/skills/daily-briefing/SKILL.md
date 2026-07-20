@@ -10,10 +10,13 @@ description: >
 
 ## What it does
 
-Pulls together Google Calendar, Notion ("Walid's space"), and both Slack
-channels (#se-requests C06EMPB41SL, #se-sgm C0B290Q8XDK) into one
-scannable brief. Read-only — never modifies anything (Notion hygiene
-fixes are proposed separately, not folded into this skill).
+Pulls together Google Calendar, Notion ("Walid's space"), Gmail, and both
+Slack channels (#se-requests C06EMPB41SL, #se-sgm C0B290Q8XDK) into one
+scannable brief. Read-only — never modifies anything as part of the brief
+itself (Notion hygiene fixes are proposed/applied separately, not folded
+into this skill's own read-only pass — though if Walid reacts to the
+brief with new evidence, e.g. "X is mine" or forwards a thread, normal
+CLAUDE.md guardrail 4 applies to that follow-up).
 
 ## Steps
 
@@ -21,7 +24,7 @@ fixes are proposed separately, not folded into this skill).
    on walid.elmselmi@storyblok.com. Flag any demo calls explicitly.
 2. **Notion**: pull the Accounts DB. For every row with a date, do NOT
    trust the "Due date" field label — cross-check against calendar and
-   recent Slack to determine whether it's actually a **call** or a
+   recent Slack/email to determine whether it's actually a **call** or a
    **deadline** (see known issue, HANDOFF.md §2 / memory.md). Mislabel
    this and the whole brief is wrong.
 3. **Slack**: scan from the start of the last WORKING day through now
@@ -39,7 +42,23 @@ fixes are proposed separately, not folded into this skill).
    handled, never flag it as "worth claiming", and never confuse one
    of their names with an AE. Matthew Alberts is Walid's manager, not
    an AE or SE peer — his messages are normal context, not a flag.
-4. **Assemble** using the priority logic (CLAUDE.md): demo today first,
+4. **Email** (Gmail, walid.elmselmi@storyblok.com — added 2026-07-20):
+   scan inbox from the start of the last WORKING day through now, same
+   window as Slack. Read-only — never draft or send anything (CLAUDE.md
+   guardrail 1, hard rule regardless of what this skill says). Surface
+   two kinds of things: (a) anything tied to a live account — AE/client
+   threads relevant to Walid's deals (e.g. a proposal negotiation, a
+   scheduling thread with a partner like Algolia, a client reply) — fold
+   these into the relevant account's context, and if it's real new
+   evidence about Stage/AE/Next call/etc., that's a normal Notion
+   full-row update per CLAUDE.md guardrail 4, not something to just
+   mention and drop; (b) anything genuinely urgent/time-sensitive
+   regardless of account (a real deadline, an escalation, something
+   needing a same-day reply). Ignore routine platform/tool notifications
+   (SaaS invites, digests, delivery notices, access-request emails)
+   unless one of them is actually time-sensitive — don't pad the brief
+   with noise.
+5. **Assemble** using the priority logic (CLAUDE.md): demo today first,
    deadline closing today/this week second, everything else after.
 
 ## Output format
@@ -56,6 +75,10 @@ fixes are proposed separately, not folded into this skill).
 💬 SLACK
 - Needs reply: [thread/link, one line]
 - Worth claiming?: [account, AE, one line] — unclaimed, not a task
+
+📧 EMAIL
+- [account-relevant or urgent item, one line]
+  (or: "Nothing urgent.")
 
 ✅ TODOS
 - [from Notion ToDo checklist]
@@ -83,6 +106,10 @@ itself, July 21).
 - Worth claiming?: unclaimed request in #se-requests for an account
   tied to Kristoffer Strindevall — not yet picked up by any SE.
 
+📧 EMAIL
+- Winfarm Group: Thibault confirmed Walid as SE on the account in a
+  thread with the Algolia partner team — custom demo set for July 29.
+
 ✅ TODOS
 - Finish onboarding (Notion ToDo).
 
@@ -105,8 +132,13 @@ One-liner: Implid proposal is the tightest deadline this week — due July 17.
   claiming" (demo-vs-deadline classification is now read directly from the
   explicit Next call/Deadline fields post-restructure, no guessing needed).
   Point Walid to that artifact for the visual version; only fall back to a
-  plain chat-text brief if artifacts aren't available in context.
+  plain chat-text brief if artifacts aren't available in context. Gmail is
+  not yet wired into the artifact itself (added to the chat-text skill
+  2026-07-20) — add it to the artifact's callMcpTool calls next time the
+  artifact gets touched, using the same last-working-day window as Slack.
 - If Walid corrects the artifact's classification (e.g. it mislabels a
   call as a deadline, or flags/misses a Slack item), that's a prompt-
   wording fix inside the artifact's askClaude prompts, not a one-off
   chat correction — update the HTML/JS and redeploy via update_artifact.
+- Never draft or send emails from this skill or any other — CLAUDE.md
+  guardrail 1 is absolute, read-only email access only.

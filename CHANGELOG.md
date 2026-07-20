@@ -6,6 +6,26 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
+## 2026-07-20 (Gmail added to daily-briefing; Implid + Winfarm Group updated from email; Akeneo deadline confirmed)
+
+- **New connector wired in: Gmail** (walid.elmselmi@storyblok.com).
+  `daily-briefing/SKILL.md` now scans the inbox as a fourth source
+  alongside Calendar/Notion/Slack, same last-working-day window as
+  Slack, read-only (CLAUDE.md guardrail 1 — never draft/send — restated
+  in the skill itself). Output format gains a "📧 EMAIL" section. Not
+  yet wired into the live `darwin-morning-brief` artifact.
+- **Akeneo RFP**: Walid confirmed the submission deadline — **2026-07-31**
+  (same date as Cera RFP). Set on the Notion row.
+- **Implid**: Stage "Proposal" → **"Contracting"**, AE confirmed Thibault
+  de Maison Rouge, Deadline cleared (the old date was for sending the
+  proposal, which is done — deal is now signature-pending, not overdue).
+  Real detail in `accounts/implid/notes.md` (local-only).
+- **Winfarm Group**: previously a near-empty stub row. Email surfaced
+  Walid as the confirmed SE with a custom demo on 2026-07-29. Notion row
+  updated: AE Thibault de Maison Rouge, Owner(s) Walid, Stage "Demo",
+  Next call 2026-07-29. Real detail in `accounts/winfarm-group/notes.md`
+  (local-only).
+
 ## 2026-07-20 (process-customer: renamed Phase A-E to explicit step names)
 
 - **`process-customer/SKILL.md` phases renamed** for clarity: Phase A → Step 1 (Self-research), B → Step 2 (Ask Walid, hard stop), C → Step 3 (Analyze), D → Step 4 (Write the brief), E → Step 5 (Update Notion and announce). No behavior change, just clearer naming.
