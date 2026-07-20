@@ -6,6 +6,35 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
+## 2026-07-20 (account-switch recovery: git, scheduler, artifact, GitHub connector)
+
+- **Git repo reconciled with the real GitHub history.** `~/dev/claude-os`
+  had no local `.git` despite this file/`memory.md` claiming a pushed
+  repo — turned out the remote (`ewalid/claude-os`, branch `main`, 11
+  commits) is real, just orphaned from a different Claude account on this
+  same Mac. Linked local `main` to `origin/main` via `git reset --soft`
+  after clearing a stale `HEAD.lock` the sandbox couldn't self-delete
+  (fixed with the `allow_cowork_file_delete` permission tool). Restored
+  `README.md` from origin, took origin's slightly newer wording for two
+  `memory.md`/`CHANGELOG.md` recap bullets, and — per Walid's decision —
+  gitignored `resources/deck-examples/*.pptx` (~120MB, kept local-only,
+  never pushed). Committed as `7f611e5`, one commit ahead of `origin/main`,
+  pending push once the GitHub connector's tools are confirmed reachable.
+- **Scheduled task and live artifact recreated** under this Claude account
+  — both existed for real under a different account on the same machine
+  (confirmed via `~/Claude/Scheduled` existing as a protected folder, and
+  Cowork refusing to reuse the `darwin-daily-briefing` artifact id) but
+  were invisible/unusable from this login. New scheduled task:
+  `darwin-daily-briefing` (weekdays ~9am Paris). New artifact id (the old
+  one is locked): `darwin-morning-brief` — verified live against Calendar,
+  the Notion Accounts DB, and both Slack channels. Updated
+  `daily-briefing/SKILL.md` to point at the new id.
+- **GitHub MCP connector connected** (`https://api.githubcopilot.com/mcp/`,
+  OAuth, no PAT) via Settings → Connectors — shows Connected, but tools
+  hadn't loaded into the running session yet as of this entry (known
+  Cowork limitation: needs a fresh session). Confirmed no GitHub MCP tool
+  exists anywhere else in this workspace.
+
 ## 2026-07-15 (process-customer: full-row rewrite)
 
 - **`process-customer` now rewrites the ENTIRE Notion Accounts DB row**
