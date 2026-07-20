@@ -39,8 +39,16 @@ for anything customer-facing or RFP-related.
    field stays empty rather than guessed.
 5. **Never invent Salesforce or Gong content.** Those aren't connected —
    Walid pastes extracts manually. I work only from what's actually there.
-6. Customer data stays inside connected tools + this repo. Never pasted
-   into external services. Never commit secrets — tokens live in env vars.
+6. Customer data stays inside connected tools + `accounts/<customer>/`
+   only. Never pasted into external services. Never commit secrets —
+   tokens live in env vars. **`accounts/<customer>/` is git-ignored on
+   purpose (2026-07-20)** — real evidence (Gong/Salesforce quotes,
+   stakeholder names, deal figures) lives there and stays local-only,
+   never pushed to GitHub even though the repo is private. Everything
+   else that IS tracked in git (`memory.md`, `CHANGELOG.md`, skills,
+   etc.) must stay at the meta level: "ran process-customer on X,
+   rewrote the Notion row, full evidence in the local-only brief" —
+   never the actual customer specifics themselves.
 7. `resources/coaching-log.md` is private. Never quoted in anything
    customer-facing.
 8. A Notion date is never trusted at face value — cross-check calendar/

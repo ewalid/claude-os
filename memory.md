@@ -360,45 +360,44 @@ Darwin has — no update, no memory.
 
 ### 2026-07-20 — Session 8 (process-customer: first real run, Jouet club)
 
-- **First-ever real `process-customer` run**, on Jouet club — Walid pasted
-  real Salesforce next-steps and a full Gong call-extract summary
-  unprompted (satisfying Phase B before the hard-stop message even went
-  out). Phase A also pulled: Notion Accounts DB row, a rich Notion
-  meeting-notes page from 2026-07-10 ("Briefing Jouet Club avec Decade")
-  found via search, the July 21 calendar event (MS Teams, 15:00-16:00
-  UTC / 17:00-18:00 Paris), and confirmed the Debriefs DB has no rows for
-  this account yet. Slack/Drive searches for "Jouet" turned up nothing
-  useful (2 empty Gong-bot posts in #gong-calls-sgt, unrelated decks in
-  Drive).
-- **Notion row rewritten** (Phase E, direct write per guardrail 4):
-  - Stage: "In progress" → **"Discovery"** (evidence: DECADE described as
-    still in "architectural reflection," shortlisting 2-3 CMS vendors —
-    more precise than the generic prior value).
-  - Notes: rewritten from the stale "First demo on july 21" to a real
-    summary of the July 21 discovery call, the end-of-August full-demo
-    plan, and two open need-validation items.
-  - MEDDPICC: null → **Decision Criteria, Decision Process, Identify
-    Pain, Competition** (Confirmed only, per convention — Metrics/
-    Economic Buyer/Champion are Partial and Paper Process is a Gap; full
-    breakdown with quoted evidence lives in the brief, not the multi-select).
-  - Priority (High) and AE (Thibault de Maison Rouge) — evidence
-    confirmed both, no change. Next call (2026-07-21) — already correct,
-    no change. Deadline — left null; no concrete near-term SE deadline
-    beyond the already-captured Next call (the end-of-August demo has no
-    firm date yet, and the Sept-2027 go-live is a multi-year business
-    target, not an SE deadline).
-- **`accounts/jouet-club/brief.md` written** — full MEDDPICC breakdown
-  (4 Confirmed / 3 Partial / 1 Gap), stakeholders (Caroline WU/DECADE,
-  Alexis/IT, Anaïs/E-commerce, an unnamed "new President" as likely
-  Economic Buyer), risks, and a real inconsistency surfaced between
-  sources: Salesforce's next-steps note describes the July 21 session
-  partly as a "technical enablement session for the Decade team," while
-  Gong/Notion describe it as a client-facing discovery call — flagged as
-  need-validation (who's actually attending) rather than guessed at.
-- This is the first proof of the Phase C/E rewrite behavior from Sessions
-  5-6 (MEDDPICC analysis + full-row rewrite, no OK gate) on real evidence
-  — worked as specced. `build-deck`/`demo-script` can now chain off a
-  real brief for the first time.
+- First-ever real `process-customer` run, on Jouet club — Walid pasted
+  real Salesforce + Gong extracts. Full Phase A/B/C/D/E executed: Notion
+  row rewritten (Stage, Notes, MEDDPICC — see CHANGELOG.md for the field-
+  level diff, kept at meta level per guardrail 6 below), and
+  `accounts/jouet-club/brief.md` written with the full evidence-backed
+  analysis. **The actual customer specifics (stakeholder names, deal
+  figures, competitor, quoted evidence) live ONLY in that local-only
+  brief file — not repeated here.** This is the first real proof of the
+  Phase C/E rewrite behavior from Sessions 5-6 on genuine evidence.
+- **Correction from Walid, same session — important, changes standing
+  policy:** the brief itself shouldn't be git-tracked at all (client data
+  stays local, full stop — not just "don't repeat it in chat"). Fixed:
+  `accounts/jouet-club/brief.md` was `git rm --cached` before ever being
+  pushed, `accounts/*/*.md` added to `.gitignore`. Updated CLAUDE.md
+  guardrail 6 to codify this as the standing rule going forward: real
+  customer specifics live only in `accounts/<customer>/` (git-ignored);
+  anything tracked in git (this file, CHANGELOG.md, skills) stays at the
+  meta level, never the actual customer detail. This session's own memory
+  entries above were rewritten to comply, retroactively.
+- **Also from Walid: `process-customer` needed real quality upgrades**,
+  not just a policy fix — the first brief wasn't good enough. Upgraded
+  `process-customer/SKILL.md`: Phase B now explicitly asks for three
+  things (Salesforce paste, Gong paste, a customer-specific Slack channel
+  ID — not just "whatever you have"). Phase D's brief template now leads
+  with a prospect intro (who they are, their business, before diving into
+  detail), an explicit "who's in the meeting" section instead of burying
+  it in need-validation, a much bigger MEDDPICC section that explicitly
+  names what wins/loses the deal and how well-positioned Storyblok
+  currently is (not just Confirmed/Partial/Gap tags), and a concrete
+  action checklist for next steps (deck, demo-script, space setup, etc.)
+  instead of a vague "verify before next call" list. Rewrote
+  `accounts/jouet-club/brief.md` against the new template (local-only,
+  not repeated here).
+- **Notion — added a "Pipeline board" view** on the Accounts DB (Kanban,
+  grouped by Stage) alongside the existing table view, per Walid's ask.
+  Also pasted the (upgraded) Jouet club brief directly into that
+  account's own Notion page content, plus a next-steps checklist block —
+  not just left in the Notion property fields / a separate git file.
 
 ## Standing facts (update if they change; don't duplicate HANDOFF.md)
 

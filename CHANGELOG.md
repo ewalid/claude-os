@@ -6,20 +6,30 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
-## 2026-07-20 (process-customer: first real run, Jouet club)
+## 2026-07-20 (process-customer: first real run + quality upgrade, Jouet club)
 
-- **`accounts/jouet-club/brief.md` created** — the first real
-  `process-customer` run, off real Salesforce + Gong extracts Walid
-  pasted in. Full MEDDPICC breakdown (4 Confirmed, 3 Partial, 1 Gap),
-  stakeholders, risks, and a cross-source inconsistency flagged as
-  need-validation rather than resolved by guessing.
-- **Notion Jouet club row rewritten**: Stage "In progress" → "Discovery";
-  Notes rewritten from the stale "First demo on july 21" to a real
-  summary of the July 21 discovery call + end-of-August demo plan;
-  MEDDPICC set to [Decision Criteria, Decision Process, Identify Pain,
-  Competition] (Confirmed elements only). Priority/AE/Next call
-  confirmed unchanged; Deadline left blank (no firm near-term date beyond
-  the already-captured Next call).
+- **First real `process-customer` run** — `accounts/jouet-club/brief.md`
+  written from real Salesforce + Gong extracts, Notion row rewritten
+  (Stage, Notes, MEDDPICC). Customer specifics live only in that
+  local-only file — not detailed here, per the guardrail 6 change below.
+- **Policy fix (Walid's correction): customer data must be git-ignored,
+  not just under-shared in chat.** `accounts/jouet-club/brief.md` was
+  untracked before ever being pushed; `accounts/*/*.md` added to
+  `.gitignore`. CLAUDE.md guardrail 6 updated to codify: real evidence
+  lives only in `accounts/<customer>/` (local-only), tracked files
+  (this one included) stay meta-level.
+- **`process-customer/SKILL.md` upgraded**: Phase B now explicitly asks
+  for Salesforce paste + Gong paste + a customer-specific Slack channel
+  ID (three concrete asks, not "whatever you have"). Phase D's brief
+  template restructured: prospect intro up front, an explicit meeting-
+  attendees section, a much bigger MEDDPICC section (what wins/loses the
+  deal + Storyblok's current positioning, not just tags), and a concrete
+  next-steps action checklist (deck/demo-script/space setup) instead of a
+  vague verify-before-call list.
+- **Notion — "Pipeline board" view added** on the Accounts DB (Kanban
+  grouped by Stage), alongside the existing table. Jouet club's own
+  Notion page now also has the (upgraded) brief pasted into its page
+  content plus a next-steps checklist, not just the property fields.
 
 ## 2026-07-20 (account-switch recovery: git, scheduler, artifact, GitHub connector)
 

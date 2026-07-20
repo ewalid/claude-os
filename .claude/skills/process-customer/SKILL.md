@@ -39,17 +39,27 @@ Five phases, in order.
 
 ## Phase B — Ask Walid once, then HARD STOP
 
-Before writing anything, post ONE consolidated message to Walid:
-- Any Salesforce or Gong context he can paste in (never invent this —
-  those tools aren't connected). This is the real input this skill runs
-  on — ask for whatever's available: call transcripts, opportunity
-  notes, stage/close-date fields, stakeholder info, anything.
-- Every inconsistency found in Phase A (e.g. Notion date vs. calendar
-  mismatch, conflicting stage info, stale notes).
+Before writing anything, post ONE consolidated message to Walid asking
+for three concrete things (not a vague "anything you have"):
+1. **Salesforce** — opportunity notes, stage/close-date fields, next
+   steps, whatever's in the CRM for this account.
+2. **Gong** — call extract(s)/summary for this account (transcripts,
+   call notes, next steps).
+3. **A Slack channel ID for this specific account/deal**, if one exists
+   (separate from the standing #se-requests/#se-sgm scan in Phase A —
+   deal-specific channels often carry the richest thread). If Walid
+   doesn't have one or none exists, that's a fine answer — don't block
+   on it, just proceed without it.
+
+Also surface every inconsistency found in Phase A (e.g. Notion date vs.
+calendar mismatch, conflicting stage info, stale notes) in the same
+message.
 
 **Do not proceed to Phase C until Walid replies.** This is a hard stop,
 not a suggestion — the whole point of this skill is analyzing real
-evidence instead of stale manual notes, so it can't run on nothing.
+evidence instead of stale manual notes, so it can't run on nothing. (If
+Walid pastes the evidence unprompted, before this message even goes out,
+that satisfies the hard stop — no need to ask again.)
 
 ## Phase C — Full account analysis
 
@@ -82,28 +92,56 @@ one:
 
 ## Phase D — Write the brief
 
-`accounts/<customer>/brief.md`, structured as:
+`accounts/<customer>/brief.md` — **local-only, never committed to git**
+(see CLAUDE.md guardrail 6; `.gitignore` already excludes `accounts/*/*.md`).
+Structured as:
 
 ```
 # <Customer> — Account Brief
 Last updated: <date>
+
+## Who they are
+2-4 sentences a rep could read cold, 30 seconds before a call: what kind
+of company, industry, rough scale, and why they're evaluating a CMS
+right now. Not a MEDDPICC field — just the "who is this" orientation
+that should come before any deal mechanics.
 
 ## Snapshot
 Type / Stage / Priority / AE / next milestone — labeled explicitly as
 CALL or DEADLINE (never just "due date"), reflecting what was just
 written to Notion in Phase E, not the pre-analysis state.
 
-## MEDDPICC
+## Who's in the meeting
+Explicit list for the next call: name, role, confirmed vs. inferred.
+If sources disagree on who's attending, say so here directly — don't
+bury it in "Need validation" at the bottom where it'll get missed right
+before a call.
+
+## MEDDPICC — what wins or loses this deal
 All 8 elements, each with its status (Confirmed / Partial / Gap), the
 quoted evidence or the specific gap, and the source (Gong extract,
-Salesforce extract, Slack thread + link, or "Walid, <date>"). Show the
-full picture, not just what made it into Notion.
+Salesforce extract, Slack thread + link, or "Walid, <date>"). Then,
+past the element-by-element list, three short closing paragraphs that
+actually say something useful instead of just tagging elements:
+- **What wins this deal** — the specific, concrete conditions that get
+  this to Closed Won given the evidence so far (e.g. "closing the
+  Champion gap by getting X personally invested" or "winning the
+  architecture argument with the IT stakeholder").
+- **What loses this deal** — the specific active or dormant risks that
+  would sink it (a named competitor's strength, an unresolved technical
+  objection, a stalled internal alignment issue) — not generic risk
+  language.
+- **Storyblok's positioning right now** — an honest read: ahead, even, or
+  behind, and why, given the competition, decision criteria, and
+  champion status above. If it's genuinely unclear, say that too.
 
 ## Their priorities
 What the customer actually cares about, per stakeholders and past calls.
 
 ## Stakeholders
-Names, roles, notes on each (technical buyer, economic buyer, etc.)
+Names, roles, notes on each (technical buyer, economic buyer, etc.) —
+this can overlap with "Who's in the meeting" but covers the full cast,
+not just next-call attendees.
 
 ## Technical context
 Stack, integration points, anything demo/RFP-relevant.
@@ -111,12 +149,22 @@ Stack, integration points, anything demo/RFP-relevant.
 ## Risks
 Open objections, competitive threats, anything that could stall the deal.
 
-## Verify before next call
-Checklist of things to confirm live — not assumed. Should include
-closing the biggest MEDDPICC gaps/partials where possible.
+## Next steps
+A concrete action checklist, not a vague "verify" list. Should name real
+next actions with what they chain into — e.g.:
+- [ ] Confirm attendee list for <date>
+- [ ] `build-deck` for the <date> call/demo
+- [ ] `demo-script` for the same
+- [ ] `demo-setup` / Storyblok space script (draft-only if the MCP
+      connector is still absent — don't skip drafting just because it
+      can't execute yet)
+- [ ] Close the biggest MEDDPICC gap: <specific gap>
+Tailor the actual items to what this account genuinely needs next —
+don't include a deck/script item if there's no upcoming demo to prep for.
 
 ## Need validation
-Anything Phase A/B/C couldn't confirm. Never silently dropped.
+Anything Phase A/B/C couldn't confirm that ISN'T already covered above
+(attendees have their own section now). Never silently dropped.
 
 ## Sources
 Where every above section came from (Notion link, Slack thread, calendar
