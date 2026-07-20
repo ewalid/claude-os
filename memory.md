@@ -765,3 +765,16 @@ Darwin has — no update, no memory.
   reply I gave first went out as prose. Fixed in `call-coach/SKILL.md`
   (new step 7: chat reply mirrors the log's bullet structure, always)
   and applied immediately to the Implid feedback already given.
+
+### 2026-07-20 — Session 20 (post-call-update: Implid, backfilled from the real transcript)
+- Ran `post-call-update` for Implid using the real July 9 transcript
+  (no Debriefs DB row existed yet for this account — email-derived
+  notes had captured the aftermath but not the call itself).
+- Updated: Notion Debriefs DB (new row), Accounts DB (MEDDPICC +
+  Notes refreshed with what the transcript actually confirmed live),
+  `accounts/implid/debriefs.md` (new, local-only). Full evidence and
+  specifics live only in Notion + the local file, per guardrail 6.
+- Kept this fully separate from the private coaching feedback given in
+  chat/`coaching-log.md` in the same turn — deal-facing debrief and
+  personal performance coaching are two different audiences per
+  CLAUDE.md guardrail 7, never merged into one artifact.

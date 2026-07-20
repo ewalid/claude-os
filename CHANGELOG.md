@@ -19,6 +19,13 @@ short, skimmable "what changed and when" record. Update it alongside any
   per-account directory stays local-only, matching CLAUDE.md guardrail
   6's actual intent.
 
+## 2026-07-20 (post-call-update: Implid backfilled from real transcript)
+
+- Notion Debriefs DB: new row for Implid's July 9 call. Notion Accounts
+  DB: MEDDPICC + Notes refreshed with what the call itself confirmed.
+  `accounts/implid/debriefs.md` created (local-only). Full evidence
+  stays in Notion/local file per guardrail 6 — not repeated here.
+
 ## 2026-07-20 (improve: call-coach chat output always mirrors bulleted log format)
 
 - **`call-coach/SKILL.md`** new step 7: the chat reply always uses the
