@@ -6,6 +6,14 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
+## 2026-07-20 (deals dashboard artifact: 24h Slack window + visual redesign)
+- `walid-deals-dashboard` artifact: "Worth Claiming" Slack scan now windowed
+  to the last 24h (`oldest` param) instead of a flat 40-message pull.
+- Same artifact: full visual redesign — gradient hero with live stat tiles,
+  priority-colored card accents, pill-style tags, hover/shadow polish.
+  Functional behavior unchanged (Notion write on Claim, Slack reply is
+  copy-only, never auto-sent).
+
 ## 2026-07-20 (build-deck first run: Jouet club deck; gitignore gap fixed)
 
 - **First real `build-deck` run** — French-language demo deck for Joué
