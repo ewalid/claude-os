@@ -6,6 +6,19 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
+## 2026-07-20 (build-deck first run: Jouet club deck; gitignore gap fixed)
+
+- **First real `build-deck` run** — French-language demo deck for Joué
+  Club / La Grande Récré, adapted from the Cellbes AB example, saved to
+  `accounts/jouet-club/2026-07-20_Demo_JouetClub.pptx`. 3 demo stations
+  picked from `style-guide.md`'s real theme vocabulary (not invented),
+  translated to French; leftover scaffolding slides excluded.
+- **`improve: broaden accounts/ gitignore to all files, not just .md`**
+  — `.gitignore` rule `accounts/*/*.md` didn't cover the new `.pptx`
+  deck. Changed to `accounts/*/*` + `!accounts/*/.gitkeep` so the whole
+  per-account directory stays local-only, matching CLAUDE.md guardrail
+  6's actual intent.
+
 ## 2026-07-20 (Gmail added to daily-briefing; Implid + Winfarm Group updated from email; Akeneo deadline confirmed)
 
 - **New connector wired in: Gmail** (walid.elmselmi@storyblok.com).

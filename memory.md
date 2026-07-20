@@ -586,3 +586,33 @@ Darwin has — no update, no memory.
   Closed Won, Contracting, Proposal, Deep Dive/ Demo, Demo, Discovery,
   Not started, In progress, Done. ("Proposal Sent" was rejected —
   learned the hard way, used "Contracting" instead for Implid.)
+
+### 2026-07-20 — Session 13 (build-deck: first real deck, Jouet club)
+- Ran `build-deck` on Jouet club for the first time — adapted the
+  Cellbes AB example deck (closest structural fit: 3 demo stations, no
+  Commercial section, appropriate for a Discovery-stage account) into a
+  French-language deck for Joué Club / La Grande Récré. Saved to
+  `accounts/jouet-club/2026-07-20_Demo_JouetClub.pptx` (19 slides).
+- Two explicit open guardrails resolved with Walid via direct question
+  rather than assumed: deck language = French; Commercial section =
+  skipped.
+- Walid corrected an early misstep: I'd proposed inventing new French
+  station names instead of using the fixed vocabulary of real station
+  themes documented in `resources/style-guide.md` ("use stations you
+  have seen in my decks, don't invent them"). Fixed by picking 3 themes
+  from that actual list — matched to real evidence in the account
+  brief — and translating the theme names to French rather than
+  inventing new categories.
+- Leftover placeholder/instructional scaffolding slides in the Cellbes
+  source (trailing unfinished block) were correctly excluded per the
+  skill's explicit guardrail — never copied forward.
+- **Gitignore gap found and fixed**: the deck file (`.pptx`) landed in
+  `accounts/jouet-club/` but the existing gitignore rule
+  (`accounts/*/*.md`) only covered markdown, not other file types.
+  Broadened to `accounts/*/*` + `!accounts/*/.gitkeep`, matching
+  guardrail 6's actual intent (the whole `accounts/<customer>/`
+  directory is local-only, not just its `.md` files).
+- Note: this deck targets the **end-of-August full demo**, not the
+  July 21 discovery call — the brief itself flags July 21 as
+  deliberately deck-free/light. Full customer-specific rationale for
+  every slide lives in the local-only brief, not here.

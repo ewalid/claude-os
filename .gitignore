@@ -3,4 +3,5 @@
 .env.*
 node_modules/
 resources/deck-examples/*.pptx
-accounts/*/*.md
+accounts/*/*
+!accounts/*/.gitkeep
