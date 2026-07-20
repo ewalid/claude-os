@@ -713,3 +713,26 @@ Darwin has — no update, no memory.
 - Also strengthened `darwin-improve/SKILL.md` step 3 with the concrete
   procedure and the real example, so the meta-skill about self-
   correction documents its own most costly failure mode explicitly.
+
+### 2026-07-20 — Session 18 (improve: make darwin-improve trigger more reliably)
+- Walid's question: how do we stop you under-using the improve loop?
+  Real gap: there's no auto-routing in this environment that fires a
+  skill when it's relevant — I have to notice the trigger myself, and
+  today I noticed inconsistently (didn't always name it running, drifted
+  on the commit prefix).
+- Fix has two parts. CLAUDE.md's "How I improve" section now lists
+  concrete trigger signals (correction, stated preference, self-caught
+  mistake via verification, Walid asking a reflection/status question
+  where the honest answer reveals a gap) instead of just the literal
+  "Darwin, learn this" phrase — and states plainly that self-caught
+  friction counts exactly the same as Walid-stated friction. It also
+  now says explicitly: re-read `darwin-improve/SKILL.md` before
+  executing, don't run it from memory — that's specifically what
+  caused the `improve:`/`fix:` prefix drift.
+- `darwin-improve/SKILL.md` gained a new step 1 ("notice the trigger")
+  with the same signal list, and step 2 now explicitly says to reread
+  the file's own steps before acting.
+- This is itself a real test of the new rule: recognized the trigger
+  (a direct reflection question), named that darwin-improve was
+  running, reread the file before editing it, used the correct
+  `improve:` prefix.

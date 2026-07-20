@@ -19,6 +19,21 @@ short, skimmable "what changed and when" record. Update it alongside any
   per-account directory stays local-only, matching CLAUDE.md guardrail
   6's actual intent.
 
+## 2026-07-20 (improve: darwin-improve triggers more reliably, not just from memory)
+
+- **CLAUDE.md "How I improve"** rewritten: concrete trigger signals
+  (correction, stated preference, self-caught mistake, a reflection
+  question whose honest answer reveals a gap) instead of relying on
+  the literal "Darwin, learn this" phrase; explicit instruction to
+  reread `darwin-improve/SKILL.md` before acting instead of running it
+  from memory; no exceptions to the `improve:` commit prefix.
+- **`darwin-improve/SKILL.md`**: new step 1 ("notice the trigger — no
+  auto-routing exists, I have to catch it myself"), step 2 now says to
+  reread the file's own steps before executing.
+- Root cause being fixed: this session alone had a real gap between
+  "applying the substance" and "actually running the named procedure
+  correctly" (two commits went out as `fix:` instead of `improve:`).
+
 ## 2026-07-20 (improve: permanent guard against the overwrite mistake recurring)
 
 - **New CLAUDE.md guardrail 9**: before any bash/python write to a
