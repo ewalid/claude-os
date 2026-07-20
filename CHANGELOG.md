@@ -19,6 +19,20 @@ short, skimmable "what changed and when" record. Update it alongside any
   per-account directory stays local-only, matching CLAUDE.md guardrail
   6's actual intent.
 
+## 2026-07-20 (improve: confirmation checkpoints added to demo-prep skills)
+
+- **`improve: build-deck confirms demo station shortlist before building`**
+  — added an explicit gate to `build-deck/SKILL.md`, mirroring the
+  existing Commercial-section confirmation.
+- **New skills: `demo-script/SKILL.md`, `demo-setup/SKILL.md`** —
+  formalized from this session's first real runs (Jouet club). Each
+  has a built-in confirmation checkpoint before finalizing (script:
+  confirm outline/framing; setup: flag space-structure decisions).
+- Reasoning logged in `memory.md` Session 14: fix applied at the skill
+  level, not CLAUDE.md, to avoid contradicting the existing Notion
+  guardrail (no proposal step there — that's evidence-based, this is
+  judgment-based).
+
 ## 2026-07-20 (Gmail added to daily-briefing; Implid + Winfarm Group updated from email; Akeneo deadline confirmed)
 
 - **New connector wired in: Gmail** (walid.elmselmi@storyblok.com).

@@ -616,3 +616,35 @@ Darwin has — no update, no memory.
   July 21 discovery call — the brief itself flags July 21 as
   deliberately deck-free/light. Full customer-specific rationale for
   every slide lives in the local-only brief, not here.
+- **Verification bug caught and fixed**: leftover Cellbes instructional
+  scaffolding text (and one Cellbes-specific stale note) was sitting in
+  the *speaker notes* of 4 kept slides — I'd only cleaned visible slide
+  text, not notes pages. Caught by pulling the uploaded file back via
+  Drive's `read_file_content` as a verification step, not assumed clean.
+  Cleared and re-shared; Walid re-uploaded the corrected version.
+- Wrote `demo-script.md` and `demo-setup.md` for Jouet club (local-only)
+  — first real run of both, previously undocumented as skills.
+- Drive structure created: `Darwin/Joué Club/` folder containing the
+  deck (.pptx — Walid manually dragged it in after both my upload paths
+  hit size limits: Drive API base64 payload too large for a single tool
+  call, browser file_upload capped at 10MB) and a combined Google Doc
+  with both scripts.
+
+### 2026-07-20 — Session 14 (improve: confirmation checkpoints in demo-prep skills)
+- Walid's correction: I'd inferred demo stations and never offered a
+  chance to validate script framing before finalizing — asked me to
+  make the demo-prep flow more interactive going forward, not just
+  build-then-report.
+- Fixed at the skill level, not CLAUDE.md, since this is specific to
+  creative/judgment calls in demo-prep (station themes, script framing,
+  space structure) — deliberately NOT a blanket rule, since it would
+  contradict the existing Notion guardrail (#4: no proposal step, write
+  and announce) which is evidence-based, not a judgment call.
+- `build-deck/SKILL.md`: added an explicit confirm-the-shortlist gate
+  for demo station themes, mirroring the existing Commercial-section
+  gate.
+- New `demo-script/SKILL.md` and `demo-setup/SKILL.md` — formalizing
+  this session's ad hoc work into real skills, each with a built-in
+  confirmation checkpoint (script: confirm the outline/framing before
+  writing the full doc; setup: flag space-structure decisions like
+  single-space-vs-per-brand before finalizing).

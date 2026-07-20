@@ -48,11 +48,15 @@ is fixed — this skill fills it in, it doesn't invent new slide types.
      If a row can't be filled from real discovery, mark it "need
      validation" on the slide's speaker notes — never invent a
      plausible-sounding constraint or metric.
-   - Demo station themes: pick 2-4 based on the brief's technical
-     context and stated priorities, not a default set. Use the
-     account's actual language where possible (e.g. if they said
-     "translation is our bottleneck," that's the station, not a generic
-     "Internationalisation" label pulled from a different deck).
+   - Demo station themes: draft 2-4 candidates from the fixed
+     vocabulary (style-guide.md step 3), tied to real evidence in the
+     brief's priorities/technical context — not a default set, and
+     never invented category names. **Confirm the shortlist with Walid
+     before building anything** (same pattern as the Commercial-section
+     gate below) — present the candidates and why each fits, get his
+     pick back. Don't infer and proceed silently (learned 2026-07-20,
+     Jouet club: a first pass invented French station names instead of
+     using the real theme vocabulary and skipped confirming entirely).
    - Demo slides themselves: leave BLANK ("Demo" / "CONFIDENTIAL" only)
      — these are live-demo placeholders, never scripted content. That's
      `demo-script`'s job, in a separate document, not on the slide.
