@@ -6,6 +6,16 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
+## 2026-07-21 (improve: process-customer chat reply must lead with company brief)
+- Walid: "Never forget to add a brief about the company" — the Cera run
+  wrote a full "Who they are" section into the local brief.md, but the
+  chat reply itself skipped straight to the Notion diff, so Walid had
+  to ask "what is Cera?" afterward.
+- Fixed in `process-customer/SKILL.md` Step 5: new explicit point 2
+  (chat reply must lead with the 2-4 sentence company brief before any
+  field-level diff), renumbered the rest. Applies to every future
+  `process-customer` run, not just this one.
+
 ## 2026-07-21 (process-customer: first real run on Cera)
 - Ran `process-customer` on Cera for the first time — wrote
   `accounts/cera/brief.md` (local-only). No Gong/Salesforce extracts

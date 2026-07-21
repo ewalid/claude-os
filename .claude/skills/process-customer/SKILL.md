@@ -196,13 +196,22 @@ event, Walid's own input, Gong/SF extract) — so staleness is auditable later.
    limits that still apply: never write a field Step 3 couldn't
    actually derive from real evidence (leave it as-is / need validation
    rather than guess), and never touch a human-only column.
-2. **Announce every field that changed** — old value → new value → the
+2. **Lead the chat reply with the "Who they are" company brief** — 2-4
+   plain-language sentences on who the account actually is (same content
+   as the brief's own "Who they are" section), before any Notion diff.
+   Never assume Walid (or whoever's reading the chat that session)
+   already holds this in their head — the brief.md having this section
+   isn't enough if the chat reply itself jumps straight to field-level
+   diffs. (2026-07-21: first real Cera run skipped this in chat even
+   though it was already in the written brief — Walid had to ask "what
+   is Cera?" after the fact.)
+3. **Announce every field that changed** — old value → new value → the
    evidence it's based on, so Walid can spot-check anything that
    surprises him even though no approval gate blocked the write.
-3. Update `memory.md` with what changed this session (including the
+4. Update `memory.md` with what changed this session (including the
    full before/after on the Notion row and what it's based on), and add
    an entry to `CHANGELOG.md`.
-4. Suggest the logical next step (e.g. "next: demo-script for the July
+5. Suggest the logical next step (e.g. "next: demo-script for the July
    21 call" or "the biggest MEDDPICC gap is Economic Buyer — worth
    confirming before the next call").
 

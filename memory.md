@@ -947,3 +947,12 @@ Darwin has — no update, no memory.
   stakeholder named anywhere, so several MEDDPICC elements (Economic
   Buyer, Champion, Metrics) are structural Gaps, not a research
   shortfall.
+- **Correction from Walid, same thread**: my chat announcement jumped
+  straight to the Notion diff without the plain-language "who is this
+  company" orientation — even though `brief.md`'s own "Who they are"
+  section already had it. Walid had to ask "what is Cera?" separately.
+  Ran `darwin-improve` properly (reread the skill file first): fixed
+  `process-customer/SKILL.md` Step 5 — chat reply must now lead with
+  the 2-4 sentence company brief before any field-level diff, every
+  run, not just when Walid happens to ask. Committed as `improve:`,
+  logged in CHANGELOG.md.
