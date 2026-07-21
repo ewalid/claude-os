@@ -912,3 +912,38 @@ Darwin has — no update, no memory.
   searched the registry with several keyword variants, confirmed zero
   results. Not a "not connected in this session" gap, a "doesn't exist
   yet" gap — updated `storyblok-content` to say this plainly.
+
+### 2026-07-21 — Session 25 (process-customer: first real run, Cera)
+- First real `process-customer` run on Cera. Step 1 self-research found
+  real evidence in Slack (#opportunity-cera-rfp, #help-bid-function,
+  #se-requests, DMs with Ines) and Drive (requirements matrices + Ines's
+  Donna-drafted response, 205 rows). Step 2 hard stop: asked Walid for
+  Salesforce/Gong — he confirmed there's nothing ("it's an RFP"), only
+  pointed at the Slack channel already found and read in full.
+- Full account analysis done from Slack/Drive evidence only (never
+  fabricated Gong/SF-shaped content that wasn't there, per guardrail 5).
+  Notion "Cera RFP" row updated: **Deadline corrected 2026-07-31 →
+  2026-08-14** (the real submission deadline — found in Storyblok's own
+  internal #help-bid-function bid-tracking post; July 31 had no
+  supporting evidence anywhere and was likely a stale placeholder).
+  Notes rewritten to reflect real progress (166/205 rows already
+  resolved, human-review in progress). MEDDPICC left empty — all 8
+  elements analyzed but none reached Confirmed (mostly Gap/Partial,
+  expected for a partner-mediated RFP with no direct Cera contact).
+  Stage/Priority/AE/Owners left as-is — evidence supported no change.
+  `accounts/cera/brief.md` written (local-only, first one for this
+  account) — full MEDDPICC breakdown, stakeholder list, risks, next
+  steps not repeated here per guardrail 6.
+- Two real inconsistencies surfaced to Walid, not auto-resolved (no
+  evidence to resolve them from either direction): a deal-value conflict
+  between two Slack sources (€41,666 vs ~€60,000), and a possible
+  "Coop" naming confusion in Walid's own shorthand (his July 21 message
+  to Ines suggested he might be treating "Coop" as separate from
+  "Cera" — everything found points to them being the same deal).
+- Confirmed this account is structurally different from every other
+  account processed so far: Storyblok is a subcontractor to a partner
+  (literally named "AE", unrelated to the AE-abbreviation) who owns the
+  actual Cera relationship — no direct customer call, no Cera-side
+  stakeholder named anywhere, so several MEDDPICC elements (Economic
+  Buyer, Champion, Metrics) are structural Gaps, not a research
+  shortfall.

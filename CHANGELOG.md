@@ -6,6 +6,21 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
+## 2026-07-21 (process-customer: first real run on Cera)
+- Ran `process-customer` on Cera for the first time — wrote
+  `accounts/cera/brief.md` (local-only). No Gong/Salesforce extracts
+  exist (Walid confirmed: "nothing because it's an RFP") — all evidence
+  from Slack (#opportunity-cera-rfp, #help-bid-function, #se-requests,
+  DMs) and Drive (the requirements matrices + Ines's draft response).
+- Notion "Cera RFP" row: Deadline corrected 2026-07-31 → **2026-08-14**
+  (real submission deadline, evidenced in #help-bid-function; July 31
+  was wrong). Notes rewritten to reflect real progress (205-row draft
+  response already 166/205 resolved, in human-review). MEDDPICC left
+  empty — all 8 elements landed Gap/Partial, none reached Confirmed.
+- Surfaced two unresolved inconsistencies to Walid (not auto-fixed):
+  deal-value conflict (€41,666 vs ~€60,000 across two Slack sources)
+  and a possible "Coop" naming confusion in his own shorthand.
+
 ## 2026-07-21 (Team Pipeline redo by SE, real RFP library found, Storyblok MCP confirmed nonexistent, pipeline scan rebuilt, Claim button removed)
 - Dashboard: removed the one-click "Claim" button (auto-wrote to Notion)
   from Worth Claiming cards, replaced with a "View Slack thread" link —
