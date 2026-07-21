@@ -474,3 +474,14 @@ short, skimmable "what changed and when" record. Update it alongside any
   extracts pasted in.
 - Scheduled `darwin-daily-briefing` task's prompt still describes chat-
   text output; it hasn't been updated to point at the live artifact.
+
+## 2026-07-21 (two corrections: RFP trust order, Team Pipeline silent drop)
+- `rfp-answer`: Walid confirmed the shared "RFP Answer Library (POC)"
+  Notion DB is unofficial (a coworker built it on their own) — official
+  Storyblok docs now rank above it in the trust order, and the two
+  disagreeing means the docs win, not the POC library.
+- Team Pipeline was silently dropping any deal with a blank/non-pod AE
+  (Cera RFP's AE is genuinely null in Notion — confirmed by query, not
+  a fetch bug) because the SQL filter excluded it outright. Fixed:
+  fetches all deals, filters in JS, and flags excluded deals by name +
+  their actual AE value in an error banner instead of vanishing them.

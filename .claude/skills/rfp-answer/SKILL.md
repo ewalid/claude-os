@@ -32,32 +32,37 @@ higher-trust local source layered on top of the shared one.
 1. **Walid's own local library** (`resources/rfp-library/answers/*.md`)
    — once seeded, this is Walid-validated and the highest-trust source.
    Currently empty.
-2. **The shared company Notion library** ("RFP Answer Library (POC)",
-   `collection://1a091a48-6c13-4f4a-84f9-67c75757e3b7`) — real content,
-   but every row is currently Status "needs review." Use it, but
-   always surface the Status alongside the answer and never present a
-   "needs review" row as equivalent to an approved one. **Read-only**
-   for now — this is a cross-team resource other people maintain;
-   writing back to it (e.g. marking rows "approved," adding new ones)
-   needs an explicit ask from Walid first, unlike his own Accounts DB
-   (CLAUDE.md guardrail 4 is about Walid's own Notion content, not
-   shared cross-team databases).
-3. **Sanctioned research, when 1-2 don't cover it** (Walid explicitly
-   authorized these four, 2026-07-21):
-   - **Storyblok public docs** (storyblok.com/docs) — objective
-     product facts.
+2. **Storyblok's official public docs** (storyblok.com/docs) — the
+   authoritative source for product/feature facts. Ranks above the
+   library in #3 (confirmed by Walid, 2026-07-21): docs are official,
+   the POC library is not.
+3. **The shared company Notion library** ("RFP Answer Library (POC)",
+   `collection://1a091a48-6c13-4f4a-84f9-67c75757e3b7`) — **not an
+   official resource.** A coworker put it together on their own
+   initiative; it's real, usable content (19 rows, genuinely
+   well-written) but every row's Status is "needs review," and Walid
+   confirmed it has no official standing — if it conflicts with the
+   official docs, the docs win. Use it, but always surface the Status
+   alongside the answer and never present a "needs review" row as
+   equivalent to an approved one. **Read-only** for now — this is
+   someone else's resource; writing back to it (marking rows
+   "approved," adding new ones) needs an explicit ask from Walid first,
+   unlike his own Accounts DB (CLAUDE.md guardrail 4 is about Walid's
+   own Notion content, not someone else's unofficial database).
+4. **Other sanctioned research, when 1-3 don't cover it** (Walid
+   explicitly authorized these, 2026-07-21):
    - **The rest of the company Notion**, starting from the RFP Answer
      Library page as an anchor and branching out via `notion-search`
      — other teams (product, security, RevOps) may have written
-     relevant material that isn't in the RFP library itself yet.
+     official material that isn't in the docs or the POC library.
    - **Slack search** (not just #se-requests/#se-sgm) — past threads
      where a similar question was actually answered.
    - **Google Drive** — security whitepapers, SOC2/ISO reports,
      one-pagers.
    Anything sourced this way is labeled `[research: <source>, needs
    SME confirmation before submitting]` — never presented as
-   equivalent to a validated answer.
-4. **Nothing else.** If none of the above cover a question, mark it
+   equivalent to a validated or official-docs answer.
+5. **Nothing else.** If none of the above cover a question, mark it
    `needs SME input` — never fabricated from general CMS-market
    knowledge. This mirrors CLAUDE.md guardrail 5 (never invent
    Salesforce/Gong content) applied to product/security facts.
@@ -74,9 +79,13 @@ a content-management API.
 ## Trust levels — always shown in the draft answer
 
 - `validated` — from Walid's own local library.
-- `needs review` — from the shared Notion library, status as-is.
-  Flag this explicitly; don't smooth it over.
-- `research: <source>` — from docs/Notion/Slack/Drive, needs SME
+- `official-docs` — from storyblok.com/docs. Authoritative; still worth
+  a quick sanity check for anything contractual, but not a guess.
+- `needs review (unofficial POC)` — from the coworker's shared Notion
+  library. Real content, no official standing, status is literally
+  "needs review" — flag this explicitly, don't smooth it over, and
+  defer to official docs if the two ever disagree.
+- `research: <source>` — from wider Notion/Slack/Drive, needs SME
   confirmation before it goes in a real submission.
 - `needs SME input` — nothing found anywhere; a real gap, not a guess.
 
@@ -108,9 +117,11 @@ this — that's a real threshold, not a permanent ruling.
 1. Take the incoming RFP question set (pasted text for now — Excel
    handling is a later addition once the base flow works).
 2. For each question, check in trust order: Walid's local library →
-   the shared Notion library (query by keyword/category, read full
-   candidate rows for relevance) → sanctioned research → `needs SME
-   input`.
+   Storyblok's official docs → the shared (unofficial) Notion library
+   (query by keyword/category, read full candidate rows for relevance)
+   → other sanctioned research → `needs SME input`. If official docs
+   and the POC library disagree, go with the docs and note the
+   discrepancy rather than silently picking one.
 3. Adapt whatever's found to the specific prospect's context — don't
    paste verbatim if it doesn't actually fit.
 4. Return a draft answer set with every answer tagged by its trust
