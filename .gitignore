@@ -6,7 +6,7 @@ resources/deck-examples/*.pptx
 resources/AEs & SEs/*.jpeg
 resources/AEs & SEs/*.jpg
 resources/AEs & SEs/*.png
-accounts/*/*
-!accounts/*/.gitkeep
+accounts/*
+!accounts/.gitkeep
 resources/coaching-log.md
 resources/rfp-library/answers/won-lost-notes.md
