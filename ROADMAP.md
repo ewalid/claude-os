@@ -66,10 +66,17 @@ for full rationale.
       account-specific next-steps, which stay on account rows).
 - [x] `dashboard` — not a routine skill, but a live Cowork artifact
       (`walid-deals-dashboard`), now a real Kanban: "Walid's Pipeline"
-      (his deals, grouped by Stage) + "Team Pipeline" (all deals,
-      grouped by AE) + "Worth Claiming" (AI-triaged from #se-requests,
-      last 7 days, cross-checks each candidate's Slack thread so
-      already-claimed requests are filtered out). One-click Claim
+      (his deals, Notion-sourced, grouped by Stage) + a unified 7-day
+      #se-requests scan that routes every AE-pod request one of two
+      places — "Team Pipeline" (grouped by whichever of Chakit/
+      Roberto/Ines actually claimed it, verified per-thread) or "Worth
+      Claiming" (everything else). Rebuilt 2026-07-21 to replace the
+      earlier batch-AI extraction (fragile, slow, caused a real
+      multi-minute hang) with deterministic regex parsing of the raw
+      Slack dump plus one small scoped AI call per thread — smaller,
+      more reliable, and matches how Walid actually wants it checked.
+      Claimed-but-untracked deals now auto-sync into Notion (Walid's
+      own DB — edit-freely guardrail applies). One-click Claim still
       writes to Notion, never auto-sends to Slack. Mirrored on the
       Notion side too: "Pipeline board" view enriched + renamed
       "🗂️ Sales Pipeline (Board)", chart view renamed "📊 Analytics

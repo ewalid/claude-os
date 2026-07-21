@@ -6,7 +6,22 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
-## 2026-07-21 (Team Pipeline redo by SE, real RFP library found, Storyblok MCP confirmed nonexistent)
+## 2026-07-21 (Team Pipeline redo by SE, real RFP library found, Storyblok MCP confirmed nonexistent, pipeline scan rebuilt)
+- Pipeline scan rebuilt again, same day: Team Pipeline and Worth
+  Claiming were two separate batch-AI extractions over the whole
+  #se-requests dump; replaced with one unified 7-day scan that parses
+  each message deterministically (regex against the Slack bot's
+  regular field format — no AI needed for that part) and, only for
+  messages with a thread, runs one small scoped AI call per thread
+  asking specifically whether Chakit Arora, Roberto Butti, or Ines
+  Akrap claimed it. Routing is now binary and per-message: claimed by
+  one of those three -> Team Pipeline (grouped by whoever claimed it),
+  otherwise -> Worth Claiming. Claimed deals not yet in Notion are now
+  auto-added (Walid's own DB, edit-freely guardrail). Caught and fixed
+  mid-build via `verify_artifact`: `update_artifact` had silently
+  dropped `slack_read_thread` from the tool allowlist, so every
+  claim-check was failing before this fix — always re-verify an
+  artifact after updating it, don't assume the allowlist carried over.
 - Team Pipeline row rebuilt: filtered to deals from the AE pod only
   (was unfiltered), grouped by Solution Engineer owner (Walid, Ines
   Akrap, Chakit Arora, Roberto Butti, Unassigned — real Notion user
