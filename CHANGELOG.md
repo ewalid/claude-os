@@ -497,3 +497,13 @@ short, skimmable "what changed and when" record. Update it alongside any
 - Re-added a `colorForName` helper that had been accidentally deleted
   in an earlier edit when the Notion-based version replaced it —
   needed again for the dynamic "other claimer" columns.
+
+## 2026-07-21 (fixed dashboard "still loading" hang)
+- Root cause: Team Pipeline's 30-day Slack scan + sequential per-thread
+  claim-checks could take 2-3+ minutes, and a transient Claude API 529
+  overload was being silently swallowed as "zero results" instead of
+  surfaced — looked stuck with no explanation either way.
+- Fixed: window trimmed 30→14 days, thread-checks parallelized (were
+  sequential, same fix applied to Worth Claiming) and capped at 20 per
+  load, and a new `looksLikeApiError()` check surfaces AI-call failures
+  as a visible error banner instead of silently rendering empty state.
