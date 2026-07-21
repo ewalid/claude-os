@@ -31,6 +31,22 @@ short, skimmable "what changed and when" record. Update it alongside any
   deal-value conflict (€41,666 vs ~€60,000 across two Slack sources)
   and a possible "Coop" naming confusion in his own shorthand.
 
+## 2026-07-21 (accounts/ folder was leaking customer names into git history)
+- Walid asked whether the account folder scaffold was actually
+  necessary. It wasn't: only 3 of 6 real account folders even had a
+  tracked `.gitkeep` (the other two — created on demand by
+  `process-customer` — proved skills already make folders as needed,
+  no pre-seeding required). Worse, those 3 tracked `.gitkeep` files put
+  real customer names into git history via the directory path itself
+  (`accounts/cera/.gitkeep`, etc.) even though file *contents* were
+  always empty — a small but real violation of guardrail 6's
+  meta-level-only rule for anything tracked in git. Removed the three
+  customer-named paths, replaced with a single generic
+  `accounts/.gitkeep`, and tightened `.gitignore` from
+  `accounts/*/*` + `!accounts/*/.gitkeep` to `accounts/*` +
+  `!accounts/.gitkeep` so no future account folder can be committed by
+  name again.
+
 ## 2026-07-21 (new: darwin-setup — portability to a new computer/account)
 - Built `darwin-setup`: the interview that rebuilds this repo for
   whoever is actually running Darwin, not whoever it was last tuned
