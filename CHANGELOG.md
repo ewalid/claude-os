@@ -485,3 +485,15 @@ short, skimmable "what changed and when" record. Update it alongside any
   a fetch bug) because the SQL filter excluded it outright. Fixed:
   fetches all deals, filters in JS, and flags excluded deals by name +
   their actual AE value in an error banner instead of vanishing them.
+
+## 2026-07-21 (Team Pipeline switched from Notion to Slack #se-requests)
+- Per Walid's explicit ask: Team Pipeline no longer reads the Notion
+  Accounts DB (too sparse to reflect the whole team's actual pipeline)
+  — it now scans #se-requests directly (last 30 days), same source as
+  Worth Claiming. Reads each request's thread to determine who (if
+  anyone) claimed it, and groups into columns: the known SE pod
+  (Walid/Ines/Chakit/Roberto), any other real claimer (dynamic column,
+  never dropped), and "Unclaimed" last.
+- Re-added a `colorForName` helper that had been accidentally deleted
+  in an earlier edit when the Notion-based version replaced it —
+  needed again for the dynamic "other claimer" columns.
