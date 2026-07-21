@@ -1003,3 +1003,31 @@ Darwin has — no update, no memory.
   one still needs committing this session). All three logged in
   CHANGELOG.md. Local commits only — still needs `git push origin
   main` from Walid's own terminal.
+
+### 2026-07-21 — Session 27 (darwin-setup built — portability to a new computer/account)
+- Walid: no validated RFPs yet (first real one starts tomorrow) —
+  `rfp-answer` stays mechanism-ready-but-unseeded until then, nothing
+  to fix there right now.
+- Walid: "create a setup skill... imagine I want to use Darwin on
+  another computer or another account... make sure the first thing
+  Darwin does is introduce himself and give an interactive setup."
+  Built `darwin-setup/SKILL.md`: introduces Darwin, then interviews
+  for identity/role, team structure (generalized beyond the current
+  SE-specific AE-pod/SE-colleague shape — offered as a template, not
+  assumed), connector status (tested live, not assumed from the repo's
+  existing config), real Notion/Slack IDs (not reused from the
+  previous account), which guardrails to keep vs. change, and
+  voice/formatting preferences. Ends by rewriting CLAUDE.md's
+  Identity/Voice/guardrails sections, replacing `resources/people.md`
+  entirely, and resetting `ROADMAP.md`/`memory.md` — explicitly does
+  NOT merge with whatever the previous account had.
+- Wired it to actually fire automatically, not just exist as an
+  invokable skill: added a "First run" check at the very top of
+  CLAUDE.md — "does `memory.md` exist? if not, run `darwin-setup`
+  before responding to anything else." This is the part that makes it
+  actually portable rather than just documented — a new person cloning
+  this repo won't know to ask for it by name.
+- Not yet exercised for real — this repo's own `memory.md` obviously
+  already exists, so the trigger has never actually fired. First real
+  test happens whenever this repo is reused on another machine or by
+  someone else.

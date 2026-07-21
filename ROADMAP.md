@@ -111,6 +111,19 @@ scheduled run — worth watching the first real firings closely.
       network allowlist. No MCP connector exists for Storyblok either
       way (checked directly).
 
+## Phase 0 — Portability (added 2026-07-21)
+- [x] `darwin-setup` — the one-time interview that makes this repo
+      correct for whoever is actually running it, on any computer or
+      account. Wired to fire automatically the first time Darwin runs
+      with no `memory.md` present (CLAUDE.md "First run" check) — not
+      something the person has to remember to invoke. Introduces
+      Darwin first, then rebuilds Identity/Voice/guardrails in
+      CLAUDE.md, `resources/people.md`, and `ROADMAP.md`/`memory.md`
+      from scratch for the new person, rather than silently inheriting
+      the previous account's specifics. Not yet exercised on a real
+      fresh install — first real test will be whenever this repo is
+      actually reused on another machine or for another person.
+
 ## Not skills
 - Coding help (native to Cowork)
 - Notion restructure (one-time task, not recurring)

@@ -31,6 +31,22 @@ short, skimmable "what changed and when" record. Update it alongside any
   deal-value conflict (€41,666 vs ~€60,000 across two Slack sources)
   and a possible "Coop" naming confusion in his own shorthand.
 
+## 2026-07-21 (new: darwin-setup — portability to a new computer/account)
+- Built `darwin-setup`: the interview that rebuilds this repo for
+  whoever is actually running Darwin, not whoever it was last tuned
+  to. Wired to fire automatically — CLAUDE.md now has a "First run"
+  check at the very top ("does `memory.md` exist? if not, this is an
+  uninitialized copy") that runs `darwin-setup` before responding to
+  anything else, introduction first. Covers: who the person is, their
+  team structure (generalized — doesn't assume the AE-pod/SE-colleague
+  shape applies to a different role), which connectors are actually
+  live (tested, not assumed), where the real data lives (Notion DB,
+  Slack channel IDs — not reused from the previous account), which
+  guardrails to keep vs. change, and voice/formatting preferences.
+  Rewrites CLAUDE.md's Identity/Voice/guardrails, `resources/people.md`,
+  and resets `ROADMAP.md`/`memory.md` — doesn't merge with the
+  previous person's config.
+
 ## 2026-07-21 (storyblok-content: token in, blocked by sandbox network allowlist instead)
 - Walid provided a Storyblok Management API personal access token.
   Stored gitignored at `storyblok.env` (confirmed ignored before
