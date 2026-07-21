@@ -6,7 +6,24 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
-## 2026-07-21 (Team Pipeline redo by SE, real RFP library found, Storyblok MCP confirmed nonexistent, pipeline scan rebuilt)
+## 2026-07-21 (Team Pipeline redo by SE, real RFP library found, Storyblok MCP confirmed nonexistent, pipeline scan rebuilt, Claim button removed)
+- Dashboard: removed the one-click "Claim" button (auto-wrote to Notion)
+  from Worth Claiming cards, replaced with a "View Slack thread" link —
+  Walid wants to read the actual thread himself before any action, not
+  have Darwin decide. Real example that triggered this: a request
+  looked claimable from the message text alone, but the thread showed
+  the AE explicitly saying he didn't need SE support. Same link added
+  to Team Pipeline cards for consistency. `claimDeal()` removed as
+  dead code.
+- Notion Accounts DB: the "AE" select property only had two configured
+  options ("Thibault de Maison Rouge" and "Unassigned / need
+  validation") — the rest of the AE pod (Rob Scholte, Mine Heck,
+  Kristoffer Strindevall) were never added as selectable values at
+  all. This is likely the real root cause behind an earlier "why does
+  everything show Thibault" symptom. Added the missing three as real
+  select options, then corrected one real deal's AE field from blank
+  to the AE Walid identified directly (his own words — CLAUDE.md
+  guardrail 4/5 evidence rule).
 - Pipeline scan rebuilt again, same day: Team Pipeline and Worth
   Claiming were two separate batch-AI extractions over the whole
   #se-requests dump; replaced with one unified 7-day scan that parses
