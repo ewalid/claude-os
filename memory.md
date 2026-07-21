@@ -849,3 +849,41 @@ Darwin has — no update, no memory.
   shows a copy-ready suggested reply Walid sends himself. Verified live:
   the Notion query and Slack scan both returned real data on first
   load.
+
+### 2026-07-21 — Session 23 (dashboard Kanban rebuild + Notion board fix + Phase 4/5)
+- Rebuilt `walid-deals-dashboard` as a real Kanban: "Walid's Pipeline"
+  (his deals, grouped by real Notion Stage values) + new "Team
+  Pipeline" row (ALL deals, unfiltered, grouped by AE) + "Worth
+  Claiming" (now 7 days not 24h, and cross-checks each candidate's
+  Slack thread so requests already claimed by another SE get filtered
+  out instead of just trusting the raw message text).
+- Walid separately called the Notion "Dashboard" view "shit" and asked
+  for Trello-style cards grouped by sale status. A `dashboard`-type
+  Notion view can only hold chart/table widgets, not a board — so the
+  real fix was enriching/renaming the existing "Pipeline board" view
+  (had been grouped by Stage all along, but showed only the account
+  name) to "🗂️ Sales Pipeline (Board)" with real card properties, and
+  renaming the chart view to "📊 Analytics (charts)" so the two stop
+  being confused. Also fixed "By status" (mislabeled — groups by AE,
+  not Stage) → "By AE".
+- Phase 4/5: asked Walid three real blockers before building anything
+  speculative (matches ROADMAP's own "nothing built speculatively"
+  rule). Answers: `todo-sync` = create/update items on his one real
+  Notion "✅ To Do" checklist (built). `rfp-answer` = he'll seed
+  `resources/rfp-library/` with real content; answered his
+  architecture question directly — markdown library, not a vector DB
+  (corpus too small to need one, and a flat library is more auditable
+  for legally-reviewed submissions); Storyblok MCP is irrelevant to
+  this either way (content-management API, not a knowledge source).
+  `storyblok-content` = still blocked, no Storyblok MCP connector in
+  this session; flagged a same-session bash/curl-against-Management-API
+  option Walid hadn't considered, alongside his two (MCP connector /
+  Claude Code prompt).
+- Self-caught (guardrail 10): `resources/rfp-library/answers/
+  won-lost-notes.md` was tracked in git since the initial scaffold and
+  would eventually name real deals/customers — gitignored + untracked
+  before any real content lands, same fix pattern as coaching-log.md.
+- ROADMAP.md updated to reflect reality: Phase 4 now fully drafted
+  (though `weekly-review`/`monthly-review`/`todo-sync` still unproven
+  on a real scheduled run); Phase 5 marked `[~]` (mechanism drafted,
+  genuinely blocked) rather than either `[ ]` or a dishonest `[x]`.

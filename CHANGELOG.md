@@ -6,6 +6,33 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
+## 2026-07-21 (Phase 4 finished; Phase 5 drafted and honestly flagged as blocked)
+- `todo-sync` skill built: reconciles personal action items onto the
+  single real "✅ To Do" checklist block on Walid's Notion space page.
+  Deliberately doesn't touch account-specific next-steps.
+- Dashboard artifact gained a "Team Pipeline" row (all deals, grouped
+  by AE, unfiltered) alongside the renamed "Walid's Pipeline" row.
+- Worth Claiming widened from 24h to 7 days (with pagination), and now
+  reads each candidate's Slack thread to filter out requests already
+  claimed by another SE instead of trusting the raw message text alone.
+- `rfp-answer` mechanism drafted (RETRIEVE + HARVEST against a markdown
+  library under `resources/rfp-library/`, explicitly not a vector DB —
+  documented why). Not live: the library is still empty, blocked on
+  Walid seeding real content. `won-lost-notes.md` gitignored + untracked
+  (guardrail 10 — it will name real deals/customers).
+- `storyblok-content` mechanism drafted (dry-run → confirm → write →
+  verify). Blocked on an execution path — no Storyblok MCP connector
+  in this session. Flagged three options, including a same-session
+  bash/curl path against Storyblok's Management API if Walid has a
+  personal access token.
+- Notion "Dashboard" (chart view) renamed "📊 Analytics (charts)" and
+  "Pipeline board" renamed + enriched to "🗂️ Sales Pipeline (Board)"
+  after Walid called the existing Notion dashboard "shit" — a
+  `dashboard`-type Notion view can only hold chart/table widgets, not
+  a Kanban board, so the real fix lived in the board view, not the
+  dashboard view. Also fixed "By status" (was mislabeled — groups by
+  AE, not Stage) → "By AE".
+
 ## 2026-07-20 (Kanban rebuild — Cowork artifact + Notion board view)
 - `walid-deals-dashboard` artifact rebuilt as an actual Kanban board:
   deals grouped into columns by real Notion Stage values (Not started /

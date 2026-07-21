@@ -9,3 +9,4 @@ resources/AEs & SEs/*.png
 accounts/*/*
 !accounts/*/.gitkeep
 resources/coaching-log.md
+resources/rfp-library/answers/won-lost-notes.md

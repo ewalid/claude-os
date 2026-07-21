@@ -60,19 +60,46 @@ for full rationale.
       recurring friction and runs `darwin-improve` on real patterns,
       scheduled 1st of month 08:00 Paris (`darwin-monthly-review`). Not
       yet exercised on a real run.
-- [ ] `todo-sync`
+- [x] `todo-sync` — drafted: creates/checks off items on the single
+      real "✅ To Do" checklist block on Walid's Notion space page,
+      deliberately narrow (personal action items only, never
+      account-specific next-steps, which stay on account rows).
 - [x] `dashboard` — not a routine skill, but a live Cowork artifact
-      (`walid-deals-dashboard`): "My Deals" from Notion + "Worth
-      Claiming" (AI-triaged from #se-requests, last 24h) with a one-click
-      Claim button (writes to Notion, never auto-sends to Slack). This
-      is explicitly the exception to the no-artifact-for-routines rule —
-      it's on-demand/interactive, not a recurring report.
+      (`walid-deals-dashboard`), now a real Kanban: "Walid's Pipeline"
+      (his deals, grouped by Stage) + "Team Pipeline" (all deals,
+      grouped by AE) + "Worth Claiming" (AI-triaged from #se-requests,
+      last 7 days, cross-checks each candidate's Slack thread so
+      already-claimed requests are filtered out). One-click Claim
+      writes to Notion, never auto-sends to Slack. Mirrored on the
+      Notion side too: "Pipeline board" view enriched + renamed
+      "🗂️ Sales Pipeline (Board)", chart view renamed "📊 Analytics
+      (charts)" to stop the two being confused, "By status" renamed
+      "By AE" (it was mislabeled — it groups by AE, not Stage).
 - [x] Morning brief scheduling — done early via Cowork's native scheduler
       (see Phase 1 note); n8n is no longer needed for this specific job.
 
+Phase 4 is now fully drafted. `weekly-review`/`monthly-review`/
+`todo-sync` are mechanism-complete but not yet exercised on a real
+scheduled run — worth watching the first real firings closely.
+
 ## Phase 5 — Heavy artillery (weeks 6-10)
-- [ ] `rfp-answer` (+ Excel handling, + library harvesting)
-- [ ] `storyblok-content`
+- [~] `rfp-answer` — mechanism drafted (RETRIEVE/HARVEST against a
+      markdown answer library, not a vector DB — corpus is realistically
+      too small to need one, and a flat library is more auditable for
+      anything that ends up in a legally-reviewed submission). Not
+      genuinely running yet: `resources/rfp-library/answers/` has zero
+      real entries. Blocked on Walid seeding it with real content from
+      Cera RFP / Akeneo RFP (both live "In progress") or an existing
+      team RFP bank. `won-lost-notes.md` gitignored on creation
+      (guardrail 10) since it will name real deals/customers.
+- [~] `storyblok-content` — mechanism drafted (dry-run → confirm →
+      write → verify). Blocked on an execution path: no Storyblok MCP
+      connector exists in this session. Three options on the table —
+      wait for an MCP connector, run it via Claude Code instead, or
+      (fastest, no new connector needed) call Storyblok's Management
+      API directly via bash/curl with a personal access token in an
+      env var. Open question for Walid: does he have a token for
+      option 3?
 
 ## Not skills
 - Coding help (native to Cowork)
