@@ -956,3 +956,50 @@ Darwin has — no update, no memory.
   the 2-4 sentence company brief before any field-level diff, every
   run, not just when Walid happens to ask. Committed as `improve:`,
   logged in CHANGELOG.md.
+
+### 2026-07-21 — Session 26 (pipeline scan rebuilt, Claim button removed, Notion AE schema fix, Slack>Notion rule)
+- Rebuilt the dashboard's Team Pipeline + Worth Claiming from two
+  separate batch-AI extractions (slow, fragile — same root cause as
+  the earlier "still loading" hang) into one unified 7-day
+  #se-requests scan: deterministic regex parsing of the raw Slack
+  message format (no AI needed there — the bot's fields are regular),
+  plus one small scoped AI call per thread asking specifically whether
+  Chakit Arora, Roberto Butti, or Ines Akrap claimed it. Binary
+  routing: claimed by one of those three -> Team Pipeline (grouped by
+  claimer); otherwise -> Worth Claiming. Claimed-but-untracked deals
+  now auto-sync into Notion.
+- Mid-build, `update_artifact` silently dropped `slack_read_thread`
+  from the tool allowlist — every claim-check was failing before I
+  caught it via `verify_artifact` and re-set the allowlist explicitly.
+  Lesson: never assume the allowlist carries over on an update; always
+  reverify.
+- Walid: "instead of a claim button i would like to have a link to the
+  slack thread" — real trigger was CHANTELLE SA: it looked claimable
+  from the message alone, but the thread showed Thibault explicitly
+  saying he didn't need SE support. Removed the one-click Claim
+  button (auto-wrote to Notion) entirely, replaced with a "View Slack
+  thread" link on both Worth Claiming and Team Pipeline cards, so
+  Walid reads context himself before anything happens. `claimDeal()`
+  deleted as dead code. Confirmed a stray CHANTELLE SA row created via
+  the old button (clicked live, before the fix deployed) was already
+  gone — nothing to clean up.
+- Walid: "Cera RFP is from Robert." Went to fix it and found the real
+  root cause of the much-earlier "why does everything show Thibault"
+  symptom: Notion's "AE" select property only had TWO configured
+  options the whole time — "Thibault de Maison Rouge" and "Unassigned
+  / need validation." Rob Scholte, Mine Heck, Kristoffer Strindevall
+  were never valid select values at all, so any deal actually owned by
+  one of them was structurally unable to show correctly no matter what
+  the row said. Added the missing three as real options via
+  `notion-update-data-source`, then set Cera RFP's AE to Rob Scholte.
+- Walid: "Remember for Deals, Slack > Notion." Codified as CLAUDE.md
+  guardrail 8 (broadened from the narrower "don't trust Notion dates"
+  rule it already was): Slack outranks Notion for deals data generally
+  — Notion is manually-maintained and can be stale, incomplete, or
+  structurally wrong (as just proven); when they conflict, Slack wins
+  and is treated as evidence to fix Notion, never the reverse.
+- Committed as three separate `improve:` commits (pipeline scan
+  rebuild, Claim-button/AE-schema fix, guardrail 8 broadening — this
+  one still needs committing this session). All three logged in
+  CHANGELOG.md. Local commits only — still needs `git push origin
+  main` from Walid's own terminal.

@@ -31,7 +31,12 @@ short, skimmable "what changed and when" record. Update it alongside any
   deal-value conflict (€41,666 vs ~€60,000 across two Slack sources)
   and a possible "Coop" naming confusion in his own shorthand.
 
-## 2026-07-21 (Team Pipeline redo by SE, real RFP library found, Storyblok MCP confirmed nonexistent, pipeline scan rebuilt, Claim button removed)
+## 2026-07-21 (Team Pipeline redo by SE, real RFP library found, Storyblok MCP confirmed nonexistent, pipeline scan rebuilt, Claim button removed, Slack>Notion rule added)
+- New standing rule (CLAUDE.md guardrail 8, broadened from a
+  Notion-dates-only rule): for Deals, Slack outranks Notion. Notion is
+  manually-maintained and can be stale, incomplete, or structurally
+  wrong — just proven by the AE schema gap below. When they conflict,
+  Slack is evidence to fix Notion, never the reverse.
 - Dashboard: removed the one-click "Claim" button (auto-wrote to Notion)
   from Worth Claiming cards, replaced with a "View Slack thread" link —
   Walid wants to read the actual thread himself before any action, not

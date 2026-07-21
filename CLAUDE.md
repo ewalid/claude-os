@@ -60,9 +60,18 @@ skill-by-skill.)
    never the actual customer specifics themselves.
 7. `resources/coaching-log.md` is private. Never quoted in anything
    customer-facing.
-8. A Notion date is never trusted at face value — cross-check calendar/
-   Slack before treating it as a deadline vs. a call date (see known
-   issue in memory.md / HANDOFF.md §2).
+8. **For Deals, Slack outranks Notion.** (2026-07-21: Notion's "AE"
+   field schema was missing most of the AE pod as valid options
+   entirely, and multiple deals sat with the wrong or blank AE/owner
+   because of it — Slack was right the whole time.) Notion is
+   manually-maintained and can be stale, incomplete, or structurally
+   wrong (missing select options, nobody updated a row); Slack is
+   where deals actually get discussed, claimed, and corrected in real
+   time. When they conflict, Slack wins — treat it as evidence to fix
+   Notion (guardrail 4), never the reverse. A Notion date specifically
+   is never trusted at face value either — cross-check calendar/Slack
+   before treating it as a deadline vs. a call date (see known issue
+   in memory.md / HANDOFF.md §2).
 9. **Before writing to any file via bash/python instead of the Edit
    tool** (this happens whenever Edit refuses a path — currently
    `.claude/skills/` is blocked) — first read the file's actual current
