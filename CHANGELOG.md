@@ -6,6 +6,28 @@ Session-level narrative detail still lives in `memory.md`; this file is the
 short, skimmable "what changed and when" record. Update it alongside any
 `improve:` commit.
 
+## 2026-07-21 (Team Pipeline redo by SE, real RFP library found, Storyblok MCP confirmed nonexistent)
+- Team Pipeline row rebuilt: filtered to deals from the AE pod only
+  (was unfiltered), grouped by Solution Engineer owner (Walid, Ines
+  Akrap, Chakit Arora, Roberto Butti, Unassigned — real Notion user
+  IDs resolved via `notion-get-users`, not guessed) instead of by AE.
+  Cards now have a dismiss (×) button, persisted via localStorage
+  (Cowork artifacts explicitly support this, unlike general Claude
+  artifacts) with a "show hidden" undo link.
+- Found a real, live, company-wide "RFP Answer Library (POC)" Notion
+  database (19 real Q&A rows, all Status "needs review") that someone
+  else already started. `rfp-answer` rewritten to use it as the
+  primary shared source (read-only — it's a cross-team resource, not
+  Walid's own Notion) layered under Walid's own local library (still
+  empty, still highest-trust once seeded) and above four newly
+  -sanctioned research sources: Storyblok public docs, the wider
+  company Notion, Slack search, Google Drive. Every answer now carries
+  an explicit trust-level tag (validated / needs review / research /
+  needs SME input) — never smoothed over.
+- Searched the MCP registry directly for a Storyblok connector — none
+  exists, in this session or at all. `storyblok-content` updated to
+  say so plainly rather than "not connected yet."
+
 ## 2026-07-21 (Phase 4 finished; Phase 5 drafted and honestly flagged as blocked)
 - `todo-sync` skill built: reconciles personal action items onto the
   single real "✅ To Do" checklist block on Walid's Notion space page.

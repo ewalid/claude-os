@@ -3,129 +3,146 @@ name: rfp-answer
 description: >
   Trigger: "answer this RFP", "help with this RFP question", or
   "harvest this RFP" after a submission closes. Two directions:
-  RETRIEVE (match incoming RFP questions against the validated answer
-  library, adapt, flag gaps) and HARVEST (fold new/validated answers
-  back into the library afterward). NOT wired to Storyblok MCP — there
-  is no such connector in this session, and product/feature facts for
-  RFPs don't come from a CMS content API anyway. The knowledge source
-  is the library itself: markdown files under resources/rfp-library/,
-  not a vector database (see "Why not a vector DB" below).
+  RETRIEVE (match incoming RFP questions against known answers, adapt,
+  flag gaps) and HARVEST (fold new/validated answers back into Walid's
+  own local library afterward). Primary knowledge source is a real,
+  live, company-wide Notion database (see below) — not empty, not
+  hypothetical. NOT wired to Storyblok MCP — no such connector exists
+  in the MCP registry at all (checked 2026-07-21), and product/feature
+  facts for RFPs don't come from a content-management API anyway.
 ---
 
 # rfp-answer
 
 ## Status (2026-07-21)
 
-Mechanism only. `resources/rfp-library/answers/` has zero real entries
-— building the RETRIEVE logic against an empty library would just
-produce "needs SME input" for everything, which isn't a genuinely good
-skill (ROADMAP's own phase-gate rule: nothing built speculatively).
-This file defines how it will work; it starts actually running once
-Walid seeds real content (see "Seeding the library").
+Mechanism drafted, and the primary source is real: there's a live
+"RFP Answer Library (POC)" database in the company Notion
+(`collection://1a091a48-6c13-4f4a-84f9-67c75757e3b7`, 19 real Q&A rows
+as of 2026-07-21 — checked directly, not assumed) that someone else on
+the team already started. Every row's Status is currently "needs
+review," not "approved" — treat accordingly (see "Trust levels"
+below). Walid is also going to seed `resources/rfp-library/` with his
+own validated RFP files once he has them (Cera RFP / Akeneo RFP are
+both live "In progress" right now) — that becomes a second,
+higher-trust local source layered on top of the shared one.
 
-## Where the answers come from
+## Where the answers come from, in trust order
 
-Two, and only two, sources — never invented, never guessed:
+1. **Walid's own local library** (`resources/rfp-library/answers/*.md`)
+   — once seeded, this is Walid-validated and the highest-trust source.
+   Currently empty.
+2. **The shared company Notion library** ("RFP Answer Library (POC)",
+   `collection://1a091a48-6c13-4f4a-84f9-67c75757e3b7`) — real content,
+   but every row is currently Status "needs review." Use it, but
+   always surface the Status alongside the answer and never present a
+   "needs review" row as equivalent to an approved one. **Read-only**
+   for now — this is a cross-team resource other people maintain;
+   writing back to it (e.g. marking rows "approved," adding new ones)
+   needs an explicit ask from Walid first, unlike his own Accounts DB
+   (CLAUDE.md guardrail 4 is about Walid's own Notion content, not
+   shared cross-team databases).
+3. **Sanctioned research, when 1-2 don't cover it** (Walid explicitly
+   authorized these four, 2026-07-21):
+   - **Storyblok public docs** (storyblok.com/docs) — objective
+     product facts.
+   - **The rest of the company Notion**, starting from the RFP Answer
+     Library page as an anchor and branching out via `notion-search`
+     — other teams (product, security, RevOps) may have written
+     relevant material that isn't in the RFP library itself yet.
+   - **Slack search** (not just #se-requests/#se-sgm) — past threads
+     where a similar question was actually answered.
+   - **Google Drive** — security whitepapers, SOC2/ISO reports,
+     one-pagers.
+   Anything sourced this way is labeled `[research: <source>, needs
+   SME confirmation before submitting]` — never presented as
+   equivalent to a validated answer.
+4. **Nothing else.** If none of the above cover a question, mark it
+   `needs SME input` — never fabricated from general CMS-market
+   knowledge. This mirrors CLAUDE.md guardrail 5 (never invent
+   Salesforce/Gong content) applied to product/security facts.
 
-1. **The validated library** (`resources/rfp-library/answers/*.md`,
-   by category: security, architecture, integrations, editorial,
-   pricing-licensing) — Walid-approved answers, harvested from real
-   past RFPs. This is the primary source and the only one trusted
-   for compliance/security-grade claims.
-2. **Public Storyblok docs** (docs.storyblok.com, storyblok.com/security
-   etc.) as a fallback for objective product facts ONLY when the
-   library has nothing — always labeled `[public-docs, needs SME
-   confirmation before submitting]` in the draft answer, never
-   presented as equivalent to a validated library answer.
+**The Storyblok MCP connector is not relevant here even if it
+existed** (and it doesn't — checked the MCP registry directly,
+zero results for "storyblok" under any keyword). That connector, if it
+ever exists, would manage content *inside* a customer's Storyblok
+space — stories, components (see `storyblok-content`). It has no
+bearing on "does Storyblok support SAML SSO" or "what's the uptime
+SLA." Those are answered from the knowledge sources above, never from
+a content-management API.
 
-Anything neither source covers is flagged `needs SME input` — never
-filled in with a best guess. This mirrors CLAUDE.md guardrail 5
-(never invent Salesforce/Gong content) applied to product/security facts.
+## Trust levels — always shown in the draft answer
 
-**The Storyblok MCP connector is not relevant here even if it existed.**
-That connector (see `storyblok-content`) manages content *inside* a
-customer's Storyblok space — stories, components. It has no bearing on
-"does Storyblok support SAML SSO" or "what's the uptime SLA." Those are
-answered from the knowledge library, not a content-management API.
+- `validated` — from Walid's own local library.
+- `needs review` — from the shared Notion library, status as-is.
+  Flag this explicitly; don't smooth it over.
+- `research: <source>` — from docs/Notion/Slack/Drive, needs SME
+  confirmation before it goes in a real submission.
+- `needs SME input` — nothing found anywhere; a real gap, not a guess.
 
-## Why not a vector DB
+## Why the local library isn't a vector DB
 
-Walid asked directly whether this should be a vector database instead
-of a plain library. Decision: no, for this scale and environment —
+Walid asked directly whether his own library should be a vector
+database instead of plain markdown. Decision: no, for this scale —
 
-- **Realistic corpus size.** One SE's validated RFP answers, even
-  harvested over years, is realistically dozens to a few hundred
-  entries — small enough that a flat, well-categorized set of markdown
-  files (already scaffolded) is fully searchable by category + keyword
-  grep, with Claude reading full matched files for actual semantic
-  judgment (a vector index buys nothing extra at this size).
-- **No persistent infra to run.** A real vector DB needs an embeddings
-  pipeline and a store that survives across sessions; this repo's
-  actual persistence is git + the filesystem. A markdown library is
-  itself the durable store — no extra moving part to keep alive,
-  re-embed after edits, or debug when it drifts from the source files.
-- **Auditability.** Every answer is a readable file with a visible
-  history (`git log`) and a clear category — a requirement for
-  anything that ends up in a legally-reviewed RFP submission. A vector
-  store's nearest-neighbor match is a worse fit for "show me exactly
-  which answer this came from and who approved it."
+- **Realistic corpus size.** Even harvested over years, one SE's
+  validated answers is realistically dozens to a few hundred entries —
+  small enough for category + keyword search with Claude reading full
+  matched files for real semantic judgment. A vector index buys
+  nothing extra at this size, and the shared Notion library above is
+  already a real structured DB for the company-wide content anyway.
+- **No persistent infra to run.** This repo's actual persistence is
+  git + the filesystem. A markdown library is itself the durable
+  store — no embeddings pipeline to keep alive or re-run after edits.
+- **Auditability.** Every local answer is a readable file with
+  `git log` history — needed for anything that ends up in a
+  legally-reviewed RFP submission. A vector store's nearest-neighbor
+  match is a worse fit for "show me exactly which answer this came
+  from and who approved it."
 
-If the library ever grows into the thousands of entries across many
-SEs, revisit this — that's a real threshold, not a permanent ruling.
-
-## Seeding the library (what Walid needs to provide)
-
-Real RFP files/extracts (Cera RFP and Akeneo RFP are both live
-"In progress" right now) — actual questions asked + the validated
-answers Walid/the team gave. Paste them in, or point to an existing
-team RFP answer bank if one already exists elsewhere (Confluence,
-Drive, a shared Notion). First real run seeds the library for real
-instead of building it empty.
+If the local library ever grows into the thousands of entries, revisit
+this — that's a real threshold, not a permanent ruling.
 
 ## Steps — RETRIEVE ("answer this RFP")
 
-1. Take the incoming RFP question set (Walid pastes it, or points to
-   a file — Excel handling is a later addition once the base flow
-   works with plain text/markdown input).
-2. For each question, search `resources/rfp-library/answers/` by
-   category + keyword. Read full candidate files, not just filenames
-   — judge relevance semantically, not by exact string match.
-3. If a validated answer matches: adapt it to the specific prospect's
-   context (their stack, their stated requirements) — don't paste it
-   verbatim if it doesn't actually fit.
-4. If nothing matches: try the public-docs fallback for objective
-   product facts only, clearly labeled as unvalidated.
-5. If still nothing: mark `needs SME input` — never fabricate.
-6. Return a draft answer set with every answer tagged by source
-   (`library` / `public-docs, needs confirmation` / `needs SME input`)
-   so Walid knows exactly what's safe to submit as-is.
+1. Take the incoming RFP question set (pasted text for now — Excel
+   handling is a later addition once the base flow works).
+2. For each question, check in trust order: Walid's local library →
+   the shared Notion library (query by keyword/category, read full
+   candidate rows for relevance) → sanctioned research → `needs SME
+   input`.
+3. Adapt whatever's found to the specific prospect's context — don't
+   paste verbatim if it doesn't actually fit.
+4. Return a draft answer set with every answer tagged by its trust
+   level (see above) so Walid knows exactly what's safe to submit as-is
+   versus what needs a second look.
 
 ## Steps — HARVEST ("harvest this RFP")
 
 1. After a submission (or a won/lost outcome), take the final
    Walid-approved answers.
-2. New or meaningfully-improved answers get added/updated under the
-   right category file in `resources/rfp-library/answers/`, with
-   `_index.md` updated to reflect what's now covered.
-3. If the deal's outcome is known, log why it was won/lost — tied to
-   which answers/positioning helped or hurt — in
-   `resources/rfp-library/answers/won-lost-notes.md`. This file is
-   gitignored (2026-07-21, guardrail 10): it will name real deals and
-   customers, same class of data as `accounts/`.
-4. Announce what was added/updated, same as any Notion/library write
-   (CLAUDE.md guardrail 4 pattern extended to this library).
+2. New/improved answers go into Walid's own
+   `resources/rfp-library/answers/` (by category), with `_index.md`
+   updated. This is Walid's local harvesting — separate from the
+   shared Notion library, which stays read-only unless he says
+   otherwise.
+3. If the deal's outcome is known, log why it was won/lost in
+   `resources/rfp-library/answers/won-lost-notes.md` — gitignored
+   (2026-07-21, guardrail 10), it will name real deals/customers, same
+   class of data as `accounts/`.
+4. Announce what was added/updated in chat.
 
 ## Guardrails
 
-- Never answer a compliance/security-grade RFP question from anything
-  other than the validated library or a clearly-labeled public-docs
-  fallback — never from general knowledge/training data about CMS
-  products in general.
-- Never invent that an answer is "validated" when it's actually a
-  public-docs guess or a gap.
+- Never answer a compliance/security-grade question from anything
+  other than the sources listed above, in trust order — never from
+  general training-data knowledge about CMS products.
+- Never present a "needs review" or "research"-sourced answer as
+  equivalent to a validated one — the trust-level tag is not optional.
+- Never write to the shared company "RFP Answer Library (POC)" DB
+  without Walid explicitly asking for that — it's read-only by default.
 - `won-lost-notes.md` is customer data — local-only, gitignored, never
   pushed even though this repo is private (same rule as `accounts/`).
-- Category answer files themselves (security/architecture/etc.) are
-  reusable product-positioning content, not tied to one customer's
-  identity — those stay tracked in git as the actual moat, unlike
-  `won-lost-notes.md`.
+- Walid's local category answer files are reusable product-positioning
+  content, not tied to one customer's identity — those stay tracked in
+  git, unlike `won-lost-notes.md`.

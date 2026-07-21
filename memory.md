@@ -887,3 +887,28 @@ Darwin has — no update, no memory.
   (though `weekly-review`/`monthly-review`/`todo-sync` still unproven
   on a real scheduled run); Phase 5 marked `[~]` (mechanism drafted,
   genuinely blocked) rather than either `[ ]` or a dishonest `[x]`.
+
+### 2026-07-21 — Session 24 (Team Pipeline by SE, real shared RFP library, Storyblok MCP confirmed absent)
+- Team Pipeline redone per Walid's correction: filtered to AE-pod deals
+  only (was every deal in the DB), grouped by Solution Engineer owner
+  instead of AE — resolved Ines Akrap / Chakit Arora / Roberto Butti's
+  real Notion user IDs via `notion-get-users` rather than guessing.
+  Added a per-card dismiss (×) with localStorage persistence — checked
+  first that Cowork artifacts (unlike general Claude artifacts)
+  explicitly permit localStorage.
+- Walid pointed at a real, live, company-wide "RFP Answer Library
+  (POC)" Notion database — fetched it directly and found 19 real
+  Q&A rows already written (all Status "needs review", not approved).
+  This changes `rfp-answer`'s whole shape: it's no longer "build an
+  empty local library and wait for Walid to seed it" — there's already
+  a shared team resource to retrieve from today, just one that needs
+  an explicit trust-level tag since nothing in it is approved yet.
+  Kept it read-only (cross-team resource, not Walid's own Notion —
+  guardrail 4's "edit freely" is specifically about his own content).
+  Walid also authorized four sanctioned research sources for gaps:
+  Storyblok public docs, the wider company Notion, Slack search,
+  Google Drive.
+- Walid asked directly to try connecting a Storyblok MCP connector —
+  searched the registry with several keyword variants, confirmed zero
+  results. Not a "not connected in this session" gap, a "doesn't exist
+  yet" gap — updated `storyblok-content` to say this plainly.

@@ -13,9 +13,12 @@ description: >
 
 ## Status (2026-07-21)
 
-Blocked on an execution path, not on the design. There's no Storyblok
-MCP connector in this Cowork session's tool list (checked directly,
-not assumed). Walid gave two options; there's actually a third worth
+Blocked on an execution path, not on the design. Checked the MCP
+registry directly (2026-07-21, `search_mcp_registry` with several
+keyword variants including "storyblok", "headless cms", "content api")
+— there is no Storyblok connector at all, in this session or the
+registry generally. This isn't a "not connected yet" gap, it's a "does
+not exist yet" gap. Walid gave two options; there's a third worth
 weighing too:
 
 ## Execution paths (pick one to unblock this)
