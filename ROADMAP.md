@@ -100,13 +100,16 @@ scheduled run — worth watching the first real firings closely.
       team RFP bank. `won-lost-notes.md` gitignored on creation
       (guardrail 10) since it will name real deals/customers.
 - [~] `storyblok-content` — mechanism drafted (dry-run → confirm →
-      write → verify). Blocked on an execution path: no Storyblok MCP
-      connector exists in this session. Three options on the table —
-      wait for an MCP connector, run it via Claude Code instead, or
-      (fastest, no new connector needed) call Storyblok's Management
-      API directly via bash/curl with a personal access token in an
-      env var. Open question for Walid: does he have a token for
-      option 3?
+      write → verify). Walid provided a Management API token
+      (2026-07-21, stored gitignored in `storyblok.env`) — but a live
+      test showed this Cowork sandbox's network proxy blocks
+      `storyblok.com` entirely (`blocked-by-allowlist`), independent of
+      having a token. Two unblock paths: run it from Walid's own
+      terminal (the workspace folder, and the token file with it,
+      already exists on his real machine — no sandbox in the way), or
+      have a Team/Enterprise org Owner add `storyblok.com` to Cowork's
+      network allowlist. No MCP connector exists for Storyblok either
+      way (checked directly).
 
 ## Not skills
 - Coding help (native to Cowork)

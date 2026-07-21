@@ -31,6 +31,17 @@ short, skimmable "what changed and when" record. Update it alongside any
   deal-value conflict (€41,666 vs ~€60,000 across two Slack sources)
   and a possible "Coop" naming confusion in his own shorthand.
 
+## 2026-07-21 (storyblok-content: token in, blocked by sandbox network allowlist instead)
+- Walid provided a Storyblok Management API personal access token.
+  Stored gitignored at `storyblok.env` (confirmed ignored before
+  writing the token in). Test call from this Cowork sandbox to
+  `mapi.storyblok.com` was blocked by the sandbox's own network proxy
+  allowlist — not a token or connector problem anymore, a Cowork
+  sandbox network-access problem. Two ways around it documented in
+  `storyblok-content/SKILL.md`: run from Walid's own terminal (no
+  sandbox), or get `storyblok.com` added to the org's network
+  allowlist (Admin settings → Capabilities).
+
 ## 2026-07-21 (Team Pipeline redo by SE, real RFP library found, Storyblok MCP confirmed nonexistent, pipeline scan rebuilt, Claim button removed, Slack>Notion rule added)
 - New standing rule (CLAUDE.md guardrail 8, broadened from a
   Notion-dates-only rule): for Deals, Slack outranks Notion. Notion is
