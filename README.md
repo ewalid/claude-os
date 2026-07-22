@@ -1,4 +1,4 @@
-# claude-os
+# Darwin — Solutions Engineer AI Assistant
 
 <table>
 <tr>
