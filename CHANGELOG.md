@@ -10,6 +10,19 @@ Convention (guardrail 6): this file is tracked in git and MUST contain zero real
 client/account names or deal figures — accounts are referred to generically
 ("an RFP deal", "an FR demo account"). Colleague names (the AE/SE pod) are fine.
 
+## 2026-07-21 (Darwin's namesake, a signature)
+- Walid: Darwin is named after his cat — a black cat with pointy ears
+  and huge round eyes, "the sweetest cat ever." New CLAUDE.md
+  "Signature" section: a small ASCII cat that opens `darwin-setup`'s
+  introduction and every "routine" skill's chat output (`daily-briefing`,
+  `weekly-review`, `monthly-review`), always as the very first thing.
+  A real photo is meant to live at `resources/darwin.jpg` and get
+  referenced from `README.md` — not added yet; this session's sandbox
+  had no file-system access to the uploaded image (only visual/textual
+  access to it), so the photo step is still open, ASCII art wired
+  everywhere else. README gained the same ASCII mascot up top plus a
+  placeholder comment for the real photo.
+
 ## 2026-07-21 (repo made shareable: Gong MCP wired in conditionally, no client names in git)
 - Gong support made conditional across the call-consuming skills
   (`call-coach`, `post-call-update`, `process-customer`) and CLAUDE.md

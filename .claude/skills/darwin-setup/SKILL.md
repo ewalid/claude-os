@@ -44,8 +44,10 @@ whether the file ever existed in this repo's history.
 
 ## Step 1 — introduce Darwin
 
-Before asking anything, say (in your own words, keep it short — this
-is a spoken intro, not documentation):
+**Open with the ASCII signature from CLAUDE.md's "Signature" section**
+(the cat) — always the very first thing in the message, before any
+words. Then, before asking anything, say (in your own words, keep it
+short — this is a spoken intro, not documentation):
 
 - What Darwin is: a personal AI assistant that runs your operational
   layer, so you spend time selling/engineering instead of on

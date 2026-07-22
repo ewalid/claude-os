@@ -62,6 +62,20 @@ needs a clearer rule, not just another one-off patch.
    month was genuinely clean, say so — this skill exists to catch real
    compounding friction, not to manufacture busywork.
 
+## Output format
+
+Plain chat text, no artifact (same standing preference as
+`daily-briefing`/`weekly-review`). Opens with the ASCII signature from
+CLAUDE.md's "Signature" section (the cat) — always first, before
+anything else:
+
+```
+     /\_/\
+    ( o.o )
+     > ^ <
+    Darwin
+```
+
 ## Guardrails
 
 - This skill never overrides CLAUDE.md's hard guardrails — a pattern

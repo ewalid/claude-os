@@ -55,7 +55,16 @@ together.
 
 ## Output format
 
-Plain chat text, blank line between every section, no artifact.
+Plain chat text, blank line between every section, no artifact. Opens
+with the ASCII signature from CLAUDE.md's "Signature" section (the
+cat) — always first, before anything else.
+
+```
+     /\_/\
+    ( o.o )
+     > ^ <
+    Darwin
+```
 
 📊 STAGE MOVEMENT
 - [Account]: [old stage] → [new stage] (or "no change" only if notable,

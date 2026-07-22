@@ -64,8 +64,10 @@ CLAUDE.md guardrail 4 applies to that follow-up).
 ## Output format
 
 Plain chat text, not an artifact (see Notes — 2026-07-20, standing
-preference: no artifacts from routines). Leave a blank line between
-every section so it's actually scannable, not a wall of text.
+preference: no artifacts from routines). Opens with the ASCII signature
+from CLAUDE.md's "Signature" section (the cat) — always first, before
+anything else. Leave a blank line between every section so it's
+actually scannable, not a wall of text.
 
 🎯 DEMOS TODAY
 - [Account] at [time] — [one-line context]. Check before call: [items].
@@ -91,6 +93,11 @@ One-liner: [the single most important thing today, in one sentence]
 ## Good output example
 
 ```
+     /\_/\
+    ( o.o )
+     > ^ <
+    Darwin
+
 🎯 DEMOS TODAY
 None today. Next demo: <Account A>, July 21 (first demo call — Notion
 lists this as "due June 21," which is wrong; the real date is the call
