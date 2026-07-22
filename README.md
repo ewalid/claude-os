@@ -24,7 +24,8 @@ It also improves itself over time — when something breaks, the fix
 gets written back into its own skills instead of being patched once and
 forgotten.
 
-Darwin is the sweetest cat ever, he's very good boy. A seasoned Solution Engineer.
+Darwin is the sweetest cat ever, he's very good boy.
+A seasoned Solution Engineer.
 
 </td>
 <td width="40%">
