@@ -4,18 +4,26 @@
 <td width="60%" valign="top">
 
 **Darwin** — a personal AI assistant for a Solutions Engineer, built on Claude
-Cowork. It runs the operational layer around a sales cycle (briefings, account
-intelligence, demo prep, RFP answers, Notion hygiene, call coaching) so the SE
-can focus on selling and engineering.
+Cowork. It runs the operational layer around a sales cycle — briefings,
+account intelligence, demo prep, RFP answers, Notion hygiene, call coaching —
+so the SE can spend that time selling and engineering, not assembling status
+updates by hand.
 
 It also runs on its own cadence, not just on request: a **daily briefing**
 every morning, a **weekly review** of the whole pipeline, and a **monthly
 self-audit** that fixes recurring friction at the root instead of patching it
-twice. Underneath that: it builds account briefs from real evidence, turns
-them into brand-consistent decks and talk tracks, answers RFPs against a
-trust-tagged answer library, coaches every call into concrete feedback, and
-keeps a live deals dashboard current — always evidence-first, flagging "need
-validation" rather than guessing.
+twice. Underneath that cadence sit the skills doing the real work: building
+account briefs from real evidence across calls, Slack, Notion, and email;
+turning those briefs into brand-consistent decks and talk tracks; answering
+RFPs against a trust-tagged answer library; coaching every call into concrete
+feedback; and keeping a live deals dashboard current by reading Slack threads
+directly instead of trusting stale CRM fields.
+
+The rule behind all of it is evidence-first: Darwin flags "needs validation"
+rather than guessing, and Slack always outranks Notion when the two
+disagree. It also improves itself over time — when something breaks, the fix
+gets written back into its own skills instead of being patched once and
+forgotten.
 
 Darwin is the sweetest cat ever, he's very good boy. A seasoned Solution Engineer.
 
