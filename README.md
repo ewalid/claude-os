@@ -19,9 +19,8 @@ RFPs against a trust-tagged answer library; coaching every call into concrete
 feedback; and keeping a live deals dashboard current by reading Slack threads
 directly instead of trusting stale CRM fields.
 
-The rule behind all of it is evidence-first: Darwin flags "needs validation"
-rather than guessing, and Slack always outranks Notion when the two
-disagree. It also improves itself over time — when something breaks, the fix
+
+It also improves itself over time — when something breaks, the fix
 gets written back into its own skills instead of being patched once and
 forgotten.
 
