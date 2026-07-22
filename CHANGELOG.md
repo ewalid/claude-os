@@ -10,6 +10,17 @@ Convention (guardrail 6): this file is tracked in git and MUST contain zero real
 client/account names or deal figures — accounts are referred to generically
 ("an RFP deal", "an FR demo account"). Colleague names (the AE/SE pod) are fine.
 
+## 2026-07-22
+- Walid: Claude Code (run on his own machine, outside Cowork) has a
+  working Storyblok MCP connector. `storyblok-content` rewritten to
+  check for it first at runtime (never assume tool names — same rule
+  as Gong), falling back to the Management API token path if absent.
+  Skill is now completable from Claude Code today, even though a
+  Cowork sandbox alone still can't reach `mapi.storyblok.com`.
+- README intro re-expanded (~1.4k chars) after the title-rename commit
+  left it shorter than the photo again — text/image height parity
+  restored.
+
 ## 2026-07-21 (Darwin's namesake, a signature)
 - Walid: Darwin is named after his cat — a black cat with pointy ears
   and huge round eyes, "the sweetest cat ever." New CLAUDE.md
