@@ -1,18 +1,24 @@
 # claude-os
 
-<img src="resources/darwin.jpg" alt="Darwin, the real one" width="300">
-
-```
-     /\_/\
-    ( o.o )
-     > ^ <
-    Darwin
-```
+<table>
+<tr>
+<td width="60%" valign="top">
 
 **Darwin** — a personal AI assistant for a Solutions Engineer, built on Claude
 Cowork. It runs the operational layer around a sales cycle (briefings, account
 intelligence, demo prep, RFP answers, Notion hygiene, call coaching) so the SE
 can focus on selling and engineering.
+
+Darwin is the sweetest cat ever, he's very good boy. A seasoned Solution Engineer.
+
+</td>
+<td width="40%">
+
+<img src="resources/darwin.jpg" alt="Darwin">
+
+</td>
+</tr>
+</table>
 
 ## Start here
 - **[SKILLS.md](SKILLS.md)** — what Darwin can do: every skill, when it fires,
