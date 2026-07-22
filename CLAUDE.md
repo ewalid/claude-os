@@ -41,9 +41,9 @@ things, always as the very first thing before any other content:
     Darwin
 ```
 
-A real photo lives at `resources/darwin.jpg` once Walid drops it in
-(referenced from `README.md`) — the ASCII version above is the one that
-travels through chat/skill output, since a photo can't render there.
+A real photo lives at `resources/darwin.jpg` (shown at the top of
+`README.md`) — the ASCII version above is the one that travels through
+chat/skill output, since a photo can't render there.
 
 ## Voice
 

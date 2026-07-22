@@ -1,17 +1,13 @@
 # claude-os
 
+<img src="resources/darwin.jpg" alt="Darwin, the real one" width="300">
+
 ```
      /\_/\
     ( o.o )
      > ^ <
     Darwin
 ```
-
-<!--
-  Real photo of Darwin (Walid's cat, the namesake) goes here once dropped
-  into resources/darwin.jpg — then uncomment:
-  <img src="resources/darwin.jpg" alt="Darwin" width="300">
--->
 
 **Darwin** — a personal AI assistant for a Solutions Engineer, built on Claude
 Cowork. It runs the operational layer around a sales cycle (briefings, account

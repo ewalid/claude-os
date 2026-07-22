@@ -16,12 +16,9 @@ client/account names or deal figures — accounts are referred to generically
   "Signature" section: a small ASCII cat that opens `darwin-setup`'s
   introduction and every "routine" skill's chat output (`daily-briefing`,
   `weekly-review`, `monthly-review`), always as the very first thing.
-  A real photo is meant to live at `resources/darwin.jpg` and get
-  referenced from `README.md` — not added yet; this session's sandbox
-  had no file-system access to the uploaded image (only visual/textual
-  access to it), so the photo step is still open, ASCII art wired
-  everywhere else. README gained the same ASCII mascot up top plus a
-  placeholder comment for the real photo.
+  Walid dropped the real photo in at the repo root; moved it to
+  `resources/darwin.jpg` and it's now shown at the top of `README.md`
+  above the ASCII mascot.
 
 ## 2026-07-21 (repo made shareable: Gong MCP wired in conditionally, no client names in git)
 - Gong support made conditional across the call-consuming skills
