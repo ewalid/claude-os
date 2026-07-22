@@ -19,8 +19,8 @@ to or claimed a Slack request, it's handled — never flag it as "worth
 claiming", and never mistake one of these names for an AE.)
 
 - **Ines Akrap** — SE, built a similar assistant ("Donna"). Joint owner
-  on the Cera RFP (CMS section). Also runs the Stokke account (Walid is
-  shadowing, not running).
+  with Walid on a live RFP (CMS section). Also runs an account Walid is
+  shadowing, not running.
 - **Chakit Arora** — SE.
 - **Roberto Butti** — SE.
 

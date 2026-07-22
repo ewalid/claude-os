@@ -2,613 +2,358 @@
 
 All notable changes Darwin makes to itself, this repo, or Walid's connected
 tools (Notion, scheduled tasks, artifacts) are logged here — newest first.
-Session-level narrative detail still lives in `memory.md`; this file is the
-short, skimmable "what changed and when" record. Update it alongside any
-`improve:` commit.
+Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
+this file is the short, skimmable, **name-free** "what changed and when" record
+that is safe to share with colleagues. Update it alongside any `improve:` commit.
+
+Convention (guardrail 6): this file is tracked in git and MUST contain zero real
+client/account names or deal figures — accounts are referred to generically
+("an RFP deal", "an FR demo account"). Colleague names (the AE/SE pod) are fine.
+
+## 2026-07-21 (repo made shareable: Gong MCP wired in conditionally, no client names in git)
+- Gong support made conditional across the call-consuming skills
+  (`call-coach`, `post-call-update`, `process-customer`) and CLAUDE.md
+  guardrail 5: if a Gong MCP connector is present in the session, pull
+  transcripts directly (discover the actual tool names at runtime — they
+  vary by connector version, never assume); if not, fall back to Walid
+  pasting transcripts, exactly as before. `darwin-setup` now tests/asks
+  for Gong alongside the other connectors. (At the time of writing, no
+  Gong MCP tools were actually resolvable in-session — the wiring is
+  forward-compatible, same pattern as storyblok-content.)
+- **Repo scrubbed of all real client/account names** so colleagues can
+  use Darwin: `memory.md` is now git-ignored (local-only, regenerated
+  fresh per person by `darwin-setup` — same model as `accounts/`), and
+  every tracked file (this CHANGELOG, HANDOFF, ROADMAP, skills, resources,
+  CLAUDE.md) was rewritten to generic account descriptors. Guardrail 6
+  tightened to make "zero real client names in git" a hard rule, not a
+  preference. (Git *history* still contains prior names — rewriting that
+  is a separate manual step, noted for Walid.)
 
 ## 2026-07-21 (improve: process-customer chat reply must lead with company brief)
-- Walid: "Never forget to add a brief about the company" — the Cera run
+- Walid: "Never forget to add a brief about the company" — a real run
   wrote a full "Who they are" section into the local brief.md, but the
   chat reply itself skipped straight to the Notion diff, so Walid had
-  to ask "what is Cera?" afterward.
+  to ask "what is this company?" afterward.
 - Fixed in `process-customer/SKILL.md` Step 5: new explicit point 2
   (chat reply must lead with the 2-4 sentence company brief before any
-  field-level diff), renumbered the rest. Applies to every future
-  `process-customer` run, not just this one.
+  field-level diff), renumbered the rest. Applies to every future run.
 
-## 2026-07-21 (process-customer: first real run on Cera)
-- Ran `process-customer` on Cera for the first time — wrote
-  `accounts/cera/brief.md` (local-only). No Gong/Salesforce extracts
-  exist (Walid confirmed: "nothing because it's an RFP") — all evidence
-  from Slack (#opportunity-cera-rfp, #help-bid-function, #se-requests,
-  DMs) and Drive (the requirements matrices + Ines's draft response).
-- Notion "Cera RFP" row: Deadline corrected 2026-07-31 → **2026-08-14**
-  (real submission deadline, evidenced in #help-bid-function; July 31
-  was wrong). Notes rewritten to reflect real progress (205-row draft
-  response already 166/205 resolved, in human-review). MEDDPICC left
-  empty — all 8 elements landed Gap/Partial, none reached Confirmed.
-- Surfaced two unresolved inconsistencies to Walid (not auto-fixed):
-  deal-value conflict (€41,666 vs ~€60,000 across two Slack sources)
-  and a possible "Coop" naming confusion in his own shorthand.
+## 2026-07-21 (process-customer: first real run)
+- Ran `process-customer` on a live RFP deal for the first time — wrote
+  its local-only `accounts/<account>/brief.md`. No Gong/Salesforce
+  extracts existed (it's an RFP) — all evidence from Slack (a
+  deal-specific channel + a bid-function channel + #se-requests + DMs)
+  and Drive (the requirements matrices + a colleague's draft response).
+- Notion row: Deadline corrected to the real submission deadline
+  (the prior date was wrong). Notes rewritten to reflect real progress
+  (large draft response already mostly resolved, in human-review).
+  MEDDPICC left empty — all 8 elements landed Gap/Partial, none
+  Confirmed (expected for a partner-mediated RFP with no direct contact).
+- Surfaced two unresolved inconsistencies to Walid rather than
+  auto-fixing (a deal-value conflict across two Slack sources, and a
+  possible naming confusion in his own shorthand).
 
 ## 2026-07-21 (accounts/ folder was leaking customer names into git history)
-- Walid asked whether the account folder scaffold was actually
-  necessary. It wasn't: only 3 of 6 real account folders even had a
-  tracked `.gitkeep` (the other two — created on demand by
-  `process-customer` — proved skills already make folders as needed,
-  no pre-seeding required). Worse, those 3 tracked `.gitkeep` files put
-  real customer names into git history via the directory path itself
-  (`accounts/cera/.gitkeep`, etc.) even though file *contents* were
-  always empty — a small but real violation of guardrail 6's
-  meta-level-only rule for anything tracked in git. Removed the three
-  customer-named paths, replaced with a single generic
-  `accounts/.gitkeep`, and tightened `.gitignore` from
-  `accounts/*/*` + `!accounts/*/.gitkeep` to `accounts/*` +
-  `!accounts/.gitkeep` so no future account folder can be committed by
-  name again.
+- Walid asked whether the account folder scaffold was necessary. It
+  wasn't: only 3 of the real account folders even had a tracked
+  `.gitkeep`, and those paths put real customer names into git history
+  via the directory name itself even though contents were empty — a
+  guardrail-6 violation. Removed the customer-named paths, replaced with
+  a single generic `accounts/.gitkeep`, and tightened `.gitignore` to
+  `accounts/*` + `!accounts/.gitkeep` so no future account folder can be
+  committed by name.
 
 ## 2026-07-21 (new: darwin-setup — portability to a new computer/account)
 - Built `darwin-setup`: the interview that rebuilds this repo for
-  whoever is actually running Darwin, not whoever it was last tuned
-  to. Wired to fire automatically — CLAUDE.md now has a "First run"
-  check at the very top ("does `memory.md` exist? if not, this is an
-  uninitialized copy") that runs `darwin-setup` before responding to
-  anything else, introduction first. Covers: who the person is, their
-  team structure (generalized — doesn't assume the AE-pod/SE-colleague
-  shape applies to a different role), which connectors are actually
-  live (tested, not assumed), where the real data lives (Notion DB,
-  Slack channel IDs — not reused from the previous account), which
-  guardrails to keep vs. change, and voice/formatting preferences.
-  Rewrites CLAUDE.md's Identity/Voice/guardrails, `resources/people.md`,
-  and resets `ROADMAP.md`/`memory.md` — doesn't merge with the
-  previous person's config.
+  whoever is actually running Darwin. Wired to fire automatically —
+  CLAUDE.md has a "First run" check at the top ("does `memory.md` exist?
+  if not, this is an uninitialized copy") that runs `darwin-setup`
+  before responding to anything else, introduction first. Covers: who
+  the person is, team structure (generalized — doesn't assume the
+  AE-pod/SE-colleague shape), which connectors are live (tested, not
+  assumed), where the real data lives (Notion DB, Slack channel IDs),
+  which guardrails to keep vs. change, voice preferences. Rewrites
+  CLAUDE.md Identity/Voice/guardrails, `resources/people.md`, and resets
+  `ROADMAP.md`/`memory.md` — doesn't merge with the previous config.
 
-## 2026-07-21 (storyblok-content: token in, blocked by sandbox network allowlist instead)
-- Walid provided a Storyblok Management API personal access token.
-  Stored gitignored at `storyblok.env` (confirmed ignored before
-  writing the token in). Test call from this Cowork sandbox to
-  `mapi.storyblok.com` was blocked by the sandbox's own network proxy
-  allowlist — not a token or connector problem anymore, a Cowork
-  sandbox network-access problem. Two ways around it documented in
-  `storyblok-content/SKILL.md`: run from Walid's own terminal (no
-  sandbox), or get `storyblok.com` added to the org's network
-  allowlist (Admin settings → Capabilities).
+## 2026-07-21 (storyblok-content: token in, blocked by sandbox network allowlist)
+- Walid provided a Storyblok Management API personal access token,
+  stored gitignored at `storyblok.env` (confirmed ignored before writing
+  it in). Test call from this Cowork sandbox to `mapi.storyblok.com` was
+  blocked by the sandbox's own network proxy allowlist — a sandbox
+  network-access problem, not a token or connector one. Two documented
+  ways around it: run from Walid's own terminal (no sandbox), or get
+  `storyblok.com` added to the org's network allowlist.
 
-## 2026-07-21 (Team Pipeline redo by SE, real RFP library found, Storyblok MCP confirmed nonexistent, pipeline scan rebuilt, Claim button removed, Slack>Notion rule added)
+## 2026-07-21 (Slack>Notion rule; Claim button removed; AE schema fixed; pipeline scan rebuilt)
 - New standing rule (CLAUDE.md guardrail 8, broadened from a
   Notion-dates-only rule): for Deals, Slack outranks Notion. Notion is
   manually-maintained and can be stale, incomplete, or structurally
-  wrong — just proven by the AE schema gap below. When they conflict,
-  Slack is evidence to fix Notion, never the reverse.
+  wrong. When they conflict, Slack is evidence to fix Notion, never the
+  reverse.
 - Dashboard: removed the one-click "Claim" button (auto-wrote to Notion)
   from Worth Claiming cards, replaced with a "View Slack thread" link —
-  Walid wants to read the actual thread himself before any action, not
-  have Darwin decide. Real example that triggered this: a request
-  looked claimable from the message text alone, but the thread showed
-  the AE explicitly saying he didn't need SE support. Same link added
-  to Team Pipeline cards for consistency. `claimDeal()` removed as
-  dead code.
+  Walid wants to read the actual thread before any action. Real trigger:
+  a request looked claimable from the message text, but the thread showed
+  the AE saying he didn't need SE support. Same link added to Team
+  Pipeline cards. `claimDeal()` removed as dead code.
 - Notion Accounts DB: the "AE" select property only had two configured
-  options ("Thibault de Maison Rouge" and "Unassigned / need
-  validation") — the rest of the AE pod (Rob Scholte, Mine Heck,
-  Kristoffer Strindevall) were never added as selectable values at
-  all. This is likely the real root cause behind an earlier "why does
-  everything show Thibault" symptom. Added the missing three as real
-  select options, then corrected one real deal's AE field from blank
-  to the AE Walid identified directly (his own words — CLAUDE.md
-  guardrail 4/5 evidence rule).
-- Pipeline scan rebuilt again, same day: Team Pipeline and Worth
-  Claiming were two separate batch-AI extractions over the whole
-  #se-requests dump; replaced with one unified 7-day scan that parses
-  each message deterministically (regex against the Slack bot's
-  regular field format — no AI needed for that part) and, only for
-  messages with a thread, runs one small scoped AI call per thread
-  asking specifically whether Chakit Arora, Roberto Butti, or Ines
-  Akrap claimed it. Routing is now binary and per-message: claimed by
-  one of those three -> Team Pipeline (grouped by whoever claimed it),
-  otherwise -> Worth Claiming. Claimed deals not yet in Notion are now
-  auto-added (Walid's own DB, edit-freely guardrail). Caught and fixed
-  mid-build via `verify_artifact`: `update_artifact` had silently
-  dropped `slack_read_thread` from the tool allowlist, so every
-  claim-check was failing before this fix — always re-verify an
-  artifact after updating it, don't assume the allowlist carried over.
-- Team Pipeline row rebuilt: filtered to deals from the AE pod only
-  (was unfiltered), grouped by Solution Engineer owner (Walid, Ines
-  Akrap, Chakit Arora, Roberto Butti, Unassigned — real Notion user
-  IDs resolved via `notion-get-users`, not guessed) instead of by AE.
-  Cards now have a dismiss (×) button, persisted via localStorage
-  (Cowork artifacts explicitly support this, unlike general Claude
-  artifacts) with a "show hidden" undo link.
-- Found a real, live, company-wide "RFP Answer Library (POC)" Notion
-  database (19 real Q&A rows, all Status "needs review") that someone
-  else already started. `rfp-answer` rewritten to use it as the
-  primary shared source (read-only — it's a cross-team resource, not
-  Walid's own Notion) layered under Walid's own local library (still
-  empty, still highest-trust once seeded) and above four newly
-  -sanctioned research sources: Storyblok public docs, the wider
-  company Notion, Slack search, Google Drive. Every answer now carries
-  an explicit trust-level tag (validated / needs review / research /
-  needs SME input) — never smoothed over.
-- Searched the MCP registry directly for a Storyblok connector — none
-  exists, in this session or at all. `storyblok-content` updated to
-  say so plainly rather than "not connected yet."
+  options — most of the AE pod (Rob Scholte, Mine Heck, Kristoffer
+  Strindevall) were never selectable values at all. Likely root cause of
+  an earlier "why does everything show one AE" symptom. Added the missing
+  three, then corrected one deal's AE from blank to the value Walid
+  identified directly.
+- Pipeline scan rebuilt: Team Pipeline and Worth Claiming were two
+  separate batch-AI extractions over the whole #se-requests dump;
+  replaced with one unified 7-day scan that parses each message
+  deterministically (regex against the Slack bot's regular field format)
+  and, only for messages with a thread, runs one small scoped AI call per
+  thread asking whether Chakit/Roberto/Ines claimed it. Routing is binary
+  per-message: claimed by one of those three -> Team Pipeline, else ->
+  Worth Claiming. Claimed-but-untracked deals auto-add to Notion. Caught
+  mid-build via `verify_artifact`: `update_artifact` had silently dropped
+  `slack_read_thread` from the tool allowlist — always re-verify after
+  updating an artifact.
+- Team Pipeline row rebuilt: filtered to the AE pod, grouped by SE owner
+  (real Notion user IDs resolved via `notion-get-users`) with dismiss (×)
+  buttons persisted via localStorage.
+- Found a real, live, company-wide "RFP Answer Library (POC)" Notion DB
+  (unofficial — a coworker built it) and rewrote `rfp-answer` to use it
+  as a read-only source, ranked below official Storyblok docs, above
+  general research; every answer carries a trust-level tag.
+- Confirmed via the MCP registry there is no Storyblok connector at all;
+  `storyblok-content` updated to say so plainly.
+
+## 2026-07-21 (two corrections: RFP trust order, Team Pipeline silent drop)
+- `rfp-answer`: the shared POC library is unofficial — official Storyblok
+  docs now rank above it, and if they disagree the docs win.
+- Team Pipeline was silently dropping any deal with a blank/non-pod AE
+  because the SQL filter excluded it. Fixed: fetch all deals, filter in
+  JS, flag excluded deals by name + actual AE value in a banner.
+
+## 2026-07-21 (Team Pipeline switched from Notion to Slack #se-requests)
+- Per Walid: Team Pipeline no longer reads the Notion Accounts DB (too
+  sparse) — it scans #se-requests directly, reads each request's thread
+  to determine who claimed it, and groups by claimer.
+- Re-added a `colorForName` helper accidentally deleted in an earlier edit.
+
+## 2026-07-21 (fixed dashboard "still loading" hang)
+- Root cause: a 30-day Slack scan + sequential per-thread claim-checks
+  could take minutes, and a transient Claude API 529 overload was
+  silently swallowed as "zero results." Fixed: window trimmed, thread
+  checks parallelized and capped, and a `looksLikeApiError()` check now
+  surfaces AI-call failures as a visible banner. (Later superseded by the
+  full pipeline-scan rebuild above.)
 
 ## 2026-07-21 (Phase 4 finished; Phase 5 drafted and honestly flagged as blocked)
 - `todo-sync` skill built: reconciles personal action items onto the
-  single real "✅ To Do" checklist block on Walid's Notion space page.
+  single "✅ To Do" checklist block on Walid's Notion space page.
   Deliberately doesn't touch account-specific next-steps.
-- Dashboard artifact gained a "Team Pipeline" row (all deals, grouped
-  by AE, unfiltered) alongside the renamed "Walid's Pipeline" row.
-- Worth Claiming widened from 24h to 7 days (with pagination), and now
-  reads each candidate's Slack thread to filter out requests already
-  claimed by another SE instead of trusting the raw message text alone.
+- Dashboard gained a "Team Pipeline" row alongside the renamed "Walid's
+  Pipeline" row.
+- Worth Claiming widened from 24h to 7 days, and now reads each
+  candidate's Slack thread to filter out already-claimed requests.
 - `rfp-answer` mechanism drafted (RETRIEVE + HARVEST against a markdown
-  library under `resources/rfp-library/`, explicitly not a vector DB —
-  documented why). Not live: the library is still empty, blocked on
-  Walid seeding real content. `won-lost-notes.md` gitignored + untracked
-  (guardrail 10 — it will name real deals/customers).
+  library, explicitly not a vector DB — documented why). Not live: the
+  library is empty. `won-lost-notes.md` gitignored + untracked.
 - `storyblok-content` mechanism drafted (dry-run → confirm → write →
-  verify). Blocked on an execution path — no Storyblok MCP connector
-  in this session. Flagged three options, including a same-session
-  bash/curl path against Storyblok's Management API if Walid has a
-  personal access token.
-- Notion "Dashboard" (chart view) renamed "📊 Analytics (charts)" and
-  "Pipeline board" renamed + enriched to "🗂️ Sales Pipeline (Board)"
-  after Walid called the existing Notion dashboard "shit" — a
-  `dashboard`-type Notion view can only hold chart/table widgets, not
-  a Kanban board, so the real fix lived in the board view, not the
-  dashboard view. Also fixed "By status" (was mislabeled — groups by
-  AE, not Stage) → "By AE".
+  verify). Blocked on an execution path.
+- Notion views renamed for clarity: chart view → "📊 Analytics (charts)",
+  board view enriched + renamed "🗂️ Sales Pipeline (Board)", "By status"
+  → "By AE" (it groups by AE, not Stage).
 
 ## 2026-07-20 (Kanban rebuild — Cowork artifact + Notion board view)
-- `walid-deals-dashboard` artifact rebuilt as an actual Kanban board:
-  deals grouped into columns by real Notion Stage values (Not started /
-  Discovery / Demo / Deep Dive-Demo / Proposal / In progress /
-  Contracting / Done / Closed Won). Any owned deal with no Stage set is
-  flagged in an error banner rather than silently dropped.
-- Notion "Pipeline board" view renamed to "🗂️ Sales Pipeline (Board)"
-  and enriched with real card properties (Priority, Type, AE, Next
-  call, Deadline) — previously showed only the account name.
-- Notion "Dashboard" (chart-based) view renamed to "📊 Analytics
-  (charts)" to stop it being confused with the new card board — a
-  `dashboard`-type Notion view can only hold chart/table widgets, not a
-  Kanban board, so the two stay separate views.
-- Notion "By status" view renamed to "By AE" — it groups by AE, not
-  Stage; the old name was actively misleading.
+- `walid-deals-dashboard` rebuilt as an actual Kanban board: deals
+  grouped into columns by real Notion Stage values. Any owned deal with
+  no Stage set is flagged in a banner rather than silently dropped.
+- Notion board/analytics/By-AE views renamed and enriched (see above).
 
 ## 2026-07-20 (deals dashboard artifact: 24h Slack window + visual redesign)
-- `walid-deals-dashboard` artifact: "Worth Claiming" Slack scan now windowed
-  to the last 24h (`oldest` param) instead of a flat 40-message pull.
-- Same artifact: full visual redesign — gradient hero with live stat tiles,
-  priority-colored card accents, pill-style tags, hover/shadow polish.
-  Functional behavior unchanged (Notion write on Claim, Slack reply is
-  copy-only, never auto-sent).
+- "Worth Claiming" Slack scan windowed to the last 24h instead of a flat
+  message-count pull.
+- Full visual redesign — gradient hero with stat tiles, priority-colored
+  card accents, pill tags. Behavior unchanged (Notion write on Claim,
+  Slack reply copy-only, never auto-sent).
 
-## 2026-07-20 (build-deck first run: Jouet club deck; gitignore gap fixed)
-
-- **First real `build-deck` run** — French-language demo deck for Joué
-  Club / La Grande Récré, adapted from the Cellbes AB example, saved to
-  `accounts/jouet-club/2026-07-20_Demo_JouetClub.pptx`. 3 demo stations
-  picked from `style-guide.md`'s real theme vocabulary (not invented),
-  translated to French; leftover scaffolding slides excluded.
-- **`improve: broaden accounts/ gitignore to all files, not just .md`**
-  — `.gitignore` rule `accounts/*/*.md` didn't cover the new `.pptx`
-  deck. Changed to `accounts/*/*` + `!accounts/*/.gitkeep` so the whole
-  per-account directory stays local-only, matching CLAUDE.md guardrail
-  6's actual intent.
+## 2026-07-20 (build-deck first run: FR demo deck; gitignore gap fixed)
+- **First real `build-deck` run** — a French-language demo deck for an FR
+  retail account, adapted from the closest example deck, saved local-only.
+  3 demo stations picked from `style-guide.md`'s real theme vocabulary
+  (not invented), translated to French; scaffolding slides excluded.
+- **`improve: broaden accounts/ gitignore to all files, not just .md`** —
+  the `.gitignore` rule didn't cover a new `.pptx` deck. Changed so the
+  whole per-account directory stays local-only.
 
 ## 2026-07-20 (feat: deals dashboard artifact — Notion + Slack, claim-in-one-click)
-
 - New Cowork artifact `walid-deals-dashboard`: "My Deals" (live Notion
-  Accounts DB query) + "Worth Claiming" (Slack #se-requests scanned and
-  AI-triaged for unclaimed AE-pod opportunities). Claim button creates
-  the Notion row directly; shows a copy-ready Slack reply rather than
-  auto-sending (guardrail 2). Explicitly NOT a routine — an on-demand
-  tool, per Walid's own distinction.
+  query) + "Worth Claiming" (Slack #se-requests AI-triaged for unclaimed
+  AE-pod opportunities). Claim button created the Notion row and showed a
+  copy-ready Slack reply rather than auto-sending. (Later replaced by the
+  thread-link approach.)
 
 ## 2026-07-20 (feat: weekly-review built; weekly + monthly routines scheduled; no-artifact preference)
+- **Standing preference**: no artifacts from routines — plain chat text.
+  `daily-briefing/SKILL.md` docs fixed to match.
+- **New skill: `weekly-review`** — pipeline/account-health pulse, distinct
+  from `monthly-review`'s self-audit scope.
+- **Both `weekly-review` and `monthly-review` scheduled** (Mondays 08:30,
+  1st of month 08:00, Paris time).
 
-- **Standing preference**: no artifacts from routines — plain chat
-  text, blank line between sections. `daily-briefing/SKILL.md` fixed
-  (its scheduled run was already compliant; its docs weren't).
-- **New skill: `weekly-review`** — pipeline/account-health pulse,
-  distinct from `monthly-review`'s self-audit scope.
-- **Both `weekly-review` and `monthly-review` are now real scheduled
-  tasks** (`darwin-weekly-review` Mondays 08:30, `darwin-monthly-review`
-  1st of month 08:00, Paris time) — not just skill files.
-
-## 2026-07-20 (improve: root-cause fix for the recurring gitignore pattern, new monthly-review skill, demo-setup reframed)
-
-- **New CLAUDE.md guardrail 10**: check `.gitignore` at file creation
-  for anything under `resources/`/`accounts/` that could hold real
-  customer/personal data — fixes the root cause behind three separate
-  same-day incidents (`accounts/*/*.md`, a `.pptx`, `coaching-log.md`).
+## 2026-07-20 (improve: root-cause fix for the recurring gitignore pattern; monthly-review; demo-setup reframed)
+- **New CLAUDE.md guardrail 10**: `.gitignore` check at file creation for
+  anything under `resources/`/`accounts/` that could hold real customer/
+  personal data — fixes the root cause behind three same-day incidents.
 - **New CLAUDE.md Voice rule**: bullets vs. prose, generalized from the
-  `call-coach` fix so the preference doesn't need relearning per skill.
-- **New skill: `monthly-review`** — formalizes pattern-mining across
-  `memory.md`/`CHANGELOG.md` (previously only theorized in
-  `darwin-improve`'s "Compounding" section, never actually built).
-- **`demo-setup/SKILL.md` + `ROADMAP.md` reframed**: dropped the
-  "execution-blocked" framing entirely — the written setup script is
-  the deliverable, connector execution is a future bonus, not a
-  dependency. Correction from Walid.
+  `call-coach` fix.
+- **New skill: `monthly-review`** — pattern-mining across memory/CHANGELOG.
+- **`demo-setup`/`ROADMAP` reframed**: the written setup script is the
+  deliverable, connector execution is a future bonus, not a dependency.
 
-## 2026-07-20 (post-call-update: Implid backfilled from real transcript)
-
-- Notion Debriefs DB: new row for Implid's July 9 call. Notion Accounts
-  DB: MEDDPICC + Notes refreshed with what the call itself confirmed.
-  `accounts/implid/debriefs.md` created (local-only). Full evidence
-  stays in Notion/local file per guardrail 6 — not repeated here.
+## 2026-07-20 (post-call-update: a real deal backfilled from a transcript)
+- Notion Debriefs DB: new row for a real call. Accounts DB MEDDPICC +
+  Notes refreshed with what the call confirmed. The account's local-only
+  `debriefs.md` created. Full evidence stays local per guardrail 6.
 
 ## 2026-07-20 (improve: call-coach chat output always mirrors bulleted log format)
-
 - **`call-coach/SKILL.md`** new step 7: the chat reply always uses the
-  same two-bullet-list structure ("did well" / "to improve") as the
-  `coaching-log.md` entry — first real run (Implid) went out as prose
-  in chat despite the log entry already being bulleted.
+  same two-bullet-list structure as the `coaching-log.md` entry — the
+  first real run went out as prose in chat despite the log being bulleted.
 
 ## 2026-07-20 (improve: untrack coaching-log.md from git)
+- **`resources/coaching-log.md`** was tracked since the initial scaffold;
+  once `call-coach` wrote a real entry it would have pushed customer
+  quotes to GitHub. Added to `.gitignore`, untracked via `git rm
+  --cached`. Content on disk unaffected.
 
-- **`resources/coaching-log.md`** was tracked in git since the initial
-  scaffold (as an empty stub) — once `call-coach` wrote a real entry
-  into it (Implid), that would have pushed customer quotes/names to
-  GitHub, the same risk guardrail 6 exists to prevent for
-  `accounts/<customer>/`. Added to `.gitignore`, untracked via
-  `git rm --cached` before any commit went out. Content on disk
-  unaffected.
-
-## 2026-07-20 (improve: darwin-improve triggers more reliably, not just from memory)
-
-- **CLAUDE.md "How I improve"** rewritten: concrete trigger signals
-  (correction, stated preference, self-caught mistake, a reflection
-  question whose honest answer reveals a gap) instead of relying on
-  the literal "Darwin, learn this" phrase; explicit instruction to
-  reread `darwin-improve/SKILL.md` before acting instead of running it
-  from memory; no exceptions to the `improve:` commit prefix.
-- **`darwin-improve/SKILL.md`**: new step 1 ("notice the trigger — no
-  auto-routing exists, I have to catch it myself"), step 2 now says to
-  reread the file's own steps before executing.
-- Root cause being fixed: this session alone had a real gap between
-  "applying the substance" and "actually running the named procedure
-  correctly" (two commits went out as `fix:` instead of `improve:`).
+## 2026-07-20 (improve: darwin-improve triggers more reliably)
+- **CLAUDE.md "How I improve"** rewritten with concrete trigger signals
+  (correction, stated preference, self-caught mistake, reflection
+  question) instead of relying on the literal "Darwin, learn this"
+  phrase; explicit instruction to reread the skill before acting; no
+  exceptions to the `improve:` commit prefix.
+- **`darwin-improve/SKILL.md`**: new step 1 (notice the trigger), step 2
+  rereads the file's own steps before executing.
 
 ## 2026-07-20 (improve: permanent guard against the overwrite mistake recurring)
-
-- **New CLAUDE.md guardrail 9**: before any bash/python write to a
-  path the Edit tool refuses (currently `.claude/skills/`), manually
-  `cat`/`git log --oneline -- <path>` first — Edit enforces
-  read-before-write automatically, bash/python doesn't.
-- `darwin-improve/SKILL.md` step 3 now documents this concrete failure
-  mode and procedure directly, with the real example that caused it.
-- Also self-noting: this is the first fix today actually committed
-  with the skill's own specified `improve:` prefix — the two before it
-  (headshots, the restore itself) went out as `fix:` instead.
+- **New CLAUDE.md guardrail 9**: before any bash/python write to a path
+  the Edit tool refuses (currently `.claude/skills/`), manually
+  `cat`/`git log --oneline -- <path>` first.
+- `darwin-improve/SKILL.md` step 3 documents this failure mode directly.
 
 ## 2026-07-20 (fix: restored overwritten demo-script/demo-setup content)
-
-- **Self-caught mistake**: Session 14's "formalize demo-script/demo-
-  setup as skills" actually overwrote real pre-existing Phase 3
-  content (commit `80ee6e8`, 2026-07-15) without reading it first —
-  lost the battle-cards-sourced objections section + verify-before-call
-  checklist in `demo-script`, and replaced `demo-setup`'s guarded
-  dry-run-preview-OK-execute-verify automation identity (built around
-  CLAUDE.md guardrail 3) with a plain manual checklist.
-- **`improve: merge restored content with Session 14's real
-  improvement`** — both skills now have their original
-  structure/identity back, plus the one thing Session 14 actually got
-  right: explicit confirm-before-finalizing gates.
-- Open: the Jouet club account's `demo-script.md`/`demo-setup.md`
-  (delivered in Session 14) don't match the restored structure —
-  not regenerated yet, Walid's call.
+- **Self-caught mistake**: an earlier "formalize as skills" pass
+  overwrote real pre-existing Phase 3 content without reading it first.
+  Restored and merged with the one thing the pass got right (explicit
+  confirm-before-finalizing gates).
 
 ## 2026-07-20 (fix: title-slide AE/SE headshots; new photo resource)
-
-- **New resource**: `resources/AEs & SEs/<Full Name>.jpeg` — headshots
-  for use on deck title slides. Walid added his own; others still
-  missing.
-- **Bug fix**: all 5 example decks carry 2 headshot PICTURE shapes on
-  slide 1 (AE + SE), invisible to a text-only shape scan. The Jouet
-  club deck had shipped with the original Cellbes AE/SE's photos still
-  in place. Fixed Walid's photo in place; Thibault's is still wrong
-  (no headshot on file for him yet) — flagged, not silently left.
-- `style-guide.md` and `build-deck/SKILL.md` updated to call out the
-  headshot swap explicitly going forward.
+- **New resource**: `resources/AEs & SEs/<Full Name>.jpeg` — headshots for
+  deck title slides (gitignored). Walid added his own; others missing.
+- **Bug fix**: all example decks carry 2 headshot PICTURE shapes on slide
+  1, invisible to a text-only scan. The first FR deck had shipped with the
+  source deck's original photos. `style-guide.md` + `build-deck/SKILL.md`
+  updated to call out the headshot swap.
 
 ## 2026-07-20 (improve: confirmation checkpoints added to demo-prep skills)
+- **`build-deck`** confirms the demo-station shortlist before building.
+- **New skills `demo-script`/`demo-setup`** formalized from the first real
+  runs, each with a confirmation checkpoint before finalizing.
 
-- **`improve: build-deck confirms demo station shortlist before building`**
-  — added an explicit gate to `build-deck/SKILL.md`, mirroring the
-  existing Commercial-section confirmation.
-- **New skills: `demo-script/SKILL.md`, `demo-setup/SKILL.md`** —
-  formalized from this session's first real runs (Jouet club). Each
-  has a built-in confirmation checkpoint before finalizing (script:
-  confirm outline/framing; setup: flag space-structure decisions).
-- Reasoning logged in `memory.md` Session 14: fix applied at the skill
-  level, not CLAUDE.md, to avoid contradicting the existing Notion
-  guardrail (no proposal step there — that's evidence-based, this is
-  judgment-based).
-
-## 2026-07-20 (Gmail added to daily-briefing; Implid + Winfarm Group updated from email; Akeneo deadline confirmed)
-
-- **New connector wired in: Gmail** (walid.elmselmi@storyblok.com).
-  `daily-briefing/SKILL.md` now scans the inbox as a fourth source
-  alongside Calendar/Notion/Slack, same last-working-day window as
-  Slack, read-only (CLAUDE.md guardrail 1 — never draft/send — restated
-  in the skill itself). Output format gains a "📧 EMAIL" section. Not
-  yet wired into the live `darwin-morning-brief` artifact.
-- **Akeneo RFP**: Walid confirmed the submission deadline — **2026-07-31**
-  (same date as Cera RFP). Set on the Notion row.
-- **Implid**: Stage "Proposal" → **"Contracting"**, AE confirmed Thibault
-  de Maison Rouge, Deadline cleared (the old date was for sending the
-  proposal, which is done — deal is now signature-pending, not overdue).
-  Real detail in `accounts/implid/notes.md` (local-only).
-- **Winfarm Group**: previously a near-empty stub row. Email surfaced
-  Walid as the confirmed SE with a custom demo on 2026-07-29. Notion row
-  updated: AE Thibault de Maison Rouge, Owner(s) Walid, Stage "Demo",
-  Next call 2026-07-29. Real detail in `accounts/winfarm-group/notes.md`
-  (local-only).
+## 2026-07-20 (Gmail added to daily-briefing; deals updated from email)
+- **New connector wired in: Gmail** — `daily-briefing/SKILL.md` scans the
+  inbox as a fourth source, read-only (guardrail 1). New "📧 EMAIL" section.
+- Several live deals updated from email evidence (deadlines confirmed, a
+  stage moved to Contracting, a stub-row account fleshed out with a
+  confirmed SE + demo date). Real detail stays in local-only account files.
 
 ## 2026-07-20 (process-customer: renamed Phase A-E to explicit step names)
+- Phases renamed for clarity (Self-research / Ask-hard-stop / Analyze /
+  Write / Update-and-announce). No behavior change.
 
-- **`process-customer/SKILL.md` phases renamed** for clarity: Phase A → Step 1 (Self-research), B → Step 2 (Ask Walid, hard stop), C → Step 3 (Analyze), D → Step 4 (Write the brief), E → Step 5 (Update Notion and announce). No behavior change, just clearer naming.
-
-## 2026-07-20 (Akeneo RFP claimed — Notion row from a parallel session)
-
-- **New Notion row: "Akeneo RFP"** — created in a different session
-  (same repo) after Walid claimed it live off a briefing flag. Repurposed
-  a blank template stub row. Deadline **2026-07-31** — same date as Cera
-  RFP, plus Implid still overdue since July 17 — three accounts stacking
-  up end-of-month. Real evidence moved to `accounts/akeneo/notes.md`
-  (local-only); that session's memory.md entry had customer specifics
-  inline, trimmed retroactively to meta-level here.
+## 2026-07-20 (an RFP deal claimed — Notion row from a parallel session)
+- A new RFP deal was claimed live off a briefing flag; its Notion row was
+  created in a different session (repurposing a blank stub). Real evidence
+  moved to the account's local-only notes; that session's memory entry had
+  inline customer specifics, trimmed to meta-level.
 
 ## 2026-07-20 (process-customer: added a "Demo — what to show" section)
+- Template gains a "Demo — what to show" section tying concrete use cases
+  to real pain points/MEDDPICC gaps (not a generic feature tour). Applied
+  to the first FR brief (local-only) and its Notion page.
 
-- **`process-customer/SKILL.md` template gains a "Demo — what to show"
-  section** in Phase D, between "Their priorities" and "Stakeholders" —
-  concrete use cases tied explicitly to real pain points/decision
-  criteria/MEDDPICC gaps (not a generic feature tour), split by occasion
-  when there are calls at different depths, with mock-data caveats
-  flagged rather than assumed. Applied to the Jouet club brief
-  (local-only) and pasted into its Notion page too.
-
-## 2026-07-20 (process-customer: first real run + quality upgrade, Jouet club)
-
-- **First real `process-customer` run** — `accounts/jouet-club/brief.md`
-  written from real Salesforce + Gong extracts, Notion row rewritten
-  (Stage, Notes, MEDDPICC). Customer specifics live only in that
-  local-only file — not detailed here, per the guardrail 6 change below.
-- **Policy fix (Walid's correction): customer data must be git-ignored,
-  not just under-shared in chat.** `accounts/jouet-club/brief.md` was
-  untracked before ever being pushed; `accounts/*/*.md` added to
-  `.gitignore`. CLAUDE.md guardrail 6 updated to codify: real evidence
-  lives only in `accounts/<customer>/` (local-only), tracked files
-  (this one included) stay meta-level.
-- **`process-customer/SKILL.md` upgraded**: Phase B now explicitly asks
-  for Salesforce paste + Gong paste + a customer-specific Slack channel
-  ID (three concrete asks, not "whatever you have"). Phase D's brief
-  template restructured: prospect intro up front, an explicit meeting-
-  attendees section, a much bigger MEDDPICC section (what wins/loses the
-  deal + Storyblok's current positioning, not just tags), and a concrete
-  next-steps action checklist (deck/demo-script/space setup) instead of a
-  vague verify-before-call list.
-- **Notion — "Pipeline board" view added** on the Accounts DB (Kanban
-  grouped by Stage), alongside the existing table. Jouet club's own
-  Notion page now also has the (upgraded) brief pasted into its page
-  content plus a next-steps checklist, not just the property fields.
+## 2026-07-20 (process-customer: first real run + quality upgrade)
+- **First real `process-customer` run** — an account brief written from
+  real Salesforce + Gong extracts, Notion row rewritten. Customer
+  specifics live only in the local-only file.
+- **Policy fix (Walid's correction): customer data must be git-ignored.**
+  `accounts/*/*.md` added to `.gitignore`; guardrail 6 codified.
+- **`process-customer/SKILL.md` upgraded**: Step 2 asks for Salesforce +
+  Gong + a deal-specific Slack channel ID; Step 4's brief template
+  restructured (prospect intro, attendees, bigger MEDDPICC, concrete
+  next-steps checklist).
+- **Notion — "Pipeline board" view added** (Kanban by Stage); the FR
+  account's Notion page got the brief + checklist pasted in.
 
 ## 2026-07-20 (account-switch recovery: git, scheduler, artifact, GitHub connector)
-
-- **Git repo reconciled with the real GitHub history.** `~/dev/claude-os`
-  had no local `.git` despite this file/`memory.md` claiming a pushed
-  repo — turned out the remote (`ewalid/claude-os`, branch `main`, 11
-  commits) is real, just orphaned from a different Claude account on this
-  same Mac. Linked local `main` to `origin/main` via `git reset --soft`
-  after clearing a stale `HEAD.lock` the sandbox couldn't self-delete
-  (fixed with the `allow_cowork_file_delete` permission tool). Restored
-  `README.md` from origin, took origin's slightly newer wording for two
-  `memory.md`/`CHANGELOG.md` recap bullets, and — per Walid's decision —
-  gitignored `resources/deck-examples/*.pptx` (~120MB, kept local-only,
-  never pushed). Committed as `7f611e5`, one commit ahead of `origin/main`,
-  pending push once the GitHub connector's tools are confirmed reachable.
-- **Scheduled task and live artifact recreated** under this Claude account
-  — both existed for real under a different account on the same machine
-  (confirmed via `~/Claude/Scheduled` existing as a protected folder, and
-  Cowork refusing to reuse the `darwin-daily-briefing` artifact id) but
-  were invisible/unusable from this login. New scheduled task:
-  `darwin-daily-briefing` (weekdays ~9am Paris). New artifact id (the old
-  one is locked): `darwin-morning-brief` — verified live against Calendar,
-  the Notion Accounts DB, and both Slack channels. Updated
-  `daily-briefing/SKILL.md` to point at the new id.
-- **GitHub MCP connector connected** (`https://api.githubcopilot.com/mcp/`,
-  OAuth, no PAT) via Settings → Connectors — shows Connected, but tools
-  hadn't loaded into the running session yet as of this entry (known
-  Cowork limitation: needs a fresh session). Confirmed no GitHub MCP tool
-  exists anywhere else in this workspace.
+- **Git repo reconciled with the real GitHub history** (`ewalid/claude-os`,
+  branch `main`) after the local repo was orphaned from a different Claude
+  account on the same Mac. Restored `README.md`, gitignored the example
+  decks (~120MB, local-only).
+- **Scheduled task and live artifact recreated** under this account.
+- **GitHub MCP connector connected** (OAuth); tools load on a fresh session.
 
 ## 2026-07-15 (process-customer: full-row rewrite)
-
 - **`process-customer` now rewrites the ENTIRE Notion Accounts DB row**
-  (Stage, Priority, Notes, AE, Next call, Deadline, MEDDPICC), not just
-  MEDDPICC — from real Gong/Salesforce/Slack evidence Walid pastes in.
-  Walid's own instruction: his manual notes aren't the source of truth,
-  the agent's analysis of real evidence is. Removed the "propose diff,
-  wait for OK" gate for Stage/Priority/AE/dates and the downgrade-gate
-  on MEDDPICC — all of it now writes directly and gets announced after
-  the fact (old value → new value → evidence), per CLAUDE.md guardrail
-  4, which already granted free Notion editing; the skill had been
-  over-restricting itself relative to that standing rule. Clarified
-  guardrail 4 itself to spell out "the whole row, not just one column."
-  The only limits that still apply: never write a field with no real
-  evidence behind it (stays as-is / need validation), and never touch
+  (Stage, Priority, Notes, AE, Next call, Deadline, MEDDPICC) from real
+  Gong/Salesforce/Slack evidence — not just MEDDPICC. Removed the
+  propose-diff-wait-for-OK gate per guardrail 4; writes directly and
+  announces after. Never writes an unevidenced field, never touches
   human-only columns.
 
 ## 2026-07-15 (process-customer upgrade)
-
-- **`process-customer` now does a real MEDDPICC analysis and writes it
-  to Notion.** New Phase C: works through all 8 MEDDPICC elements
-  against whatever Salesforce/Gong extracts Walid pastes in (plus
-  Slack/Debriefs/calendar context), tagging each Confirmed (quoted
-  evidence + source) / Partial (signal but incomplete) / Gap (nothing).
-  Only Confirmed elements get written to the Notion MEDDPICC
-  multi-select — done automatically per CLAUDE.md guardrail 4 (edit
-  Notion freely, announce at the end), except a *downgrade* of a
-  previously-confirmed element, which still needs Walid's OK first.
-  The brief's MEDDPICC section now shows the full picture (Confirmed/
-  Partial/Gap for all 8), not just a checklist of what's in Notion.
+- **`process-customer` now does a real MEDDPICC analysis** against pasted
+  extracts, tagging each of the 8 elements Confirmed/Partial/Gap; only
+  Confirmed elements write to Notion (a downgrade still needs Walid's OK).
 
 ## 2026-07-15
-
 - **Notion — Accounts DB restructured.** Split the ambiguous "Due date"
-  property (kept as "Due date (legacy)") into explicit **Next call** and
-  **Deadline** date properties. Added an **AE** select property (Thibault
-  de Maison Rouge, Rob Scholte, Mine Heck, Kristoffer Strindevall,
-  Unassigned/need validation) and a **MEDDPICC** multi-select property
-  (Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper
-  Process, Identify Pain, Champion, Competition) for deal qualification
-  tracking. Populated the 3 live rows: Jouet club → Next call 2026-07-21,
-  AE Thibault de Maison Rouge; Implid → Deadline 2026-07-17; Cera RFP →
-  Deadline 2026-07-31 (Implid/Cera AE left unassigned — not confirmed by
-  any source, flagged need-validation rather than guessed).
-- **Notion — new views added** on the Accounts DB: "This week", "Demos
-  upcoming" (filtered to Type=Demo, sorted by Next call), "Overdue"
-  (sorted by Deadline), and a "Dashboard" view tab (created, but Notion's
-  CHART configuration DSL rejected every syntax tried via the API this
-  session — the tab exists empty; charts still need to be added by hand
-  in the Notion UI, or scripted again once the DSL issue is understood).
-- **Notion — new "📞 Debriefs" database** created and linked inline on
-  Walid's space, with a relation back to Accounts. Empty for now — will
-  be populated by the future `post-call-update` skill (Phase 2).
-- **daily-briefing artifact updated** to read the new Next call/Deadline/
-  AE/MEDDPICC fields directly instead of guessing from one ambiguous
-  date field, and to surface AE + MEDDPICC status on each account card.
-- **daily-briefing became a live Cowork artifact** (`darwin-daily-briefing`)
-  instead of chat text — pulls Calendar/Notion/Slack fresh on every open,
-  uses a Haiku pass (`askClaude`) to classify call-vs-deadline and triage
-  Slack into needs-reply / worth-claiming.
-- **daily-briefing scheduled** via Cowork's native scheduler (task
-  `darwin-daily-briefing`, weekdays 9:00am Paris) — n8n no longer needed
-  for this job.
-- **Repo created**: private GitHub repo `ewalid/claude-os`, scaffolded
-  from HANDOFF.md — CLAUDE.md, ROADMAP.md, `.claude/skills/{daily-
-  briefing,process-customer}`, `resources/`, `accounts/`.
+  (kept as legacy) into **Next call** and **Deadline**; added **AE** select
+  and **MEDDPICC** multi-select properties. Populated the live rows'
+  dates; AEs left unassigned where no source confirmed them.
+- **Notion — new views**: "This week", "Demos upcoming", "Overdue", and a
+  "Dashboard" tab (charts couldn't be scripted via the API — added by hand).
+- **Notion — new "📞 Debriefs" database** created, related back to Accounts.
+- **daily-briefing** updated to read the new fields; became a live Cowork
+  artifact and was scheduled (weekdays 9am Paris).
+- **Repo created**: private GitHub repo, scaffolded from HANDOFF.md.
 
 ## 2026-07-15 (later same day)
-
-- **People model corrected**: `resources/people.md` now distinguishes
-  the AE pod from SE colleagues (Chakit Arora, Roberto Butti, Ines
-  Akrap) and Walid's manager (Matthew Alberts). Wired into the
-  `darwin-daily-briefing` artifact's Slack triage prompt and
-  `daily-briefing/SKILL.md` so an SE peer's reply/claim is never
-  mistaken for an unclaimed AE opportunity.
-- **Slack scan window widened**: from a flat 25-message cap to "start
-  of the last working day through now" (a Monday run also covers
-  Friday + the weekend). Applied in the artifact and documented in
-  `daily-briefing/SKILL.md`.
-- **Deck format decided**: `resources/deck-examples/` will hold .pptx
-  exports from Google Slides, not .odp — see `style-guide.md`.
+- **People model corrected**: `resources/people.md` distinguishes the AE
+  pod from SE colleagues (Chakit Arora, Roberto Butti, Ines Akrap) and
+  Walid's manager (Matthew Alberts). Wired into the artifact's Slack triage.
+- **Slack scan window widened** to "start of the last working day through
+  now".
+- **Deck format decided**: .pptx exports, not .odp.
 
 ## 2026-07-15 (Phase 2)
-
-- **`darwin-improve` skill drafted** — formalizes CLAUDE.md's "how I
-  improve" loop into a concrete procedure: identify friction ->
-  classify (CLAUDE.md / a skill's SKILL.md / resources/ / accounts/ /
-  a live artifact) -> apply everywhere it touches in one pass -> commit
-  as `improve: ...` -> log in CHANGELOG.md -> update memory.md. Uses
-  today's people-model correction as its worked example.
-- **`post-call-update` skill drafted** — trigger "debrief [account]":
-  writes a new row to the Debriefs DB, updates the Accounts DB row's
-  Stage/Next call/Deadline/MEDDPICC, appends to
-  `accounts/<customer>/debriefs.md`, updates memory.md. Never fabricates
-  outcomes — asks Walid if his trigger message doesn't already state
-  what happened.
-- **`call-coach` skill drafted** — coaches from a pasted Gong transcript
-  or notes (Gong not connected, never claims otherwise): 3-5 things
-  done well + 3-5 to improve, each quoting an actual moment, critiqued
-  against the call's stated goal (from `accounts/<customer>/brief.md`),
-  one focus for next call. Feeds private `resources/coaching-log.md` —
-  never surfaced anywhere customer-facing.
-- **Phase 2 of ROADMAP.md now complete** (process-customer, call-coach,
-  post-call-update, darwin-improve all drafted). Phase 3 (demo pack) is
-  next, but blocked on Storyblok MCP reachability and example decks in
-  `resources/deck-examples/`.
+- **`darwin-improve`, `post-call-update`, `call-coach` skills drafted.**
+  Phase 2 complete. Phase 3 next, blocked on Storyblok MCP + example decks.
 
 ## 2026-07-15 (Phase 3)
-
-- **`resources/deck-examples/` populated** — Walid dropped 5 real demo
-  decks (Stokke, fashioncheque, Payabl, Cellbes AB, Orange Cyberdefense).
-  Reverse-engineered the shared template across all 5 and documented it
-  in `style-guide.md`: title → "What we know so far" discovery recap →
-  themed demo-stations overview → per-station transition/blank-Demo/
-  key-takeaways triptych → optional Technical Topics → optional
-  commercial/pricing section → Thank You close.
-- **`build-deck` skill drafted** — adapts the closest-fitting example
-  deck per account brief; never invents a slide type outside the
-  documented template; demo slides always stay blank (that's
-  `demo-script`'s job, in a separate doc).
-- **`demo-script` skill drafted** — Tell-Show-Tell per demo station,
-  objections sourced from `resources/battle-cards/` (currently empty —
-  flagged), verify-before-call checklist. Chains off `build-deck` and
-  the account brief.
-- **`demo-setup` skill drafted but blocked** — fully specced (dry-run
-  preview → OK → write → verify, per CLAUDE.md guardrail 3), but the
-  Storyblok MCP connector is still absent from this Cowork session as
-  of 2026-07-15 (re-verified, same result as the original HANDOFF.md
-  flag). Will not run live until that connector appears.
-- **Phase 3 of ROADMAP.md is now mostly complete** — only `demo-setup`'s
-  live execution remains blocked on the Storyblok connector. Phase 4
-  (`weekly-review`, `monthly-review`, `todo-sync`, `dashboard`) is next.
+- **`resources/deck-examples/` populated** — 5 real demo decks (gitignored).
+  Reverse-engineered the shared template into `style-guide.md`.
+- **`build-deck`, `demo-script`, `demo-setup` skills drafted** — `demo-setup`
+  blocked on the Storyblok connector.
 
 ## Known gaps / carried forward
-
-- Notion "Dashboard" view has no charts yet (API limitation hit today).
-- Implid and Cera RFP have no confirmed AE — need validation from Walid.
-- MEDDPICC not yet populated for any account — needs Walid's input per
-  deal, or for `process-customer` to gather real Gong/SF extracts first.
-- `call-coach`, `post-call-update`, `build-deck`, `demo-script` are all
-  drafted but unused — first real runs will surface whatever the specs
-  got wrong.
-- `demo-setup` cannot run live — Storyblok MCP connector still absent.
+- Notion "Analytics" view has no charts yet (API limitation).
+- MEDDPICC not yet populated for most accounts — needs Walid's input or
+  real extracts.
+- `rfp-answer` library is empty — blocked on Walid seeding real content.
+- `storyblok-content` can't run in-sandbox — network allowlist / run locally.
 - `resources/battle-cards/` is empty — `demo-script`'s objection-sourcing
-  step has nothing to draw on yet.
-- No `accounts/<customer>/brief.md` exists yet for any account —
-  `process-customer` hasn't been run for real; `build-deck`/`demo-script`
-  need one to chain off.
-- `process-customer`'s full-row rewrite (Stage/Priority/Notes/AE/dates/
-  MEDDPICC) hasn't had a real run yet — no account has real Gong/SF
-  extracts pasted in.
-- Scheduled `darwin-daily-briefing` task's prompt still describes chat-
-  text output; it hasn't been updated to point at the live artifact.
-
-## 2026-07-21 (two corrections: RFP trust order, Team Pipeline silent drop)
-- `rfp-answer`: Walid confirmed the shared "RFP Answer Library (POC)"
-  Notion DB is unofficial (a coworker built it on their own) — official
-  Storyblok docs now rank above it in the trust order, and the two
-  disagreeing means the docs win, not the POC library.
-- Team Pipeline was silently dropping any deal with a blank/non-pod AE
-  (Cera RFP's AE is genuinely null in Notion — confirmed by query, not
-  a fetch bug) because the SQL filter excluded it outright. Fixed:
-  fetches all deals, filters in JS, and flags excluded deals by name +
-  their actual AE value in an error banner instead of vanishing them.
-
-## 2026-07-21 (Team Pipeline switched from Notion to Slack #se-requests)
-- Per Walid's explicit ask: Team Pipeline no longer reads the Notion
-  Accounts DB (too sparse to reflect the whole team's actual pipeline)
-  — it now scans #se-requests directly (last 30 days), same source as
-  Worth Claiming. Reads each request's thread to determine who (if
-  anyone) claimed it, and groups into columns: the known SE pod
-  (Walid/Ines/Chakit/Roberto), any other real claimer (dynamic column,
-  never dropped), and "Unclaimed" last.
-- Re-added a `colorForName` helper that had been accidentally deleted
-  in an earlier edit when the Notion-based version replaced it —
-  needed again for the dynamic "other claimer" columns.
-
-## 2026-07-21 (fixed dashboard "still loading" hang)
-- Root cause: Team Pipeline's 30-day Slack scan + sequential per-thread
-  claim-checks could take 2-3+ minutes, and a transient Claude API 529
-  overload was being silently swallowed as "zero results" instead of
-  surfaced — looked stuck with no explanation either way.
-- Fixed: window trimmed 30→14 days, thread-checks parallelized (were
-  sequential, same fix applied to Worth Claiming) and capped at 20 per
-  load, and a new `looksLikeApiError()` check surfaces AI-call failures
-  as a visible error banner instead of silently rendering empty state.
+  has nothing to draw on yet.
+- Colleague (AE/SE pod) names are still in tracked files by design — they
+  aren't clients. `darwin-setup` regenerates them per person.
+- Git *history* still contains pre-scrub client names — rewriting history
+  (e.g. `git filter-repo`) is a separate manual step if Walid wants it.

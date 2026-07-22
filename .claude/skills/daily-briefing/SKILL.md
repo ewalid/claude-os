@@ -92,30 +92,30 @@ One-liner: [the single most important thing today, in one sentence]
 
 ```
 🎯 DEMOS TODAY
-None today. Next demo: Jouet club, July 21 (first demo call — Notion
+None today. Next demo: <Account A>, July 21 (first demo call — Notion
 lists this as "due June 21," which is wrong; the real date is the call
 itself, July 21).
 
 ⏰ DEADLINES
-- Implid: proposal due July 17 (2 days out) — Proposal stage, HIGH.
+- <Account B>: proposal due July 17 (2 days out) — Proposal stage, HIGH.
   Real deadline, confirmed against Notion + no conflicting calendar entry.
-- Cera: RFP due July 31 — CMS section owned by Walid, joint with Ines.
-  Shared validation sheet in progress.
+- <Account C>: RFP due July 31 — CMS section owned by Walid, joint with
+  an SE peer. Shared validation sheet in progress.
 
 💬 SLACK
-- Needs reply: Rob Scholte asked in #se-requests about PoC timeline for
-  [account] — no response yet (posted yesterday).
+- Needs reply: <AE> asked in #se-requests about PoC timeline for an
+  account — no response yet (posted yesterday).
 - Worth claiming?: unclaimed request in #se-requests for an account
-  tied to Kristoffer Strindevall — not yet picked up by any SE.
+  tied to another AE in the pod — not yet picked up by any SE.
 
 📧 EMAIL
-- Winfarm Group: Thibault confirmed Walid as SE on the account in a
-  thread with the Algolia partner team — custom demo set for July 29.
+- <Account D>: an AE confirmed Walid as SE on the account in a thread
+  with a search/integration partner team — custom demo set for July 29.
 
 ✅ TODOS
 - Finish onboarding (Notion ToDo).
 
-One-liner: Implid proposal is the tightest deadline this week — due July 17.
+One-liner: the <Account B> proposal is the tightest deadline this week — due July 17.
 ```
 
 ## Notes

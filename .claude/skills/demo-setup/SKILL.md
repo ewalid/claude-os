@@ -39,7 +39,7 @@ Storyblok connector to do its job.
    more than one brand/site involved — this is a structural call that
    affects how convincingly the demo proves a Decision Criterion (e.g.
    "single-environment multi-site management"), not just a formatting
-   detail. (Learned 2026-07-20, Jouet club.)
+   detail. (Learned 2026-07-20, first real FR run.)
 
 3. **List components needed**, each tied to a specific station/pain
    point — fields, not just names, where that's known from the brief.

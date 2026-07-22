@@ -13,21 +13,29 @@ description: >
 
 Closes the loop after a call: one debrief in, four places updated out.
 Never invents outcomes — this skill is only as good as what Walid
-actually tells it (or a Gong transcript he pastes in; Gong itself isn't
-connected).
+actually tells it, or a Gong transcript (pulled directly if Gong MCP is
+connected this session, otherwise pasted by Walid).
 
 ## Steps
 
-1. **Get the debrief.** If Walid's trigger message already contains the
-   outcome, objections, and next steps, use it. If it's thin ("debrief
-   Jouet club"), ask: what happened, what was the outcome, what
-   objections came up, what's the next step (and is it a CALL or a
-   DEADLINE — label it explicitly, same rule as everywhere else in this
-   repo). If he pastes a Gong transcript, summarize it but still have
-   him confirm the outcome/next-step before writing anything — a
-   misread transcript writing the wrong stage into Notion is a real cost.
+1. **Get the debrief.**
+   - **If a Gong MCP connector is available this session**, offer to
+     pull the call transcript directly (find it by account/date,
+     discover the actual Gong tool names at runtime — don't assume
+     them). Summarize the outcome/objections/next-step from the
+     transcript, then **still have Walid confirm** before writing
+     anything — a misread transcript writing the wrong stage into
+     Notion is a real cost, and Slack outranks Notion for deals but a
+     transcript summary doesn't outrank Walid's own read of his call.
+   - **Otherwise**: if Walid's trigger message already contains the
+     outcome, objections, and next steps, use it. If it's thin
+     ("debrief [account]"), ask: what happened, what was the outcome,
+     what objections came up, what's the next step (and is it a CALL or
+     a DEADLINE — label it explicitly, same rule as everywhere else in
+     this repo). If he pastes a Gong transcript manually, treat it the
+     same as a Gong-pulled one: summarize, then confirm before writing.
 
-2. **Write a new row to the Notion "📞 Debriefs" database:**
+2. **Write a new row to the Notion "Debriefs" database:**
    - Call: `<Account> — <date>`
    - Account: relation to the matching Accounts DB row
    - Call date: the actual call date
@@ -60,31 +68,35 @@ connected).
 
 6. **Announce the changes** (Notion guardrail: edit freely, announce at
    the end) and suggest the logical next step — e.g. "next: process-
-   customer refresh before the follow-up call" or "call-coach if you
-   have the Gong recording."
+   customer refresh before the follow-up call" or "call-coach on this
+   call" (which, if Gong is connected, can now pull the same transcript
+   directly).
 
-## Good output example
+## Output example (shape only — no real account names in git)
 
 ```
-Debriefed Jouet club (call 2026-07-21):
+Debriefed <account> (call <date>):
 - Outcome: Went well - next step booked. Technical deep-dive scheduled.
-- Objections: pricing vs. incumbent CMS; timeline for LGR rollout.
-- Next steps: Anush to send technical session invite for July 28 (CALL).
+- Objections: pricing vs. incumbent CMS; rollout timeline.
+- Next steps: AE to send technical session invite for <date> (CALL).
 
 Updated:
-- Notion Debriefs: new row "Jouet club — 2026-07-21".
-- Notion Accounts: Stage -> Deep Dive/Demo, Next call -> 2026-07-28.
-- accounts/jouet-club/debriefs.md: entry added.
+- Notion Debriefs: new row "<account> — <date>".
+- Notion Accounts: Stage -> Deep Dive/Demo, Next call -> <date>.
+- accounts/<account>/debriefs.md: entry added.
 - memory.md: session log updated.
 
-Next: process-customer refresh before July 28 to fold in the pricing
-objection and prep the deep-dive.
+Next: process-customer refresh before the deep-dive to fold in the
+pricing objection.
 ```
 
 ## Guardrails
 
-- Never fabricate outcomes, objections, or next steps — if Walid's
-  input is incomplete, ask rather than filling gaps.
+- Never fabricate outcomes, objections, or next steps — if the input
+  (Gong transcript or Walid's own words) is incomplete, ask rather than
+  filling gaps.
+- A Gong transcript is confirmed with Walid before it writes to Notion —
+  never let an auto-pulled summary set a Stage on its own.
 - MEDDPICC updates require an explicit statement from Walid, not an
   inference from attendee seniority or call tone.
 - This is Notion writes, not Storyblok — no second confirmation needed,

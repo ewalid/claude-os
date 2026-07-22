@@ -35,7 +35,7 @@ is fixed — this skill fills it in, it doesn't invent new slide types.
 
 2. **Pick a base deck** from `resources/deck-examples/` — whichever
    existing deck is closest in size/sophistication/vertical to this
-   account. Say which one and why (e.g. "similar to Cellbes — mid-size,
+   account. Say which one and why (e.g. "similar to the mid-size,
    multi-market, editorial-autonomy pain point").
 
 3. **Customize per the template** (see style-guide.md for the full
@@ -60,7 +60,7 @@ is fixed — this skill fills it in, it doesn't invent new slide types.
      before building anything** (same pattern as the Commercial-section
      gate below) — present the candidates and why each fits, get his
      pick back. Don't infer and proceed silently (learned 2026-07-20,
-     Jouet club: a first pass invented French station names instead of
+     the first real FR build: a first pass invented French station names instead of
      using the real theme vocabulary and skipped confirming entirely).
    - Demo slides themselves: leave BLANK ("Demo" / "CONFIDENTIAL" only)
      — these are live-demo placeholders, never scripted content. That's
@@ -84,7 +84,7 @@ is fixed — this skill fills it in, it doesn't invent new slide types.
 
 5. **Save** to `accounts/<customer>/<date>_Demo_<Account>.pptx`,
    matching the naming convention already used in
-   `resources/deck-examples/` (e.g. `2026-07-16_Demo_Stokke.pptx`).
+   `resources/deck-examples/` (e.g. `YYYY-MM-DD_Demo_<Account>.pptx`).
 
 6. **Flag anything you couldn't confidently fill** — an unclear demo
    station theme, a discovery row with no real data, an ambiguous

@@ -27,9 +27,9 @@ for full rationale.
       from CLAUDE.md into a concrete classify-apply-commit-log procedure
 
 ## Phase 3 — Demo pack (weeks 3-5)
-- [x] `build-deck` — drafted AND now proven on a real account: Jouet
-      club deck built from the Cellbes AB example, French, 3 confirmed
-      stations, 19 slides. Gained a confirm-the-station-shortlist gate
+- [x] `build-deck` — drafted AND now proven on a real account: an FR
+      demo deck built by adapting the closest example deck, French, 3
+      confirmed stations, 19 slides. Gained a confirm-the-station-shortlist gate
       and a title-slide-headshot step (`resources/AEs & SEs/<Name>.jpeg`)
       from real mistakes caught this session.
 - [x] `demo-script` — drafted, overwritten by mistake, then restored +
@@ -37,12 +37,12 @@ for full rationale.
       `resources/battle-cards/` (still empty — flag if used before
       populated), verify-before-call checklist, PLUS a new
       confirm-the-outline gate before finalizing (framing is a judgment
-      call, not a lookup). Real run done for Jouet club.
+      call, not a lookup). Real run done on a live FR account.
 - [x] `demo-setup` — drafted, overwritten by mistake, then restored +
       improved, then reframed (2026-07-20): this skill's job is the
       written setup script itself, full stop — not a placeholder
-      waiting on the Storyblok MCP connector. Real run done for Jouet
-      club. If a connector ever exists, the same script becomes
+      waiting on the Storyblok MCP connector. Real run done on a
+      live FR account. If a connector ever exists, the same script becomes
       directly executable (dry-run → OK → write → verify, CLAUDE.md
       guardrail 3) — a bonus, not the point. Gained a
       confirm-the-space-structure gate (single space vs. per-brand).
@@ -96,8 +96,7 @@ scheduled run — worth watching the first real firings closely.
       anything that ends up in a legally-reviewed submission). Not
       genuinely running yet: `resources/rfp-library/answers/` has zero
       real entries. Blocked on Walid seeding it with real content from
-      Cera RFP / Akeneo RFP (both live "In progress") or an existing
-      team RFP bank. `won-lost-notes.md` gitignored on creation
+      his first live RFP deals or an existing team RFP bank. `won-lost-notes.md` gitignored on creation
       (guardrail 10) since it will name real deals/customers.
 - [~] `storyblok-content` — mechanism drafted (dry-run → confirm →
       write → verify). Walid provided a Management API token
@@ -150,7 +149,7 @@ scheduled run — worth watching the first real firings closely.
   `demo-setup` drafted but still can't run live — Storyblok MCP still
   absent from this Cowork session. Phase 4 (`weekly-review`,
   `monthly-review`, `todo-sync`, `dashboard`) is next.
-- 2026-07-20: Phase 3 exercised for real, first time — Jouet club:
+- 2026-07-20: Phase 3 exercised for real, first time — an FR account:
   `build-deck` (French, 19 slides), `demo-script`, `demo-setup` all run
   against a real account brief. Storyblok MCP re-verified still absent.
   Two mistakes caught and fixed same-day: silent station/photo
@@ -161,7 +160,7 @@ scheduled run — worth watching the first real firings closely.
   deck title-slide photos — only Walid's exists so far, Thibault's (AE)
   still missing. `resources/battle-cards/` still empty.
 - 2026-07-20 (cont'd): Phase 4 started and mostly landed same day —
-  `call-coach`/`post-call-update` exercised for real (Implid), full
+  `call-coach`/`post-call-update` exercised for real on a live deal, full
   audit run + monthly-review skill built, no-artifact-for-routines
   standing preference set, `weekly-review` drafted and scheduled,
   `monthly-review` scheduled, and a live `walid-deals-dashboard`

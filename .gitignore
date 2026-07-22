@@ -10,3 +10,7 @@ accounts/*
 !accounts/.gitkeep
 resources/coaching-log.md
 resources/rfp-library/answers/won-lost-notes.md
+
+# Rolling personal state — local-only (regenerated fresh per person by darwin-setup).
+# Full of real deal specifics by design; never pushed. (2026-07-21)
+memory.md

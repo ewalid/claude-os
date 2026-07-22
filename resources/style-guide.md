@@ -5,7 +5,7 @@ scripts, RFP answers). Fill in as real examples accumulate — this is a
 living document, not a one-time spec.
 
 ## Tone
-- English primary; some accounts (FR-based, e.g. Jouet club) may need
+- English primary; some accounts (FR-based) may need
   French — confirm with Walid before switching, never assume.
 - Direct, technical-credibility-first. Walid is the technical expert in
   the room; copy should read that way — no marketing fluff.
@@ -20,10 +20,10 @@ living document, not a one-time spec.
 
 ### The template (learned from 5 real decks, 2026-07-15)
 
-Walid dropped 5 real demo decks into `resources/deck-examples/`: Stokke,
-fashioncheque, Payabl, Cellbes AB, Orange Cyberdefense. All 5 share one
-underlying template — `build-deck` adapts this template, it never
-invents slide types that aren't in it.
+Walid dropped 5 real demo decks into `resources/deck-examples/` (real
+customer decks — filenames are local-only, gitignored; not named here).
+All 5 share one underlying template — `build-deck` adapts this template,
+it never invents slide types that aren't in it.
 
 **1. Title** — "Storyblok for \<Account\>", with the AE's name/title and
 the SE's name/title (Walid, "Solutions Engineer") on the slide, each
@@ -34,7 +34,7 @@ they don't show up in a text-only scan of the slide). Headshots live in
 the real AE/SE, matched by name (never guess/reuse a different
 person's photo from the source deck). If a headshot is missing for
 someone, flag it rather than leaving the source deck's wrong person in
-place. Discovered 2026-07-20 (Jouet club): the first build left the
+place. Discovered 2026-07-20 (first real FR build): it left the
 source deck's original AE/SE photos in place unnoticed.
 
 **2. "What we know so far."** — the discovery recap, one row per line:
@@ -63,11 +63,12 @@ each a 3-slide block:
      drive live.
    - a "KEY TAKEAWAYS" slide: what we demonstrated (bullets) + key
      benefits (bullets) + one customer proof point/quote with a
-     `storyblok.com/cs/<case>` source link (e.g. Spendesk, Marc O'Polo)
+     `storyblok.com/cs/<case>` source link (pick a public Storyblok
+     case study relevant to the account's vertical)
 
 **5. Technical Topics** (optional — used for more technical/enterprise
-accounts, e.g. Stokke, Payabl, Cellbes, Orange Cyberdefense; skipped
-for fashioncheque). Standing slides, reused near-verbatim across decks:
+accounts; skipped for smaller/less technical ones). Standing slides,
+reused near-verbatim across decks:
    - FlowMotion (workflow builder / n8n orchestration)
    - Storyblok MCP Server (AI agent access to content)
    - Composable Headless (reference architecture diagram)
@@ -75,7 +76,7 @@ for fashioncheque). Standing slides, reused near-verbatim across decks:
    - "A CMS for everyone—securely." (ISO 27001/SOC 2, encryption, GDPR)
 
 **6. Commercial section** (optional — larger/enterprise deals only,
-seen in Stokke/Payabl/Orange Cyberdefense, not the smaller accounts):
+seen in the enterprise example decks, not the smaller accounts):
    Storyblok Pricing → Partnership Orchestration → Implementation
    Methodology → Regressive Multiplier → Premium vs Elite breakdown →
    package option slides ("Premium Smart Package," "Elite Smart
@@ -100,4 +101,4 @@ copy forward.
 ## Status
 Template structure confirmed against 5 real decks, 2026-07-15. Tone/
 FR-EN rules still need Walid's real-world validation on an actual FR
-deck (Jouet club would be the first test case).
+deck (the first FR account is the test case).

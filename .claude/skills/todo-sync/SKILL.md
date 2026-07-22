@@ -19,7 +19,7 @@ next-steps, MEDDPICC gaps, RFP deadlines) already lives on the
 Accounts DB rows — todo-sync does NOT duplicate those. It only handles
 Walid's own personal action items (the kind that don't belong to a
 specific account row) — things like "finish onboarding," "meet with
-Ines for Cera," "investigate white labelling feature."
+an SE peer on the RFP," "investigate white labelling feature."
 
 This is intentionally narrow. It is not a task-management system, not
 a second source of truth, and not a place for account-specific
@@ -43,7 +43,7 @@ next-steps — those stay on the account's own Notion page/Notes per
 
 2. **Reconcile, don't duplicate.** For each new candidate item:
    - Skip it if an existing unchecked item is clearly the same thing
-     (don't add "meet Ines re: Cera" if "meet with Ines for Cera" is
+     (don't add "meet re: the RFP" if "meet with peer on the RFP" is
      already there).
    - Otherwise append it as a new unchecked item: `- [ ] <item>`.
 

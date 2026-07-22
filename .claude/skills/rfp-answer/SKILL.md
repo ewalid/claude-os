@@ -23,7 +23,7 @@ as of 2026-07-21 — checked directly, not assumed) that someone else on
 the team already started. Every row's Status is currently "needs
 review," not "approved" — treat accordingly (see "Trust levels"
 below). Walid is also going to seed `resources/rfp-library/` with his
-own validated RFP files once he has them (Cera RFP / Akeneo RFP are
+own validated RFP files once he has them (his first live RFP deals are
 both live "In progress" right now) — that becomes a second,
 higher-trust local source layered on top of the shared one.
 

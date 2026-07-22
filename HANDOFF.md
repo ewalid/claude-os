@@ -40,8 +40,9 @@ via an explicit self-improvement loop (see §7).
 | GitHub | ✅ | Versioning this repo (private) |
 | n8n | ✅ | Later: scheduling your morning run |
 | Claude in Chrome | ✅ | Fallback browsing |
-| Storyblok MCP | ⚠️ works in Claude Code, verify in Cowork | Phase 5 |
-| Salesforce, Gong | ❌ not connected | Walid pastes extracts manually. NEVER invent their content. |
+| Storyblok MCP | ⚠️ no connector exists; Management API via token instead | Phase 5 |
+| Gong | ⚠️ MAY be connected via MCP — check per session, discover tool names at runtime | If connected, call-coach/post-call-update pull transcripts directly; else Walid pastes |
+| Salesforce | ❌ not connected | Walid pastes extracts manually. NEVER invent its content. |
 
 ### Slack channels
 - **#se-requests (C06EMPB41SL)** — AEs request SE support. Deals are
@@ -60,7 +61,7 @@ Contains: ToDo checklist · Accounts DB (Name, Type, Stage, Priority,
 Due date, Owner, Notes) · Notes gallery.
 
 **Critical known issue:** the "Due date" property conflates CALL DATES
-with DEADLINES. Example: Jouet club shows due June 21, but reality is
+with DEADLINES. Example: an account shows due June 21, but reality is
 a first demo CALL on July 21 — not a deadline at all. Never trust a
 Notion date without cross-checking calendar/Slack.
 
@@ -73,12 +74,15 @@ Pending one-time restructure to propose in your first sessions:
 - Add a **Debriefs** database (fed by post-call-update skill)
 Show the plan, get OK, execute.
 
-### Current live accounts (as of July 15, 2026)
-- **Jouet club** — Demo, In progress, HIGH. First demo call July 21.
-  (Notion date wrong, see above.)
-- **Implid** — Demo, Proposal stage, HIGH. Proposal due **July 17** (real deadline).
-- **Cera** — RFP, In progress, HIGH, due **July 31**. Joint with Ines.
-  CMS section to complete. There's a shared validation Google Sheet:
+### Current live accounts
+Live account state (names, stages, deadlines) is **local-only** — it
+lives in `memory.md` and `accounts/<customer>/`, both git-ignored, and
+in Notion. It is deliberately NOT listed here, because this file is
+tracked in git and shared with colleagues (no real client/account
+names in git — see guardrail 6). A representative pattern, names
+redacted: one FR demo account (first demo call, Notion date known-stale),
+one deal in Proposal stage with a hard proposal deadline, and one
+partner-mediated RFP with a shared validation Google Sheet:
   AI-drafted rows, humans spot-check, mark "x" in the SE-check column,
   rows flagged "need validation" require attention. NEVER fill the
   SE-check column yourself — human-only.
@@ -132,7 +136,7 @@ Design principles (why it's built this way):
 - Customer data stays in connected tools + this repo. Never into
   external services. Never commit secrets; tokens live in env vars.
 - coaching-log.md is private — never quoted in customer-facing output.
-- Cera sheet: SE-check column is human-only.
+- Partner-run RFP validation sheets: the SE-check column is human-only.
 
 ---
 
@@ -230,11 +234,12 @@ Additional compounding loops:
 5. Propose the Notion restructure plan (§2) — plan only, execute on OK.
 6. Update memory.md. Commit.
 
-## 9. This week's reality check (July 15-21)
-- **July 17: Implid proposal due** — real deadline, 2 days out.
-- **July 21: Jouet club first demo** — expect "let's process Jouet club"
-  before then; brief must be ready.
-- **July 31: Cera RFP** — ongoing with Ines; validation sheet workflow.
+## 9. This week's reality check
+Point-in-time deadlines and which account is doing what live in
+`memory.md` (local-only) and Notion, never here — this file is tracked
+and shared. The *shape* to expect early on: a proposal deadline, a
+first demo to prep a brief for, and an RFP deadline running in parallel
+with an SE peer. Names redacted on purpose.
 
 ## 10. Success criteria (how Walid judges you)
 - Morning brief trusted enough to be scheduled via n8n (Phase 4 gate)

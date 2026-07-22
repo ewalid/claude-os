@@ -44,7 +44,7 @@ decks match the customer's language, internal notes/briefs stay English).
 3. **Confirm the outline with Walid before writing the final doc.**
    This is a judgment call about framing and emphasis (what to lead
    with, what to downplay) — not a factual lookup, so it needs a real
-   checkpoint, not an assumption. (Learned 2026-07-20, Jouet club: a
+   checkpoint, not an assumption. (Learned 2026-07-20, first real FR run: a
    first version was written end-to-end with no chance to adjust
    framing before it was finalized.)
 

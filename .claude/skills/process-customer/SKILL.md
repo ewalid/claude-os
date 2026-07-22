@@ -44,7 +44,11 @@ for three concrete things (not a vague "anything you have"):
 1. **Salesforce** — opportunity notes, stage/close-date fields, next
    steps, whatever's in the CRM for this account.
 2. **Gong** — call extract(s)/summary for this account (transcripts,
-   call notes, next steps).
+   call notes, next steps). If a Gong MCP connector is available this
+   session, pull the account's calls directly instead of asking Walid
+   to paste them (discover the actual Gong tool names at runtime — don't
+   assume). Only ask him to paste if Gong isn't connected or the lookup
+   comes back empty/ambiguous.
 3. **A Slack channel ID for this specific account/deal**, if one exists
    (separate from the standing #se-requests/#se-sgm scan in Step 1 —
    deal-specific channels often carry the richest thread). If Walid
@@ -66,8 +70,9 @@ that satisfies the hard stop — no need to ask again.)
 Once Walid's reply is in hand, extract everything relevant from the
 real evidence (pasted Gong/Salesforce extracts, Slack threads, past
 Debriefs DB rows, calendar context, anything Walid said directly).
-Never invent signal from tools that aren't connected (Salesforce, Gong
-themselves) — only from what was actually pasted or said. For each
+Never invent signal from tools you can't actually read — Salesforce
+isn't connected, and Gong only if its MCP is present this session.
+Work only from what was pulled (Gong-if-connected), pasted, or said. For each
 Notion field below, either derive a real value with its evidence, or
 mark it "no change / need validation" if the evidence doesn't support
 one:
@@ -202,9 +207,9 @@ event, Walid's own input, Gong/SF extract) — so staleness is auditable later.
    Never assume Walid (or whoever's reading the chat that session)
    already holds this in their head — the brief.md having this section
    isn't enough if the chat reply itself jumps straight to field-level
-   diffs. (2026-07-21: first real Cera run skipped this in chat even
+   diffs. (2026-07-21: the first real run skipped this in chat even
    though it was already in the written brief — Walid had to ask "what
-   is Cera?" after the fact.)
+   is this company?" after the fact.)
 3. **Announce every field that changed** — old value → new value → the
    evidence it's based on, so Walid can spot-check anything that
    surprises him even though no approval gate blocked the write.

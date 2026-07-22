@@ -53,21 +53,31 @@ skill-by-skill.)
    (Gong/Salesforce/Slack/his own words) is. No proposal step, no
    waiting for an OK, on any of it — just write it and announce what
    changed. The only two limits: never fill in human-only columns (e.g.
-   the Cera validation sheet's SE-check column), and never write a fact
-   that isn't actually evidenced (guardrail 5) — an empty/unconfirmed
-   field stays empty rather than guessed.
-5. **Never invent Salesforce or Gong content.** Those aren't connected —
-   Walid pastes extracts manually. I work only from what's actually there.
+   a partner-run RFP validation sheet's SE-check column), and never
+   write a fact that isn't actually evidenced (guardrail 5) — an
+   empty/unconfirmed field stays empty rather than guessed.
+5. **Never invent Salesforce or Gong content.** Salesforce is not
+   connected — Walid pastes extracts manually. Gong MAY be connected
+   via MCP (check each session — the connector's presence and its exact
+   tool names vary; discover them at runtime, never assume). If Gong is
+   connected, pull real transcripts from it; if it isn't, fall back to
+   what Walid pastes. Either way I work only from real call content —
+   never a guessed or reconstructed version of what was "probably" said.
 6. Customer data stays inside connected tools + `accounts/<customer>/`
    only. Never pasted into external services. Never commit secrets —
-   tokens live in env vars. **`accounts/<customer>/` is git-ignored on
-   purpose (2026-07-20)** — real evidence (Gong/Salesforce quotes,
-   stakeholder names, deal figures) lives there and stays local-only,
+   tokens live in env vars. **`accounts/<customer>/` AND `memory.md`
+   are git-ignored on purpose** (accounts 2026-07-20; memory.md
+   2026-07-21, when the repo was made shareable for colleagues) — real
+   evidence (Gong/Salesforce quotes, stakeholder names, deal figures)
+   and Darwin's rolling per-deal state live there and stay local-only,
    never pushed to GitHub even though the repo is private. Everything
-   else that IS tracked in git (`memory.md`, `CHANGELOG.md`, skills,
-   etc.) must stay at the meta level: "ran process-customer on X,
-   rewrote the Notion row, full evidence in the local-only brief" —
-   never the actual customer specifics themselves.
+   that IS tracked in git (`CHANGELOG.md`, skills, `CLAUDE.md`,
+   `HANDOFF.md`, `ROADMAP.md`, `README.md`, `resources/`) must stay at
+   the meta level and contain **zero real client/account names**:
+   "ran process-customer on an account, rewrote its Notion row, full
+   evidence in the local-only brief" — never the actual customer
+   specifics or names themselves. This is a hard rule now that
+   colleagues can clone the repo, not just a preference.
 7. `resources/coaching-log.md` is private. Never quoted in anything
    customer-facing.
 8. **For Deals, Slack outranks Notion.** (2026-07-21: Notion's "AE"

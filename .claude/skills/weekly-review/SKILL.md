@@ -39,8 +39,8 @@ together.
    as `daily-briefing`).
 
 5. **RFP status**: any RFP-type row with a deadline in the next 2
-   weeks — flag explicitly, these tend to stack (2026-07-20: Cera and
-   Akeneo both landed on July 31 in the same week — exactly the kind
+   weeks — flag explicitly, these tend to stack (2026-07-20: two RFP
+   deadlines both landed on July 31 in the same week — exactly the kind
    of collision this section exists to catch early).
 
 6. **Open MEDDPICC gaps on High-priority accounts**: not a full re-run

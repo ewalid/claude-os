@@ -89,14 +89,26 @@ person's team.
 
 ## Step 4 — connectors: verify, don't assume
 
-For each of Calendar, Notion, Slack, Gmail, Google Drive, GitHub: ask
-if it's expected to be connected, then actually test it (a cheap
-read — e.g. `list_calendars`, a Notion search, a Slack channel read)
-rather than trusting the person's assumption or the previous account's
-config. Report ✅/❌ per connector, same format as the original
-2026-07-15 verification log in `memory.md` Session 1. A connector
-being unavailable isn't a blocker — note it and move on; skills that
-need it will flag "need validation" until it's connected.
+For each of Calendar, Notion, Slack, Gmail, Google Drive, GitHub, and
+Gong: ask if it's expected to be connected, then actually test it (a
+cheap read — e.g. `list_calendars`, a Notion search, a Slack channel
+read) rather than trusting the person's assumption or the previous
+account's config. Report ✅/❌ per connector, same format as the
+original verification log in `memory.md` Session 1. A connector being
+unavailable isn't a blocker — note it and move on; skills that need it
+will flag "need validation" until it's connected.
+
+**Gong specifically** (conversation-intelligence — call recordings and
+transcripts): check whether a Gong MCP connector is present this
+session (search the MCP registry / the available tools; the exact tool
+names vary by connector version, so discover them, don't assume). If
+present, `call-coach` and `post-call-update` can pull transcripts
+directly; if absent, those skills fall back to the person pasting
+transcripts in, and that's a supported mode, not a failure. If the
+person wants Gong but it isn't connected, point them to their
+claude.ai connector settings (or `claude mcp` / `/mcp` in an
+interactive session) to add it — setup can't run that OAuth flow
+itself.
 
 ## Step 5 — where the real data lives
 
