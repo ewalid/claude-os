@@ -1,5 +1,4 @@
 # Darwin — Solutions Engineer AI Assistant
-
 <table>
 <tr>
 <td width="60%" valign="top">
