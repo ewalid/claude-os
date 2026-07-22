@@ -11,6 +11,16 @@ client/account names or deal figures — accounts are referred to generically
 ("an RFP deal", "an FR demo account"). Colleague names (the AE/SE pod) are fine.
 
 ## 2026-07-22
+- `storyblok-content` gained two new guardrails from a real content
+  session on a demo space (via Claude Code, not this repo's Cowork
+  session): (1) re-fetch a story/component fresh immediately before
+  every update-in-place write, never reuse content held from earlier
+  in the task — a full-content overwrite built on stale content nearly
+  clobbered manual Visual Editor edits made in between writes; (2) when
+  extending an existing component schema for a new feature, touch only
+  the new field(s) — adding a restriction to a pre-existing field broke
+  its focal-point/crop editor, caught only because the visual result
+  looked off. Fixed live on the affected space, then generalized here.
 - Walid: Claude Code (run on his own machine, outside Cowork) has a
   working Storyblok MCP connector. `storyblok-content` rewritten to
   check for it first at runtime (never assume tool names — same rule

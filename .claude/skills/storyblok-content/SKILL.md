@@ -69,16 +69,26 @@ session on its own is still blocked on path 2 specifically.
    explicit OK (CLAUDE.md guardrail 3). If the target is a production
    space (not a dev/test space), require a second, explicit
    confirmation naming the space — guardrail 3 is stricter there.
-4. **Write.** Execute the writes (create/update stories, components,
+4. **Re-fetch immediately before any update-in-place write.** For any
+   `updateStory` / `updateComponent` call (or MCP equivalent), fetch
+   that exact story/component fresh right before writing — never
+   reuse content held from earlier in the session or conversation,
+   even content fetched moments ago. These endpoints replace their
+   target in full; stale content silently clobbers anything changed
+   in between by a human (e.g. a manual Visual Editor edit made while
+   Darwin was mid-task) or by another process. This applies per-write,
+   not once per task — if a task does three sequential updates to the
+   same story, re-fetch before each one, not just the first.
+5. **Write.** Execute the writes (create/update stories, components,
    assets) via the MCP connector's tools if available, otherwise via
    `https://mapi.storyblok.com/v1/spaces/{space_id}/stories` and
    related endpoints, authenticated with `STORYBLOK_MANAGEMENT_TOKEN`
    from `storyblok.env`.
-5. **Verify.** Re-fetch what was written and confirm it matches the
+6. **Verify.** Re-fetch what was written and confirm it matches the
    dry-run exactly — same principle as the deals-dashboard's
    `update_artifact` → `verify_artifact` pattern. Report any mismatch
    rather than assuming success from a 200 response alone.
-6. **Announce** what was written, in chat — never silent.
+7. **Announce** what was written, in chat — never silent.
 
 ## Guardrails
 
@@ -92,3 +102,22 @@ session on its own is still blocked on path 2 specifically.
 - This skill has no bearing on RFP/security-question answers
   (`rfp-answer`) — that's a knowledge-library lookup, not a content
   API call, even once this skill is live.
+- **Never reuse held-in-context story/component content across
+  multiple writes in the same task** — see step 4. A full-content
+  overwrite built from anything but a fresh fetch is a real risk on
+  every single write, not just the first one in a task.
+- **When extending an existing component's schema to add a new
+  field or feature, touch only the new field(s).** Never add
+  restrictions or `conditional_settings` to a *pre-existing* field to
+  support the new feature — put any new conditional-visibility logic
+  on the new field(s) only, and leave every pre-existing field
+  byte-for-byte as it was. Adding a `filetypes` restriction plus a
+  `conditional_settings` hide-rule to an existing image field (to
+  support a new "toggle between image and video" feature) once broke
+  that field's focal-point/crop editor in the Visual Editor — caught
+  only because Walid noticed the hero looked different and the focal
+  point stopped saving. The fix was to restore the pre-existing field
+  to its exact original definition and move the conditional logic
+  onto the new field instead. Diff discipline on schema edits is not
+  optional: a schema update should read as "N new fields added," never
+  as changes to lines that were already there.
