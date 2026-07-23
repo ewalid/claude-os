@@ -110,14 +110,20 @@ copy forward.
 `resources/brand-guidelines/` (gitignored, local-only) is where the
 operator's own real logo file(s) and brand guideline document live, if
 they've been added — this file stays tracked and product-agnostic, so
-the actual colors/fonts/logo are never hardcoded here. Before styling
-any new customer-facing document (an RFP response, a one-pager, a
-co-branded file combining the operator's logo with a prospect's), check
-that folder first rather than guessing or reusing a color sampled from
-someone else's document. `build-deck` is the one exception — it already
-inherits real, compliant branding by adapting the operator's own example
-decks, so it has nothing to check here. Added 2026-07-22 after an RFP
-response needed the operator's logo added and this wasn't checked
+the actual colors/fonts/logo are never hardcoded here. **Ask the
+operator first, before checking anything**, whether a new customer-facing
+document actually needs to follow the brand guidelines throughout, or
+just needs the input file's own format kept with information added into
+it — the second case is far more common (an RFP response annotated in
+place) and only needs the logo, not a full guideline read. Only pull the
+full guidelines if the answer is "yes, follow them," and even then treat
+any local PDF/asset in that folder as a snapshot — if a `SOURCES.md`-
+style note in there points at a live source (a Notion page is typical),
+check that directly for anything font-related, since a local export can
+go stale. `build-deck` is the one exception — it already inherits real,
+compliant branding by adapting the operator's own example decks, so it
+has nothing to check here. Added 2026-07-22 after an RFP response needed
+the operator's logo added and this wasn't checked
 proactively.
 
 ## Status

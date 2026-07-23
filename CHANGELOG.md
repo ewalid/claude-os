@@ -14,6 +14,18 @@ local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
 2026-07-23 when the repo went fully agnostic — previously colleague names were
 allowed here.)
 
+## 2026-07-23 (improve: ask before checking brand guidelines; Notion is the live source)
+- CLAUDE.md guardrail 11 revised: ask the operator first whether a new
+  document needs to actually follow brand guidelines, or just needs the
+  input file's own format kept with information added — avoids reading
+  brand assets (tokens) when they turn out not to be needed. When
+  guidelines genuinely apply, a local snapshot in
+  `resources/brand-guidelines/` is treated as possibly stale — a
+  `SOURCES.md`-style note pointing at a live source (typically a Notion
+  page) is checked directly instead, especially for fonts.
+- `resources/style-guide.md` and `rfp-answer/SKILL.md` updated to match
+  (ask-first branching, live-source-over-snapshot rule).
+
 ## 2026-07-23 (improve: brand-guidelines compliance for document creation)
 - New CLAUDE.md guardrail 11: before creating any document that will
   carry the operator's own branding, check `resources/brand-guidelines/`

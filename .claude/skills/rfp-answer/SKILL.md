@@ -141,15 +141,25 @@ file, not just a chat draft:
    Never rebuild it as a separate from-scratch proposal unless asked —
    confirmed with the operator 2026-07-22 that the annotated-in-place
    version is what's actually wanted, not a restructure.
-2. **Check `resources/brand-guidelines/` before styling anything** (see
-   CLAUDE.md guardrail 11) — real logo files and the real brand
-   guideline doc live there if the operator has added them. If the
-   response document combines the operator's own logo with the
-   prospect's (a cover page, for example), pull both logos from real
-   sources (the prospect's from their own document, the operator's from
-   `resources/brand-guidelines/`) and follow whatever co-branding rule
-   the actual brand guidelines specify (safe area, separator style) —
-   never invent a lockup.
+2. **Ask the operator first, before checking anything** (see CLAUDE.md
+   guardrail 11): does this response need to actually follow the
+   operator's brand guidelines throughout, or does it just need the
+   prospect's own document format kept, with a co-branded logo at most?
+   Most RFP responses are the second case (step 1 above) — don't spend
+   tokens reading brand assets that turn out not to be needed. Only if
+   the answer is "yes, follow them" or a logo is genuinely needed: real
+   logo files and a local guideline-doc snapshot live in
+   `resources/brand-guidelines/` if the operator has added them — but
+   treat that local copy as possibly stale. If a `SOURCES.md`-style note
+   in that folder points at a live source (typically a Notion page),
+   check that directly rather than the snapshot, especially for fonts —
+   Notion tends to hold the current type/token detail that a one-time
+   PDF export won't get updated with. If the response document combines
+   the operator's own logo with the prospect's (a cover page, for
+   example), pull both logos from real sources (the prospect's from
+   their own document, the operator's from `resources/brand-guidelines/`)
+   and follow whatever co-branding rule the actual guidelines specify
+   (safe area, separator style) — never invent a lockup.
 3. Keep new table columns/response blocks visually distinct enough to
    spot (a labeled box, or matching the original document's own header
    color for a seamless look — ask the operator which they prefer,

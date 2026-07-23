@@ -148,14 +148,27 @@ skill-by-skill.)
     coaching note? If yes, gitignore it now.
 11. **Before creating any document that will carry the operator's own
     company/product branding** (an RFP response, a one-pager, anything
-    beyond internal notes) **— check `resources/brand-guidelines/` first**
-    if it exists (real logo files + the operator's actual brand guideline
-    doc, gitignored, local-only — sourced from wherever the operator's
-    company keeps this, e.g. a Notion page, pulled in once by the
-    operator or fetched live). Never invent or guess the operator's own brand
-    colors, fonts, or logo for a document — pull real assets from
-    `resources/brand-guidelines/`. **Exception: `build-deck` doesn't need
-    this** — it already inherits compliant branding by adapting the
+    beyond internal notes) **— ask the operator first, don't just check
+    silently**: does this document need to actually follow the brand
+    guidelines (colors/fonts/logo throughout), or should it just keep
+    the input file's own existing format and have information added
+    into it (the common case for annotating a prospect's own RFP —
+    see `rfp-answer/SKILL.md`)? The second case needs at most the
+    operator's logo for a co-branding element, not a full guideline
+    pull — asking first avoids burning tokens reading brand assets that
+    turn out not to be needed. (2026-07-22: checked and pulled the full
+    guideline PDF before realizing the actual ask only needed a logo.)
+    If the answer is "yes, follow the guidelines," check
+    `resources/brand-guidelines/` (real logo files + a local guideline
+    doc snapshot, gitignored, local-only) — but treat that local copy as
+    a possibly-stale snapshot, not the source of truth: if a local
+    `SOURCES.md`-style note points at a live source (e.g. a Notion page,
+    which typically holds the most current font/type detail), check
+    that directly rather than trusting an old local export, especially
+    for anything font-related. Never invent or guess the operator's own
+    brand colors, fonts, or logo for a document — pull real assets.
+    **Exception: `build-deck` doesn't need this** — it already inherits
+    compliant branding by adapting the
     operator's own real example decks in `resources/deck-examples/`, not
     by guessing. Learned 2026-07-22: when a document needed the
     operator's own logo added alongside a prospect's, this wasn't checked
