@@ -4,7 +4,7 @@ description: >
   Trigger: "sync my todos", "update my to-do list", or as a step inside
   `daily-briefing`/`weekly-review` when a new personal action item
   surfaces. Creates and checks off items on the "✅ To Do" checklist
-  block on Walid's Notion space page (page id
+  block on the operator's Notion space page (page id
   7e2677cd8aef48c3bee3136fdbb6a536) — the one real to-do list, not a
   new system.
 ---
@@ -13,11 +13,11 @@ description: >
 
 ## What it does
 
-Walid has exactly one personal to-do list: the "✅ To Do" checklist
-block at the top of his Notion space page. Everything else (account
+The operator has exactly one personal to-do list: the "✅ To Do" checklist
+block at the top of their Notion space page. Everything else (account
 next-steps, MEDDPICC gaps, RFP deadlines) already lives on the
 Accounts DB rows — todo-sync does NOT duplicate those. It only handles
-Walid's own personal action items (the kind that don't belong to a
+The operator's own personal action items (the kind that don't belong to a
 specific account row) — things like "finish onboarding," "meet with
 an SE peer on the RFP," "investigate white labelling feature."
 
@@ -30,7 +30,7 @@ next-steps — those stay on the account's own Notion page/Notes per
 
 - On demand ("sync my todos").
 - As a step folded into `daily-briefing` and `weekly-review`: if either
-  surfaces a clearly personal action item for Walid (not tied to a
+  surfaces a clearly personal action item for the operator (not tied to a
   specific account, e.g. "reply to Matthew about the QBR slot," "submit
   expense report") that isn't already on the checklist, add it there
   instead of just mentioning it and dropping it.
@@ -48,7 +48,7 @@ next-steps — those stay on the account's own Notion page/Notes per
    - Otherwise append it as a new unchecked item: `- [ ] <item>`.
 
 3. **Check off completed items** when there's real evidence they're
-   done (Walid says so directly, or a downstream skill/action clearly
+   done (The operator says so directly, or a downstream skill/action clearly
    completed it — e.g. `post-call-update` just logged the debrief that
    was the to-do item). Never check something off on a guess.
 
@@ -65,7 +65,7 @@ next-steps — those stay on the account's own Notion page/Notes per
 ## Guardrails
 
 - Never invent a personal to-do from an ambiguous signal — if it's not
-  clearly Walid's own action item, leave it alone rather than guess.
+  clearly the operator's own action item, leave it alone rather than guess.
 - Never add account-specific next-steps here — those belong on the
   account's own page/Notes (CLAUDE.md guardrail 4 already covers full
   Notion-row hygiene for accounts).

@@ -1,13 +1,13 @@
 ---
 name: demo-setup
 description: >
-  Trigger: "set up the demo for [account]", "prep the Storyblok space
-  for [X]". Produces the concrete Storyblok space-setup script for a
+  Trigger: "set up the demo for [account]", "prep the demo environment
+  for [X]". Produces the concrete demo-environment setup script for a
   demo — spaces/folders, components, front-end wiring, permissions,
   data caveats. That script IS the deliverable, full stop, not a
-  placeholder for something else. If a Storyblok MCP connector ever
-  exists, steps 6-9 below describe how the same script could be
-  executed directly instead of run by hand — a bonus, not the point.
+  placeholder for something else. If the operator's product has a content/config MCP connector
+  (e.g. Storyblok CMS — see `storyblok-content`), steps 6-9 below
+  describe how the same script could be executed directly instead of run by hand — a bonus, not the point.
 ---
 
 # demo-setup
@@ -16,9 +16,16 @@ description: >
 
 Turns a deck's demo stations into a concrete, written setup script —
 spaces/folders, components (with fields), front-end wiring, permissions,
-data caveats — that Walid runs by hand ahead of a demo. This is a
+data caveats — that the operator runs by hand ahead of a demo. This is a
 planning/writing skill, like `demo-script`; it does not require a live
-Storyblok connector to do its job.
+product connector to do its job.
+
+The concrete vocabulary below (spaces, folders, components, a
+content-delivery API) assumes a headless-CMS product — which is the
+common case for the operator's product (read it from `memory.md`).
+For a different kind of product, keep the *shape* of the script
+(what each demo station must show, wired end to end) and swap the
+CMS-specific nouns for that product's equivalents.
 
 ## Prerequisites
 
@@ -30,12 +37,12 @@ Storyblok connector to do its job.
 
 1. **Read the deck's stations and the brief's "Demo — what to show"
    section.** Every setup item should trace back to something a
-   station actually needs to demonstrate — don't add generic Storyblok
+   station actually needs to demonstrate — don't add generic product
    features that aren't part of this account's planned demo.
 
 2. **Decide space structure** (one shared space vs. space-per-brand/
    entity, folder structure, shared vs. duplicated component library).
-   **Flag this decision to Walid before finalizing** if the account has
+   **Flag this decision to the operator before finalizing** if the account has
    more than one brand/site involved — this is a structural call that
    affects how convincingly the demo proves a Decision Criterion (e.g.
    "single-environment multi-site management"), not just a formatting
@@ -54,22 +61,22 @@ Storyblok connector to do its job.
    split for a security argument), not just discuss verbally.
 
 6. **Flag data caveats explicitly** — mock/fictional data, no live
-   client API, no finalized client UX/UI — as checklist items Walid
+   client API, no finalized client UX/UI — as checklist items the operator
    verbally caveats during the demo, not hides.
 
 7. **Save** to `accounts/<customer>/demo-setup.md` (local-only, per
-   guardrail 6). This is the complete script — Walid runs it by hand.
+   guardrail 6). This is the complete script — the operator runs it by hand.
 
 8. **Report back**: what the script covers, station by station, and
-   anything flagged as needing his confirmation or judgment.
+   anything flagged as needing their confirmation or judgment.
 
-## If a Storyblok MCP connector ever exists
+## If the product has a content/config MCP connector (e.g. Storyblok)
 
 The same script becomes directly executable instead of a manual
 checklist — but the script itself doesn't change shape, only who runs
 steps 3-6. If asked to execute directly:
 - **Dry-run preview before any write** — produce a preview of exactly
-  what will be created/changed and show it to Walid before touching
+  what will be created/changed and show it to the operator before touching
   the space. This is CLAUDE.md guardrail 3, not optional.
 - **Get explicit confirmation before writing.** Production spaces get
   a second, separate confirmation — never treat a first OK as covering
@@ -84,7 +91,8 @@ steps 3-6. If asked to execute directly:
 
 ## Guardrails
 
-- Never write to a Storyblok space without a preview + explicit OK
+- Never write to a live product environment (e.g. a Storyblok space)
+  without a preview + explicit OK
   (CLAUDE.md guardrail 3) — no exceptions, no matter how small the
   change. This only applies if/when direct execution is ever attempted;
   it has no bearing on writing the script itself.

@@ -7,7 +7,7 @@ description: >
   just a list of what happened — the thing `darwin-improve`'s
   "Compounding" section says should exist, formalized as a real skill
   (2026-07-20: first real run was a manual, ad hoc audit requested by
-  Walid — this skill exists so that doesn't have to be manually asked
+  the operator — this skill exists so that doesn't have to be manually asked
   for every time).
 ---
 
@@ -53,8 +53,8 @@ needs a clearer rule, not just another one-off patch.
 
 4. **Report back**: what patterns were found, what got fixed as a
    result, and what's flagged as backlog rather than fixed now (ask
-   Walid to prioritize backlog items rather than silently deciding for
-   him — this is exactly the kind of judgment call that needs a real
+   the operator to prioritize backlog items rather than silently deciding for
+   them — this is exactly the kind of judgment call that needs a real
    checkpoint, not an assumption, per the same lesson `demo-script`
    and `build-deck` already learned this session).
 

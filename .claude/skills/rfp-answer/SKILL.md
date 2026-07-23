@@ -4,12 +4,13 @@ description: >
   Trigger: "answer this RFP", "help with this RFP question", or
   "harvest this RFP" after a submission closes. Two directions:
   RETRIEVE (match incoming RFP questions against known answers, adapt,
-  flag gaps) and HARVEST (fold new/validated answers back into Walid's
+  flag gaps) and HARVEST (fold new/validated answers back into the operator's
   own local library afterward). Primary knowledge source is a real,
   live, company-wide Notion database (see below) — not empty, not
-  hypothetical. NOT wired to Storyblok MCP — no such connector exists
-  in the MCP registry at all (checked 2026-07-21), and product/feature
-  facts for RFPs don't come from a content-management API anyway.
+  hypothetical. Product/feature facts for RFPs come from the product's
+  official docs and the company knowledge base — never from a
+  content-management API (a CMS content connector like the one
+  `storyblok-content` uses is unrelated to RFP answers).
 ---
 
 # rfp-answer
@@ -22,34 +23,35 @@ Mechanism drafted, and the primary source is real: there's a live
 as of 2026-07-21 — checked directly, not assumed) that someone else on
 the team already started. Every row's Status is currently "needs
 review," not "approved" — treat accordingly (see "Trust levels"
-below). Walid is also going to seed `resources/rfp-library/` with his
-own validated RFP files once he has them (his first live RFP deals are
+below). The operator is also going to seed `resources/rfp-library/` with their
+own validated RFP files once they have them (their first live RFP deals are
 both live "In progress" right now) — that becomes a second,
 higher-trust local source layered on top of the shared one.
 
 ## Where the answers come from, in trust order
 
-1. **Walid's own local library** (`resources/rfp-library/answers/*.md`)
-   — once seeded, this is Walid-validated and the highest-trust source.
+1. **The operator's own local library** (`resources/rfp-library/answers/*.md`)
+   — once seeded, this is the operator-validated and the highest-trust source.
    Currently empty.
-2. **Storyblok's official public docs** (storyblok.com/docs) — the
+2. **The product's official public docs** (the operator's product and its
+   docs URL are recorded in `memory.md`) — the
    authoritative source for product/feature facts. Ranks above the
-   library in #3 (confirmed by Walid, 2026-07-21): docs are official,
+   library in #3 (confirmed by the operator, 2026-07-21): docs are official,
    the POC library is not.
 3. **The shared company Notion library** ("RFP Answer Library (POC)",
    `collection://1a091a48-6c13-4f4a-84f9-67c75757e3b7`) — **not an
    official resource.** A coworker put it together on their own
    initiative; it's real, usable content (19 rows, genuinely
-   well-written) but every row's Status is "needs review," and Walid
+   well-written) but every row's Status is "needs review," and the operator
    confirmed it has no official standing — if it conflicts with the
    official docs, the docs win. Use it, but always surface the Status
    alongside the answer and never present a "needs review" row as
    equivalent to an approved one. **Read-only** for now — this is
    someone else's resource; writing back to it (marking rows
-   "approved," adding new ones) needs an explicit ask from Walid first,
-   unlike his own Accounts DB (CLAUDE.md guardrail 4 is about Walid's
+   "approved," adding new ones) needs an explicit ask from the operator first,
+   unlike their own Accounts DB (CLAUDE.md guardrail 4 is about the operator's
    own Notion content, not someone else's unofficial database).
-4. **Other sanctioned research, when 1-3 don't cover it** (Walid
+4. **Other sanctioned research, when 1-3 don't cover it** (The operator
    explicitly authorized these, 2026-07-21):
    - **The rest of the company Notion**, starting from the RFP Answer
      Library page as an anchor and branching out via `notion-search`
@@ -67,19 +69,16 @@ higher-trust local source layered on top of the shared one.
    knowledge. This mirrors CLAUDE.md guardrail 5 (never invent
    Salesforce/Gong content) applied to product/security facts.
 
-**The Storyblok MCP connector is not relevant here even if it
-existed** (and it doesn't — checked the MCP registry directly,
-zero results for "storyblok" under any keyword). That connector, if it
-ever exists, would manage content *inside* a customer's Storyblok
-space — stories, components (see `storyblok-content`). It has no
-bearing on "does Storyblok support SAML SSO" or "what's the uptime
-SLA." Those are answered from the knowledge sources above, never from
-a content-management API.
+**A CMS content connector is not relevant here.** A connector like
+the one `storyblok-content` uses manages content *inside* a customer's
+CMS space — stories, components. It has no bearing on "does the product
+support SAML SSO" or "what's the uptime SLA." Those are answered from
+the knowledge sources above, never from a content-management API.
 
 ## Trust levels — always shown in the draft answer
 
-- `validated` — from Walid's own local library.
-- `official-docs` — from storyblok.com/docs. Authoritative; still worth
+- `validated` — from the operator's own local library.
+- `official-docs` — from the product's official docs. Authoritative; still worth
   a quick sanity check for anything contractual, but not a guess.
 - `needs review (unofficial POC)` — from the coworker's shared Notion
   library. Real content, no official standing, status is literally
@@ -91,7 +90,7 @@ a content-management API.
 
 ## Why the local library isn't a vector DB
 
-Walid asked directly whether his own library should be a vector
+The operator asked directly whether their own library should be a vector
 database instead of plain markdown. Decision: no, for this scale —
 
 - **Realistic corpus size.** Even harvested over years, one SE's
@@ -116,8 +115,8 @@ this — that's a real threshold, not a permanent ruling.
 
 1. Take the incoming RFP question set (pasted text for now — Excel
    handling is a later addition once the base flow works).
-2. For each question, check in trust order: Walid's local library →
-   Storyblok's official docs → the shared (unofficial) Notion library
+2. For each question, check in trust order: The operator's local library →
+   the product's official docs → the shared (unofficial) Notion library
    (query by keyword/category, read full candidate rows for relevance)
    → other sanctioned research → `needs SME input`. If official docs
    and the POC library disagree, go with the docs and note the
@@ -125,17 +124,17 @@ this — that's a real threshold, not a permanent ruling.
 3. Adapt whatever's found to the specific prospect's context — don't
    paste verbatim if it doesn't actually fit.
 4. Return a draft answer set with every answer tagged by its trust
-   level (see above) so Walid knows exactly what's safe to submit as-is
+   level (see above) so the operator knows exactly what's safe to submit as-is
    versus what needs a second look.
 
 ## Steps — HARVEST ("harvest this RFP")
 
 1. After a submission (or a won/lost outcome), take the final
-   Walid-approved answers.
-2. New/improved answers go into Walid's own
+   operator-approved answers.
+2. New/improved answers go into the operator's own
    `resources/rfp-library/answers/` (by category), with `_index.md`
-   updated. This is Walid's local harvesting — separate from the
-   shared Notion library, which stays read-only unless he says
+   updated. This is the operator's local harvesting — separate from the
+   shared Notion library, which stays read-only unless they say
    otherwise.
 3. If the deal's outcome is known, log why it was won/lost in
    `resources/rfp-library/answers/won-lost-notes.md` — gitignored
@@ -151,9 +150,9 @@ this — that's a real threshold, not a permanent ruling.
 - Never present a "needs review" or "research"-sourced answer as
   equivalent to a validated one — the trust-level tag is not optional.
 - Never write to the shared company "RFP Answer Library (POC)" DB
-  without Walid explicitly asking for that — it's read-only by default.
+  without the operator explicitly asking for that — it's read-only by default.
 - `won-lost-notes.md` is customer data — local-only, gitignored, never
   pushed even though this repo is private (same rule as `accounts/`).
-- Walid's local category answer files are reusable product-positioning
+- the operator's local category answer files are reusable product-positioning
   content, not tied to one customer's identity — those stay tracked in
   git, unlike `won-lost-notes.md`.

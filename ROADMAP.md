@@ -7,7 +7,7 @@ for full rationale.
 ## Phase 1 — Foundation (now)
 - [x] `daily-briefing` skill drafted
 - [x] Scheduled: runs automatically weekdays at 9:00am Paris time via Cowork's
-      native scheduler (task `darwin-daily-briefing`) — Walid opted to skip
+      native scheduler (task `darwin-daily-briefing`) — the operator opted to skip
       the original "tune manually first" gate and go straight to automation,
       using Cowork's scheduler instead of n8n. Still watch its output closely
       for the first couple weeks; correct anything wrong immediately.
@@ -61,11 +61,11 @@ for full rationale.
       scheduled 1st of month 08:00 Paris (`darwin-monthly-review`). Not
       yet exercised on a real run.
 - [x] `todo-sync` — drafted: creates/checks off items on the single
-      real "✅ To Do" checklist block on Walid's Notion space page,
+      real "✅ To Do" checklist block on the operator's Notion space page,
       deliberately narrow (personal action items only, never
       account-specific next-steps, which stay on account rows).
 - [x] `dashboard` — not a routine skill, but a live Cowork artifact
-      (`walid-deals-dashboard`), now a real Kanban: "Walid's Pipeline"
+      (`walid-deals-dashboard`), now a real Kanban: "the operator's Pipeline"
       (his deals, Notion-sourced, grouped by Stage) + a unified 7-day
       #se-requests scan that routes every AE-pod request one of two
       places — "Team Pipeline" (grouped by whichever of Chakit/
@@ -74,8 +74,8 @@ for full rationale.
       earlier batch-AI extraction (fragile, slow, caused a real
       multi-minute hang) with deterministic regex parsing of the raw
       Slack dump plus one small scoped AI call per thread — smaller,
-      more reliable, and matches how Walid actually wants it checked.
-      Claimed-but-untracked deals now auto-sync into Notion (Walid's
+      more reliable, and matches how the operator actually wants it checked.
+      Claimed-but-untracked deals now auto-sync into Notion (The operator's
       own DB — edit-freely guardrail applies). One-click Claim still
       writes to Notion, never auto-sends to Slack. Mirrored on the
       Notion side too: "Pipeline board" view enriched + renamed
@@ -95,15 +95,15 @@ scheduled run — worth watching the first real firings closely.
       too small to need one, and a flat library is more auditable for
       anything that ends up in a legally-reviewed submission). Not
       genuinely running yet: `resources/rfp-library/answers/` has zero
-      real entries. Blocked on Walid seeding it with real content from
+      real entries. Blocked on the operator seeding it with real content from
       his first live RFP deals or an existing team RFP bank. `won-lost-notes.md` gitignored on creation
       (guardrail 10) since it will name real deals/customers.
 - [~] `storyblok-content` — mechanism drafted (dry-run → confirm →
-      write → verify). Walid provided a Management API token
+      write → verify). The operator provided a Management API token
       (2026-07-21, stored gitignored in `storyblok.env`) — but a live
       test showed this Cowork sandbox's network proxy blocks
       `storyblok.com` entirely (`blocked-by-allowlist`), independent of
-      having a token. Two unblock paths: run it from Walid's own
+      having a token. Two unblock paths: run it from the operator's own
       terminal (the workspace folder, and the token file with it,
       already exists on his real machine — no sandbox in the way), or
       have a Team/Enterprise org Owner add `storyblok.com` to Cowork's
@@ -130,7 +130,7 @@ scheduled run — worth watching the first real firings closely.
 
 ## Status log
 - 2026-07-15: Repo scaffolded. Connectors verified: Calendar ✅, Notion ✅,
-  Slack ✅, GitHub ✅ (repo `ewalid/claude-os`). Storyblok MCP: not present
+  Slack ✅, GitHub ✅ (repo `ewalid/darwin`). Storyblok MCP: not present
   in this Cowork session — flagged, not urgent (Phase 5).
 - 2026-07-15: daily-briefing scheduled — weekdays 9:00am Paris, Cowork native
   scheduler, task id `darwin-daily-briefing`.
@@ -157,7 +157,7 @@ scheduled run — worth watching the first real firings closely.
   and an accidental overwrite of `demo-script`/`demo-setup`'s real
   Phase 3 content (restored, merged with the new confirmation gates).
   New reference resource: `resources/AEs & SEs/<Full Name>.jpeg` for
-  deck title-slide photos — only Walid's exists so far, Thibault's (AE)
+  deck title-slide photos — only the operator's exists so far, Thibault's (AE)
   still missing. `resources/battle-cards/` still empty.
 - 2026-07-20 (cont'd): Phase 4 started and mostly landed same day —
   `call-coach`/`post-call-update` exercised for real on a live deal, full

@@ -10,6 +10,27 @@ Convention (guardrail 6): this file is tracked in git and MUST contain zero real
 client/account names or deal figures — accounts are referred to generically
 ("an RFP deal", "an FR demo account"). Colleague names (the AE/SE pod) are fine.
 
+## 2026-07-23 (Darwin goes agnostic)
+- **Darwin is now company- and product-agnostic.** The tracked repo no
+  longer assumes the operator works at or sells any particular product.
+  CLAUDE.md "Identity" rewritten as a template; operator name/company/
+  product/team now live only in local, git-ignored files (`memory.md`,
+  `resources/people.md`), written by `darwin-setup`.
+- Genericized "the product we sell" (was Storyblok) across all operating
+  skills, `style-guide.md`, `SKILLS.md`, and the guardrails. The deck
+  template keeps its reusable *structure*; product-specific slide content
+  now comes from the operator's own example decks, not hardcoded.
+- `storyblok-content` kept as the one sanctioned exception — reframed as
+  an opt-in "only if your company uses Storyblok CMS" integration.
+- Operator referred to generically ("the operator") in operating files;
+  gendered pronouns neutralized. Real colleague names removed from
+  operating skills (they reference `resources/people.md` instead).
+- `resources/people.md` now git-ignored (real team = local
+  customization); tracked `resources/people.template.md` added. Product
+  brand assets under `resources/brand-guidelines/` git-ignored too.
+- Historical docs (this file, HANDOFF, ROADMAP) keep the reference
+  operator's build history — framed as history, not a hardcoded default.
+
 ## 2026-07-22
 - `storyblok-content` gained two new guardrails from a real content
   session on a demo space (via Claude Code, not this repo's Cowork

@@ -5,12 +5,22 @@ description: >
   stories/components in [space]". Writes real content into a
   Storyblok space: dry-run preview → explicit OK → write → verify.
   Checks for a live Storyblok MCP connector first (works today from
-  Claude Code on Walid's own machine); falls back to the Management
+  Claude Code on the operator's own machine); falls back to the Management
   API token, which is blocked from inside a Cowork sandbox specifically
   by network egress — see "Status".
 ---
 
 # storyblok-content
+
+## Scope — this is Darwin's one opt-in, product-specific skill
+
+Darwin ships company- and product-agnostic (CLAUDE.md "Identity"). This
+skill is the sanctioned exception: it's only relevant if the operator's
+company uses **Storyblok** as its CMS (whether that's the product they
+sell, or just the CMS they run). If the operator's product/stack has
+nothing to do with Storyblok, this skill simply doesn't apply — it makes
+no assumption that anyone selling anything uses it. Everything else in
+Darwin stays product-neutral.
 
 ## Status (2026-07-22)
 
@@ -18,14 +28,14 @@ Two live paths now, checked in this order every time — never assume
 which one is available, this varies by *where* Darwin is running,
 not by session:
 
-1. **Storyblok MCP connector.** Walid confirmed Claude Code (run
-   directly on his machine, outside Cowork) has a working Storyblok
+1. **Storyblok MCP connector.** the operator confirmed Claude Code (run
+   directly on their machine, outside Cowork) has a working Storyblok
    MCP connection. If running there, check for it first — discover
    the actual tool names at runtime (same rule as Gong in CLAUDE.md
    guardrail 5, never assume a name). If found, use it directly for
    all read/write calls below; no network-egress concern applies,
    since the call isn't going through Cowork's sandbox proxy at all.
-2. **Management API token (fallback).** Walid provided a Storyblok
+2. **Management API token (fallback).** the operator provided a Storyblok
    Management API personal access token. Stored at `storyblok.env`
    in the repo root (gitignored via the existing `*.env` pattern —
    confirmed with `git check-ignore -v` before writing the token in,
@@ -42,8 +52,8 @@ not by session:
    it (as of 2026-07-21).
 
    This path works with no admin action needed as long as it's run
-   somewhere with normal network access — Walid's own terminal, or a
-   Claude Code session on his machine (the repo lives at
+   somewhere with normal network access — the operator's own terminal, or a
+   Claude Code session on their machine (the repo lives at
    `~/dev/darwin`, and `storyblok.env` already exists there with the
    token in it). It would also work directly inside Cowork if a
    Team/Enterprise org Owner adds `storyblok.com` /
@@ -65,7 +75,7 @@ session on its own is still blocked on path 2 specifically.
    an account brief, or a direct request), produce a full preview of
    exactly what would be written — story slugs, component structure,
    field values — without writing anything.
-3. **Explicit confirmation.** Show the dry-run to Walid, wait for an
+3. **Explicit confirmation.** Show the dry-run to the operator, wait for an
    explicit OK (CLAUDE.md guardrail 3). If the target is a production
    space (not a dev/test space), require a second, explicit
    confirmation naming the space — guardrail 3 is stricter there.
@@ -115,7 +125,7 @@ session on its own is still blocked on path 2 specifically.
   `conditional_settings` hide-rule to an existing image field (to
   support a new "toggle between image and video" feature) once broke
   that field's focal-point/crop editor in the Visual Editor — caught
-  only because Walid noticed the hero looked different and the focal
+  only because the operator noticed the hero looked different and the focal
   point stopped saving. The fix was to restore the pre-existing field
   to its exact original definition and move the conditional logic
   onto the new field instead. Diff discipline on schema edits is not

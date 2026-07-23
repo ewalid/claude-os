@@ -11,7 +11,8 @@ It's the starting point if you're a colleague picking Darwin up.
 > **New to Darwin? Start here.** The very first time you run Darwin on a fresh
 > clone, it detects there's no local memory yet and runs **`darwin-setup`**
 > automatically — it introduces itself and interviews you to make the repo
-> yours (your name/role, your team, your connectors, your Notion/Slack IDs).
+> yours (your name/role, your company, the product you sell, your team,
+> your connectors, your Notion/Slack IDs).
 > Nothing below is tuned to you until that runs. See `darwin-setup` at the end.
 
 ## How skills work
@@ -112,11 +113,12 @@ Chains off the brief and the deck. Confirms the outline/framing before
 finalizing.
 
 ### `demo-setup`
-**Trigger:** "set up the demo for [account]". **Does:** the concrete Storyblok
-space-setup script for the demo — spaces/folders, components, front-end wiring,
-permissions, data caveats. The written script is the deliverable. If a
-Storyblok connector or API path is available it can also execute it (dry-run →
-your OK → write → verify), but that's a bonus, not a dependency.
+**Trigger:** "set up the demo for [account]". **Does:** the concrete
+demo-environment setup script — for a headless-CMS product that's
+spaces/folders, components, front-end wiring, permissions, data caveats;
+for a different product, its equivalents. The written script is the
+deliverable. If the product exposes a connector or API it can also execute
+it (dry-run → your OK → write → verify), but that's a bonus, not a dependency.
 
 ---
 
@@ -132,13 +134,16 @@ never smoothed over, because a wrong compliance claim in a submission is a
 real problem. Official product docs outrank any unofficial answer library.
 *Status: mechanism ready; the validated library is still being seeded.*
 
-### `storyblok-content`
-**Trigger:** "set up the Storyblok space for [account]", "create these
+### `storyblok-content` *(opt-in — Storyblok CMS only)*
+Darwin is otherwise product-agnostic; this is the one skill tied to a
+specific product. Ignore it unless your company uses **Storyblok** as its
+CMS. **Trigger:** "set up the Storyblok space for [account]", "create these
 stories/components". **Does:** writes real content into a Storyblok space via
-the Management API, always dry-run → your OK → write → verify (production
-spaces need a second confirmation). *Status: needs a network path to
+a Storyblok MCP connector if present (works from Claude Code), else the
+Management API, always dry-run → your OK → write → verify (production spaces
+need a second confirmation). *Status: from Cowork it needs a network path to
 storyblok.com — run from your own terminal, or have an admin allowlist the
-domain in Cowork.*
+domain.*
 
 ---
 

@@ -2,7 +2,7 @@
 name: post-call-update
 description: >
   Trigger: "debrief [account]", "debrief the [account] call", or right
-  after Walid mentions a call just happened. Captures the outcome and
+  after the operator mentions a call just happened. Captures the outcome and
   propagates it everywhere it needs to live — Notion Debriefs DB,
   Accounts DB, the account's own file, and memory.md.
 ---
@@ -12,9 +12,9 @@ description: >
 ## What it does
 
 Closes the loop after a call: one debrief in, four places updated out.
-Never invents outcomes — this skill is only as good as what Walid
+Never invents outcomes — this skill is only as good as what the operator
 actually tells it, or a Gong transcript (pulled directly if Gong MCP is
-connected this session, otherwise pasted by Walid).
+connected this session, otherwise pasted by the operator).
 
 ## Steps
 
@@ -23,16 +23,16 @@ connected this session, otherwise pasted by Walid).
      pull the call transcript directly (find it by account/date,
      discover the actual Gong tool names at runtime — don't assume
      them). Summarize the outcome/objections/next-step from the
-     transcript, then **still have Walid confirm** before writing
+     transcript, then **still have the operator confirm** before writing
      anything — a misread transcript writing the wrong stage into
      Notion is a real cost, and Slack outranks Notion for deals but a
-     transcript summary doesn't outrank Walid's own read of his call.
-   - **Otherwise**: if Walid's trigger message already contains the
+     transcript summary doesn't outrank the operator's own read of their call.
+   - **Otherwise**: if the operator's trigger message already contains the
      outcome, objections, and next steps, use it. If it's thin
      ("debrief [account]"), ask: what happened, what was the outcome,
      what objections came up, what's the next step (and is it a CALL or
      a DEADLINE — label it explicitly, same rule as everywhere else in
-     this repo). If he pastes a Gong transcript manually, treat it the
+     this repo). If they paste a Gong transcript manually, treat it the
      same as a Gong-pulled one: summarize, then confirm before writing.
 
 2. **Write a new row to the Notion "Debriefs" database:**
@@ -41,14 +41,14 @@ connected this session, otherwise pasted by Walid).
    - Call date: the actual call date
    - Outcome: one of Went well - next step booked / Mixed - follow-up
      needed / Stalled or at risk / Lost / Won
-   - Objections, Next steps, Notes: from what Walid gave you
+   - Objections, Next steps, Notes: from what the operator gave you
 
 3. **Update the Accounts DB row** for that account:
    - Stage, if it changed.
    - Next call or Deadline — whichever the new next-step actually is
      (never write into "Due date (legacy)").
    - Notes — refresh if stale.
-   - MEDDPICC — only add elements Walid explicitly confirmed as part of
+   - MEDDPICC — only add elements the operator explicitly confirmed as part of
      this call; never infer "Economic Buyer" confirmed just because a
      senior person attended, for instance.
 
@@ -93,11 +93,11 @@ pricing objection.
 ## Guardrails
 
 - Never fabricate outcomes, objections, or next steps — if the input
-  (Gong transcript or Walid's own words) is incomplete, ask rather than
+  (Gong transcript or the operator's own words) is incomplete, ask rather than
   filling gaps.
-- A Gong transcript is confirmed with Walid before it writes to Notion —
+- A Gong transcript is confirmed with the operator before it writes to Notion —
   never let an auto-pulled summary set a Stage on its own.
-- MEDDPICC updates require an explicit statement from Walid, not an
+- MEDDPICC updates require an explicit statement from the operator, not an
   inference from attendee seniority or call tone.
-- This is Notion writes, not Storyblok — no second confirmation needed,
+- This is Notion writes, not a live product environment — no second confirmation needed,
   but still announce what changed at the end (CLAUDE.md guardrail 4).

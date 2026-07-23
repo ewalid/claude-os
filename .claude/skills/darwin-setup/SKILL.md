@@ -15,12 +15,14 @@ description: >
 
 ## What it does
 
-Darwin, as it exists in this repo today, is tuned to one specific
-person (name, role, company, AE/SE pod, Notion DB IDs, Slack channel
-IDs — all real, all hardcoded into CLAUDE.md and resources/). None of
-that transfers automatically to a new computer or a new account. This
-skill is the one-time interview that makes Darwin correct for whoever
-is actually sitting in front of it, before it does anything else.
+This repo ships **company- and product-agnostic**: the tracked files
+(CLAUDE.md, skills, templates) name no specific person, company, or
+product. Everything operator-specific — name, role, company, the
+product they sell, their team, Notion DB IDs, Slack channel IDs —
+lives only in local, git-ignored files (`memory.md`,
+`resources/people.md`). This skill is the one-time interview that
+writes those local files for whoever is actually sitting in front of
+Darwin, before it does anything else.
 
 **This must happen first — before answering whatever the person
 actually typed.** Introducing a stale identity, or worse, silently
@@ -65,7 +67,10 @@ short — this is a spoken intro, not documentation):
 Ask (plain chat questions, or AskUserQuestion where the answer is a
 clean choice):
 - Name and email.
-- Role/title and company (e.g. "Solutions Engineer at Storyblok").
+- Role/title, company, and — critically — the product they sell
+  (e.g. "Solutions Engineer at Acme, selling Acme's platform"). The
+  product name feeds every downstream skill (demos, RFPs, positioning);
+  it lives only in `memory.md`, never hardcoded in a tracked file.
   This shapes almost everything downstream — don't assume it matches
   whatever the previous owner of this repo had.
 - Primary language/voice preference, timezone (for scheduled tasks
@@ -85,8 +90,11 @@ shape as a starting template and ask them to confirm or correct it:
   one of them has already claimed something, it's handled, not a gap.
 - Manager(s) — context, not a flag source.
 
-Write whatever shape emerges to `resources/people.md`, replacing the
-previous owner's names entirely — don't merge, this is a different
+Write whatever shape emerges to `resources/people.md` — which is
+**git-ignored and local-only** (real colleague names are
+operator-specific data). Use `resources/people.template.md` (tracked)
+as the starting shape. If a previous `people.md` exists on this
+machine, replace it entirely — don't merge, this is a different
 person's team.
 
 ## Step 4 — connectors: verify, don't assume
@@ -161,7 +169,9 @@ Once Steps 2-7 are answered:
    because of a mistake a *different* person's Darwin once made,
    unless it's a generally-good practice worth keeping regardless of
    who hit it first — use judgment, and say so either way).
-2. **resources/people.md**: replace entirely with Step 3's structure.
+2. **resources/people.md** (local, git-ignored): create/replace from
+   `resources/people.template.md` with Step 3's structure. The real
+   names never get committed.
 3. **ROADMAP.md**: reset to Phase 1 with today's date, list which
    connectors are live per Step 4, and carry over the *shape* of the
    phase plan (foundation → core loop → demo pack → cadence → heavy

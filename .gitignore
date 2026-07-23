@@ -3,6 +3,7 @@
 .env.*
 node_modules/
 resources/deck-examples/*.pptx
+resources/brand-guidelines/
 resources/AEs & SEs/*.jpeg
 resources/AEs & SEs/*.jpg
 resources/AEs & SEs/*.png
@@ -14,3 +15,8 @@ resources/rfp-library/answers/won-lost-notes.md
 # Rolling personal state — local-only (regenerated fresh per person by darwin-setup).
 # Full of real deal specifics by design; never pushed. (2026-07-21)
 memory.md
+
+# Real team/colleague names — operator-specific customization, local-only.
+# The tracked template is resources/people.template.md; darwin-setup writes
+# the real resources/people.md from it. (2026-07-23)
+resources/people.md

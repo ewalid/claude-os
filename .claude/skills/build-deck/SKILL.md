@@ -41,7 +41,7 @@ is fixed — this skill fills it in, it doesn't invent new slide types.
 3. **Customize per the template** (see style-guide.md for the full
    structure):
    - Title slide: account name, the actual AE's name (from Notion AE
-     property — never guess), Walid as the SE. Also swap the two
+     property — never guess), the operator as the SE. Also swap the two
      headshot PICTURE shapes (easy to miss — they don't show up in a
      text-only shape scan): match each person by name against
      `resources/AEs & SEs/<Full Name>.jpeg`. If a headshot is missing
@@ -56,9 +56,9 @@ is fixed — this skill fills it in, it doesn't invent new slide types.
    - Demo station themes: draft 2-4 candidates from the fixed
      vocabulary (style-guide.md step 3), tied to real evidence in the
      brief's priorities/technical context — not a default set, and
-     never invented category names. **Confirm the shortlist with Walid
+     never invented category names. **Confirm the shortlist with the operator
      before building anything** (same pattern as the Commercial-section
-     gate below) — present the candidates and why each fits, get his
+     gate below) — present the candidates and why each fits, get their
      pick back. Don't infer and proceed silently (learned 2026-07-20,
      the first real FR build: a first pass invented French station names instead of
      using the real theme vocabulary and skipped confirming entirely).
@@ -74,7 +74,7 @@ is fixed — this skill fills it in, it doesn't invent new slide types.
      precedent — skip for smaller/less technical accounts).
    - Commercial section (Pricing/Partnership/Packages): include only
      for larger/enterprise deals, per style-guide.md precedent — ask
-     Walid if it's unclear whether this deal warrants it.
+     the operator if it's unclear whether this deal warrants it.
    - Closing: "Thank You for Joining!" always last.
 
 4. **Never copy leftover placeholder/instructional text** (e.g. "List
@@ -91,13 +91,13 @@ is fixed — this skill fills it in, it doesn't invent new slide types.
    technical-vs-commercial call — rather than silently guessing.
 
 7. **Suggest the logical next step**: `demo-script` to script the talk
-   track around this deck's stations, or a verify pass with Walid
+   track around this deck's stations, or a verify pass with the operator
    before the call.
 
 ## Guardrails
 
 - Never create a slide type that doesn't exist in the 5 source decks —
-  if a new slide type is genuinely needed, flag it to Walid rather than
+  if a new slide type is genuinely needed, flag it to the operator rather than
   inventing one.
 - Never fill in demo slides with fake demo content — they stay blank.
 - Never invent discovery data (constraints, metrics, quotes) to fill a

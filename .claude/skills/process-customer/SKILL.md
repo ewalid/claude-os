@@ -5,7 +5,7 @@ description: >
   [account]". Builds or refreshes the full account brief before a demo,
   call, or RFP push — and rewrites the ENTIRE Notion Accounts DB row
   (Stage, Priority, Notes, AE, Next call, Deadline, MEDDPICC) from real
-  Salesforce/Gong/Slack evidence. Walid's manual notes are not the
+  Salesforce/Gong/Slack evidence. The operator's manual notes are not the
   source of truth — this skill's analysis is. Has a hard stop in the
   middle — do not skip it.
 ---
@@ -14,7 +14,7 @@ description: >
 
 ## What it does
 
-Produces `accounts/<customer>/brief.md`: the single document Walid should
+Produces `accounts/<customer>/brief.md`: the single document the operator should
 be able to walk into a demo or call with. It also rewrites the account's
 entire Notion Accounts DB row from whatever real Gong/Salesforce/Slack
 evidence is available — not just the MEDDPICC column, the whole row.
@@ -32,26 +32,26 @@ Five phases, in order.
    deprecated — **Next call** / **Deadline** are the real fields).
 3. Calendar — past and upcoming events with this customer/account.
 4. Slack — search #se-requests, #se-sgm, and any other channel IDs
-   Walid has shared, for threads mentioning this account.
+   the operator has shared, for threads mentioning this account.
 5. Google Drive — decks, docs, RFP files tied to this account.
 6. Notion "📞 Debriefs" database — any past debrief rows related to this
    account (relation property).
 
-## Step 2 — Ask Walid once, then HARD STOP
+## Step 2 — Ask the operator once, then HARD STOP
 
-Before writing anything, post ONE consolidated message to Walid asking
+Before writing anything, post ONE consolidated message to the operator asking
 for three concrete things (not a vague "anything you have"):
 1. **Salesforce** — opportunity notes, stage/close-date fields, next
    steps, whatever's in the CRM for this account.
 2. **Gong** — call extract(s)/summary for this account (transcripts,
    call notes, next steps). If a Gong MCP connector is available this
-   session, pull the account's calls directly instead of asking Walid
+   session, pull the account's calls directly instead of asking the operator
    to paste them (discover the actual Gong tool names at runtime — don't
-   assume). Only ask him to paste if Gong isn't connected or the lookup
+   assume). Only ask them to paste if Gong isn't connected or the lookup
    comes back empty/ambiguous.
 3. **A Slack channel ID for this specific account/deal**, if one exists
    (separate from the standing #se-requests/#se-sgm scan in Step 1 —
-   deal-specific channels often carry the richest thread). If Walid
+   deal-specific channels often carry the richest thread). If the operator
    doesn't have one or none exists, that's a fine answer — don't block
    on it, just proceed without it.
 
@@ -59,17 +59,17 @@ Also surface every inconsistency found in Step 1 (e.g. Notion date vs.
 calendar mismatch, conflicting stage info, stale notes) in the same
 message.
 
-**Do not proceed to Step 3 until Walid replies.** This is a hard stop,
+**Do not proceed to Step 3 until the operator replies.** This is a hard stop,
 not a suggestion — the whole point of this skill is analyzing real
 evidence instead of stale manual notes, so it can't run on nothing. (If
-Walid pastes the evidence unprompted, before this message even goes out,
+The operator pastes the evidence unprompted, before this message even goes out,
 that satisfies the hard stop — no need to ask again.)
 
 ## Step 3 — Analyze the evidence
 
-Once Walid's reply is in hand, extract everything relevant from the
+Once the operator's reply is in hand, extract everything relevant from the
 real evidence (pasted Gong/Salesforce extracts, Slack threads, past
-Debriefs DB rows, calendar context, anything Walid said directly).
+Debriefs DB rows, calendar context, anything the operator said directly).
 Never invent signal from tools you can't actually read — Salesforce
 isn't connected, and Gong only if its MCP is present this session.
 Work only from what was pulled (Gong-if-connected), pasted, or said. For each
@@ -125,7 +125,7 @@ before a call.
 ## MEDDPICC — what wins or loses this deal
 All 8 elements, each with its status (Confirmed / Partial / Gap), the
 quoted evidence or the specific gap, and the source (Gong extract,
-Salesforce extract, Slack thread + link, or "Walid, <date>"). Then,
+Salesforce extract, Slack thread + link, or "the operator, <date>"). Then,
 past the element-by-element list, three short closing paragraphs that
 actually say something useful instead of just tagging elements:
 - **What wins this deal** — the specific, concrete conditions that get
@@ -136,7 +136,7 @@ actually say something useful instead of just tagging elements:
   would sink it (a named competitor's strength, an unresolved technical
   objection, a stalled internal alignment issue) — not generic risk
   language.
-- **Storyblok's positioning right now** — an honest read: ahead, even, or
+- **The product's positioning right now** — an honest read: ahead, even, or
   behind, and why, given the competition, decision criteria, and
   champion status above. If it's genuinely unclear, say that too.
 
@@ -174,7 +174,7 @@ next actions with what they chain into — e.g.:
 - [ ] Confirm attendee list for <date>
 - [ ] `build-deck` for the <date> call/demo
 - [ ] `demo-script` for the same
-- [ ] `demo-setup` / Storyblok space script (draft-only if the MCP
+- [ ] `demo-setup` / product demo-environment script (draft-only if the MCP
       connector is still absent — don't skip drafting just because it
       can't execute yet)
 - [ ] Close the biggest MEDDPICC gap: <specific gap>
@@ -187,7 +187,7 @@ Anything Steps 1-3 couldn't confirm that ISN'T already covered above
 
 ## Sources
 Where every above section came from (Notion link, Slack thread, calendar
-event, Walid's own input, Gong/SF extract) — so staleness is auditable later.
+event, the operator's own input, Gong/SF extract) — so staleness is auditable later.
 ```
 
 ## Step 5 — Update Notion and announce
@@ -204,15 +204,15 @@ event, Walid's own input, Gong/SF extract) — so staleness is auditable later.
 2. **Lead the chat reply with the "Who they are" company brief** — 2-4
    plain-language sentences on who the account actually is (same content
    as the brief's own "Who they are" section), before any Notion diff.
-   Never assume Walid (or whoever's reading the chat that session)
+   Never assume the operator (or whoever's reading the chat that session)
    already holds this in their head — the brief.md having this section
    isn't enough if the chat reply itself jumps straight to field-level
    diffs. (2026-07-21: the first real run skipped this in chat even
-   though it was already in the written brief — Walid had to ask "what
+   though it was already in the written brief — the operator had to ask "what
    is this company?" after the fact.)
 3. **Announce every field that changed** — old value → new value → the
-   evidence it's based on, so Walid can spot-check anything that
-   surprises him even though no approval gate blocked the write.
+   evidence it's based on, so the operator can spot-check anything that
+   surprises them even though no approval gate blocked the write.
 4. Update `memory.md` with what changed this session (including the
    full before/after on the Notion row and what it's based on), and add
    an entry to `CHANGELOG.md`.
@@ -222,7 +222,7 @@ event, Walid's own input, Gong/SF extract) — so staleness is auditable later.
 
 ## Guardrails specific to this skill
 
-- Never fabricate Salesforce/Gong content — if Walid doesn't provide
+- Never fabricate Salesforce/Gong content — if the operator doesn't provide
   it, the field is left as-is (or "need validation" in the brief), and
   the MEDDPICC element stays Gap. Not writing something is always
   safer than guessing it.
@@ -233,6 +233,6 @@ event, Walid's own input, Gong/SF extract) — so staleness is auditable later.
   having real evidence in hand first; without it there's nothing to
   analyze.
 - Rewriting the whole row means old manual Notes/Stage/Priority values
-  are superseded, not preserved — that's the point (Walid's manual
+  are superseded, not preserved — that's the point (The operator's manual
   notes are treated as unreliable by design). Always show the old ->
   new diff when announcing so nothing changes invisibly.

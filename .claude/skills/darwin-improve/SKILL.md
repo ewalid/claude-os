@@ -1,7 +1,7 @@
 ---
 name: darwin-improve
 description: >
-  Trigger: "Darwin, learn this", or any moment Walid corrects a mistake,
+  Trigger: "Darwin, learn this", or any moment the operator corrects a mistake,
   states a preference, or gives context that should stick permanently.
   Formalizes the standing "How I improve" loop from CLAUDE.md into a
   concrete procedure — this is what actually ran, ad hoc, all through
@@ -13,7 +13,7 @@ description: >
 ## What it does
 
 Turns a piece of friction — a mistake, a missing preference, new context
-Walid supplies — into a permanent fix in the right file, committed to
+The operator supplies — into a permanent fix in the right file, committed to
 the repo, so it never has to be corrected twice.
 
 ## Steps
@@ -21,11 +21,11 @@ the repo, so it never has to be corrected twice.
 1. **Notice the trigger — there's no routing system that does this for
    me.** This skill doesn't auto-fire; I have to recognize the moment
    myself, every time, from signals wider than the literal phrase
-   "Darwin, learn this": Walid correcting something; Walid stating a
+   "Darwin, learn this": The operator correcting something; the operator stating a
    preference ("next time...", "always/never..."); catching my OWN
    mistake via verification or a git-log check (self-caught friction
-   counts exactly the same as Walid-stated friction — most of
-   2026-07-20's real fixes were self-caught); or Walid asking a
+   counts exactly the same as operator-stated friction — most of
+   2026-07-20's real fixes were self-caught); or the operator asking a
    reflection/status question about how I'm operating — if the honest
    answer reveals a gap, that IS the trigger, not just a question to
    answer and move past.
@@ -81,7 +81,7 @@ the repo, so it never has to be corrected twice.
 
 7. **Report back concisely**: what changed, where it now lives, and (if
    relevant) what's still open because of it. Don't re-explain the whole
-   mechanism every time — Walid already knows how this works after the
+   mechanism every time — the operator already knows how this works after the
    first pass.
 
 ## Compounding
@@ -93,9 +93,10 @@ a clearer rule, not just another one-off patch.
 
 ## Good example (real, from 2026-07-15)
 
-Walid: "Chakit Arora, Roberto Butti, Ines Akrap are my SE colleagues...
-Matthew Alberts is my manager... check Slack from the last working day
-to the day of the routine."
+The operator: "[names] are my SE colleagues... [name] is my manager...
+check Slack from the last working day to the day of the routine."
+(Real names go to `resources/people.md`, which is local-only, never
+quoted back into a tracked file like this one.)
 
 - Classified: people context → `resources/people.md` (new); Slack scan
   window → task-specific procedure → `daily-briefing/SKILL.md` +

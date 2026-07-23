@@ -6,8 +6,8 @@ living document, not a one-time spec.
 
 ## Tone
 - English primary; some accounts (FR-based) may need
-  French — confirm with Walid before switching, never assume.
-- Direct, technical-credibility-first. Walid is the technical expert in
+  French — confirm with the operator before switching, never assume.
+- Direct, technical-credibility-first. The operator is the technical expert in
   the room; copy should read that way — no marketing fluff.
 
 ## Slide conventions
@@ -20,13 +20,20 @@ living document, not a one-time spec.
 
 ### The template (learned from 5 real decks, 2026-07-15)
 
-Walid dropped 5 real demo decks into `resources/deck-examples/` (real
+The operator dropped 5 real demo decks into `resources/deck-examples/` (real
 customer decks — filenames are local-only, gitignored; not named here).
 All 5 share one underlying template — `build-deck` adapts this template,
 it never invents slide types that aren't in it.
 
-**1. Title** — "Storyblok for \<Account\>", with the AE's name/title and
-the SE's name/title (Walid, "Solutions Engineer") on the slide, each
+The examples below come from a headless-CMS product's decks (the
+operator's product — read it from `memory.md`). The **structure** is
+the reusable part; product-specific slide content (feature names, the
+website/case-study domain, pricing slide names) is drawn from the
+operator's own example decks, not hardcoded here.
+
+**1. Title** — "\<Product\> for \<Account\>" (the product name comes
+from `memory.md`), with the AE's name/title and
+the SE's name/title (The operator, "Solutions Engineer") on the slide, each
 paired with a small headshot photo (confirmed present in all 5 example
 decks — 2 PICTURE shapes on slide 1, one per person, easy to miss since
 they don't show up in a text-only scan of the slide). Headshots live in
@@ -56,28 +63,28 @@ brief), not a default set.
 **4. Per demo station** (repeated once per station named in step 3),
 each a 3-slide block:
    - a transition slide: station name, a one-line value statement, a
-     bullet list of what will be shown, "storyblok.com" footer
+     bullet list of what will be shown, the product's website in the footer
    - a **blank "Demo" slide** — literally just "Demo" + "CONFIDENTIAL",
      no content. This is the live-demo placeholder; build-deck never
-     fills this in with fake demo content, it stays blank for Walid to
+     fills this in with fake demo content, it stays blank for the operator to
      drive live.
    - a "KEY TAKEAWAYS" slide: what we demonstrated (bullets) + key
      benefits (bullets) + one customer proof point/quote with a
-     `storyblok.com/cs/<case>` source link (pick a public Storyblok
+     the product's public case-study URL as a source link (pick a public
      case study relevant to the account's vertical)
 
 **5. Technical Topics** (optional — used for more technical/enterprise
-accounts; skipped for smaller/less technical ones). Standing slides,
-reused near-verbatim across decks:
-   - FlowMotion (workflow builder / n8n orchestration)
-   - Storyblok MCP Server (AI agent access to content)
-   - Composable Headless (reference architecture diagram)
-   - Performance & Scalability (data centers, edge network)
-   - "A CMS for everyone—securely." (ISO 27001/SOC 2, encryption, GDPR)
+accounts; skipped for smaller/less technical ones). Standing slides
+reused near-verbatim across decks — the specific set is product-
+specific and comes from the operator's example decks. For a
+headless-CMS product they look like: a workflow/orchestration slide, a
+CMS-MCP / AI-agent-access slide, a composable/headless reference
+architecture, a performance & scalability slide, and a security slide
+(ISO 27001/SOC 2, encryption, GDPR).
 
 **6. Commercial section** (optional — larger/enterprise deals only,
 seen in the enterprise example decks, not the smaller accounts):
-   Storyblok Pricing → Partnership Orchestration → Implementation
+   <Product> Pricing → Partnership Orchestration → Implementation
    Methodology → Regressive Multiplier → Premium vs Elite breakdown →
    package option slides ("Premium Smart Package," "Elite Smart
    Package").
@@ -100,5 +107,5 @@ copy forward.
 
 ## Status
 Template structure confirmed against 5 real decks, 2026-07-15. Tone/
-FR-EN rules still need Walid's real-world validation on an actual FR
+FR-EN rules still need the operator's real-world validation on an actual FR
 deck (the first FR account is the test case).

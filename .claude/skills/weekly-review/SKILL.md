@@ -3,7 +3,7 @@ name: weekly-review
 description: >
   Trigger: "weekly review", "how's the pipeline looking", or a natural
   Monday-morning cadence. A pipeline/account-health pulse across all of
-  Walid's live accounts — distinct from `monthly-review`, which audits
+  the operator's live accounts — distinct from `monthly-review`, which audits
   Darwin's own behavior/patterns, not the pipeline. Chat text output
   only, never an artifact (standing preference, 2026-07-20).
 ---
@@ -31,7 +31,7 @@ together.
 
 3. **Stalled accounts**: any High-priority account with no Notes
    update, no debrief, and no calendar activity in the last ~2 weeks.
-   Flag it, don't guess why — that's a real gap Walid should notice,
+   Flag it, don't guess why — that's a real gap the operator should notice,
    not something to explain away.
 
 4. **This week ahead**: every Next call and Deadline landing in the
@@ -86,7 +86,7 @@ cat) — always first, before anything else.
 - [Account]: [the one real gap]
   (or: "No flagged gaps on High-priority accounts.")
 
-One-liner: [the single thing most worth Walid's attention this week]
+One-liner: [the single thing most worth the operator's attention this week]
 
 ## Guardrails
 
