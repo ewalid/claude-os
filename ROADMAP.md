@@ -66,9 +66,9 @@ for full rationale.
       account-specific next-steps, which stay on account rows).
 - [x] `dashboard` — not a routine skill, but a live Cowork artifact
       (`walid-deals-dashboard`), now a real Kanban: "the operator's Pipeline"
-      (his deals, Notion-sourced, grouped by Stage) + a unified 7-day
+      (their deals, Notion-sourced, grouped by Stage) + a unified 7-day
       #se-requests scan that routes every AE-pod request one of two
-      places — "Team Pipeline" (grouped by whichever of Chakit/
+      places — "Team Pipeline" (grouped by whichever of the SE peers (
       Roberto/Ines actually claimed it, verified per-thread) or "Worth
       Claiming" (everything else). Rebuilt 2026-07-21 to replace the
       earlier batch-AI extraction (fragile, slow, caused a real
@@ -96,7 +96,7 @@ scheduled run — worth watching the first real firings closely.
       anything that ends up in a legally-reviewed submission). Not
       genuinely running yet: `resources/rfp-library/answers/` has zero
       real entries. Blocked on the operator seeding it with real content from
-      his first live RFP deals or an existing team RFP bank. `won-lost-notes.md` gitignored on creation
+      their first live RFP deals or an existing team RFP bank. `won-lost-notes.md` gitignored on creation
       (guardrail 10) since it will name real deals/customers.
 - [~] `storyblok-content` — mechanism drafted (dry-run → confirm →
       write → verify). The operator provided a Management API token
@@ -105,7 +105,7 @@ scheduled run — worth watching the first real firings closely.
       `storyblok.com` entirely (`blocked-by-allowlist`), independent of
       having a token. Two unblock paths: run it from the operator's own
       terminal (the workspace folder, and the token file with it,
-      already exists on his real machine — no sandbox in the way), or
+      already exists on their real machine — no sandbox in the way), or
       have a Team/Enterprise org Owner add `storyblok.com` to Cowork's
       network allowlist. No MCP connector exists for Storyblok either
       way (checked directly).
@@ -157,7 +157,7 @@ scheduled run — worth watching the first real firings closely.
   and an accidental overwrite of `demo-script`/`demo-setup`'s real
   Phase 3 content (restored, merged with the new confirmation gates).
   New reference resource: `resources/AEs & SEs/<Full Name>.jpeg` for
-  deck title-slide photos — only the operator's exists so far, Thibault's (AE)
+  deck title-slide photos — only the operator's exists so far, an AE's
   still missing. `resources/battle-cards/` still empty.
 - 2026-07-20 (cont'd): Phase 4 started and mostly landed same day —
   `call-coach`/`post-call-update` exercised for real on a live deal, full

@@ -18,9 +18,9 @@ description: >
 ## Status (2026-07-21)
 
 Mechanism drafted, and the primary source is real: there's a live
-"RFP Answer Library (POC)" database in the company Notion
-(`collection://1a091a48-6c13-4f4a-84f9-67c75757e3b7`, 19 real Q&A rows
-as of 2026-07-21 — checked directly, not assumed) that someone else on
+"RFP Answer Library (POC)" database in the company Notion (its
+collection id is in local `memory.md`; ~19 Q&A rows as of 2026-07-21 —
+checked directly, not assumed) that someone else on
 the team already started. Every row's Status is currently "needs
 review," not "approved" — treat accordingly (see "Trust levels"
 below). The operator is also going to seed `resources/rfp-library/` with their
@@ -39,7 +39,7 @@ higher-trust local source layered on top of the shared one.
    library in #3 (confirmed by the operator, 2026-07-21): docs are official,
    the POC library is not.
 3. **The shared company Notion library** ("RFP Answer Library (POC)",
-   `collection://1a091a48-6c13-4f4a-84f9-67c75757e3b7`) — **not an
+   collection id in local `memory.md`) — **not an
    official resource.** A coworker put it together on their own
    initiative; it's real, usable content (19 rows, genuinely
    well-written) but every row's Status is "needs review," and the operator

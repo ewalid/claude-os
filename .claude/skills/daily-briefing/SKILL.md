@@ -11,7 +11,8 @@ description: >
 ## What it does
 
 Pulls together Google Calendar, Notion ("the operator's space"), Gmail, and both
-Slack channels (#se-requests C06EMPB41SL, #se-sgm C0B290Q8XDK) into one
+Slack channels (#se-requests and #se-sgm, or the operator's
+equivalents — channel IDs in local `memory.md`) into one
 scannable brief. Read-only — never modifies anything as part of the brief
 itself (Notion hygiene fixes are proposed/applied separately, not folded
 into this skill's own read-only pass — though if the operator reacts to the

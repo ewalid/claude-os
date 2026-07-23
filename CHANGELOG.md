@@ -1,14 +1,18 @@
 # CHANGELOG
 
-All notable changes Darwin makes to itself, this repo, or Walid's connected
+All notable changes Darwin makes to itself, this repo, or the operator's connected
 tools (Notion, scheduled tasks, artifacts) are logged here — newest first.
 Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
 Convention (guardrail 6): this file is tracked in git and MUST contain zero real
-client/account names or deal figures — accounts are referred to generically
-("an RFP deal", "an FR demo account"). Colleague names (the AE/SE pod) are fine.
+client/account names, deal figures, or real colleague/operator names — accounts
+are referred to generically ("an RFP deal", "an FR demo account") and people as
+roles ("the operator", "an AE", "an SE colleague"). Real names live only in
+local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
+2026-07-23 when the repo went fully agnostic — previously colleague names were
+allowed here.)
 
 ## 2026-07-23 (Darwin goes agnostic)
 - **Darwin is now company- and product-agnostic.** The tracked repo no
@@ -42,7 +46,7 @@ client/account names or deal figures — accounts are referred to generically
   the new field(s) — adding a restriction to a pre-existing field broke
   its focal-point/crop editor, caught only because the visual result
   looked off. Fixed live on the affected space, then generalized here.
-- Walid: Claude Code (run on his own machine, outside Cowork) has a
+- The operator: Claude Code (run on their own machine, outside Cowork) has a
   working Storyblok MCP connector. `storyblok-content` rewritten to
   check for it first at runtime (never assume tool names — same rule
   as Gong), falling back to the Management API token path if absent.
@@ -53,12 +57,12 @@ client/account names or deal figures — accounts are referred to generically
   restored.
 
 ## 2026-07-21 (Darwin's namesake, a signature)
-- Walid: Darwin is named after his cat — a black cat with pointy ears
+- The operator: Darwin is named after their cat — a black cat with pointy ears
   and huge round eyes, "the sweetest cat ever." New CLAUDE.md
   "Signature" section: a small ASCII cat that opens `darwin-setup`'s
   introduction and every "routine" skill's chat output (`daily-briefing`,
   `weekly-review`, `monthly-review`), always as the very first thing.
-  Walid dropped the real photo in at the repo root; moved it to
+  The operator dropped the real photo in at the repo root; moved it to
   `resources/darwin.jpg` and it's now shown at the top of `README.md`
   above the ASCII mascot.
 
@@ -67,7 +71,7 @@ client/account names or deal figures — accounts are referred to generically
   (`call-coach`, `post-call-update`, `process-customer`) and CLAUDE.md
   guardrail 5: if a Gong MCP connector is present in the session, pull
   transcripts directly (discover the actual tool names at runtime — they
-  vary by connector version, never assume); if not, fall back to Walid
+  vary by connector version, never assume); if not, fall back to the operator
   pasting transcripts, exactly as before. `darwin-setup` now tests/asks
   for Gong alongside the other connectors. (At the time of writing, no
   Gong MCP tools were actually resolvable in-session — the wiring is
@@ -79,12 +83,12 @@ client/account names or deal figures — accounts are referred to generically
   CLAUDE.md) was rewritten to generic account descriptors. Guardrail 6
   tightened to make "zero real client names in git" a hard rule, not a
   preference. (Git *history* still contains prior names — rewriting that
-  is a separate manual step, noted for Walid.)
+  is a separate manual step, noted for the operator.)
 
 ## 2026-07-21 (improve: process-customer chat reply must lead with company brief)
-- Walid: "Never forget to add a brief about the company" — a real run
+- The operator: "Never forget to add a brief about the company" — a real run
   wrote a full "Who they are" section into the local brief.md, but the
-  chat reply itself skipped straight to the Notion diff, so Walid had
+  chat reply itself skipped straight to the Notion diff, so the operator had
   to ask "what is this company?" afterward.
 - Fixed in `process-customer/SKILL.md` Step 5: new explicit point 2
   (chat reply must lead with the 2-4 sentence company brief before any
@@ -101,12 +105,12 @@ client/account names or deal figures — accounts are referred to generically
   (large draft response already mostly resolved, in human-review).
   MEDDPICC left empty — all 8 elements landed Gap/Partial, none
   Confirmed (expected for a partner-mediated RFP with no direct contact).
-- Surfaced two unresolved inconsistencies to Walid rather than
+- Surfaced two unresolved inconsistencies to the operator rather than
   auto-fixing (a deal-value conflict across two Slack sources, and a
-  possible naming confusion in his own shorthand).
+  possible naming confusion in their own shorthand).
 
 ## 2026-07-21 (accounts/ folder was leaking customer names into git history)
-- Walid asked whether the account folder scaffold was necessary. It
+- The operator asked whether the account folder scaffold was necessary. It
   wasn't: only 3 of the real account folders even had a tracked
   `.gitkeep`, and those paths put real customer names into git history
   via the directory name itself even though contents were empty — a
@@ -129,12 +133,12 @@ client/account names or deal figures — accounts are referred to generically
   `ROADMAP.md`/`memory.md` — doesn't merge with the previous config.
 
 ## 2026-07-21 (storyblok-content: token in, blocked by sandbox network allowlist)
-- Walid provided a Storyblok Management API personal access token,
+- The operator provided a Storyblok Management API personal access token,
   stored gitignored at `storyblok.env` (confirmed ignored before writing
   it in). Test call from this Cowork sandbox to `mapi.storyblok.com` was
   blocked by the sandbox's own network proxy allowlist — a sandbox
   network-access problem, not a token or connector one. Two documented
-  ways around it: run from Walid's own terminal (no sandbox), or get
+  ways around it: run from the operator's own terminal (no sandbox), or get
   `storyblok.com` added to the org's network allowlist.
 
 ## 2026-07-21 (Slack>Notion rule; Claim button removed; AE schema fixed; pipeline scan rebuilt)
@@ -145,22 +149,22 @@ client/account names or deal figures — accounts are referred to generically
   reverse.
 - Dashboard: removed the one-click "Claim" button (auto-wrote to Notion)
   from Worth Claiming cards, replaced with a "View Slack thread" link —
-  Walid wants to read the actual thread before any action. Real trigger:
+  the operator wants to read the actual thread before any action. Real trigger:
   a request looked claimable from the message text, but the thread showed
-  the AE saying he didn't need SE support. Same link added to Team
+  the AE saying they didn't need SE support. Same link added to Team
   Pipeline cards. `claimDeal()` removed as dead code.
 - Notion Accounts DB: the "AE" select property only had two configured
-  options — most of the AE pod (Rob Scholte, Mine Heck, Kristoffer
+  options — most of the AE pod (several AE-pod members
   Strindevall) were never selectable values at all. Likely root cause of
   an earlier "why does everything show one AE" symptom. Added the missing
-  three, then corrected one deal's AE from blank to the value Walid
+  three, then corrected one deal's AE from blank to the value the operator
   identified directly.
 - Pipeline scan rebuilt: Team Pipeline and Worth Claiming were two
   separate batch-AI extractions over the whole #se-requests dump;
   replaced with one unified 7-day scan that parses each message
   deterministically (regex against the Slack bot's regular field format)
   and, only for messages with a thread, runs one small scoped AI call per
-  thread asking whether Chakit/Roberto/Ines claimed it. Routing is binary
+  thread asking whether the SE peers claimed it. Routing is binary
   per-message: claimed by one of those three -> Team Pipeline, else ->
   Worth Claiming. Claimed-but-untracked deals auto-add to Notion. Caught
   mid-build via `verify_artifact`: `update_artifact` had silently dropped
@@ -184,7 +188,7 @@ client/account names or deal figures — accounts are referred to generically
   JS, flag excluded deals by name + actual AE value in a banner.
 
 ## 2026-07-21 (Team Pipeline switched from Notion to Slack #se-requests)
-- Per Walid: Team Pipeline no longer reads the Notion Accounts DB (too
+- Per the operator: Team Pipeline no longer reads the Notion Accounts DB (too
   sparse) — it scans #se-requests directly, reads each request's thread
   to determine who claimed it, and groups by claimer.
 - Re-added a `colorForName` helper accidentally deleted in an earlier edit.
@@ -199,9 +203,9 @@ client/account names or deal figures — accounts are referred to generically
 
 ## 2026-07-21 (Phase 4 finished; Phase 5 drafted and honestly flagged as blocked)
 - `todo-sync` skill built: reconciles personal action items onto the
-  single "✅ To Do" checklist block on Walid's Notion space page.
+  single "✅ To Do" checklist block on the operator's Notion space page.
   Deliberately doesn't touch account-specific next-steps.
-- Dashboard gained a "Team Pipeline" row alongside the renamed "Walid's
+- Dashboard gained a "Team Pipeline" row alongside the renamed "the operator's
   Pipeline" row.
 - Worth Claiming widened from 24h to 7 days, and now reads each
   candidate's Slack thread to filter out already-claimed requests.
@@ -300,7 +304,7 @@ client/account names or deal figures — accounts are referred to generically
 
 ## 2026-07-20 (fix: title-slide AE/SE headshots; new photo resource)
 - **New resource**: `resources/AEs & SEs/<Full Name>.jpeg` — headshots for
-  deck title slides (gitignored). Walid added his own; others missing.
+  deck title slides (gitignored). The operator added their own; others missing.
 - **Bug fix**: all example decks carry 2 headshot PICTURE shapes on slide
   1, invisible to a text-only scan. The first FR deck had shipped with the
   source deck's original photos. `style-guide.md` + `build-deck/SKILL.md`
@@ -337,7 +341,7 @@ client/account names or deal figures — accounts are referred to generically
 - **First real `process-customer` run** — an account brief written from
   real Salesforce + Gong extracts, Notion row rewritten. Customer
   specifics live only in the local-only file.
-- **Policy fix (Walid's correction): customer data must be git-ignored.**
+- **Policy fix (the operator's correction): customer data must be git-ignored.**
   `accounts/*/*.md` added to `.gitignore`; guardrail 6 codified.
 - **`process-customer/SKILL.md` upgraded**: Step 2 asks for Salesforce +
   Gong + a deal-specific Slack channel ID; Step 4's brief template
@@ -365,7 +369,7 @@ client/account names or deal figures — accounts are referred to generically
 ## 2026-07-15 (process-customer upgrade)
 - **`process-customer` now does a real MEDDPICC analysis** against pasted
   extracts, tagging each of the 8 elements Confirmed/Partial/Gap; only
-  Confirmed elements write to Notion (a downgrade still needs Walid's OK).
+  Confirmed elements write to Notion (a downgrade still needs the operator's OK).
 
 ## 2026-07-15
 - **Notion — Accounts DB restructured.** Split the ambiguous "Due date"
@@ -381,8 +385,8 @@ client/account names or deal figures — accounts are referred to generically
 
 ## 2026-07-15 (later same day)
 - **People model corrected**: `resources/people.md` distinguishes the AE
-  pod from SE colleagues (Chakit Arora, Roberto Butti, Ines Akrap) and
-  Walid's manager (Matthew Alberts). Wired into the artifact's Slack triage.
+  pod from SE colleagues (the operator's SE colleagues) and
+  the operator's manager (the operator's manager). Wired into the artifact's Slack triage.
 - **Slack scan window widened** to "start of the last working day through
   now".
 - **Deck format decided**: .pptx exports, not .odp.
@@ -399,13 +403,13 @@ client/account names or deal figures — accounts are referred to generically
 
 ## Known gaps / carried forward
 - Notion "Analytics" view has no charts yet (API limitation).
-- MEDDPICC not yet populated for most accounts — needs Walid's input or
+- MEDDPICC not yet populated for most accounts — needs the operator's input or
   real extracts.
-- `rfp-answer` library is empty — blocked on Walid seeding real content.
+- `rfp-answer` library is empty — blocked on the operator seeding real content.
 - `storyblok-content` can't run in-sandbox — network allowlist / run locally.
 - `resources/battle-cards/` is empty — `demo-script`'s objection-sourcing
   has nothing to draw on yet.
 - Colleague (AE/SE pod) names are still in tracked files by design — they
   aren't clients. `darwin-setup` regenerates them per person.
 - Git *history* still contains pre-scrub client names — rewriting history
-  (e.g. `git filter-repo`) is a separate manual step if Walid wants it.
+  (e.g. `git filter-repo`) is a separate manual step if the operator wants it.

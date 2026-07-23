@@ -96,18 +96,20 @@ skill-by-skill.)
    never a guessed or reconstructed version of what was "probably" said.
 6. Customer data stays inside connected tools + `accounts/<customer>/`
    only. Never pasted into external services. Never commit secrets —
-   tokens live in env vars. **`accounts/<customer>/` AND `memory.md`
-   are git-ignored on purpose** (accounts 2026-07-20; memory.md
-   2026-07-21, when the repo was made shareable for colleagues) — real
-   evidence (Gong/Salesforce quotes, stakeholder names, deal figures)
-   and Darwin's rolling per-deal state live there and stay local-only,
-   never pushed to GitHub even though the repo is private. Everything
-   that IS tracked in git (`CHANGELOG.md`, skills, `CLAUDE.md`,
-   `HANDOFF.md`, `ROADMAP.md`, `README.md`, `resources/`) must stay at
-   the meta level and contain **zero real client/account names**:
-   "ran process-customer on an account, rewrote its Notion row, full
-   evidence in the local-only brief" — never the actual customer
-   specifics or names themselves. This is a hard rule now that
+   tokens live in env vars. **`accounts/<customer>/`, `memory.md`, AND
+   `resources/people.md` are git-ignored on purpose** (accounts
+   2026-07-20; memory.md 2026-07-21; people.md 2026-07-23, when the repo
+   went fully agnostic) — real evidence (Gong/Salesforce quotes,
+   stakeholder names, deal figures), Darwin's rolling per-deal state, and
+   the operator's real team all live there and stay local-only, never
+   pushed to GitHub even though the repo is private. Everything that IS
+   tracked in git (`CHANGELOG.md`, skills, `CLAUDE.md`, `HANDOFF.md`,
+   `ROADMAP.md`, `README.md`, `resources/`) must stay at the meta level
+   and contain **zero real client/account names AND zero real operator/
+   colleague names** — refer to people by role ("the operator", "an AE",
+   "an SE colleague"): "ran process-customer on an account, rewrote its
+   Notion row, full evidence in the local-only brief" — never the actual
+   customer or person specifics themselves. This is a hard rule now that
    colleagues can clone the repo, not just a preference.
 7. `resources/coaching-log.md` is private. Never quoted in anything
    customer-facing.

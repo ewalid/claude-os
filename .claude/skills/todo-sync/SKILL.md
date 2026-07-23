@@ -4,9 +4,8 @@ description: >
   Trigger: "sync my todos", "update my to-do list", or as a step inside
   `daily-briefing`/`weekly-review` when a new personal action item
   surfaces. Creates and checks off items on the "✅ To Do" checklist
-  block on the operator's Notion space page (page id
-  7e2677cd8aef48c3bee3136fdbb6a536) — the one real to-do list, not a
-  new system.
+  block on the operator's Notion space page (page id in local
+  `memory.md`) — the one real to-do list, not a new system.
 ---
 
 # todo-sync
@@ -37,9 +36,9 @@ next-steps — those stay on the account's own Notion page/Notes per
 
 ## Steps
 
-1. **Read the current checklist.** Fetch the Notion page
-   (`7e2677cd8aef48c3bee3136fdbb6a536`) and read the "✅ To Do" block
-   as it exists right now — never assume its contents from memory.
+1. **Read the current checklist.** Fetch the Notion page (page id in
+   local `memory.md`) and read the "✅ To Do" block as it exists right
+   now — never assume its contents from memory.
 
 2. **Reconcile, don't duplicate.** For each new candidate item:
    - Skip it if an existing unchecked item is clearly the same thing
