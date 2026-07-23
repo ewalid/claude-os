@@ -105,6 +105,21 @@ copy forward.
 - Default to the customer's own language in decks; internal
   notes/briefs stay in English regardless.
 
+## Brand assets (for anything that isn't build-deck)
+
+`resources/brand-guidelines/` (gitignored, local-only) is where the
+operator's own real logo file(s) and brand guideline document live, if
+they've been added — this file stays tracked and product-agnostic, so
+the actual colors/fonts/logo are never hardcoded here. Before styling
+any new customer-facing document (an RFP response, a one-pager, a
+co-branded file combining the operator's logo with a prospect's), check
+that folder first rather than guessing or reusing a color sampled from
+someone else's document. `build-deck` is the one exception — it already
+inherits real, compliant branding by adapting the operator's own example
+decks, so it has nothing to check here. Added 2026-07-22 after an RFP
+response needed the operator's logo added and this wasn't checked
+proactively.
+
 ## Status
 Template structure confirmed against 5 real decks, 2026-07-15. Tone/
 FR-EN rules still need the operator's real-world validation on an actual FR

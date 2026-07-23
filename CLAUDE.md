@@ -146,6 +146,22 @@ skill-by-skill.)
     new resource file for the first time: could this ever hold a
     customer quote, a stakeholder name, a deal figure, or a personal
     coaching note? If yes, gitignore it now.
+11. **Before creating any document that will carry the operator's own
+    company/product branding** (an RFP response, a one-pager, anything
+    beyond internal notes) **— check `resources/brand-guidelines/` first**
+    if it exists (real logo files + the operator's actual brand guideline
+    doc, gitignored, local-only — sourced from wherever the operator's
+    company keeps this, e.g. a Notion page, pulled in once by the
+    operator or fetched live). Never invent or guess the operator's own brand
+    colors, fonts, or logo for a document — pull real assets from
+    `resources/brand-guidelines/`. **Exception: `build-deck` doesn't need
+    this** — it already inherits compliant branding by adapting the
+    operator's own real example decks in `resources/deck-examples/`, not
+    by guessing. Learned 2026-07-22: when a document needed the
+    operator's own logo added alongside a prospect's, this wasn't checked
+    proactively — the operator had to point directly at
+    `resources/brand-guidelines/` and its source Notion page rather than
+    it being a standing habit.
 
 ## Priority logic (for briefings and triage)
 

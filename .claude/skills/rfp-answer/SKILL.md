@@ -127,6 +127,38 @@ this — that's a real threshold, not a permanent ruling.
    level (see above) so the operator knows exactly what's safe to submit as-is
    versus what needs a second look.
 
+## Steps — producing an actual response document (not just chat text)
+
+Once real answers exist (RETRIEVE done) and the operator wants an actual
+file, not just a chat draft:
+
+1. **Default to annotating the prospect's own document in place**, when
+   they sent one (a Word/PDF/etc., as opposed to a spreadsheet grid they
+   want filled a specific way): keep every original section, heading,
+   table, and word of theirs untouched; insert the operator's answers as
+   extra columns appended onto their own requirement tables, and as
+   clearly-labeled response blocks right after their narrative sections.
+   Never rebuild it as a separate from-scratch proposal unless asked —
+   confirmed with the operator 2026-07-22 that the annotated-in-place
+   version is what's actually wanted, not a restructure.
+2. **Check `resources/brand-guidelines/` before styling anything** (see
+   CLAUDE.md guardrail 11) — real logo files and the real brand
+   guideline doc live there if the operator has added them. If the
+   response document combines the operator's own logo with the
+   prospect's (a cover page, for example), pull both logos from real
+   sources (the prospect's from their own document, the operator's from
+   `resources/brand-guidelines/`) and follow whatever co-branding rule
+   the actual brand guidelines specify (safe area, separator style) —
+   never invent a lockup.
+3. Keep new table columns/response blocks visually distinct enough to
+   spot (a labeled box, or matching the original document's own header
+   color for a seamless look — ask the operator which they prefer,
+   don't assume) but never touch the original content itself.
+4. Every trust-level tag and internal note (open questions, NEEDS SME
+   INPUT flags) stays in the draft and gets called out explicitly as
+   "delete before sending" — this is a working draft, not the final
+   submission.
+
 ## Steps — HARVEST ("harvest this RFP")
 
 1. After a submission (or a won/lost outcome), take the final

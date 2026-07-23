@@ -14,6 +14,21 @@ local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
 2026-07-23 when the repo went fully agnostic — previously colleague names were
 allowed here.)
 
+## 2026-07-23 (improve: brand-guidelines compliance for document creation)
+- New CLAUDE.md guardrail 11: before creating any document that will
+  carry the operator's own branding, check `resources/brand-guidelines/`
+  (real logo + brand guideline doc, gitignored, local-only) rather than
+  guessing or reusing a color sampled from someone else's document.
+  `build-deck` is exempt — it already inherits real branding from the
+  operator's own example decks.
+- `resources/style-guide.md` gets a matching pointer to the same folder
+  (kept generic — no real brand specifics tracked in git).
+- `rfp-answer/SKILL.md` gains a new "producing an actual response
+  document" section: default to annotating a prospect's own RFP document
+  in place (their wording untouched, answers appended as extra columns/
+  labeled blocks) rather than rebuilding a separate proposal, and check
+  brand guidelines before styling any co-branded cover page.
+
 ## 2026-07-23 (Darwin goes agnostic)
 - **Darwin is now company- and product-agnostic.** The tracked repo no
   longer assumes the operator works at or sells any particular product.
