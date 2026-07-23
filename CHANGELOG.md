@@ -14,6 +14,30 @@ local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
 2026-07-23 when the repo went fully agnostic — previously colleague names were
 allowed here.)
 
+## 2026-07-24 (improve: storyblok-content now covers bootstrapping the ecommerce frontend template)
+- First real run of standing up the Storyblok ecommerce demo frontend
+  template (repo → Vercel → env vars → live) for a multi-brand ecommerce
+  demo account. Folded the concrete runbook into `storyblok-content`:
+  owning the repo without polluting the shared template repo or using a
+  public GitHub fork, deploying via Vercel's Git import (not the CLI) so
+  pushes auto-deploy, two bugs that ship broken by default (an
+  unconditional VWO SDK init that 500s every route when unconfigured, a
+  missing `compatibilityDate`), the env vars needed locally vs. on Vercel,
+  the distinction between a read-only Shopify Storefront token and a
+  write-capable Admin token, why mocking product data breaks the
+  Shopify-backed product-picker blocks specifically, and an `npm install`
+  side effect that silently bumps a dependency's major version.
+
+## 2026-07-23 (process-customer run on an FR multi-brand demo account)
+- Ran process-customer on a partner-sourced FR demo account ahead of a
+  first-meeting custom demo. Gong is connected via a deal-intelligence MCP
+  (ask_deal/ask_account/generate_brief, multi-workspace — pass the workspace
+  name) — pulled the discovery call directly per guardrail 5 instead of asking
+  the operator to paste it; Salesforce still not connected (operator pasted the
+  opp notes). Wrote the local-only brief and rewrote the whole Notion row
+  (Stage/Priority/AE/Next call/Notes/MEDDPICC). MEDDPICC multi-select convention
+  used = tag only the Confirmed elements; Partial/Gap detail lives in brief.md.
+
 ## 2026-07-23 (improve: ask before checking brand guidelines; Notion is the live source)
 - CLAUDE.md guardrail 11 revised: ask the operator first whether a new
   document needs to actually follow brand guidelines, or just needs the
