@@ -134,6 +134,20 @@ never smoothed over, because a wrong compliance claim in a submission is a
 real problem. Official product docs outrank any unofficial answer library.
 *Status: mechanism ready; the validated library is still being seeded.*
 
+### `custom-storyblok-demo` *(opt-in — Storyblok CMS only)*
+Also tied to Storyblok specifically — ignore it unless your company uses
+Storyblok. **Trigger:** "let's create a custom [demo] for [customer]" (the
+word "custom" is what distinguishes it from `demo-setup` and
+`storyblok-content`). **Does:** the concrete, repeatable pipeline for
+standing up a brand-new customer's Storyblok ecommerce demo from the
+`REDACTED-TEMPLATE` template end to end — own private repo (never a
+public GitHub Fork), local working directory, known template bugs fixed
+fresh every time, env vars, a real localhost check (not just "didn't
+crash"), then a guided Netlify-or-Vercel deploy. Never creates the Storyblok
+space itself — always asks the operator to do that via Storyblok's own
+"Solutions Demo Environment" flow, then fetches its Preview token itself
+once confirmed.
+
 ### `storyblok-content` *(opt-in — Storyblok CMS only)*
 Darwin is otherwise product-agnostic; this is the one skill tied to a
 specific product. Ignore it unless your company uses **Storyblok** as its

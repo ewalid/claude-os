@@ -14,6 +14,23 @@ local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
 2026-07-23 when the repo went fully agnostic — previously colleague names were
 allowed here.)
 
+## 2026-07-24 (improve: new custom-storyblok-demo skill, split out of storyblok-content)
+- Split the ecommerce-template bootstrap runbook (added earlier the same
+  day, see entry below) out of `storyblok-content` into its own dedicated
+  skill, `custom-storyblok-demo` — operator's explicit call, to keep
+  "writes content into a space that already works" and "stands up a
+  brand-new customer's demo end to end" as separate skills rather than one
+  skill doing both. Reworked while splitting: the space-creation step now
+  explicitly never attempts to create a Storyblok space itself (not even
+  as an API call to try) — always asks the operator to create it via
+  Storyblok's own Solutions Demo Environment flow, then fetches that
+  space's Preview token itself once confirmed, rather than asking the
+  operator to hunt for and paste it. Also confirmed (checking the actual
+  template repo) that this template ships no component-schema export and
+  no Storyblok CLI dependency, unlike an older sibling template that did —
+  meaning a plain API-created space would silently have no matching
+  components, which is exactly why space creation has to stay manual.
+
 ## 2026-07-24 (improve: storyblok-content now covers bootstrapping the ecommerce frontend template)
 - First real run of standing up the Storyblok ecommerce demo frontend
   template (repo → Vercel → env vars → live) for a multi-brand ecommerce

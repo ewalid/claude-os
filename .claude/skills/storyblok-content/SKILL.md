@@ -2,14 +2,14 @@
 name: storyblok-content
 description: >
   Trigger: "set up the Storyblok space for [account]", "create these
-  stories/components in [space]", or starting a new demo from the
-  Storyblok ecommerce frontend template (clone/own the repo, deploy to
-  Vercel, wire env vars). Writes real content into a Storyblok space:
-  dry-run preview → explicit OK → write → verify. Checks for a live
-  Storyblok MCP connector first (works today from Claude Code on the
-  operator's own machine); falls back to the Management API token, which
-  is blocked from inside a Cowork sandbox specifically by network egress
-  — see "Status".
+  stories/components in [space]". Writes real content into a
+  Storyblok space: dry-run preview → explicit OK → write → verify.
+  Checks for a live Storyblok MCP connector first (works today from
+  Claude Code on the operator's own machine); falls back to the Management
+  API token, which is blocked from inside a Cowork sandbox specifically
+  by network egress — see "Status". For standing up a brand-new customer's
+  ecommerce demo template from scratch (repo/Vercel/env vars), see
+  `custom-storyblok-demo` instead — that's a separate skill now.
 ---
 
 # storyblok-content
@@ -23,101 +23,6 @@ sell, or just the CMS they run). If the operator's product/stack has
 nothing to do with Storyblok, this skill simply doesn't apply — it makes
 no assumption that anyone selling anything uses it. Everything else in
 Darwin stays product-neutral.
-
-## Bootstrapping the ecommerce demo template (2026-07-24, first real run)
-
-Before there's any space content to write, an account whose demo needs a
-live storefront usually starts from Storyblok's `storyblok-demo-ecommerce-
-storefront` / `REDACTED-TEMPLATE` frontend template. This is the
-concrete setup path for that — distinct from the content-write loop below,
-but the same skill, since nothing below matters until this part works.
-
-1. **Own the repo without polluting the shared template.** Don't push to
-   `storyblok/storyblok-demo-*`, and don't use GitHub's native Fork either
-   — forks of public repos are public by default and carry visible
-   "forked from" lineage, wrong for a client demo repo. Instead:
-   `gh repo create <name> --private --source=. --remote=<tmp>`, swap it in
-   as `origin`, push. If template updates are ever needed later, add the
-   original as a second `upstream` remote rather than forking.
-
-2. **Deploy via Vercel's Git import, not the CLI**, so every push
-   auto-deploys: vercel.com/new → import the GitHub repo → framework
-   auto-detects as Nuxt.js → skip env vars on the first pass, deploy, add
-   them after (step 4), then manually trigger a Redeploy — **Vercel does
-   not redeploy automatically just because env vars changed.** Double-
-   check the **Team dropdown on the New Project screen specifically** —
-   it can default to a personal Hobby team even when the account-level
-   dashboard was showing a different (e.g. company) team. Confirm the
-   intended team before hitting Deploy, not after.
-
-3. **Two bugs ship broken by default in this template — fix both before
-   anything else, or every route 500s:**
-   - `plugins/storyblok.js` unconditionally calls the VWO SDK's `init()`
-     using `VITE_VWO_ACCOUNT_ID`/`VITE_VWO_SDK_KEY`. Unset (the normal
-     case until a personalization station actually wires up VWO),
-     `init()` returns `null`, and `storyblok/custom/ExperimentationVwo.vue`
-     then calls `.getFlag()` on that null client — an unconditional
-     "Cannot read properties of null" 500 on every route, not just pages
-     using that block. Guard both files: only call `init()` when both env
-     vars are present (default `vwoClient` to `null` otherwise), and guard
-     the `.getFlag()` call behind `if (vwoClient)`, falling back to the
-     default/forced variation when it's absent.
-   - `nuxt.config.js` has no `compatibilityDate` set (`NUXT_B5001`
-     warning) — add one. Cosmetic, but worth silencing immediately since
-     it clutters every dev-server boot log.
-
-4. **Env vars needed for both localhost and the Vercel deploy to work**,
-   at minimum: `STORYBLOK_TOKEN` (the space's **Preview** token, Settings
-   → Access Tokens — not the Public one), `SHOPIFY_DOMAIN` +
-   `SHOPIFY_TOKEN` (Storefront API — see step 5). Set these in a local
-   `.env` for `npm run dev`, AND separately in Vercel → Settings →
-   Environment Variables for the deployed site — the two don't share
-   state. VWO/Akeneo vars can stay unset (step 3's guard covers it)
-   unless that station is actually part of the demo.
-
-5. **Shopify Storefront token vs. Admin token are different credentials,
-   and this template eventually needs both.** The Storefront API token
-   (`SHOPIFY_TOKEN`) is public/read-only by design — it's what already
-   runs client-side, safe to receive/paste in chat, and lets the app read
-   products/collections and drive a mock cart. It **cannot** create or
-   edit collections or products. That needs a separate **Admin API**
-   token (scopes `read_products`/`write_products`, created under the
-   store's Settings → Apps → Develop apps) — or just create products by
-   hand in the Shopify admin UI, which needs no token at all and is fast
-   enough for a dozen demo products (~10-15 min manually vs. ~1-2 min
-   scripted with an Admin token).
-
-6. **Don't mock product data in code if the demo uses
-   `FeaturedProducts`/`ImageTextSectionProduct`.** Those two block types
-   use a separate custom Storyblok field plugin
-   (`shopify-demo-product-picker`) that searches the **live** Shopify
-   catalog for editors to pick a product visually — it has no awareness
-   of anything mocked in the frontend's own composables. If the account's
-   Shopify store is a shared multi-tenant SE sandbox with no relevant
-   products (confirmed via a live Storefront API query before assuming —
-   one such shared store turned out to hold only generic watches/F1-
-   merch/homeware, nothing usable for an agri-wholesale account), create
-   real products/a real collection in Shopify itself (step 5) rather than
-   mocking — mocking silently breaks that picker for those two block
-   types even though it works fine for `ProductCard`/`ProductPageOverview`
-   /`SingleProduct`, which resolve products directly through the
-   frontend's own composables instead.
-
-7. **The `shopify-config` datasource's `collection_slug` entry is a live
-   governance knob, not a build-time setting** — it's fetched at runtime
-   via the CDN API (`cdn/datasource_entries?datasource=shopify-config`),
-   so changing its value in the Storyblok UI takes effect on the next
-   page load, no redeploy needed. It scopes `ProductPageOverview`'s "all
-   products" listing and single-product-by-handle lookups to one
-   collection; it does **not** scope the product-picker blocks (step 6),
-   which editors choose individually.
-
-8. **After any `npm install` on this template, check `git diff` before
-   committing.** It has silently bumped `package.json`'s `swiper` range
-   (`^11.2.10` → `^14.0.6`, a major version) purely from lockfile
-   regeneration, with no explicit ask for that upgrade — revert
-   `package.json`/`package-lock.json` if the diff includes dependency
-   changes that weren't the actual intent of the install.
 
 ## Status (2026-07-22)
 
