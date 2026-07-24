@@ -93,10 +93,8 @@ message by message, that session.
    call has none of this template's component schemas (Header,
    ProductPageOverview, etc.) — nothing will render even with a valid token,
    and it fails silently, not with an error. Confirmed 2026-07-24: this
-   specific template (`REDACTED-TEMPLATE`) ships no
-   `components.*.json` export and no Storyblok CLI dependency to push
-   schemas programmatically — unlike the older
-   `REDACTED-TEMPLATE-2` template, which did ship one.
+   template (`REDACTED-TEMPLATE`) ships no `components.*.json`
+   export and no Storyblok CLI dependency to push schemas programmatically.
    Instead: **ask the operator to create it themselves**, via Storyblok's
    own "Solutions Demo Environment" flow
    (`app.storyblok.com/#/me/spaces/new?tab=experience-demo`, select
