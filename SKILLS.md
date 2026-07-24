@@ -140,16 +140,15 @@ Storyblok. **Trigger:** "let's create a custom [demo] for [customer]" (the
 word "custom" is what distinguishes it from `demo-setup` and
 `storyblok-content`). **Does:** the repeatable, mostly hands-off pipeline for
 standing up a brand-new customer's Storyblok demo. Two paths: **Path A**
-(Storyblok-internal operators) duplicates the *private*
-`REDACTED-TEMPLATE` ecommerce template; **Path B** (non-Storyblok
-operators, who can't clone that private repo) asks which framework/language
-and scaffolds it via the Storyblok CLI (`storyblok create`). Then both:
-own a private repo (never a public GitHub Fork), fix the known template bugs
-(Path A only — they're `default-se`-specific), set `.env` + Vercel env vars
-via CLI, deploy via CLI, one cheap content check on the deployed URL, and
-wire both preview URLs into the CMS (localhost as "dev", Vercel as default).
-On Path A never creates the space (asks the operator — a blank one renders
-nothing); fetches the Preview token itself; doesn't launch/verify localhost.
+duplicates a starter template repo the operator already uses (which repo, and
+any of its fixes/CMS-seeding quirks, come from local memory — never named in
+git); **Path B** asks which framework/language and scaffolds it via the
+Storyblok CLI (`storyblok create`). Then both: own a private repo (never a
+public GitHub Fork), apply any template fixes (Path A, from local memory), set
+`.env` + Vercel env vars via CLI, deploy via CLI, one cheap content check on
+the deployed URL, and wire both preview URLs into the CMS (localhost as "dev",
+Vercel as default). Never creates a would-be-blank CMS space (asks the
+operator); fetches the Preview token itself; doesn't launch/verify localhost.
 
 ### `storyblok-content` *(opt-in — Storyblok CMS only)*
 Darwin is otherwise product-agnostic; this is the one skill tied to a

@@ -14,70 +14,56 @@ local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
 2026-07-23 when the repo went fully agnostic — previously colleague names were
 allowed here.)
 
-## 2026-07-24 (improve: custom-storyblok-demo now handles non-Storyblok operators — the default template is private)
-- Flagged that `storyblok/REDACTED-TEMPLATE` is a private,
-  Storyblok-internal repo — a plain clone 403s for anyone outside Storyblok,
-  which would silently break the skill for the general (shareable) Darwin
-  user. Split the flow into two paths: **Path A** (operator has access to the
-  private template — Storyblok employees) works exactly as before; **Path B**
-  (non-Storyblok operator) asks which framework/language and scaffolds via the
-  Storyblok CLI (`storyblok create`) instead, which also seeds its own space.
-  Scoped the known-bugs fix-list and the "never create a space" guardrail to
-  Path A specifically (they're `default-se`-specific; the CLI legitimately
-  creates a seeded space on Path B). Left CLI flag syntax deliberately hedged
-  ("verify with `storyblok create --help`") since CLI flags drift across
-  versions and Path B hasn't been run end-to-end yet.
+## 2026-07-24 (improve: keep confidential template specifics out of git — generify custom-storyblok-demo)
+- The `custom-storyblok-demo` skill had been authored around a specific
+  starter template that is confidential to the operator's setup, and its
+  identifiers had landed in tracked files (and pushed history). Generified the
+  skill, `SKILLS.md`, and these changelog entries so git names no specific
+  template, its files, or its fix list — the process stays generic (Path A =
+  duplicate whatever starter repo the operator names; Path B = Storyblok CLI
+  scaffold), and all template-specific specifics now live only in local,
+  gitignored `memory.md`, loaded at run time. Also purged the identifiers from
+  past commit history (history rewrite + force-push) since the darwin repo is
+  public. Standing rule reinforced (CLAUDE.md guardrail 6): confidential
+  operator/setup specifics never go in tracked files.
 
 ## 2026-07-24 (improve: custom-storyblok-demo reworked leaner after its first real end-to-end run)
-- Ran the new skill end-to-end for the first time (repo → fixes → deploy →
-  CMS wiring, all working), then audited it for speed/token cost and applied
-  the fixes back into the skill: (1) reordered so the one human-gated step —
-  operator creates the Storyblok space — goes FIRST and overlaps the code
-  work, instead of blocking at the end; (2) collapsed a wasteful two-clone +
-  scratchpad dance into a single clone with `gh repo create --source=. --push`;
-  (3) switched the deploy from a guided dashboard flow to the Vercel CLI
-  (`vercel link` / `env add` / `--prod`), setting env vars before the first
-  deploy so there's no post-hoc redeploy, and dropped the Netlify-vs-Vercel
-  question (Vercel is the default; Netlify an untried fallback); (4) stopped
-  launching/verifying localhost — the deployed URL is now the single
-  render-verification gate, per operator preference; (5) token discipline:
-  verify with a cheap `get_page_text`/`innerText` check, never
-  `read_network_requests` on this template (it inlines fonts as base64 data
-  URIs — the biggest token sink on the first run), and don't churn MCP
-  `search` for space-settings writes that the connector doesn't expose. Also
-  recorded that the official Storyblok MCP connector
-  (`https://mcp.labs.storyblok.com/mcp`) is now permanently configured.
+- Ran the skill end-to-end for the first time (repo → fixes → deploy → CMS
+  wiring, all working), then audited it for speed/token cost and applied the
+  fixes back: (1) reordered so the human-gated step(s) go FIRST and overlap
+  the code work, instead of blocking at the end; (2) collapsed a wasteful
+  two-clone + scratchpad dance into a single clone with
+  `gh repo create --source=. --push`; (3) switched the deploy from a guided
+  dashboard flow to the Vercel CLI (`vercel link` / `env add` / `--prod`),
+  setting env vars before the first deploy so there's no post-hoc redeploy,
+  and dropped the Netlify-vs-Vercel question (Vercel default; Netlify an
+  untried fallback); (4) stopped launching/verifying localhost — the deployed
+  URL is now the single render-verification gate, per operator preference;
+  (5) token discipline: verify with a cheap `get_page_text`/`innerText` check,
+  never `read_network_requests` on a Nuxt/Vite frontend (inlined base64 fonts
+  — the biggest token sink on the first run), and don't churn MCP `search` for
+  space-settings writes the connector doesn't expose. Also recorded that the
+  official Storyblok MCP connector (`https://mcp.labs.storyblok.com/mcp`) is
+  now permanently configured.
 
 ## 2026-07-24 (improve: new custom-storyblok-demo skill, split out of storyblok-content)
-- Split the ecommerce-template bootstrap runbook (added earlier the same
-  day, see entry below) out of `storyblok-content` into its own dedicated
-  skill, `custom-storyblok-demo` — operator's explicit call, to keep
-  "writes content into a space that already works" and "stands up a
-  brand-new customer's demo end to end" as separate skills rather than one
-  skill doing both. Reworked while splitting: the space-creation step now
-  explicitly never attempts to create a Storyblok space itself (not even
-  as an API call to try) — always asks the operator to create it via
-  Storyblok's own Solutions Demo Environment flow, then fetches that
-  space's Preview token itself once confirmed, rather than asking the
-  operator to hunt for and paste it. Also confirmed (checking the actual
-  template repo) that this template ships no component-schema export and
-  no Storyblok CLI dependency, unlike an older sibling template that did —
-  meaning a plain API-created space would silently have no matching
-  components, which is exactly why space creation has to stay manual.
+- Split the demo-bootstrap runbook out of `storyblok-content` into its own
+  dedicated skill, `custom-storyblok-demo` — operator's explicit call, to keep
+  "writes content into a space that already works" and "stands up a brand-new
+  customer's demo end to end" as separate skills. Added a Path B (Storyblok
+  CLI scaffold) for operators without their own starter template. Space
+  handling: never create a space that would render blank (ask the operator to
+  seed it), then fetch its Preview token automatically rather than making them
+  paste it. Template-specific specifics kept in local memory, not in git.
 
-## 2026-07-24 (improve: storyblok-content now covers bootstrapping the ecommerce frontend template)
-- First real run of standing up the Storyblok ecommerce demo frontend
-  template (repo → Vercel → env vars → live) for a multi-brand ecommerce
-  demo account. Folded the concrete runbook into `storyblok-content`:
-  owning the repo without polluting the shared template repo or using a
-  public GitHub fork, deploying via Vercel's Git import (not the CLI) so
-  pushes auto-deploy, two bugs that ship broken by default (an
-  unconditional VWO SDK init that 500s every route when unconfigured, a
-  missing `compatibilityDate`), the env vars needed locally vs. on Vercel,
-  the distinction between a read-only Shopify Storefront token and a
-  write-capable Admin token, why mocking product data breaks the
-  Shopify-backed product-picker blocks specifically, and an `npm install`
-  side effect that silently bumps a dependency's major version.
+## 2026-07-24 (improve: storyblok-content gained then shed a demo-bootstrap runbook)
+- First real run of standing up a Storyblok demo frontend end to end (repo →
+  Vercel → env vars → live). Captured the reusable, non-confidential lessons
+  (own a private repo rather than pushing to a shared template; env vars
+  needed locally vs. on the host; read-only Shopify Storefront token vs.
+  write-capable Admin token; watch `npm install` for silent dependency
+  version bumps). This later moved into the dedicated `custom-storyblok-demo`
+  skill; template-specific quirks live in local memory.
 
 ## 2026-07-23 (process-customer run on an FR multi-brand demo account)
 - Ran process-customer on a partner-sourced FR demo account ahead of a
