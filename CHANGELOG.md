@@ -14,6 +14,20 @@ local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
 2026-07-23 when the repo went fully agnostic — previously colleague names were
 allowed here.)
 
+## 2026-07-24 (improve: custom-storyblok-demo now handles non-Storyblok operators — the default template is private)
+- Flagged that `storyblok/REDACTED-TEMPLATE` is a private,
+  Storyblok-internal repo — a plain clone 403s for anyone outside Storyblok,
+  which would silently break the skill for the general (shareable) Darwin
+  user. Split the flow into two paths: **Path A** (operator has access to the
+  private template — Storyblok employees) works exactly as before; **Path B**
+  (non-Storyblok operator) asks which framework/language and scaffolds via the
+  Storyblok CLI (`storyblok create`) instead, which also seeds its own space.
+  Scoped the known-bugs fix-list and the "never create a space" guardrail to
+  Path A specifically (they're `default-se`-specific; the CLI legitimately
+  creates a seeded space on Path B). Left CLI flag syntax deliberately hedged
+  ("verify with `storyblok create --help`") since CLI flags drift across
+  versions and Path B hasn't been run end-to-end yet.
+
 ## 2026-07-24 (improve: custom-storyblok-demo reworked leaner after its first real end-to-end run)
 - Ran the new skill end-to-end for the first time (repo → fixes → deploy →
   CMS wiring, all working), then audited it for speed/token cost and applied

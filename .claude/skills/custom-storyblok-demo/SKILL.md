@@ -5,10 +5,12 @@ description: >
   matters, it's what distinguishes this from `demo-setup` (writes the planning
   script) and `storyblok-content` (ongoing content writes into an existing
   space). End-to-end pipeline for standing up a brand-new customer's
-  Storyblok ecommerce demo from the REDACTED-TEMPLATE template: ask
-  the operator to create the space first, then automatically clone+own the
-  repo, fix the known template bugs, deploy to Vercel via CLI, set env vars
-  via CLI, and wire both preview URLs into the CMS. Runs mostly hands-off.
+  Storyblok demo: Path A (Storyblok-internal operators) duplicates the
+  private REDACTED-TEMPLATE ecommerce template; Path B (non-Storyblok
+  operators, who can't access that private repo) scaffolds their chosen
+  framework via the Storyblok CLI. Then, both paths: clone+own a private
+  repo, fix known bugs (Path A), deploy to Vercel via CLI, set env vars via
+  CLI, wire both preview URLs into the CMS. Runs mostly hands-off.
 ---
 
 # custom-storyblok-demo
@@ -21,16 +23,43 @@ and `storyblok-content` (ongoing content writes into a working space). First
 real run 2026-07-24 (Winfarm, by hand); reworked leaner 2026-07-24 after that
 run — see "Efficiency notes" for what changed and why.
 
-The shape: **one human-gated step up front** (operator creates the Storyblok
-space — Darwin can't), and everything after runs without hand-holding —
+The shape: **one human-gated step up front** (the Storyblok space — Darwin
+can't create it on Path A), and everything after runs without hand-holding —
 clone+own the repo, fix the known bugs, deploy to Vercel via CLI, set env
 vars via CLI, wire both preview URLs into the CMS.
+
+## Two template paths — decide this FIRST
+
+`storyblok/REDACTED-TEMPLATE` is a **PRIVATE, Storyblok-internal
+repo.** A plain `git clone` of it 403s for anyone outside Storyblok. So which
+path applies depends on who the operator is:
+
+- **Path A — operator has access to the private template** (Storyblok
+  employees, e.g. Walid). Use `REDACTED-TEMPLATE` as written below.
+  It's the purpose-built ecommerce demo, and the known-bugs list in step 4
+  and the Shopify product-picker specifics are all properties of *this
+  template specifically*. This is the default, fully-proven path.
+- **Path B — operator is NOT from Storyblok / has no access to that repo.**
+  Do NOT try to clone the private template (it will fail). Instead, ask which
+  **framework/language** they want (Next.js, Nuxt, Astro, SvelteKit, etc.),
+  then scaffold with the **Storyblok CLI** — see step 3, Path B. This
+  produces a *different* boilerplate, so the step-4 bug list does NOT apply
+  verbatim — verify what actually reproduces in that boilerplate rather than
+  blindly editing files that may not exist.
+
+Confirm the operator's situation before step 3 if it isn't already obvious
+(Darwin's own operator identity in `memory.md` usually settles it — Walid is
+Storyblok-internal → Path A). When unsure, ask.
 
 ## Prerequisites
 
 - GitHub CLI (`gh`) authenticated as the operator's own account.
 - Vercel CLI authenticated (`npx vercel whoami`) — the deploy is done via CLI,
   not the dashboard.
+- **Path A only:** access to the private `storyblok/REDACTED-TEMPLATE`
+  repo (Storyblok-internal). **Path B only:** the Storyblok CLI — npm package
+  `storyblok` (`npm i -g storyblok`, or `npx storyblok`); `storyblok create`
+  scaffolds a framework project and can seed a matching space.
 - Storyblok Management API token in `storyblok.env` (`STORYBLOK_MANAGEMENT_TOKEN`),
   and/or the official Storyblok MCP connector (now permanently configured —
   HTTP server at `https://mcp.labs.storyblok.com/mcp`, registered via
@@ -45,24 +74,26 @@ vars via CLI, wire both preview URLs into the CMS.
 The one human-gated step (1) goes first, so the space is being created while
 Darwin does the rest — by the time the token is needed (step 6), it's ready.
 
-1. **FIRST, ask the operator to create the Storyblok space** — before
-   touching any code. Darwin must **never** create a space itself (see
-   guardrails): a blank API-created space has none of this template's
-   component schemas and renders nothing, silently. Tell the operator to
-   create it via Storyblok's "Solutions Demo Environment" flow
-   (`app.storyblok.com/#/me/spaces/new?tab=experience-demo`, select
-   "Solutions Demo Environment"), named after the customer, and to also
-   disable **Settings → Maintenance Mode → Example Mode** while they're in
-   there (required later for the Visual Editor to accept a custom preview
-   URL). Then proceed with steps 2-5 in parallel — don't block on their
-   confirmation until step 6.
-
-   Also ask, in the same message, the one other thing that needs a human
-   answer: **which Shopify store** — reuse the shared SE-demo sandbox used
-   elsewhere, or a customer-specific one? (2026-07-24: the shared sandbox
-   is a generic multi-tenant store — watches/F1-merch/smart-home/homeware —
-   with nothing agri-relevant; fine as a placeholder, but confirm it suits
-   the demo.) Batch both asks into one turn, don't drip them out.
+1. **FIRST, get the human-gated answers up front** — in one batched turn,
+   before touching code, so they resolve while Darwin does steps 2-5.
+   - **Path A: ask the operator to create the Storyblok space themselves.**
+     Darwin must **never** create a space on this path (see guardrails): a
+     blank API-created space has none of `default-se`'s component schemas and
+     renders nothing, silently. Point them at Storyblok's "Solutions Demo
+     Environment" flow (`app.storyblok.com/#/me/spaces/new?tab=experience-demo`,
+     select "Solutions Demo Environment"), named after the customer, and have
+     them disable **Settings → Maintenance Mode → Example Mode** while there
+     (needed later for the Visual Editor to accept a custom preview URL).
+     Don't block on their confirmation until step 6.
+   - **Path B: ask which framework/language** instead — the Storyblok CLI's
+     `storyblok create` scaffolds the space itself as part of step 3, so
+     there's no separate manual space-creation ask here.
+   - **Both paths: ask which Shopify store** — reuse the shared SE-demo
+     sandbox used elsewhere, or a customer-specific one? (2026-07-24: the
+     shared sandbox is a generic multi-tenant store —
+     watches/F1-merch/smart-home/homeware — nothing agri-relevant; fine as a
+     placeholder, but confirm it suits the demo.) Batch every applicable ask
+     into one turn, don't drip them out.
 
 2. **Resolve the customer's local working directory.** Check `~/dev/accounts/`
    for a folder that's already a variant of the customer's name — different
@@ -73,10 +104,11 @@ Darwin does the rest — by the time the token is needed (step 6), it's ready.
    the operator to confirm** on any ambiguity. Never silently create a second
    folder for the same customer under a different spelling.
 
-3. **Clone + own the repo in one pass — a private duplicate, not a GitHub
-   Fork, and NO scratchpad / no double-clone.** Clone the template straight
-   into the working directory, drop the template remote, then create+push
-   the private repo in a single `gh` call:
+3. **Get the code into an owned private repo** — path-dependent:
+
+   **Path A (private `default-se` template).** Clone straight into the
+   working dir, drop the template remote, create+push the private repo in one
+   `gh` call — one clone, no scratchpad, no re-clone:
    ```
    git clone https://github.com/storyblok/REDACTED-TEMPLATE.git \
      ~/dev/accounts/<Customer>/<customer>-storyblok-demo
@@ -85,16 +117,37 @@ Darwin does the rest — by the time the token is needed (step 6), it's ready.
    gh repo create <customer>-storyblok-demo --private --source=. \
      --remote=origin --push
    ```
-   `--push` creates the repo AND pushes in the same step, and the working
-   dir is already the clone — so there's no scratchpad clone and no
-   re-clone afterward (that two-clone dance was pure waste on the first
-   run). Never use GitHub's native Fork — it defaults to public and carries
-   visible "forked from storyblok/..." lineage, wrong for a client demo repo
+   `--push` creates AND pushes in one step, and the working dir is already
+   the clone — the first run's scratchpad + re-clone was pure waste.
+
+   **Path B (Storyblok CLI scaffold).** Don't clone the private repo — it
+   403s. Scaffold with the CLI in the framework the operator chose (step 1),
+   then own it the same way:
+   ```
+   npx storyblok create ~/dev/accounts/<Customer>/<customer>-storyblok-demo \
+     --template <framework>          # verify current flags: storyblok create --help
+   cd <that dir>
+   git init && git add -A && git commit -m "Initial scaffold"   # if create didn't
+   gh repo create <customer>-storyblok-demo --private --source=. \
+     --remote=origin --push
+   ```
+   `storyblok create` also scaffolds/links a Storyblok space for that
+   boilerplate — so on Path B the space is handled here, not via the manual
+   Solutions Demo Environment flow. CLI flags change across versions (the
+   `--token`/`--skip-space` flags are recent) — check `storyblok create
+   --help` rather than trusting the syntax above verbatim.
+
+   **Both paths:** never use GitHub's native Fork — it defaults to public and
+   carries visible "forked from …" lineage, wrong for a client demo repo
    (operator decision, 2026-07-24: "a private repo, so I can work on it
    without touching the team's template"). Repo name: lowercase-kebab,
    `<customer>-storyblok-demo`.
 
-4. **Apply the known template bugs — fresh, on every new customer repo.**
+4. **Apply the known template bugs — Path A / `default-se` only, fresh on
+   every new customer repo.** These five are all specific to
+   `REDACTED-TEMPLATE`; a Path B CLI-scaffold (Next/Nuxt/Astro/etc.)
+   won't have these files, so **skip this step on Path B** and instead verify
+   that boilerplate boots cleanly and fix whatever actually reproduces there.
    Operator decision (2026-07-24): don't maintain a pre-fixed base fork,
    since it would silently drift from the upstream template. Read the target
    regions in ONE batched command (a single `cat`/`grep` across all five
@@ -210,13 +263,19 @@ Darwin does the rest — by the time the token is needed (step 6), it's ready.
   project's own local `.env`, gitignored by the template itself — never in
   the darwin repo, never in any tracked file. A Storefront token is
   public/read-only by design and safe to receive in chat; nothing else is.
-- **Never attempt to create a Storyblok space, not even as an API call to
-  try "just in case."** Always ask the operator to create it themselves via
-  the Solutions Demo Environment flow, and wait for their explicit
-  confirmation before proceeding — a space Darwin created itself (or
-  assumed existed) is exactly the silent-failure case step 5 warns about.
-  Once confirmed, retrieving that space's Preview token IS Darwin's job
-  (step 6) — don't ask the operator to fetch and paste it.
+- **Path A: never create the Storyblok space via a raw API call, not even
+  "just in case."** A blank space created that way has none of `default-se`'s
+  component schemas and fails silently (renders nothing, no error). Ask the
+  operator to create it via the Solutions Demo Environment flow and wait for
+  confirmation. (Path B is different: the Storyblok CLI's `storyblok create`
+  legitimately scaffolds/seeds a matching space for its own boilerplate —
+  that's fine, because it's seeded, not blank.) On either path, once the
+  space exists, retrieving its Preview token IS Darwin's job (step 6) — don't
+  make the operator fetch and paste it.
+- **`storyblok/REDACTED-TEMPLATE` is a private, Storyblok-internal
+  repo.** Don't attempt to clone it for an operator without access — it 403s.
+  For non-Storyblok operators, use Path B (Storyblok CLI scaffold in their
+  chosen framework) instead. See "Two template paths."
 - The render-verification gate is the **deployed URL**, not localhost — and
   it must be a real content check (text actually present), not just a 200 or
   "no crash," because an empty space renders cleanly with zero content. Skip
