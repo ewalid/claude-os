@@ -5,33 +5,66 @@ description: >
   matters, it's what distinguishes this from `demo-setup` (writes the planning
   script) and `storyblok-content` (ongoing content writes into an existing
   space). End-to-end pipeline for standing up a brand-new customer's
-  Storyblok ecommerce demo from the REDACTED-TEMPLATE template: own
-  repo, local working directory, Storyblok space, env vars, localhost check,
-  then a guided deploy.
+  Storyblok ecommerce demo from the REDACTED-TEMPLATE template: ask
+  the operator to create the space first, then automatically clone+own the
+  repo, fix the known template bugs, deploy to Vercel via CLI, set env vars
+  via CLI, and wire both preview URLs into the CMS. Runs mostly hands-off.
 ---
 
 # custom-storyblok-demo
 
 ## What it does
 
-Turns "let's create a custom for [customer]" into a working local dev
-environment plus a guided deploy, end to end. This is the concrete,
-repeatable pipeline — distinct from `demo-setup` (the planning/script-writing
-skill) and `storyblok-content` (ongoing content writes into a space that
-already exists and works). First real run: 2026-07-24, Winfarm Group,
-retroactively — this skill formalizes what actually happened by hand,
-message by message, that session.
+Turns "let's create a custom for [customer]" into a deployed, CMS-wired demo,
+end to end and mostly hands-off. Distinct from `demo-setup` (planning/script)
+and `storyblok-content` (ongoing content writes into a working space). First
+real run 2026-07-24 (Winfarm, by hand); reworked leaner 2026-07-24 after that
+run — see "Efficiency notes" for what changed and why.
+
+The shape: **one human-gated step up front** (operator creates the Storyblok
+space — Darwin can't), and everything after runs without hand-holding —
+clone+own the repo, fix the known bugs, deploy to Vercel via CLI, set env
+vars via CLI, wire both preview URLs into the CMS.
 
 ## Prerequisites
 
 - GitHub CLI (`gh`) authenticated as the operator's own account.
-- A Storyblok MCP connector, or a Management API token in `storyblok.env`
-  (`STORYBLOK_MANAGEMENT_TOKEN`) — same dual-path rule as `storyblok-content`,
-  check both every time, never assume which is live.
+- Vercel CLI authenticated (`npx vercel whoami`) — the deploy is done via CLI,
+  not the dashboard.
+- Storyblok Management API token in `storyblok.env` (`STORYBLOK_MANAGEMENT_TOKEN`),
+  and/or the official Storyblok MCP connector (now permanently configured —
+  HTTP server at `https://mcp.labs.storyblok.com/mcp`, registered via
+  `claude mcp add --transport http --scope user`; note it needs a **Personal
+  Access Token**, not the space Management token, in the Bearer header, and
+  its tools only load after a session restart following the add). The MCP has
+  `getSpace` (read) but **no space-settings write op** — environments/preview
+  URLs must be set via Management API curl regardless (see step 7).
 
 ## Steps
 
-1. **Resolve the customer's local working directory.** Check `~/dev/accounts/`
+The one human-gated step (1) goes first, so the space is being created while
+Darwin does the rest — by the time the token is needed (step 6), it's ready.
+
+1. **FIRST, ask the operator to create the Storyblok space** — before
+   touching any code. Darwin must **never** create a space itself (see
+   guardrails): a blank API-created space has none of this template's
+   component schemas and renders nothing, silently. Tell the operator to
+   create it via Storyblok's "Solutions Demo Environment" flow
+   (`app.storyblok.com/#/me/spaces/new?tab=experience-demo`, select
+   "Solutions Demo Environment"), named after the customer, and to also
+   disable **Settings → Maintenance Mode → Example Mode** while they're in
+   there (required later for the Visual Editor to accept a custom preview
+   URL). Then proceed with steps 2-5 in parallel — don't block on their
+   confirmation until step 6.
+
+   Also ask, in the same message, the one other thing that needs a human
+   answer: **which Shopify store** — reuse the shared SE-demo sandbox used
+   elsewhere, or a customer-specific one? (2026-07-24: the shared sandbox
+   is a generic multi-tenant store — watches/F1-merch/smart-home/homeware —
+   with nothing agri-relevant; fine as a placeholder, but confirm it suits
+   the demo.) Batch both asks into one turn, don't drip them out.
+
+2. **Resolve the customer's local working directory.** Check `~/dev/accounts/`
    for a folder that's already a variant of the customer's name — different
    casing, spacing, or an abbreviation (that directory already has
    inconsistent naming: `joué club`, `Group`, `implid-demo`/`implid-careers`
@@ -40,25 +73,33 @@ message by message, that session.
    the operator to confirm** on any ambiguity. Never silently create a second
    folder for the same customer under a different spelling.
 
-2. **Create the repo — a private duplicate, not a GitHub Fork.** From a
-   fresh local clone of `storyblok/REDACTED-TEMPLATE`:
-   `gh repo create <customer>-storyblok-demo --private --source=. --remote=<tmp>`,
-   then swap the new repo in as `origin` and push. Never use GitHub's native
-   Fork feature for this — it defaults to public and carries visible
-   "forked from storyblok/..." lineage, wrong for a client demo repo
-   (explicit operator decision, 2026-07-24: "duplicating the template repo
-   in my personal repo as a private repo, so I can work on it without
-   touching the team's template"). Repo name convention: lowercase-kebab,
-   `<customer>-storyblok-demo` (matches `winfarm-storyblok-demo`).
-
-3. **Clone it into the working directory resolved in step 1.**
+3. **Clone + own the repo in one pass — a private duplicate, not a GitHub
+   Fork, and NO scratchpad / no double-clone.** Clone the template straight
+   into the working directory, drop the template remote, then create+push
+   the private repo in a single `gh` call:
+   ```
+   git clone https://github.com/storyblok/REDACTED-TEMPLATE.git \
+     ~/dev/accounts/<Customer>/<customer>-storyblok-demo
+   cd <that dir>
+   git remote remove origin
+   gh repo create <customer>-storyblok-demo --private --source=. \
+     --remote=origin --push
+   ```
+   `--push` creates the repo AND pushes in the same step, and the working
+   dir is already the clone — so there's no scratchpad clone and no
+   re-clone afterward (that two-clone dance was pure waste on the first
+   run). Never use GitHub's native Fork — it defaults to public and carries
+   visible "forked from storyblok/..." lineage, wrong for a client demo repo
+   (operator decision, 2026-07-24: "a private repo, so I can work on it
+   without touching the team's template"). Repo name: lowercase-kebab,
+   `<customer>-storyblok-demo`.
 
 4. **Apply the known template bugs — fresh, on every new customer repo.**
-   Explicit operator decision (2026-07-24): don't maintain a pre-fixed base
-   fork to duplicate from instead, since that would silently drift from
-   Storyblok's actual current template over time. Before applying each fix,
-   verify it still reproduces — the upstream template may have been patched
-   since this was last written:
+   Operator decision (2026-07-24): don't maintain a pre-fixed base fork,
+   since it would silently drift from the upstream template. Read the target
+   regions in ONE batched command (a single `cat`/`grep` across all five
+   files, not five separate reads) to confirm each still reproduces before
+   editing:
    - `plugins/storyblok.js` unconditionally calls the VWO SDK's `init()`
      using `VITE_VWO_ACCOUNT_ID`/`VITE_VWO_SDK_KEY`. Unset (the normal case
      until a personalization station actually wires up VWO), `init()`
@@ -83,83 +124,85 @@ message by message, that session.
      `ProductCard.vue`, etc. — reuse that, don't invent a new marker) gets
      `'draft'`. **Tell the operator afterward that every story they want
      visible on the live URL now needs an explicit Publish, not just Save.**
+   Commit and push the fixes.
 
-5. **Check whether a Storyblok space for this customer already exists**
-   (MCP connector, or Management API space list). If yes, skip straight to
-   step 6.
+5. **`npm install`, then check `git diff` before committing.** On the first
+   run this only produced benign lockfile metadata churn (stale
+   `peer`/`extraneous` flags, the package-name field) — but earlier in the
+   session an install had silently bumped `swiper` to a new major version.
+   Revert `package.json`/`package-lock.json` if the diff includes dependency
+   *version* changes that weren't the intent; commit if it's only metadata.
 
-   **If no space exists yet, never attempt to create it — not even as an
-   API call to try.** A blank space created via a plain "create space" API
-   call has none of this template's component schemas (Header,
-   ProductPageOverview, etc.) — nothing will render even with a valid token,
-   and it fails silently, not with an error. Confirmed 2026-07-24: this
-   template (`REDACTED-TEMPLATE`) ships no `components.*.json`
-   export and no Storyblok CLI dependency to push schemas programmatically.
-   Instead: **ask the operator to create it themselves**, via Storyblok's
-   own "Solutions Demo Environment" flow
-   (`app.storyblok.com/#/me/spaces/new?tab=experience-demo`, select
-   "Solutions Demo Environment"), named after the customer. Wait for their
-   explicit confirmation it's done (operator decision, 2026-07-24: "don't
-   create the space yourself ask me to do it") — don't proceed to step 6 on
-   an assumption.
+6. **Once the operator confirms the space exists, retrieve its Preview token
+   yourself** — don't make them hunt for it. Via Management API:
+   `GET /v1/spaces` to find the space by name → `GET /v1/spaces/<id>/api_keys/`
+   → the token whose `access` is `"private"` is the draft-capable Preview
+   token (verify if unsure: it can fetch `?version=draft`; the `public` one
+   returns Unauthorized on draft). Then write `.env` in the project root:
+   - `STORYBLOK_TOKEN` = that private/Preview token.
+   - `SHOPIFY_DOMAIN` / `SHOPIFY_TOKEN` = per the step-1 answer.
+   - Leave `VITE_VWO_*` / `AKENEO_*` commented out (step 4's guards cover it).
+   Confirm `.env` is gitignored (`git check-ignore -v .env`).
 
-6. **Once the operator confirms the space is ready, retrieve its Preview
-   token yourself** (MCP connector, or Management API — Settings → Access
-   Tokens → **Preview**, not Public) rather than asking them to copy/paste
-   it. This is the one part of space setup that IS on Darwin: fetch it,
-   don't make the operator hunt for it.
+7. **Deploy to Vercel via CLI — not the dashboard.** The CLI path is fully
+   automatable and is the default now (operator, 2026-07-24: "could have
+   deployed yourself and add the variable yourself"). Netlify remains an
+   untried fallback — only offer it if the operator asks. Sequence:
+   ```
+   npx vercel link --yes --project <customer>-storyblok-demo --scope <team>
+   # add all three vars to all three environments, non-interactively:
+   for ENV in production preview development; do
+     npx vercel env add STORYBLOK_TOKEN  "$ENV" --value "<token>"  --yes
+     npx vercel env add SHOPIFY_DOMAIN   "$ENV" --value "<domain>" --yes
+     npx vercel env add SHOPIFY_TOKEN    "$ENV" --value "<token>"  --yes
+   done
+   npx vercel --prod --yes    # builds WITH the env vars already set
+   ```
+   Doing env-vars-before-first-`--prod` avoids the dashboard flow's
+   "redeploy needed after adding vars" gotcha entirely. If a project already
+   exists, `vercel link` finds it; if `link` prints a `next[]` hint asking
+   for `--scope`, re-run with the scope it names. The final `--prod` output
+   gives both the deployment URL and the aliased
+   `https://<customer>-storyblok-demo.vercel.app`.
 
-7. **Create `.env`** in the project root:
-   - `STORYBLOK_TOKEN` = the Preview token from step 6.
-   - `SHOPIFY_DOMAIN` / `SHOPIFY_TOKEN` — **ask the operator** whether this
-     customer reuses the same shared SE-demo Shopify sandbox used elsewhere,
-     or needs its own; never assume silently. (2026-07-24: the shared
-     sandbox turned out to be a generic multi-tenant store — watches,
-     F1-team merch, smart-home, homeware — with nothing relevant to an
-     agri-wholesale account. Confirm the shared store is actually usable for
-     *this* customer's demo before reusing it as-is.)
-   - Leave `VITE_VWO_*`/`AKENEO_*` commented out — safe now that step 4's
-     guards are in place; only fill them in if that station is actually
-     part of this customer's demo.
+8. **Verify the DEPLOYED URL renders real content — cheaply. Skip localhost
+   entirely** (operator, 2026-07-24: "don't run it... you don't have to
+   check that it works"). The deployed check is the real gate and it also
+   confirms the space isn't empty. Do it with ONE lightweight check:
+   `get_page_text`, or a single `innerText.includes('...')` via the JS tool.
+   **Never use `read_network_requests` on this template** — it inlines fonts
+   as base64 `data:` URIs and the dump is enormous (the big token sink on
+   the first run). Avoid screenshots unless a text check is ambiguous; if the
+   first check looks blank, it's usually a paint-timing race — re-check text,
+   don't reach for a screenshot.
 
-8. **`npm install`, then check `git diff` before ever committing.**
-   `npm install` on this template has silently bumped `package.json`'s
-   `swiper` range to a new major version purely from lockfile regeneration,
-   with no explicit ask for that upgrade — revert
-   `package.json`/`package-lock.json` if the diff includes dependency
-   changes that weren't the actual intent of the install.
+9. **Wire both preview URLs into the CMS** via Management API (the MCP has no
+   space-settings write op). Re-fetch environments first so you don't clobber
+   anything, then PUT the full list:
+   `PUT /v1/spaces/<id>` with
+   `{"space":{"environments":[
+     {"name":"dev","location":"https://localhost:3000/"},
+     {"name":"Vercel","location":"https://<customer>-storyblok-demo.vercel.app/"}]}}`.
+   Plain URLs, nothing appended — the `?token=...&path=...` scheme is only
+   for Storyblok's multi-tenant demo hosting, and a query-param token
+   *overrides* the env-var fallback (pasting the wrong one there — e.g. a
+   Shopify token — silently breaks auth, which happened 2026-07-24). Set the
+   Vercel entry as the one to use as default. localhost is wired as "dev" for
+   convenience but is NOT launched or verified by this skill.
 
-9. **`npm run dev`, then confirm localhost actually renders real content —
-   not just "no crash."** A guarded VWO client and a valid token still
-   render nothing useful if step 5's space doesn't have matching
-   components/stories yet. This is the real verification gate.
+## Efficiency notes (what changed after the first run, and why)
 
-10. **Ask the operator: Netlify or Vercel?** before deploying — this
-    template's own README defaults to Netlify examples; only the Vercel path
-    is proven end-to-end so far (2026-07-24, Winfarm). Guide whichever is
-    chosen:
-    - **Vercel**: Git-import via vercel.com/new (not the CLI), so pushes
-      auto-deploy. Double-check the **Team dropdown on the New Project
-      screen itself** — it can default to a personal Hobby team even when
-      the account-level dashboard was showing a different team. Skip env
-      vars on the first pass, deploy, then add
-      `STORYBLOK_TOKEN`/`SHOPIFY_DOMAIN`/`SHOPIFY_TOKEN` in Settings →
-      Environment Variables and manually trigger a **Redeploy** — Vercel
-      does not redeploy automatically just because env vars changed.
-    - **Netlify**: not yet run end-to-end by this skill. Treat the first
-      real run as a chance to capture the equivalent gotchas afterward —
-      don't assume the Vercel steps translate directly.
-
-11. **Set the Storyblok space's Visual Editor Location** to the plain
-    deployed URL, nothing appended (`https://<deployment-url>`) — the
-    `?token=...&path=...` scheme in this template's README is only for
-    Storyblok's own multi-tenant demo-hosting setup, not a dedicated
-    single-customer deploy where `STORYBLOK_TOKEN` is already an env var.
-    A query-param token also *overrides* the env var fallback, so pasting
-    the wrong value there (e.g. a Shopify token by mistake, which happened
-    2026-07-24) breaks auth in a confusing way — leave it out entirely.
-    Also disable **Settings → Maintenance Mode → Example Mode**, required
-    for any custom preview URL to work in the Visual Editor at all.
+- **Space-ask goes first** so the human-gated bottleneck overlaps the code
+  work instead of blocking at the end.
+- **One clone, no scratchpad** (`gh repo create --source=. --push`) — the
+  first run cloned twice.
+- **Vercel via CLI**, env-vars-before-first-deploy — no dashboard, no
+  Netlify-vs-Vercel question, no post-hoc redeploy.
+- **No localhost run/verify** — the deployed URL is the single render gate.
+- **Cheap verification only**: `get_page_text`/`innerText`, never
+  `read_network_requests` (base64 fonts) and rarely a screenshot.
+- **Don't churn MCP `search`** for space-settings writes — they aren't in the
+  connector; go straight to Management API curl for token + environments.
 
 ## Guardrails
 
@@ -174,8 +217,12 @@ message by message, that session.
   assumed existed) is exactly the silent-failure case step 5 warns about.
   Once confirmed, retrieving that space's Preview token IS Darwin's job
   (step 6) — don't ask the operator to fetch and paste it.
-- Never treat "localhost didn't crash" as "localhost works" — confirm
-  actual content renders (step 9), not just an absence of errors.
+- The render-verification gate is the **deployed URL**, not localhost — and
+  it must be a real content check (text actually present), not just a 200 or
+  "no crash," because an empty space renders cleanly with zero content. Skip
+  launching/verifying localhost entirely (operator preference, 2026-07-24).
+  Keep the verification cheap: `get_page_text`/`innerText`, never
+  `read_network_requests` on this template (inlined base64 fonts).
 - **Read each message for which mode is active before assuming a default.**
   The operator has, in the same session, asked to type every command
   themselves *and* asked for direct edits/commits ("do it yourself") at

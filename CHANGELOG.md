@@ -14,6 +14,26 @@ local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
 2026-07-23 when the repo went fully agnostic — previously colleague names were
 allowed here.)
 
+## 2026-07-24 (improve: custom-storyblok-demo reworked leaner after its first real end-to-end run)
+- Ran the new skill end-to-end for the first time (repo → fixes → deploy →
+  CMS wiring, all working), then audited it for speed/token cost and applied
+  the fixes back into the skill: (1) reordered so the one human-gated step —
+  operator creates the Storyblok space — goes FIRST and overlaps the code
+  work, instead of blocking at the end; (2) collapsed a wasteful two-clone +
+  scratchpad dance into a single clone with `gh repo create --source=. --push`;
+  (3) switched the deploy from a guided dashboard flow to the Vercel CLI
+  (`vercel link` / `env add` / `--prod`), setting env vars before the first
+  deploy so there's no post-hoc redeploy, and dropped the Netlify-vs-Vercel
+  question (Vercel is the default; Netlify an untried fallback); (4) stopped
+  launching/verifying localhost — the deployed URL is now the single
+  render-verification gate, per operator preference; (5) token discipline:
+  verify with a cheap `get_page_text`/`innerText` check, never
+  `read_network_requests` on this template (it inlines fonts as base64 data
+  URIs — the biggest token sink on the first run), and don't churn MCP
+  `search` for space-settings writes that the connector doesn't expose. Also
+  recorded that the official Storyblok MCP connector
+  (`https://mcp.labs.storyblok.com/mcp`) is now permanently configured.
+
 ## 2026-07-24 (improve: new custom-storyblok-demo skill, split out of storyblok-content)
 - Split the ecommerce-template bootstrap runbook (added earlier the same
   day, see entry below) out of `storyblok-content` into its own dedicated
