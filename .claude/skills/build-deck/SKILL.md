@@ -82,6 +82,21 @@ is fixed — this skill fills it in, it doesn't invent new slide types.
    base deck still has that scaffolding, treat it as blank and fill it
    properly, don't paste the instructions into the new deck.
 
+4b. **If deleting or reordering slides via direct pptx XML manipulation
+   (`prs.slides._sldIdLst`)**: removing a slide by only stripping its
+   entry from `sldIdLst` leaves its relationship (`r:id`) orphaned in
+   `presentation.xml.rels` — on save, python-pptx can silently assign a
+   DUPLICATE part filename (e.g. two different slides both written as
+   `slide13.xml`) with no error, only an easy-to-miss `zipfile`
+   UserWarning. Always delete via both steps together: grab the slide's
+   `r:id`, call `prs.part.drop_rel(rId)`, THEN remove it from
+   `sldIdLst` — never the second without the first. After any
+   slide deletion or reorder, verify before delivering:
+   `unzip -l <file> | grep 'slide.*\.xml$' | awk '{print $4}' | sort |
+   uniq -d` — must return nothing. (2026-07-23, an FR multi-brand demo
+   account's deck: this bit twice in the same build before the drop_rel
+   fix was applied — caught before delivery, not after.)
+
 5. **Save** to `accounts/<customer>/<date>_Demo_<Account>.pptx`,
    matching the naming convention already used in
    `resources/deck-examples/` (e.g. `YYYY-MM-DD_Demo_<Account>.pptx`).

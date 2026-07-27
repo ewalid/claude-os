@@ -139,14 +139,43 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
    without touching the team's template"). Repo name: lowercase-kebab,
    `<customer>-storyblok-demo`.
 
-4. **Apply any known template fixes — Path A only.** If the operator's starter
-   template has recurring boot-breaking bugs, the fix list lives in local
-   `memory.md` (Darwin loads it each session) — apply those fixes fresh on
-   every new customer repo, and **re-verify each still reproduces** before
-   editing (the upstream template may have been patched). Skip this step
-   entirely on Path B — a freshly-scaffolded boilerplate won't have the same
-   files; instead just confirm it boots cleanly and fix whatever actually
-   breaks there. Commit and push the fixes.
+4. **Apply known template fixes, then audit the component library.** If the
+   operator's starter template has recurring boot-breaking bugs, the fix list
+   lives in local `memory.md` (Darwin loads it each session) — apply those
+   fixes fresh on every new customer repo, and **re-verify each still
+   reproduces** before editing (the upstream template may have been patched).
+   On Path B skip the known list — a fresh boilerplate won't have those files.
+
+   **Then run these two audits on either path, before authoring any content.**
+   Both problems are invisible until an editor hits them live, which is the
+   worst time to find out:
+
+   a. **Unguarded field access → editor 500s.** Grep the component library for
+      fields read without optional chaining:
+      ```
+      grep -rnE "blok\.[a-zA-Z_]+\.(length|filename|alt|items)" \
+        --include="*.vue" <components-dirs> | grep -v "?\."
+      ```
+      A block added in the Visual Editor arrives with **only `component` and
+      `_uid`** — every array and asset field is undefined — so
+      `blok.cards.length` throws and takes down the whole preview with a 500.
+      The effect is that a marketer cannot add those blocks at all, which
+      breaks the "non-technical staff can edit this" pitch the demo exists to
+      make. Fix with optional chaining across the library (a mechanical
+      regex pass), then `npm run build` to confirm nothing broke. Watch for
+      half-guards the regex leaves behind, e.g. `blok.form?.items[0].id`
+      still throws — it needs `?.items?.[0]?.id`.
+
+   b. **Hardcoded root paths → multi-site breakage.** If the space uses a
+      folder per brand, grep for route/story lookups that assume a
+      single-site space at the root (product routes, template lookups,
+      internal links). Anything comparing `slug[0]` to a fixed folder name,
+      or fetching `<folder>/<story>` from the root, resolves to the wrong
+      place — or nothing — once content lives under `<brand>/...`. Resolve
+      the folder from the current route instead, in one shared composable
+      that every call site uses.
+
+   Commit and push the fixes.
 
 5. **`npm install`, then check `git diff` before committing.** Benign lockfile
    metadata churn (stale `peer`/`extraneous` flags, the package-name field) is
@@ -211,6 +240,49 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
    the Vercel entry as the default. localhost is wired as "dev" for
    convenience but is NOT launched or verified by this skill.
 
+## Working with the Storyblok Management API / MCP
+
+Mechanics learned the hard way — none of these are obvious from the tool
+descriptions.
+
+- **Placeholder images must be uploaded as real CMS assets.** Frontends that
+  run images through an image-service helper append a transform suffix
+  (`/m/1200x0/filters:...`) to whatever URL they're given, which produces a
+  broken image for any external host (`placehold.co` and friends). Generate
+  simple placeholders locally and upload them: create the asset record, POST
+  the file to the returned signed S3 URL, then finalize. Scripting that loop
+  directly against the Management API is far faster than one MCP call per
+  step per image.
+- **Bulk writes get rate-limited (HTTP 429).** Anything looping over more than
+  a handful of records (datasource entries, stories, assets) needs a small
+  delay (~0.35s) plus retry-with-backoff on 429. Write the loop to be
+  **idempotent and resumable** — check what already exists first — so a
+  mid-run 429 can simply be re-run rather than creating duplicates.
+- **Some move operations report failure but succeed.** `moveStory` /
+  `bulkMoveStories` have returned an error ("Body is unusable: Body has
+  already been read") while the move actually completed server-side. Don't
+  retry blindly and don't assume failure — **re-read the affected stories and
+  check their `full_slug`/`parent_id`** before doing anything else.
+- **Check staleness cheaply before an update-in-place.** `updateStory`
+  replaces `content` in full, so the re-fetch rule matters — but a full
+  re-fetch is expensive. Read just `story.updated_at` with field selection
+  and compare it to the timestamp the last write returned. Match → the held
+  copy is current. Differ → someone edited in the editor, so re-fetch the
+  whole thing and merge. This caught a real conflict twice in one session
+  (an operator edit, and products added via the picker).
+- **Content written by API bypasses editor-side validation.** Component
+  whitelists and required fields aren't enforced, so a page can render
+  perfectly while being un-addable or un-editable in the UI. After authoring,
+  open the page in the Visual Editor at least once — rendering correctly is
+  not evidence that it is editable.
+- **A datasource-backed `options` field is a reliable stand-in for a flaky
+  picker app.** If a commerce picker plugin only loads part of the catalog
+  (so recently-added products can't be found), sync the catalog into a
+  datasource as name/value pairs and point a native multi-select at it. The
+  editor gets real search over everything, in a chosen order. Say plainly
+  that the datasource is a snapshot needing re-sync, and that a
+  collection/category-driven field avoids the staleness entirely.
+
 ## Efficiency notes (what changed after the first run, and why)
 
 - **Human-gated asks go first** so they overlap the code work instead of
@@ -248,7 +320,27 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
   crash," because an empty space renders cleanly with zero content. Skip
   launching/verifying localhost entirely (operator preference, 2026-07-24).
   Keep verification cheap: `get_page_text`/`innerText`, never
-  `read_network_requests` (inlined base64 fonts).
+  `read_network_requests` (inlined base64 fonts). **Prefer DOM assertions over
+  screenshots** — a `querySelectorAll` check of section order, headings and
+  link hrefs is cheaper, more precise, and more reliable than an image.
+  Screenshots repeatedly came back blank mid-session from paint timing; treat
+  one blank frame as a rendering race, not evidence of breakage, and confirm
+  with a text check before chasing a non-existent bug.
+- **Publish, don't just save.** Once the frontend serves published content to
+  normal visitors, anything created or updated via the API sits in draft and
+  is invisible on the live URL, while looking perfect in the Visual Editor
+  (which reads draft). Pass the publish flag on create/update, and before
+  handing over, list the folder's stories and confirm none are still
+  unpublished. Duplicated stories inherit the original's published state;
+  folders themselves always read as unpublished, which is normal.
+- **Reference galleries can belong to a different template.** A component
+  screenshot gallery shipped with a replication skill was captured from an
+  older, since-abandoned starter template, so it did not reflect how this
+  template's components actually render. Treat such galleries as indicative
+  only — **the authoritative answer is the component source in the repo being
+  built**. Reading the Vue file is what revealed that one card component
+  renders its image as a full-bleed background with overlaid white text,
+  which no gallery PNG would have shown.
 - **Read each message for which mode is active before assuming a default.**
   The operator has, in the same session, asked to type every command
   themselves *and* asked for direct edits/commits ("do it yourself") at

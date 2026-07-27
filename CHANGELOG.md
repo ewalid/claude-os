@@ -14,6 +14,29 @@ local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
 2026-07-23 when the repo went fully agnostic — previously colleague names were
 allowed here.)
 
+## 2026-07-27 (improve: custom-storyblok-demo gains a component audit + API mechanics, after a full demo build)
+- Built an entire branded multi-site demo on the pipeline (folder per brand,
+  themed site-config, homepage rebuilt against a live reference site, campaign
+  page, product template, collection-driven and hand-picked product blocks).
+  Folded the reusable lessons back into the skill: (1) step 4 now requires two
+  audits of the component library *before* authoring content — unguarded field
+  access, which 500s the whole preview the moment an editor adds a block and
+  silently destroys the "non-technical staff can edit this" pitch, and
+  hardcoded root paths, which break every product route in a folder-per-brand
+  space; (2) a new "Working with the Management API / MCP" section covering
+  placeholder images having to be uploaded as real CMS assets (image-service
+  helpers mangle external URLs), rate-limit-safe idempotent bulk writes, move
+  operations that report failure while succeeding, checking `updated_at` with
+  field selection as a cheap staleness guard before an update-in-place,
+  API-written content bypassing editor validation, and using a
+  datasource-backed multi-select when a commerce picker plugin is unreliable;
+  (3) guardrails on publishing (API writes sit in draft and are invisible on a
+  published-content frontend) and on preferring DOM assertions to screenshots.
+  Also recorded that a reference component gallery shipped with a replication
+  skill was captured from a different, abandoned template — the component
+  source in the repo is authoritative. Template-specific fix lists stay in
+  local memory per the confidentiality split.
+
 ## 2026-07-24 (improve: keep confidential template specifics out of git — generify custom-storyblok-demo)
 - The `custom-storyblok-demo` skill had been authored around a specific
   starter template that is confidential to the operator's setup, and its
@@ -64,6 +87,23 @@ allowed here.)
   write-capable Admin token; watch `npm install` for silent dependency
   version bumps). This later moved into the dedicated `custom-storyblok-demo`
   skill; template-specific quirks live in local memory.
+
+## 2026-07-23 (improve: safe slide-deletion recipe for build-deck)
+- build-deck/SKILL.md: deleting a pptx slide via `sldIdLst.remove()`
+  alone leaves an orphaned relationship that can make python-pptx write
+  a duplicate part filename on save (silent corruption, only a
+  `zipfile` UserWarning as a clue). Documented the correct two-step
+  deletion (`prs.part.drop_rel(rId)` + `sldIdLst.remove()`) and a
+  mandatory post-save duplicate-part check before ever delivering a
+  deck built by slide surgery.
+
+## 2026-07-23 (build-deck run on an FR multi-brand demo account)
+- First real build-deck run: adapted one existing example deck's three
+  native station slots in place (its own editorial-experience station,
+  its own structured-content-reuse station, and one repurposed
+  station retexted using a different existing deck's real personalization/
+  AI content) rather than inventing anything. Dropped the optional
+  technical-topics/placeholder section for a first-SE-cycle account.
 
 ## 2026-07-23 (process-customer run on an FR multi-brand demo account)
 - Ran process-customer on a partner-sourced FR demo account ahead of a
