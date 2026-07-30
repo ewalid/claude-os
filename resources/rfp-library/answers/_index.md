@@ -1,9 +1,51 @@
 # RFP answer library — index
 
-Categories: security, architecture, integrations, editorial,
-pricing-licensing. Each category folder holds curated Q&A markdown
-files. Populated by the `rfp-answer` skill (Phase 5) via two directions:
-RETRIEVE (match incoming questions, adapt, flag gaps as "needs SME
-input") and HARVEST (fold new/improved answers back in after every RFP).
+Two layers:
 
-No entries yet — this is the moat `rfp-answer` will build over time.
+**`answers/<category>.md`** — tracked in git. Reusable product-positioning
+answers, scrubbed of every client/stakeholder/deal specific (guardrail 6).
+This is the moat: each RFP should leave this library better than it found it.
+
+**`validated-submissions/`** — **gitignored** (2026-07-30, guardrail 10).
+The real, as-submitted documents. They name real clients, stakeholders,
+partner firms and commercial specifics, so they never go to git — but they're
+the highest-trust source there is, because they're what the operator actually
+put their name on. Read the most recent one for a category before drafting
+anything new.
+
+## Trust ranking for anything in here
+`validated` — it survived the operator's review and went out the door.
+Higher trust than official docs, because it reflects both the facts *and*
+how the operator chooses to frame them commercially.
+
+## Categories
+| File | Covers |
+|---|---|
+| `platform-architecture.md` | API/headless architecture, environments, dev workflow, hosting, extensibility |
+| `editorial-experience.md` | Visual Editor, components, workflows, versioning, scheduling, AI authoring |
+| `localisation.md` | i18n model, fallbacks, TMS/AI translation |
+| `seo-ai-discoverability.md` | Meta/canonical/hreflang, structured data, sitemaps, redirects, LLM/AI readiness |
+| `personalisation-experimentation.md` | A/B testing, audience targeting, variants |
+| `integrations.md` | Forms/CRM/MAP, analytics, consent, PIM/commerce, middleware patterns |
+| `security-compliance.md` | Certifications, SSO/SCIM, RBAC, residency, SLA, backups, DR |
+| `migration.md` | Migration tooling/methodology, SEO preservation, freeze/rollback |
+| `company-credentials.md` | Company facts, funding, partnerships, case studies, references |
+| `pricing-licensing.md` | Licensing structure, plan gating, TCO framing |
+
+## Standing lessons (learned the expensive way — read before drafting)
+1. **Plan tier gates features.** Never answer "supported out of the box"
+   without checking *which plan*. Several capabilities are Premium+/Elite-only
+   (see `pricing-licensing.md`). A capability answer without its plan tier is
+   half an answer, and creates commercial risk downstream.
+2. **Check whether the product natively integrates with the prospect's own
+   product.** See `integrations.md` — this was missed once on an RFP where a
+   first-party integration with the prospect's own platform existed and was
+   the single strongest differentiator available. Requirement-driven research
+   will never surface it, because it's never a line item.
+3. **A "gap" is usually a path.** Before writing "Requires custom
+   development," ask what the *actual delivery route* is on the target stack.
+   Naming the route ("embed the existing forms directly — zero CMS
+   dependency") is both more accurate and more useful than naming the
+   absence.
+4. **Answer the metric, not just the feature.** If the RFP states success
+   metrics, tie capabilities back to them explicitly.

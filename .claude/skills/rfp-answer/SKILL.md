@@ -30,9 +30,17 @@ higher-trust local source layered on top of the shared one.
 
 ## Where the answers come from, in trust order
 
-1. **The operator's own local library** (`resources/rfp-library/answers/*.md`)
-   — once seeded, this is the operator-validated and the highest-trust source.
-   Currently empty.
+1. **The operator's own local library** — the highest-trust source,
+   and **no longer empty (seeded 2026-07-30)**. Two layers:
+   - `resources/rfp-library/validated-submissions/` (gitignored) — real
+     as-submitted documents. Read the most recent relevant one **before
+     drafting anything**. Higher trust than official docs, because it
+     carries both the facts and how the operator chooses to frame them
+     commercially, already through review.
+   - `resources/rfp-library/answers/<category>.md` (tracked) — reusable
+     positioning harvested from those submissions, scrubbed of client
+     specifics. Includes plan-gating tables and a "standing lessons"
+     list in `_index.md` that exists because of real misses; read it.
 2. **The product's official public docs** (the operator's product and its
    docs URL are recorded in `memory.md`) — the
    authoritative source for product/feature facts. Ranks above the
@@ -113,19 +121,105 @@ this — that's a real threshold, not a permanent ruling.
 
 ## Steps — RETRIEVE ("answer this RFP")
 
-1. Take the incoming RFP question set (pasted text for now — Excel
-   handling is a later addition once the base flow works).
-2. For each question, check in trust order: The operator's local library →
-   the product's official docs → the shared (unofficial) Notion library
-   (query by keyword/category, read full candidate rows for relevance)
-   → other sanctioned research → `needs SME input`. If official docs
-   and the POC library disagree, go with the docs and note the
-   discrepancy rather than silently picking one.
-3. Adapt whatever's found to the specific prospect's context — don't
-   paste verbatim if it doesn't actually fit.
-4. Return a draft answer set with every answer tagged by its trust
-   level (see above) so the operator knows exactly what's safe to submit as-is
-   versus what needs a second look.
+0. **Two research passes, not one — run BOTH.** This is the single
+   biggest lesson from the 2026-07 RFP that a colleague's assistant
+   materially out-answered (see "Why that response was better" below).
+   - **Requirement-driven** (the obvious pass): answer every numbered
+     requirement in the document.
+   - **Account-driven** (the pass that gets skipped, and where the deal
+     is actually won): ask what makes *this* product uniquely right for
+     *this* prospect — things no requirement line item will ever ask for.
+     Non-negotiable checks:
+     a. **Does our product natively integrate with the prospect's own
+        product?** If the prospect is a software vendor, search the app
+        directory, changelog and partner pages for *their company name*
+        before anything else. On the 2026-07 RFP a shipped first-party
+        plugin connecting the prospect's own platform to our editor
+        existed, was publicly documented, and no competitor in the
+        evaluation had an equivalent — the strongest differentiator
+        available, and requirement-driven research walked straight past
+        it because it wasn't a line item.
+     b. Is the prospect an existing partner/customer/integration in any
+        capacity already?
+     c. Which case studies match this prospect's *profile* (industry,
+        current CMS, locale count, team shape) rather than just being
+        impressive?
+     d. If the RFP states success metrics, tie capabilities back to each
+        metric explicitly.
+1. Take the incoming requirement set (from the document itself — see the
+   document-production section below for keeping their format).
+2. For each requirement, check in trust order: the operator's local
+   library (validated submissions first, then category answers) → the
+   product's official docs → the shared (unofficial) Notion library →
+   other sanctioned research → `needs SME input`. If official docs and
+   the POC library disagree, go with the docs and note the discrepancy
+   rather than silently picking one.
+3. **Always resolve the plan tier.** A capability answer without its plan
+   gate is half an answer and creates commercial risk downstream — several
+   capabilities are Premium+/Elite-only, and one (SSO) is a paid add-on
+   rather than bundled. See `resources/rfp-library/answers/pricing-licensing.md`.
+4. **Before writing "Requires custom development" or calling something a
+   gap, find the delivery route on the prospect's actual target stack.**
+   A gap named without a route reads as a missing feature and loses points
+   on the (usually heavily-weighted) platform-capabilities criterion. Real
+   examples from the 2026-07 RFP where a hedged "gap" answer was corrected
+   to a concrete path: forms → embed the prospect's existing MAP forms
+   directly in the front end (zero CMS dependency) *or* model fields as
+   components; non-developer redirects → CMS story as the data store *plus*
+   the host's own dashboard-driven redirect config; canonical/hreflang →
+   the framework's native metadata API, i.e. framework-native work rather
+   than bespoke development. Be honest about what isn't native; be
+   specific about how it actually gets delivered.
+5. **Don't downgrade a feature's maturity off a changelog entry alone.**
+   A "Labs"/changelog mention is a point-in-time signal. Check for a
+   product landing page and current plan inclusion before hedging — one
+   answer was written as "new, don't over-claim" when the feature was
+   already GA and included on two plan tiers.
+6. **Exhaust the sanctioned sources before writing `needs SME input`.**
+   That tag is for genuine gaps, not for facts that are merely
+   inconvenient to find. Company headcount, customer/enterprise counts,
+   funding, certifications, support-tier response times, roadmap items and
+   partnership credentials are all normally obtainable from public pages,
+   the trust centre, the public roadmap, or sales-enablement material in
+   Drive/Notion — trust-order step 4 exists precisely for this. On the
+   2026-07 RFP, eight `needs SME input` flags were written where every
+   single one was answerable; they are now recorded in
+   `resources/rfp-library/answers/company-credentials.md`.
+7. **Pull the live deal context, don't rely on the account brief.** Read
+   the account's own Slack channel, recent email and any Gong calls for
+   the *current* state before drafting. The 2026-07 RFP turned on facts
+   that lived only there — the proposed implementation partner had
+   dropped out, and the two teams had agreed to evaluate the platform
+   first and select a partner afterwards. A draft written without that
+   reads as evasive on the partner question; with it, it reads as aligned.
+   The channel ID is in the account's local notes; guardrail 8 (Slack
+   outranks Notion) applies.
+8. Adapt whatever's found to the prospect's context — never paste verbatim
+   if it doesn't actually fit.
+9. Return a draft with every answer tagged by trust level so the operator
+   knows what's safe to submit as-is versus what needs a second look.
+
+## Why that response was better (2026-07, worth re-reading before each RFP)
+
+A colleague's assistant produced the validated version of an RFP response
+Darwin had drafted. It was ~39% longer and better on substance, not
+formatting — the structure, co-branding and compliance work carried over
+essentially unchanged. What it did that Darwin hadn't:
+
+- Found the first-party integration with the prospect's own product.
+- Answered every fact Darwin had punted to `needs SME input`.
+- Resolved plan-tier gating on every capability.
+- Converted "gap" answers into concrete delivery routes.
+- Carried live deal context (partner situation) into the narrative.
+- Added consultative judgment the RFP never asked for — e.g. flagging
+  that the prospect's own timeline put migration too late and dry runs
+  should start during the build phase. Reads as expertise, not scope creep.
+- Answered "two contactable references" as a genuinely different ask from
+  "three case studies", with a "why this maps to you" paragraph each.
+- Closed with a useful-links appendix (docs, roadmap, changelog, FAQ,
+  fact sheet, T&Cs) — cheap to add, gives the evaluator somewhere to go.
+- Stripped all internal scaffolding (trust tags, draft notices) for the
+  final version — those are Darwin's working aids, never the deliverable.
 
 ## Steps — producing an actual response document (not just chat text)
 
@@ -172,17 +266,32 @@ file, not just a chat draft:
 ## Steps — HARVEST ("harvest this RFP")
 
 1. After a submission (or a won/lost outcome), take the final
-   operator-approved answers.
-2. New/improved answers go into the operator's own
-   `resources/rfp-library/answers/` (by category), with `_index.md`
-   updated. This is the operator's local harvesting — separate from the
-   shared Notion library, which stays read-only unless they say
-   otherwise.
-3. If the deal's outcome is known, log why it was won/lost in
+   operator-approved answers. **Also harvest whenever a validated or
+   externally-proofed version comes back** — that version is now the
+   highest-trust source and supersedes Darwin's draft, even mid-cycle.
+2. Save the document itself to
+   `resources/rfp-library/validated-submissions/` as
+   `YYYY-MM-DD_<Account>-<Topic>_VALIDATED.<ext>` — **gitignored**, it
+   names real clients/stakeholders/partners (guardrail 10).
+3. Then extract the *reusable* positioning into
+   `resources/rfp-library/answers/<category>.md`, scrubbed of every
+   client/stakeholder/deal specific so those files stay safe to track in
+   git (guardrail 6). Update `_index.md`. This is the compounding step —
+   skipping it means the next RFP relearns everything.
+4. **If the validated version differs from Darwin's draft, diff it and
+   record why in the category file**, not just the corrected fact. "Plan
+   tier was missing" / "a gap was really a delivery route" / "punted to
+   needs-SME-input when it was public" are reusable lessons; the fact
+   alone is not. `_index.md`'s "standing lessons" list is exactly this.
+   Where the diff reveals a process gap rather than a content gap, that's
+   a `darwin-improve` trigger — take it.
+5. This is local harvesting — separate from the shared Notion library,
+   which stays read-only unless the operator says otherwise.
+6. If the deal's outcome is known, log why it was won/lost in
    `resources/rfp-library/answers/won-lost-notes.md` — gitignored
    (2026-07-21, guardrail 10), it will name real deals/customers, same
    class of data as `accounts/`.
-4. Announce what was added/updated in chat.
+7. Announce what was added/updated in chat.
 
 ## Guardrails
 

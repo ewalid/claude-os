@@ -166,6 +166,38 @@ allowed here.)
   (Stage/Priority/AE/Next call/Notes/MEDDPICC). MEDDPICC multi-select convention
   used = tag only the Confirmed elements; Partial/Gap detail lives in brief.md.
 
+## 2026-07-30 (improve: rfp-answer gets account-driven research; RFP library seeded for real)
+- An externally-proofed version of an RFP response came back materially
+  better than Darwin's draft (~39% longer, same structure/formatting —
+  the delta was all substance). Diffed both and rebuilt the skill around
+  the gaps.
+- `rfp-answer/SKILL.md`: RETRIEVE now runs **two research passes** —
+  requirement-driven *and* account-driven. The account-driven pass leads
+  with "does our product natively integrate with the prospect's own
+  product?", which is where the biggest miss came from (a shipped
+  first-party integration with the prospect's own platform, publicly
+  documented, no competitor equivalent — invisible to requirement-driven
+  research because it was never a line item). Also added: always resolve
+  the plan tier behind a capability answer; find the delivery route before
+  calling anything a gap; don't downgrade feature maturity off a changelog
+  entry alone; exhaust sanctioned sources before writing `needs SME input`;
+  pull live deal context from Slack/email/calls rather than trusting the
+  account brief. Plus a "why that response was better" section to re-read
+  before each RFP.
+- HARVEST rewritten so the library actually compounds: validated documents
+  are saved (gitignored) and the reusable positioning extracted into
+  tracked category files, with the *reason* a draft differed recorded
+  alongside the corrected fact.
+- `resources/rfp-library/` genuinely populated for the first time: 10
+  category answer files (tracked, client-scrubbed) covering architecture,
+  editorial, localisation, SEO/AI, personalisation, integrations, security,
+  migration, credentials and licensing — including a plan-gating table,
+  since missing plan tiers was a systematic weakness. New
+  `validated-submissions/` folder, **gitignored at creation** (guardrail
+  10) since it holds real as-submitted documents.
+- `_index.md` rewritten with the two-layer model, a `validated` trust
+  level ranked above official docs, and a standing-lessons list.
+
 ## 2026-07-23 (improve: ask before checking brand guidelines; Notion is the live source)
 - CLAUDE.md guardrail 11 revised: ask the operator first whether a new
   document needs to actually follow brand guidelines, or just needs the
