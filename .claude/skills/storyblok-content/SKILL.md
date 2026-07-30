@@ -100,7 +100,94 @@ session on its own is still blocked on path 2 specifically.
    dry-run exactly — same principle as the deals-dashboard's
    `update_artifact` → `verify_artifact` pattern. Report any mismatch
    rather than assuming success from a 200 response alone.
-7. **Announce** what was written, in chat — never silent.
+7. **Then open it in the Visual Editor and confirm it is editable.** A
+   re-fetch only proves the API accepted the write. It cannot see an
+   empty story picker, a field the schema never declared, a component
+   missing from the "+" menu, or a required-field error blocking Save —
+   every one of which renders perfectly on the page. Check that each
+   field shows its value, that the block can be added from the picker,
+   and that the story saves. See "Schema semantics that break the
+   editor, not the page" below for what to look for.
+8. **Announce** what was written, in chat — never silent.
+
+## Schema semantics that break the editor, not the page
+
+Every item here produces the same signature: the write succeeds, the page
+renders correctly, and the CMS is quietly broken — an empty picker, a
+missing field, a page that refuses to save. None of it is visible from the
+rendered site, which is why each one below cost real time on a multi-brand
+build (2026-07-28/29) and several were only noticed when the operator
+pointed at a screenshot. The commercial stake is the same every time: a
+demo whose whole argument is "your marketers can edit this themselves"
+fails at exactly the moment someone tries.
+
+- **A reference field stores a uuid only when `use_uuid: true`.** An
+  `options`/`option` field with `source: internal_stories` stores the
+  numeric story id by default; `resolve_relations` only works with uuids.
+  Author uuids without the flag and the frontend resolves everything
+  while the picker shows an empty "Choose one or more…" — 18 of 21
+  reference fields in one space were in this state, all rendering fine.
+  Set `use_uuid: true` whenever content holds uuids, and check that no
+  existing field stores numeric ids before flipping it.
+- **A reference field returns an array even at `max_options: 1`.**
+  Reading `.content` off the field instead of `field[0]` gives
+  `undefined` with no error. One such line silently disabled every
+  banner placement in a space at once, so the feature looked unbuilt
+  rather than broken.
+- **`component_group_uuid` is not `component_group_whitelist`.** The
+  first is which folder a component lives in. The second is what a
+  *bloks field* accepts, and setting it at component level does nothing.
+  Since a page-body field typically whitelists one group, an ungrouped
+  component renders where a script put it and is absent from the "+"
+  menu — it cannot be added to any page, with no error to say why.
+- **A story-type multilink is validated on `id`, not `cached_url`.** A
+  link with a slug and an empty `id` renders correctly and makes every
+  page holding it unsaveable ("Link in <field> is required"). If the
+  helper that builds links omits the uuid, this returns after every
+  script run — fix it at the source, then sweep the space once.
+- **A destination with a query string must stay `linktype: "url"`.**
+  Give it a story `id` and Storyblok resolves it to the bare story on
+  the next fetch; a frontend that prefers the resolved value then
+  silently drops the `?q=` filter the link existed for.
+- **Content can hold fields the schema does not declare.** They render
+  and the editor shows no field at all, so the value looks hardcoded.
+  Orphaned content is worse than a missing feature because it looks
+  deliberate. After authoring, diff the story's content keys against the
+  component's schema keys and reconcile in whichever direction is right.
+- **`resolve_relations` has to be passed to the fetch *and* the bridge.**
+  Omit it on the bridge options and a reference resolves on load, then
+  un-resolves on the first keystroke — the section vanishes for the
+  person editing it, which reads as the CMS corrupting their work.
+- **A schema `default_value` applies only to newly created stories.** On
+  an existing space the field reads empty until someone saves it, which
+  is indistinguishable from a broken field. Write the effective value
+  into existing stories explicitly rather than relying on the default.
+- **`translatable: true` is per-field, and a `bloks` field cannot carry
+  it.** Translation happens on the fields of the nested components, so a
+  headline is translated through the headline segment's own text field,
+  never through the section that contains it. Collect the components a
+  page actually uses at every depth and flag those; flag only the top
+  level and every headline stays in the source language.
+- **An asset field needs `id` and `meta_data`, not just `filename`.**
+  Without them the editor offers no focal-point picker and there are no
+  source dimensions to compute a crop from, so the feature looks
+  unimplemented. A bare URL written by a script is not a library asset.
+- **Experiment results are pushed in, not read out.** The Results tab
+  says "push results from your analytics tool" and means it literally:
+  `POST /experiments/:id/results` with a `charts` array (bar/line/text).
+  Probing for a GET endpoint returns 404 and invites the wrong
+  conclusion — that results can only come from Storyblok's own analytics
+  — which sends the deliverable to the wrong place entirely. `started_at`
+  is server-controlled and cannot be backdated, so any figures spanning
+  more days than the experiment has run must be labelled illustrative,
+  inside the panel rather than only in the deck.
+- **Decide draft-versus-published deliberately, then verify the state.**
+  Publishing is right when a live URL is the deliverable; staying draft
+  is right when the point is to show an editorial workflow. Either way
+  the two look identical in the Visual Editor, which reads draft, so
+  confirm the state you intended rather than the one you assumed — and
+  on a client-rendered frontend confirm it from the rendered DOM, not a
+  status code.
 
 ## Guardrails
 
@@ -133,3 +220,19 @@ session on its own is still blocked on path 2 specifically.
   onto the new field instead. Diff discipline on schema edits is not
   optional: a schema update should read as "N new fields added," never
   as changes to lines that were already there.
+- **Never accept a proxy for the surface a claim is about.** An HTTP
+  200 proves nothing on a client-rendered frontend — every route returns
+  200 with an empty shell, so a status code once stood in as evidence a
+  page existed, and would later have "confirmed" the exact opposite
+  about a draft being hidden. A screenshot can be a paint-timing race. A
+  hidden or zero-width browser pane reports `innerWidth: 0`, which makes
+  every responsive media query evaluate false and every layout
+  measurement meaningless — one such reading looked exactly like the bug
+  being chased. Name the surface, then check that surface.
+- **Author through the path the operator will demo, or say plainly that
+  it collides.** Content set via the API and content set through an
+  editor picker are two write paths to one field. An operator pressing
+  Done in a picker once silently replaced an API-populated product list
+  with unrelated items (2026-07-27). If a field will be demoed by hand,
+  set it by hand — or state up front that the API value disappears the
+  moment someone touches that field.

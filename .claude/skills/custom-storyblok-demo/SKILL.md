@@ -274,7 +274,11 @@ descriptions.
   whitelists and required fields aren't enforced, so a page can render
   perfectly while being un-addable or un-editable in the UI. After authoring,
   open the page in the Visual Editor at least once — rendering correctly is
-  not evidence that it is editable.
+  not evidence that it is editable. The inverse also happens: a field can
+  exist in a story's content while the component schema never declared it, so
+  it renders and the editor shows no field for it at all. `storyblok-content`
+  carries the full list of schema semantics that produce this signature —
+  read it before authoring, not after the operator finds an empty picker.
 - **A datasource-backed `options` field is a reliable stand-in for a flaky
   picker app.** If a commerce picker plugin only loads part of the catalog
   (so recently-added products can't be found), sync the catalog into a

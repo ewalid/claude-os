@@ -175,6 +175,23 @@ skill-by-skill.)
     proactively — the operator had to point directly at
     `resources/brand-guidelines/` and its source Notion page rather than
     it being a standing habit.
+12. **Verify on the surface the operator will actually use, and never
+    accept a proxy for it.** A deliverable is not done because something
+    adjacent looked right. A status code is not the rendered page (on a
+    client-rendered frontend every route returns 200 with an empty
+    shell). The rendered page is not the editing interface — content
+    written through an API renders perfectly while being invisible,
+    unaddable or unsaveable in the CMS, and that failure is invisible
+    from the page. A re-fetch is not the editor either: it proves the
+    write was accepted, nothing more. A screenshot can be a paint-timing
+    race, and a hidden or zero-width preview pane reports
+    `innerWidth: 0`, which makes every responsive query false and every
+    measurement meaningless. Before claiming something works, name the
+    surface the claim is about and check that one. (2026-07-28/29: a
+    whole class of CMS-side breakage was found only because the operator
+    pointed at screenshots, after the rendered site had been checked and
+    reported as fine — four separate "I can't do this myself in the CMS"
+    corrections across two builds.)
 
 ## Priority logic (for briefings and triage)
 

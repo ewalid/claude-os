@@ -14,6 +14,40 @@ local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
 2026-07-23 when the repo went fully agnostic — previously colleague names were
 allowed here.)
 
+## 2026-07-29 (improve: Storyblok schema semantics that break the editor, and a standing verify-the-real-surface rule)
+- Audited two long demo-build sessions on request. The dominant finding was one
+  repeating failure, not a list of bugs: content written through the API renders
+  perfectly on the page and is quietly broken in the CMS — an empty story
+  picker, a component absent from the "+" menu, a field the schema never
+  declared, a link type that makes the page unsaveable, a facet that had never
+  returned a result. Across the two builds the operator raised it as "I can't
+  do this myself in the CMS" four separate times, each after the rendered site
+  had been checked and reported as working.
+- `storyblok-content` (135 → 229 lines): new section documenting eleven of
+  these semantics with the editor-side symptom stated first, since that is how
+  each will be recognised next time — reference fields needing `use_uuid`,
+  reference fields returning arrays at `max_options: 1`, `component_group_uuid`
+  vs `component_group_whitelist`, multilink `id` vs `cached_url`, query-string
+  destinations having to stay url-type, content holding fields the schema never
+  declared, `resolve_relations` needing both the fetch and the bridge,
+  `default_value` applying only to new stories, `translatable` being per-field
+  and never on a bloks field, asset fields needing `id` + `meta_data` for the
+  focal-point picker, and deciding draft-vs-published deliberately. Plus a new
+  step 7 (open it in the editor and confirm it is editable — a re-fetch cannot
+  see any of the above) and two guardrails: never accept a proxy for the
+  surface a claim is about, and author through the path that will be demoed or
+  say plainly that the two write paths collide.
+- `custom-storyblok-demo`: one existing bullet extended to name the inverse
+  case and point at the above, rather than restating it.
+- `CLAUDE.md`: new guardrail 12 — verify on the surface the operator will
+  actually use. Promoted to a standing rule rather than another skill patch
+  because the same correction recurred in several different forms, which is the
+  compounding signal `darwin-improve` describes.
+- Also noted, not fixed: the richest Storyblok gotchas file on the machine
+  lives in a skill that is in no git repo, and already documented four of the
+  behaviours above — including an API endpoint that got rediscovered by probing
+  during this build. Nothing routes a lesson between that skill and Darwin.
+
 ## 2026-07-27 (improve: custom-storyblok-demo gains a component audit + API mechanics, after a full demo build)
 - Built an entire branded multi-site demo on the pipeline (folder per brand,
   themed site-config, homepage rebuilt against a live reference site, campaign
