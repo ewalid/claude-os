@@ -122,6 +122,23 @@ allowed here.)
   version bumps). This later moved into the dedicated `custom-storyblok-demo`
   skill; template-specific quirks live in local memory.
 
+## 2026-07-23 (improve: process-customer retro after an FR demo went well)
+- process-customer/SKILL.md Step 1: added Gong as an explicit self-research
+  source with a concrete rule — never rely on thematic/synthesized Gong
+  answers alone, always also pull the raw call list (dates + attendees)
+  before writing any "first meeting" framing. A real miss this cycle: a
+  thematic query didn't surface that the AE had already run several
+  presentations over many months before the SE's first cycle; corrected
+  after the fact, should have been right the first time.
+- process-customer/SKILL.md Step 1: added public web research (the
+  account's own site(s), corporate structure, industry, visible tech
+  signals) as a standing source, done proactively rather than only when
+  asked — also noted that Drive already holds real BDR/AE account-research
+  docs for other accounts using a reusable template, worth checking for
+  the account in hand before researching from scratch.
+- memory.md "Local config": recorded the Gong workspace name to default to,
+  so a future session doesn't rediscover it via a failed call.
+
 ## 2026-07-23 (improve: safe slide-deletion recipe for build-deck)
 - build-deck/SKILL.md: deleting a pptx slide via `sldIdLst.remove()`
   alone leaves an orphaned relationship that can make python-pptx write

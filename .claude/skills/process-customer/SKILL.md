@@ -33,9 +33,34 @@ Five phases, in order.
 3. Calendar — past and upcoming events with this customer/account.
 4. Slack — search #se-requests, #se-sgm, and any other channel IDs
    the operator has shared, for threads mentioning this account.
-5. Google Drive — decks, docs, RFP files tied to this account.
-6. Notion "📞 Debriefs" database — any past debrief rows related to this
+5. **Gong, if a connector is present this session** (discover the real
+   tool names/workspace at runtime — don't assume; check `memory.md`'s
+   "Local config" section for a workspace name that worked before, but
+   confirm since it can be account-dependent). Pull real evidence, but
+   never stop at one synthesized/thematic question — thematic answers
+   ("what are the pains/criteria") can hide real relationship history.
+   **Always also ask for the raw call list** (dates + who attended each
+   one) before writing "first meeting" or similar framing anywhere.
+   (2026-07-23, real miss: a thematic Gong query never surfaced that the
+   AE had already run 4 presentations over 9 months before this cycle —
+   an early brief wrongly called it a first-meeting account, only caught
+   after a follow-up ask specifically for the call list. Corrected same
+   session, but should have been right the first time.)
+6. Google Drive — decks, docs, RFP files tied to this account.
+7. Notion "📞 Debriefs" database — any past debrief rows related to this
    account (relation property).
+8. **Public web research** — the account's own live site(s), corporate
+   structure/ownership (parent/subsidiary brands, recent acquisitions),
+   industry, and any visible tech-stack signals. Internal tools (Notion/
+   Slack/Gong) capture the deal; they rarely capture "who this company
+   actually is" — a plain web search fills that gap and is worth doing
+   as standard practice, not just when the operator happens to ask for
+   it. (2026-07-23: found via web search only after the operator asked
+   directly — should have been proactive; also spotted that Google Drive
+   already holds real BDR/AE account-research docs for OTHER accounts
+   using a "Situation / Compelling Events / Tech Stack & Display Layer
+   Info" template — worth checking whether one exists for the account
+   being processed before doing this research from scratch.)
 
 ## Step 2 — Ask the operator once, then HARD STOP
 
