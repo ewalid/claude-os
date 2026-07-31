@@ -14,6 +14,40 @@ local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
 2026-07-23 when the repo went fully agnostic — previously colleague names were
 allowed here.)
 
+## 2026-07-30 (first Closed Won recorded; new win/revenue tracking + live impact dashboard)
+- First deal reached Closed Won. Recorded it end-to-end from real sources only:
+  the Salesforce closed-won Slack notification for the booked annual figure, and
+  Gong (1 call + 23 emails) for contract term and total contract value. Salesforce
+  still isn't directly connected; the SF-to-Slack bot is the usable substitute for
+  closed-won facts and is worth treating as a standing source.
+- Notion Accounts DB gained seven properties so money and outcome are trackable at
+  all: `Outcome` (Won/Lost/Open/No decision), `ACV (EUR)`, `TCV (EUR)`,
+  `Contract years`, `Closed date`, `Partner`, `Competition beaten`. Every existing
+  row got an explicit Outcome so win-rate has a real denominator instead of an
+  inferred one.
+- New Notion database **🏆 Wins** (one row per Closed Won deal, full anatomy: role,
+  partner, competition beaten, why-we-won, milestone, SF opp reference) plus a
+  **📈 My Impact** summary page — revenue per year, TCV, win rate, open pipeline,
+  and a written note on how the figures are sourced.
+- New Cowork artifact **impact-dashboard**: revenue-per-year bar chart (annual vs
+  total contract value), win-rate donut, wins detail, pipeline by stage, all live
+  from the two Notion databases on every open. It also derives its own data-integrity
+  flags rather than trusting the rows: annual×term ≠ total-contract-value mismatches,
+  deadlines inside 21 days, and next-call dates that have gone past. Verified live —
+  both Notion queries succeed and return the expected shapes.
+- **Notion API limitation confirmed and worth not rediscovering:** `FORMULA(...)`
+  columns using `repeat()` are rejected with a bare "Type error with formula",
+  including with no string concatenation and against a paren-free property name.
+  This is the same class of gap as the chart-DSL failure logged on day one — Notion
+  visuals over the API are limited to callouts, tables and pre-rendered bar text;
+  anything genuinely charted belongs in an artifact. Two attempts, then stopped
+  guessing rather than burning calls on syntax roulette.
+- Honesty notes carried into the deliverables rather than smoothed over: a real
+  ~2% discrepancy between annual-figure×term and the stated total contract value is
+  flagged in the win record, on the summary page, and automatically by the dashboard;
+  a 100% win rate off a single close is labelled as the thin number it is; and open
+  deals with no sourced amount read "need validation" instead of carrying an estimate.
+
 ## 2026-07-29 (improve: Storyblok schema semantics that break the editor, and a standing verify-the-real-surface rule)
 - Audited two long demo-build sessions on request. The dominant finding was one
   repeating failure, not a list of bugs: content written through the API renders
