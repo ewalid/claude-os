@@ -20,19 +20,33 @@ material disagree again, ask the security team rather than picking one.
 ## SSO / provisioning
 SSO: Auth0, Okta, Microsoft Entra ID, Google Workspace, OneLogin,
 JumpCloud, Salesforce, SAML 2.0 and SAML 1.0. SCIM 2.0 provisioning via
-Okta and Entra ID (auto-provision, role sync, de-provision). Forced 2FA on
-all plans. **SSO is an Enterprise add-on, not bundled** — price it.
+Okta and Entra ID (auto-provision, role sync, de-provision).
+
+**Plan gating (corrected 2026-07-30):** SSO, SCIM and **Forced** 2FA are
+all **Premium/Elite only** — not on any self-service tier. Plain 2FA is on
+all tiers. ⚠️ A validated submission called SSO an Enterprise *add-on*
+while the public matrix lists it as included on Premium/Elite; unresolved,
+see `pricing-licensing.md`. Ask the AE before restating either way.
 
 ## RBAC / audit
-Permissions scope by space, language, content type, workflow stage, folder
-and asset library. Admin + Editor on all plans; custom roles with
-fine-grained config on Premium+. Activity Logs encrypted (AES-256 at rest,
-TLS 1.3 in transit), access-restricted, exportable for external archiving;
-Extended Activity Log on Enterprise.
+Admin + Editor roles on all plans. **Custom roles are Premium/Elite only
+(10 on Premium, unlimited on Elite).** Scoping by space, language, content
+type and workflow stage comes with custom roles.
+
+**Folder / block / datasource / asset-folder scoping and Access Token
+Scopes are Elite ONLY** (the "Additional Access Controls" row), as is
+restricted IP range and security audit. An earlier draft presented
+fine-grained scoping as generally available — it isn't. Activity Logs are
+encrypted (AES-256 at rest, TLS 1.3 in transit) and access-restricted.
+**Retention: 1 day Starter / 30 days Growth & Growth Plus / 180 days
+Premium / unlimited Elite** — "retained indefinitely on Enterprise" is
+wrong, only Elite is unlimited.
 
 ## Residency / DR / SLA
-EU residency by default (AWS Frankfurt); region configurable
-(EU/US/Canada/Australia); DPA published publicly. Hot-standby read replica
+EU residency by default (AWS Frankfurt). **Region choice ("Preferred Data
+Centers": EU/US/Canada/Australia, China on isolated infra) is a paid add-on
+on Premium and included on Elite** — not a free universal setting. DPA is
+published publicly and also downloadable in-app. Hot-standby read replica
 with automatic failover; daily backups to S3 with 14-day transaction log
 retention and point-in-time restore. Enterprise customers can run
 self-controlled daily backups to their own bucket. Full programmatic export

@@ -3,8 +3,10 @@
 Source: validated RFP submission, 2026-07-30. Trust: `validated`.
 
 ## Core
-API-first/headless: REST Content Delivery API (primary), read-only GraphQL
-endpoint, Management API, official SDKs, webhooks. Multi-tenant SaaS —
+API-first/headless: REST Content Delivery API (primary), Management API,
+official SDKs and webhooks on **all** tiers. The **GraphQL** Content
+Delivery API is **Premium/Elite only** — don't present it as universally
+available. Multi-tenant SaaS —
 **no on-premise, dedicated single-tenant or private-cloud option**; strong
 separation needs are met via separate spaces + folder structure +
 fine-grained access control, not dedicated infrastructure. State this
@@ -17,8 +19,11 @@ can consume the delivery API.
 
 ## Environments & dev workflow
 Environments are modelled as **separate spaces** (e.g. dev / staging /
-production), promoted via CLI/Management API; a Pipelines app also supports
-stage-based promotion within a single space. Page History gives content
+production), promoted via CLI/Management API. **Self-service plans include
+exactly 1 space**, so any real environment requirement implies
+Premium/Elite — state this rather than describing environments as freely
+available. **Pipelines / content staging is also Premium/Elite only**
+(5 stages on Premium, unlimited on Elite). Page History gives content
 versioning out of the box. Schema-as-code (TypeScript, version-controlled)
 covers content-model-in-CI.
 
@@ -38,6 +43,7 @@ boundary sentence is the accurate answer.
   prospect naming both will notice.
 
 ## Extensibility
-Official App Directory + first-party Plugin SDK (custom field types, Space
-Plugins, OAuth-based), webhooks, Management API. Hosted MCP Server shipped
-for agentic/programmatic workflows.
+Official App Directory + first-party Plugin SDK, webhooks, Management API.
+Hosted MCP Server shipped for agentic/programmatic workflows.
+**Plugin gating: Field Plugins on all tiers; Space Plugins and Tool
+Plugins are Premium/Elite only.**

@@ -4,7 +4,8 @@ Source: validated RFP submission, 2026-07-30. Trust: `validated`.
 
 ## A/B testing — status corrected 2026-07-30
 Native **A/B Testing is GA** with its own product landing page, included at
-**no extra cost on Premium and Elite**. Editors create Experiments, define
+no extra cost on **Premium and Elite — and available on no self-service
+tier at all** (confirmed against the public pricing matrix 2026-07-30). Editors create Experiments, define
 Variants (multiple versions of a story), and surface Results from their
 existing analytics stack inside the CMS. Marketer-operable end to end:
 variant creation, experiment setup, results review, no developer involved.

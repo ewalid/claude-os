@@ -33,10 +33,15 @@ how the operator chooses to frame them commercially.
 | `pricing-licensing.md` | Licensing structure, plan gating, TCO framing |
 
 ## Standing lessons (learned the expensive way — read before drafting)
-1. **Plan tier gates features.** Never answer "supported out of the box"
-   without checking *which plan*. Several capabilities are Premium+/Elite-only
-   (see `pricing-licensing.md`). A capability answer without its plan tier is
-   half an answer, and creates commercial risk downstream.
+1. **Plan tier gates features — read `pricing-licensing.md` FIRST, before
+   answering any capability question.** It holds the full transcribed
+   public plan matrix (tier names, quotas, and the ~third of the feature
+   set that is Premium+/Elite-only). Never answer "supported out of the
+   box" without naming the plan; a capability answer without its tier is
+   half an answer and creates commercial risk downstream. "Unlimited" is
+   usually an Elite word — Premium often has a real numeric cap. The
+   pricing page's own integration matrix is also the fastest way to check
+   whether an integration with the prospect's platform exists at all.
 2. **Check whether the product natively integrates with the prospect's own
    product.** See `integrations.md` — this was missed once on an RFP where a
    first-party integration with the prospect's own platform existed and was

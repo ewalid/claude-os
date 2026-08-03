@@ -20,17 +20,24 @@ adoption; another 80% faster page creation. Use these against any
 - **Visual editing/preview** — live via the JS bridge (SSG/SPA/SSR),
   multiple preview environments, in-editor locale switcher.
 - **Versioning** — Page History with who/when, compare + one-click revert.
-- **Scheduling** — native per story; **Releases** for coordinated
-  multi-story publish events (Premium+).
-- **Workflows** — Custom Workflows with customer-defined stages, per-stage
-  role restriction, per-content-type scoping, in-editor commenting and
-  approval (Premium+). Default draft→review→ready-to-publish on all plans.
+- **Scheduling** — single-story scheduling from Growth up (2 scheduled
+  stories on Growth/Growth Plus, 100 on Premium/Elite). **Releases** for
+  coordinated multi-story publishing: **20 on Premium, unlimited on
+  Elite**, not available below Premium. Release merging Premium/Elite.
+- **Workflows** — default draft→review→ready-to-publish on all plans.
+  **Custom Workflows are Premium/Elite: 2 on Premium, unlimited on
+  Elite** (stages themselves unlimited on both). Per-stage role
+  restriction depends on custom roles — also Premium/Elite.
 - **Assets** — Asset Library + image service (on-the-fly resize/crop,
   WebP/AVIF, responsive sizing), CDN-delivered.
 
 ## AI authoring suite (in production — not roadmap)
-AI-generated SEO titles/descriptions; automated image alt text; AI Branding
-(brand voice + editorial guidelines shaping all AI output); Custom AI
-(bring your own model credentials, e.g. GPT-4/Gemini); Ideation Room
-(collaborative AI-assisted content workspace); AI Translations across 35+
-languages in-editor. Distinguish these shipped features from roadmap items.
+AI content generation and AI Translations are on **all** tiers; AI alt text
+from Growth up. **AI SEO and Basic AI Branding are Premium/Elite.
+Advanced AI Branding and bring-your-own-model (Custom AI) are Elite only.**
+Default model options: OpenAI only on Starter, OpenAI + Gemini above.
+
+AI usage is metered in **AI credits** with monthly caps per tier (25k
+Starter → 200k Growth Plus → custom on Premium/Elite) — a real consumption
+line item, not an unlimited feature. Distinguish shipped features from
+roadmap items.

@@ -154,10 +154,17 @@ this — that's a real threshold, not a permanent ruling.
    other sanctioned research → `needs SME input`. If official docs and
    the POC library disagree, go with the docs and note the discrepancy
    rather than silently picking one.
-3. **Always resolve the plan tier.** A capability answer without its plan
-   gate is half an answer and creates commercial risk downstream — several
-   capabilities are Premium+/Elite-only, and one (SSO) is a paid add-on
-   rather than bundled. See `resources/rfp-library/answers/pricing-licensing.md`.
+3. **Always resolve the plan tier — read
+   `resources/rfp-library/answers/pricing-licensing.md` before answering
+   any capability question.** It holds the transcribed public plan matrix:
+   real tier names, per-tier quotas, and the roughly one-third of the
+   feature set that is Premium+/Elite-only. A capability answer without its
+   plan gate is half an answer and creates commercial risk downstream.
+   Also check the pricing page's **integration matrix** — it is the
+   fastest single check for whether an integration with the prospect's own
+   platform exists (see step 0a), and it reveals when a must-have
+   integration sets a pricing floor. Re-fetch the live page if the local
+   transcription looks stale; the fact-sheet filename is date-stamped.
 4. **Before writing "Requires custom development" or calling something a
    gap, find the delivery route on the prospect's actual target stack.**
    A gap named without a route reads as a missing feature and loses points

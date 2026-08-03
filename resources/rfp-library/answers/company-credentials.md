@@ -21,9 +21,13 @@ MACH Alliance Certified ISV since June 2021. Cite this for any
 
 ## Roadmap (as of 2026-07)
 In development: Multi-Space Content Orchestration (global + local content
-governance), Strata (vector-based semantic content intelligence),
-FlowMotion (CMS automation/orchestration across the digital ecosystem),
-built-in AI Assistant for content workflows.
+governance), Strata (vector-based semantic content intelligence), built-in
+AI Assistant for content workflows.
+
+**FlowMotion is NOT just roadmap** — it is a separately priced product line
+already on the public pricing page (Core / Advanced / Pro, contact-sales,
+metered by workflow executions and concurrent runs). See
+`pricing-licensing.md`. Don't describe it as forthcoming.
 Already shipped and production-ready: hosted MCP Server (agentic content
 workflows), schema-as-code package.
 Public roadmap page is citable — use it rather than describing roadmap

@@ -200,6 +200,31 @@ allowed here.)
   (Stage/Priority/AE/Next call/Notes/MEDDPICC). MEDDPICC multi-select convention
   used = tag only the Confirmed elements; Partial/Gap detail lives in brief.md.
 
+## 2026-07-30 (improve: real plan/licensing knowledge, after plan-gating turned out to be a systematic weakness)
+- The operator pointed out the obvious root cause behind the plan-gating
+  misses: no structured knowledge of the product's own plan tiers existed
+  anywhere in the repo. Fixed by transcribing the full public pricing-page
+  comparison matrix plus the internal Premium-vs-Elite solutions guide into
+  `resources/rfp-library/answers/pricing-licensing.md` — real tier names,
+  per-tier quotas, the full feature-gating split, support tiers, integration
+  gating, and the separately-priced automation product line.
+- **This corrected real errors in category files committed the same day**,
+  which is exactly why the reference was needed: log/version retention is
+  180 days on the mid enterprise tier and unlimited only on the top one
+  (previously written as "indefinite on Enterprise"); fine-grained folder/
+  asset scoping and token scopes are top-tier-only, not general; the GraphQL
+  API, pipelines, space/tool plugins and SSO/SCIM are enterprise-gated, not
+  universal; region choice is a paid add-on on the mid tier; several
+  "unlimited" capabilities have real numeric caps below the top tier; and an
+  automation product described as roadmap is in fact already sold.
+- `rfp-answer/SKILL.md` step 3 now requires reading that file *before*
+  answering any capability question, and points at the pricing page's
+  integration matrix as the fastest check for whether an integration with
+  the prospect's own platform exists.
+- Also logged an unresolved conflict rather than papering over it: a
+  validated submission called SSO an add-on while the public matrix lists it
+  as included on both enterprise tiers.
+
 ## 2026-07-30 (improve: rfp-answer gets account-driven research; RFP library seeded for real)
 - An externally-proofed version of an RFP response came back materially
   better than Darwin's draft (~39% longer, same structure/formatting —

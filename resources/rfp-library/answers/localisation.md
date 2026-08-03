@@ -27,7 +27,10 @@ a precise partial yes.
   in-platform, no vendor contract needed. Often overlooked; lead with it.
 - **External TMS** — official integrations with Lokalise (bidirectional
   sync), Smartling, Localazy, plus language export/import (XML/JSON)
-  compatible with tools like Trados.
+  compatible with tools like Trados. **Gating: the Smartling integration
+  and Language Export/Import are Premium/Elite only**; Dimensions
+  (multi-tree) and translatable slugs are available from Growth up;
+  translatable asset metadata is Premium/Elite.
 
 Present both. Enterprise localisation questions usually assume a TMS is
 mandatory; showing a credible no-vendor path is a differentiator.

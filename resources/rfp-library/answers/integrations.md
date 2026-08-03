@@ -7,12 +7,13 @@ Source: validated RFP submission, 2026-07-30. Trust: `validated`.
 prospect's own product?** If the prospect is a software vendor, check the
 app directory and changelog for *their company name* before anything else.
 
-Real case (2026-07): the prospect was a PIM vendor. A first-party plugin
-connecting their PIM to our editor existed, shipped, and was documented
-publicly — letting content teams browse, filter and embed the prospect's
-own product data by channel/locale/category into any story, exposed
-through the delivery API for front-end rendering. **No competitor in that
-evaluation had a native integration with the prospect's own platform.**
+Real case (2026-07): the prospect was itself a software vendor in a
+category we already integrate with. A first-party plugin connecting their
+own platform to our editor existed, shipped, and was documented publicly —
+letting content teams browse, filter and embed the prospect's own product
+data by channel/locale/category into any story, exposed through the
+delivery API for front-end rendering. **No competitor in that evaluation
+had a native integration with the prospect's own platform.**
 It was the strongest differentiator in the entire response and the
 first-pass research missed it completely, because it wasn't a requirement
 line item. Requirement-driven research structurally cannot find this.
@@ -40,12 +41,22 @@ Known third-party gotcha worth flagging proactively: Hotjar's own GA4
 integration does not work when GA4 is deployed via GTM. Unrelated to us,
 but flagging it earns credibility.
 
-## Commerce / PIM ecosystem
-First-party plugins exist for several PIM and commerce platforms, plus a
-documented e-commerce integration-plugin pattern for anything else.
-**Always check the live app directory and changelog rather than relying on
-a remembered list** — the list grows, and a plugin for the prospect's own
-platform may exist even if it isn't in your recollection.
+## Commerce / PIM / TMS ecosystem — and the plan floor it sets
+First-party plugins exist for a long list of PIM, commerce and TMS
+platforms, plus a documented e-commerce integration-plugin pattern for
+anything else. **Always check the live app directory, the changelog AND the
+pricing-page integration matrix** rather than relying on a remembered list.
+
+Two things the pricing matrix tells you that the app directory doesn't:
+1. Nearly every PIM/commerce/TMS connector is **Premium/Elite gated**
+   (only Figma, Netlify, Vercel are on all tiers; Bynder, Cloudinary,
+   Optimizely, Semrush, Shopify, Slack from Growth up). If the prospect's
+   integration is central to the deal, it sets a **pricing floor** — raise
+   that early, not in negotiation.
+2. It is a fast way to check whether an integration with the prospect's own
+   platform exists at all — the 2026-07 miss was listed right there in the
+   integrations section of the public pricing page.
+See `pricing-licensing.md` for the full gating list.
 
 ## Extensibility fallback
 Official App Directory + first-party Plugin SDK (custom field types, Space
