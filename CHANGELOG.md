@@ -236,6 +236,32 @@ allowed here.)
   schema-as-code package is very new, so it gets the same
   don't-oversell-maturity treatment as other recent features.
 
+## 2026-08-03 (operator settles the certification question; a lesson about inferring negatives)
+- The operator confirmed the actual position: **SOC 2 Type I is held, Type II
+  is in progress.** That is now the answer in the library, with Type II always
+  described as in progress and never with a completion date unless the
+  security team supplies one.
+- **This corrected an over-correction of mine.** Earlier the same day I had
+  concluded from three official pages that no SOC 2 certification existed at
+  all. Wrong, and arguably worse than the error I was fixing: understating our
+  own compliance posture to a security-conscious prospect is as damaging as
+  overstating it. Type I reports are shared under NDA, not marketed — which I
+  had actually hypothesised and then abandoned in favour of a firmer claim
+  than the evidence supported.
+- Recorded as a standing rule in both the library index and the RFP skill:
+  **never infer a negative from silence.** Public pages are for *checking* a
+  claim, not *settling* one about our own company; when the web is silent on
+  an internal fact, write "confirm with <team>" and ask a human.
+- Also demoted the library's trust ranking for validated submissions. They had
+  been ranked above official docs; of the three harvested so far, two carried
+  a wrong certification claim and one mis-stated a licensing detail. New
+  order: the operator/owning team, then official docs, then validated
+  submissions — trust their framing, verify their figures.
+- Kept the genuinely useful finding: the sprawling certificate list on the
+  oldest security page belongs to the **hosting provider**, not us, which is
+  the likely origin of the erroneous Type II claim in a shipped document.
+  Cite the hosting layer's certifications separately and explicitly.
+
 ## 2026-08-03 (SOC 2 root cause found: it is the hosting provider's certification, not ours)
 - Checked a third official security page and found the source of the error.
   Its data-protection section lists a long certificate set — SOC 1/2/3,

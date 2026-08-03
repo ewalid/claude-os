@@ -189,6 +189,16 @@ this — that's a real threshold, not a permanent ruling.
    product landing page and current plan inclusion before hedging — one
    answer was written as "new, don't over-claim" when the feature was
    already GA and included on two plan tiers.
+5b. **Never infer a negative from silence.** If the public sources don't
+   mention something about our own company, that is *not* evidence we lack
+   it — compliance reports, certification progress, internal roadmap status
+   and commercial terms are routinely unpublished on purpose. Write
+   "confirm with <team>" and ask the operator; do not write "we do not
+   have X" on the basis of an absent web page. (2026-08-03: three official
+   pages omitted a certification, a draft concluded we didn't hold it, and
+   the operator corrected it — we hold Type I with Type II in progress.
+   Understating our own posture in a security review is as damaging as
+   overstating it.)
 6. **Exhaust the sanctioned sources before writing `needs SME input`.**
    That tag is for genuine gaps, not for facts that are merely
    inconvenient to find. Company headcount, customer/enterprise counts,

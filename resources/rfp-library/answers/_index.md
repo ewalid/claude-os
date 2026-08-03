@@ -14,9 +14,16 @@ put their name on. Read the most recent one for a category before drafting
 anything new.
 
 ## Trust ranking for anything in here
-`validated` — it survived the operator's review and went out the door.
-Higher trust than official docs, because it reflects both the facts *and*
-how the operator chooses to frame them commercially.
+1. **The operator / the owning internal team** — the only way to settle an
+   internal fact the public web doesn't cover (see lesson 8).
+2. **`official-docs`** — the public pages and fact sheet. Best for plan
+   gating, quotas, SLA, published capabilities.
+3. **`validated`** — survived the operator's review and went out the door.
+   Excellent for *framing* and commercial judgement, and it carries real
+   nuance the docs don't. But **not infallible on facts**: of the three
+   validated submissions harvested so far, two contained a wrong
+   certification claim and one mis-stated a licensing detail. Trust the
+   framing; verify the figures.
 
 ## Categories
 | File | Covers |
@@ -69,3 +76,13 @@ how the operator chooses to frame them commercially.
 7. **Cross-reference instead of repeating.** In a large grid, answering
    "same pattern as TB0024" is normal, accepted practice and keeps the
    response readable. Write the canonical answer once.
+8. **"Not on the website" ≠ "not true" — and over-correcting is its own
+   error.** Public pages are the right way to *check* a claim, never the way
+   to *settle* one about our own company. Compliance reports, internal
+   roadmap status and commercial terms are routinely unpublished by design.
+   Real case (2026-08-03): three official pages didn't mention a
+   certification, so this library briefly asserted we didn't hold it — the
+   operator corrected it (we hold Type I, Type II in progress). That
+   understatement would have damaged us in a security review just as much as
+   the overstatement it was "fixing". When the web is silent on an internal
+   fact, write "confirm with <team>" and ask a human — don't infer absence.

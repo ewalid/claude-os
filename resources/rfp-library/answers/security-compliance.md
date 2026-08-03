@@ -1,14 +1,20 @@
 # Security & compliance
 
-Sources: three official pages checked directly on **2026-08-03** —
-`/trust-center`, `/trust-center/security`, `/enterprise-security` — plus the
-official public fact sheet (all `official-docs`), and two validated RFP
-submissions (`validated`). Where they disagree the official pages win, and
-note that `/trust-center/security` is visibly the **oldest** of the three
-(see the retention and TLS discrepancies below) — prefer `/trust-center`.
+Sources, in order of authority:
+1. **The operator / the owning internal team** — settles anything about our
+   own company that the website doesn't cover (see the SOC 2 entry).
+2. Three official pages checked **2026-08-03** — `/trust-center`,
+   `/trust-center/security`, `/enterprise-security` — plus the official public
+   fact sheet (`official-docs`). Note `/trust-center/security` is visibly the
+   **oldest** (see the retention and TLS discrepancies below); prefer
+   `/trust-center`.
+3. Two validated RFP submissions (`validated`) — useful, but each contained
+   at least one wrong certification claim, so don't treat them as final.
 
-## Certifications — what is safe to claim
-Confirmed on Storyblok's own official pages:
+## Certifications — the answer to give
+- **SOC 2 Type I — held. Type II in progress** (operator-confirmed
+  2026-08-03; not on the public pages because Type I reports are shared under
+  NDA, not marketed).
 - **ISO 27001 certified** — the certificate PDF is publicly downloadable
   from storyblok.com/enterprise-security, and the Trust Center links TÜV.
   (A validated submission adds: TÜV Rheinland, valid to 2028-03-03.)
@@ -21,35 +27,49 @@ Confirmed on Storyblok's own official pages:
   internal *and* third-party penetration testing, dedicated incident
   response team with severity-based escalation and root cause analysis.
 
-### ⛔ SOC 2 — RESOLVED 2026-08-03: it is **AWS's** certification, not Storyblok's
-Three official pages checked directly:
-- **`/trust-center`** — ISMS section lists **ISO 27001 and TISAX only**. No
-  SOC 2.
-- **`/enterprise-security`** — titled "ISO 27001 Certified CMS"; its
-  "Security standards & certificates" section lists exactly ISO 27001,
-  OWASP, GDPR, WAF, AWS GuardDuty. No SOC 2.
-- **`/trust-center/security`** — **this is where the confusion comes from.**
-  Its Data Protection section reads: *"The solution is hosted on Amazon AWS
-  in Frankfurt/Germany **which has** various security certificates like: SOC
-  1/SSAE 16/ISAE 3402, **SOC 2**, SOC 3, FISMA/DIACAP/FedRAMP, DOD CSM 1-5,
-  PCI DSS Level 1, ISO 9001/ISO 27001, ITAR, FIPS 140-2, MTCS Level 3."*
+### ✅ SOC 2 — SETTLED 2026-08-03 by the operator (authoritative)
+**Storyblok holds SOC 2 Type I. Type II is in progress.**
 
-That list belongs to **AWS**, the hosting provider — the sentence subject is
-Amazon AWS, not Storyblok. Storyblok has **no SOC 2 certification of its
-own** on any official page.
+Confirmed directly by the operator, who works at the company. This is the
+answer to use. It also means:
+- The Akeneo submission's **"SOC 2 Type I, never claim Type II"** was
+  **correct**.
+- The requirements grid's **"SOC 2 Type II certifications"** was **wrong** —
+  Type II is in progress, not held. That answer went out in a real document
+  and is worth flagging to whoever wrote it.
+- The Type II error is still best explained by the misread described below.
 
-**This almost certainly explains the bad answer in a validated submission**
-("Storyblok holds ISO 27001, SOC 2 Type II certifications") — someone read
-AWS's certificate list as Storyblok's. The other submission's "SOC 2 Type I"
-looks like the same misread, softened.
+**How to answer it:** ISO 27001 (certified, certificate publicly available) +
+TISAX + GDPR + EU-U.S. Data Privacy Framework + **SOC 2 Type I**, with Type II
+described honestly as *in progress* — never as held, and never with a promised
+completion date unless the security team gives one. A SOC 2 Type I report is
+typically shared under NDA rather than published, which is why it doesn't
+appear on the marketing pages.
 
-**Standing rule:** answer certification questions with **ISO 27001 + TISAX +
-GDPR + EU-U.S. Data Privacy Framework** as *Storyblok's own*, and, if useful,
-cite AWS's certifications separately and explicitly as **the hosting layer's**
-(that framing is legitimate and often reassuring in a security review).
-**Never present SOC 2 — of any type — as Storyblok's own certification.**
-If a prospect specifically requires a vendor SOC 2 report, that is a real
-question for the security team, not something to answer from the website.
+### Where the "Type II" error comes from — still worth knowing
+`/trust-center/security` reads: *"The solution is hosted on Amazon AWS in
+Frankfurt/Germany **which has** various security certificates like: SOC
+1/SSAE 16/ISAE 3402, **SOC 2**, SOC 3, FISMA/DIACAP/FedRAMP, DOD CSM 1-5,
+PCI DSS Level 1, ISO 9001/ISO 27001, ITAR, FIPS 140-2, MTCS Level 3."*
+
+The subject of that sentence is **AWS**, not Storyblok — it's the hosting
+provider's certificate list. Reading it as Storyblok's own inflates the
+company's posture (SOC 2 → SOC 2 *Type II*, FedRAMP, PCI DSS L1…). Useful
+practice: cite AWS's certifications separately and explicitly as **the
+hosting layer's**, which is both accurate and reassuring in a security review.
+
+### ⚠️ Lesson recorded: absence from the website ≠ absence of the certification
+On 2026-08-03 this file briefly asserted "Storyblok has **no** SOC 2
+certification of its own" on the basis that three official pages didn't
+mention it. That was an over-correction — and a worse error than the one it
+was fixing, because it would have had us *understate* our compliance posture
+to a security-conscious prospect.
+
+Not-published-publicly is not the same as not-true. Compliance reports
+(SOC 2 especially) are routinely NDA-only and deliberately unmarketed. For
+any **internal fact about our own company**, the operator or the owning team
+outranks the absence of a public web page. Search the website to *check* a
+claim; ask a human to *settle* one.
 
 ## SSO / provisioning / token scoping
 SSO: Auth0, Okta, Microsoft Entra ID, Google Workspace, OneLogin,
