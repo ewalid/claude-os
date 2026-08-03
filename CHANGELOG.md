@@ -200,6 +200,30 @@ allowed here.)
   (Stage/Priority/AE/Next call/Notes/MEDDPICC). MEDDPICC multi-select convention
   used = tag only the Confirmed elements; Partial/Gap detail lives in brief.md.
 
+## 2026-08-03 (SOC 2 conflict resolved against official docs — do not claim it)
+- Checked the two authoritative public security pages directly. The Trust
+  Center's ISMS section lists **ISO 27001 and TISAX only**, and the dedicated
+  enterprise-security page (titled "ISO 27001 Certified CMS") lists exactly
+  ISO 27001, OWASP, GDPR, WAF and AWS GuardDuty. **SOC 2 appears nowhere, in
+  any form.** So neither validated submission's claim holds up: one asserted
+  Type I, the other Type II — and the first had explicitly warned that third
+  parties keep wrongly claiming Type II.
+- Standing rule recorded: answer certification questions with ISO 27001 +
+  TISAX + GDPR / EU-U.S. Data Privacy Framework, and say SOC 2 report
+  availability will be confirmed in writing. A report may well exist under
+  NDA and simply not be marketed — which is why it needs confirming rather
+  than asserting. Escalated to the security team rather than resolved from
+  documents.
+- Two other facts settled from the same pages: transaction-log retention is
+  **14 days** (the earlier 30-day figure was wrong), and officially listed
+  data-residency regions are **US, Canada, Germany, Australia** — China is
+  not listed as a standard region, so an earlier internal note claiming it
+  is now marked unconfirmed.
+- New material picked up: self-certification under the EU-U.S. Data Privacy
+  Framework, a publicly downloadable ISO 27001 certificate, and **two
+  separate GTCs** (Americas enterprise vs. global/self-service and all other
+  regions) — point procurement at the right one.
+
 ## 2026-07-30 (English is the working language; two more validated RFPs harvested)
 - **CLAUDE.md Voice**: English regardless of the input language. Source
   material may arrive in any language; reading it in that language is fine,
