@@ -17,6 +17,27 @@ a gap when it's really framework-native work.
 | Redirect management for non-developers | Requires custom development | CMS story as redirect data store, queried via API — **plus** on Vercel, native redirect config + Edge Config with a dashboard non-developers can use. Present the combination. |
 | XML sitemaps per locale | Requires custom development | `next-sitemap` or a script against the Links API |
 
+## Native SEO/quality tooling worth naming
+- **Broken Links Checker** — a native app (Growth Plus / Premium+) that
+  scans for broken links and 404s. The right answer to "regular scanning of
+  redirects and 404s / don't waste crawl budget", and easy to miss because
+  it isn't part of the SEO app.
+- **Field-level required validation** in content types — covers
+  "enforceable rules before publication" (mandatory meta fields etc.).
+  Heading structure (a single H1) stays authoring/template discipline; the
+  CMS doesn't enforce it.
+
+## Core Web Vitals levers that ARE platform-side
+Most CWV requirements are honestly frontend responsibilities, but two are
+genuinely Storyblok's and worth claiming rather than deferring:
+- The **Image Service enforces width/height via URL parameters**, directly
+  preventing image-driven layout shift (CLS).
+- The **component schema can carry a `fetchpriority` field**, letting
+  editors mark the hero/LCP element high priority.
+Everything else (reserving space for dynamic injects, `font-display`,
+below-the-fold lazy loading, preconnect hints, code-splitting/minification)
+is frontend build work — say so plainly, then name these two.
+
 ## AI / LLM discoverability
 Content is stored and delivered as structured, typed JSON — directly
 consumable by LLMs and AI crawlers without HTML stripping. Plus a hosted

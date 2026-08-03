@@ -200,6 +200,39 @@ allowed here.)
   (Stage/Priority/AE/Next call/Notes/MEDDPICC). MEDDPICC multi-select convention
   used = tag only the Confirmed elements; Partial/Gap detail lives in brief.md.
 
+## 2026-07-30 (English is the working language; two more validated RFPs harvested)
+- **CLAUDE.md Voice**: English regardless of the input language. Source
+  material may arrive in any language; reading it in that language is fine,
+  but answers, summaries and notes are English unless the operator asks
+  otherwise. The deliberate exception stays: a customer-facing deliverable
+  in the customer's own language, confirmed with the operator first, with
+  internal notes still in English.
+- Two further validated submissions added by the operator and harvested —
+  both **requirements grids** (~250 rows total) rather than prose RFPs, i.e.
+  the other major RFP format. New `dam-assets.md` category file (Asset
+  Manager, image service, asset governance/distribution, and the two honest
+  DAM partials). Existing files gained: first-party automation product as
+  the middleware answer with 500+ pre-built integrations; no native CRM or
+  marketing-automation connectors (per-tool check required); no
+  customer-controlled server and no plugin hosting, so "move our app into
+  the CMS" is a real no; no customer-facing infra monitoring dashboard;
+  native broken-link/404 checker; two genuinely platform-side Core Web
+  Vitals levers; simpler personalisation cases that *are* native; and the
+  reusable framing for AI/intent requirements.
+- **New standing lessons in `_index.md`** drawn from the grids: a
+  well-written "partial" beats a padded "yes" (name the limit, then the
+  bridge); some answers are legitimately "not ours" and should say so while
+  naming what the platform does contribute; cross-reference rather than
+  repeat in large grids.
+- `rfp-answer/SKILL.md`: match the response vocabulary the document itself
+  uses — a prose RFP's four-option scheme and a grid's Yes/Partial/No comply
+  column are different, and inventing categories is a compliance failure.
+- **Escalated, not resolved: a SOC 2 contradiction between two validated
+  submissions** (one says Type I and warns against claiming Type II; the
+  other claims Type II; the public trust centre mentions neither). Recorded
+  with an instruction to cite only the certification all sources agree on
+  until the security team confirms.
+
 ## 2026-07-30 (improve: real plan/licensing knowledge, after plan-gating turned out to be a systematic weakness)
 - The operator pointed out the obvious root cause behind the plan-gating
   misses: no structured knowledge of the product's own plan tiers existed

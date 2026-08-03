@@ -11,11 +11,20 @@ Source: validated RFP submission, 2026-07-30. Trust: `validated`.
   response team with severity-based escalation and root cause analysis.
 - Public trust centre is the citable source.
 
-Note: an earlier draft flagged a conflict here because an unofficial
-internal library said SOC 2 Type I while the public trust-centre page
-listed only ISO 27001 + TISAX. Resolved in the validated submission as
-ISO 27001 + SOC 2 Type I + TISAX. If the public page and internal
-material disagree again, ask the security team rather than picking one.
+### ⚠️ SOC 2: two validated submissions contradict each other — do NOT pick a side
+- One validated submission (2026-07-30) states **ISO 27001 + SOC 2 Type I +
+  TISAX**, and explicitly warns that third parties keep wrongly claiming
+  Type II.
+- Another validated submission (2026-07, a requirements grid) states
+  **"ISO 27001, SOC 2 Type II certifications."**
+- Earlier research found the *public* trust-centre page listing only ISO
+  27001 + TISAX, with no SOC 2 mention at all.
+
+Three sources, three answers, all "validated" or official. Overclaiming a
+SOC 2 type in a regulated prospect's security review is a serious problem,
+so **confirm with the security team before any submission repeats either
+figure.** Until then, cite ISO 27001 (which all sources agree on) and say
+the SOC 2 report status will be confirmed in writing.
 
 ## SSO / provisioning
 SSO: Auth0, Okta, Microsoft Entra ID, Google Workspace, OneLogin,
@@ -41,6 +50,15 @@ encrypted (AES-256 at rest, TLS 1.3 in transit) and access-restricted.
 **Retention: 1 day Starter / 30 days Growth & Growth Plus / 180 days
 Premium / unlimited Elite** — "retained indefinitely on Enterprise" is
 wrong, only Elite is unlimited.
+
+## Honest limit: no customer-facing infrastructure monitoring
+**Server/infra-level metrics, tracing and alerting dashboards are not
+exposed to customers** — that is Storyblok's internal ops concern. Content-
+level auditing is covered (Activity Log on all plans; longer retention on
+enterprise tiers), and Storyblok monitors its own infrastructure, but a
+prospect asking for a self-service CPU/memory/response-time dashboard gets
+a *partial*, not a yes. The public status page plus the uptime SLA are the
+customer-visible surface. Validated answer, twice.
 
 ## Residency / DR / SLA
 EU residency by default (AWS Frankfurt). **Region choice ("Preferred Data

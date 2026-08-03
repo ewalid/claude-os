@@ -6,8 +6,11 @@ Source: validated RFP submission, 2026-07-30. Trust: `validated`.
 API-first/headless: REST Content Delivery API (primary), Management API,
 official SDKs and webhooks on **all** tiers. The **GraphQL** Content
 Delivery API is **Premium/Elite only** — don't present it as universally
-available. Multi-tenant SaaS —
-**no on-premise, dedicated single-tenant or private-cloud option**; strong
+available. Multi-tenant SaaS — **no on-premise, dedicated single-tenant or
+private-cloud option, no customer-controlled server, and no mechanism for
+hosting customer application code** (see `integrations.md` for the
+plugin-hosting limit and what it means for "move our app into the CMS"
+requirements); strong
 separation needs are met via separate spaces + folder structure +
 fine-grained access control, not dedicated infrastructure. State this
 plainly when asked; don't imply otherwise.

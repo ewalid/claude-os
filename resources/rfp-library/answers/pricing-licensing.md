@@ -99,6 +99,12 @@ generation · AI translations · Storyblok Labs.
   business day, plus emergency protocols, alerting and dedicated
   monitoring involving senior leadership.
 - Dedicated CSM on Premium and Elite.
+- **Extended Support Package** (add-on, from a validated grid): SLA-defined
+  response times plus **24/7 critical incident management, 2h response for
+  critical incidents**, and post-incident reporting. Support-hour carryover
+  terms are **contract-negotiable**. When a prospect specifies P1/P2/P3
+  bands "to market-conform specs", the honest answer is *partial* — the
+  bands don't map one-to-one.
 
 ## Integration gating (matters on almost every RFP)
 **All tiers:** Figma, Netlify, Vercel.

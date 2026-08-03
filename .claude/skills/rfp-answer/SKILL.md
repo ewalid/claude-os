@@ -147,7 +147,14 @@ this — that's a real threshold, not a permanent ruling.
      d. If the RFP states success metrics, tie capabilities back to each
         metric explicitly.
 1. Take the incoming requirement set (from the document itself — see the
-   document-production section below for keeping their format).
+   document-production section below for keeping their format). **Match the
+   response vocabulary the document itself uses** — it varies, and inventing
+   your own categories is a compliance failure: a prose RFP used
+   *Supported out of the box / with configuration / requires custom
+   development / not supported*, while a requirements grid used a simple
+   *Yes / Partial / No* comply column plus a comments field. Read the
+   column headers and legend before answering, and if the grid has a
+   separate English column alongside another language, fill both.
 2. For each requirement, check in trust order: the operator's local
    library (validated submissions first, then category answers) → the
    product's official docs → the shared (unofficial) Notion library →

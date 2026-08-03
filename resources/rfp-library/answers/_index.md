@@ -29,6 +29,7 @@ how the operator chooses to frame them commercially.
 | `integrations.md` | Forms/CRM/MAP, analytics, consent, PIM/commerce, middleware patterns |
 | `security-compliance.md` | Certifications, SSO/SCIM, RBAC, residency, SLA, backups, DR |
 | `migration.md` | Migration tooling/methodology, SEO preservation, freeze/rollback |
+| `dam-assets.md` | Asset Manager, Image Service, asset governance/distribution, DAM partials |
 | `company-credentials.md` | Company facts, funding, partnerships, case studies, references |
 | `pricing-licensing.md` | Licensing structure, plan gating, TCO framing |
 
@@ -54,3 +55,17 @@ how the operator chooses to frame them commercially.
    absence.
 4. **Answer the metric, not just the feature.** If the RFP states success
    metrics, tie capabilities back to them explicitly.
+5. **A well-written "partial" beats a padded "yes".** The most reusable
+   content in this library came from the *partial* rows of a validated
+   requirements grid — each one names the precise limit and then the bridge
+   ("no native X; achievable via Y, which is additional implementation").
+   Copy that shape. Never inflate a partial into a yes; never leave a
+   partial as a bare no.
+6. **Some answers are legitimately "not ours".** Frontend/implementation-
+   partner responsibilities (PWA shell, responsive build, WCAG at site
+   level, lazy loading, code splitting) should be stated as such, paired
+   with what the platform *does* contribute. A validated grid used this
+   framing consistently across ~250 requirements without losing the deal.
+7. **Cross-reference instead of repeating.** In a large grid, answering
+   "same pattern as TB0024" is normal, accepted practice and keeps the
+   response readable. Write the canonical answer once.

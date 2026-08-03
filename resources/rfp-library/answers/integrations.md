@@ -58,7 +58,38 @@ Two things the pricing matrix tells you that the app directory doesn't:
    integrations section of the public pricing page.
 See `pricing-licensing.md` for the full gating list.
 
-## Extensibility fallback
+## FlowMotion is the first-party middleware answer
+Before reaching for third-party middleware, note FlowMotion — Storyblok's
+own automation/orchestration product — advertising **500+ pre-built
+integrations** across CMS, CRM, marketing, commerce and analytics, plus
+workflow automation with approval steps, AI-driven asset tagging, and
+download/access approval flows. In validated submissions it carried most of
+the "can you integrate with X / automate Y" answers.
+Two caveats that keep it honest: it is **separately priced** (Core/Advanced/
+Pro, metered by workflow executions — see `pricing-licensing.md`), and using
+it is implementation effort, not a toggle.
+
+## No native CRM or marketing-automation connectors
+Validated answer, stated as *partial* both times: there is **no native CRM
+connector**, and **no native pre-built connector for SFMC, Braze, HubSpot,
+Klaviyo or Adobe Campaign** specifically. Integration is achievable via
+API/webhooks, FlowMotion, or middleware — and needs a **per-tool technical
+check** rather than a blanket yes. Say exactly that.
+
+Also worth knowing: Storyblok is a listed **Adobe Commerce/Magento
+Technology Partner**, and supports **OIDC-based SSO** for editors (not only
+SAML) — relevant when a prospect's CIAM stack is OIDC-standard.
+
+## Extensibility fallback — and its hard limit
 Official App Directory + first-party Plugin SDK (custom field types, Space
-Plugins, OAuth-based) + webhooks + Management API. Middleware (Zapier,
-n8n, Pipedream) covers anything without a native app.
+Plugins, OAuth-based) + webhooks + Management API. Third-party middleware
+(Zapier, n8n, Pipedream) covers anything without a native app.
+
+⚠️ **There is no customer-controlled server and no plugin-hosting
+mechanism.** Storyblok plugins are self-hosted elsewhere and **run only
+inside the editor, never on the public site.** So "migrate our existing
+.NET/Java application into the CMS" is a genuine **no** — the app must be
+rehosted as its own service/container/serverless function, a real
+architectural change for the prospect. Embedding it into the new frontend
+once rehosted is standard. This came up verbatim in a validated grid; don't
+soften it.

@@ -31,6 +31,21 @@ implementation work; "Requires custom development" is the fair answer for a
 full audience-variant requirement (F19-style), while marketer-led A/B
 testing itself is now OOTB.
 
+## Don't overstate the gap either — simpler cases have a native path
+**Native content variants plus returning-visitor detection** cover simpler
+personalisation cases with no partner platform. It's profile/interest/
+AI-based *targeting* that needs one. Validated framing: simple cases native,
+sophisticated targeting via partner.
+
+## AI-driven intent/behavioural experiences — the repeated honest answer
+Requirements phrased as "contextual search driven by intent, supported by
+AI", "dynamic page content based on click behaviour and navigation", or
+"conversational recommendation" were each answered *partial* in a validated
+grid with one consistent line: **achievable via custom development or a
+partner platform, grounded on Storyblok's structured, API-first content.**
+Reusable sentence — honest, doesn't concede the deal, and puts the
+structured-content foundation forward as the enabler.
+
 ## Audience creation from a campaign ID (common demo ask)
 Handled by the marketing-automation layer (HubSpot, Segment, etc.), not the
 CMS. API + webhooks enable bi-directional flow so campaign data moves

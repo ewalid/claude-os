@@ -26,8 +26,10 @@ AI Assistant for content workflows.
 
 **FlowMotion is NOT just roadmap** — it is a separately priced product line
 already on the public pricing page (Core / Advanced / Pro, contact-sales,
-metered by workflow executions and concurrent runs). See
-`pricing-licensing.md`. Don't describe it as forthcoming.
+metered by workflow executions and concurrent runs), advertising **500+
+pre-built integrations** and carrying most automation/orchestration answers
+in real submissions. See `pricing-licensing.md` and `integrations.md`.
+Don't describe it as forthcoming.
 Already shipped and production-ready: hosted MCP Server (agentic content
 workflows), schema-as-code package.
 Public roadmap page is citable — use it rather than describing roadmap
