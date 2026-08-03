@@ -46,11 +46,15 @@ SSO: Auth0, Okta, Microsoft Entra ID, Google Workspace, OneLogin,
 JumpCloud, Salesforce, SAML 2.0 and SAML 1.0. SCIM 2.0 provisioning via
 Okta and Entra ID (auto-provision, role sync, de-provision).
 
-**Plan gating (corrected 2026-07-30):** SSO, SCIM and **Forced** 2FA are
-all **Premium/Elite only** — not on any self-service tier. Plain 2FA is on
-all tiers. ⚠️ A validated submission called SSO an Enterprise *add-on*
-while the public matrix lists it as included on Premium/Elite; unresolved,
-see `pricing-licensing.md`. Ask the AE before restating either way.
+**Plan gating:** SSO, SCIM and **Forced** 2FA are all **Premium/Elite
+only** — not on any self-service tier. Plain 2FA is on all tiers.
+
+✅ **"Is SSO an add-on?" — resolved 2026-08-03.** It is **included in the
+user licence** on Premium and Elite. The official fact sheet's legend
+distinguishes ✔ (included) from $ (additional fee), and SSO carries ✔ on
+both enterprise tiers; its Security Access row reads Premium = "Standard
+roles +SSO". A validated submission had called SSO an Enterprise add-on —
+that was imprecise. See `pricing-licensing.md` for the genuine paid add-ons.
 
 ## RBAC / audit
 Admin + Editor roles on all plans. **Custom roles are Premium/Elite only
@@ -83,18 +87,30 @@ a *partial*, not a yes. The public status page plus the uptime SLA are the
 customer-visible surface. Validated answer, twice.
 
 ## Residency / DR / SLA
-EU residency by default (AWS Frankfurt, Germany). **Officially listed
-regions (Trust Center, 2026-08-03): North America (US & Canada), Europe
-(Germany), Australia — China is NOT listed as a standard region**, so don't
-claim it without checking (an internal note previously flagged China as
-isolated infra and uncertain; treat as unconfirmed). **Region choice
-("Preferred Data Centers") is a paid add-on on Premium and included on
-Elite** — not a free universal setting. DPA is published publicly and also
-downloadable in-app. Hot-standby read replica
-with automatic failover; daily backups to S3 with 14-day transaction log
-retention and point-in-time restore. Enterprise customers can run
-self-controlled daily backups to their own bucket. Full programmatic export
-via the APIs at any time (data-portability answers).
+EU residency by default (AWS Frankfurt, Germany). **Standard selectable
+regions: EU, US, Canada, Australia** — dedicated AWS infrastructure, per the
+Trust Center and the official fact sheet.
+
+**China IS officially offered — correction, 2026-08-03.** An earlier note
+here said China wasn't available because the Trust Center lists only the
+four standard regions. The official fact sheet is explicit: **"Additional
+Data Center (China)"** is a **paid add-on on both Premium and Elite**, with
+dedicated Mainland China infrastructure, **an ICP license already in place**
+for international customers, and a custom domain (`app.storyblokchina.cn`).
+This is a real, sellable answer for a prospect with a China requirement —
+just priced separately. Lesson: the Trust Center lists the *standard*
+regions; the fact sheet lists the *purchasable* ones.
+
+**Region choice ("Preferred Data Center Selection") is a paid add-on on
+Premium and included on Elite** — not a free universal setting.
+
+DPA is published publicly and also downloadable in-app. Hot-standby read
+replica with automatic failover; 14-day transaction log retention with
+point-in-time restore; regular backup testing. **Self-managed S3 backups to
+the customer's own bucket are Premium/Elite** (weekly on Premium, daily on
+Elite); a **Managed Backup Service** is a paid add-on on both (Premium
+weekly/180 days, Elite daily/up to 7 years). Full programmatic export via
+the APIs at any time (data-portability answers).
 
 ✅ Backup retention **resolved 2026-08-03**: the Trust Center states
 **"14-Day Transaction Log Retention — restore to any point in time within

@@ -110,8 +110,16 @@ generation · AI translations · Storyblok Labs.
 **All tiers:** Figma, Netlify, Vercel.
 **Growth up:** Bynder, Cloudinary, **Optimizely**, Semrush, Shopify, Slack.
 **Premium/Elite only:** Akeneo, Algolia, BigCommerce, Centra,
-CommerceLayer, commercetools, Nacelle, Saleor, Salesforce Commerce Cloud,
-SAP, Shopware, Spryker, Sylius, Vendure, Smartling.
+CommerceLayer, commercetools, inRiver, Nacelle, Saleor, Salesforce Commerce
+Cloud, SAP, Shopware, Spryker, Sylius, Vendure, **VWO**.
+(Note: the official fact sheet places **Smartling** from Growth up, while
+the live pricing page shows it Premium/Elite — check the live page for a
+real submission.)
+
+Standard third-party disclaimer on the fact sheet worth mirroring in
+responses: Storyblok isn't liable for third-party service performance,
+access must be purchased from the provider directly, and the integration
+list can change.
 
 → Nearly every PIM / commerce / TMS connector is Premium/Elite-gated. If an
 integration is central to the deal it sets a **pricing floor** — say so
@@ -124,12 +132,33 @@ workflow executions/mo, 10 concurrent runs) · **Advanced** (120k, 30) ·
 Add-ons on each: source control & environments, AI Assistant, custom
 execution data, external secrets, audit & log streaming, insights.
 
-## Known conflict — resolve, don't smooth over
-A validated 2026-07 submission stated **"SSO is an add-on on Enterprise
-plans."** The public matrix lists Single Sign-On as plain "Yes" (included)
-on Premium and Elite, while genuinely add-on rows carry `$`/`€`. Either the
-submission was imprecise or SSO is contractually separable in practice.
-**Ask the AE / deal desk before repeating either version.**
+## ✅ SSO conflict RESOLVED (2026-08-03, official public fact sheet)
+The official fact sheet uses an explicit legend — **✔ = included in user
+licence, $ = additional fee or terms apply** — and shows:
+- **Single Sign-On: ✔ on Premium and Elite** (included, not an add-on).
+- Its "Security Access" summary row states Premium = "Standard roles +SSO";
+  Elite = "Standard roles, +SSO, access token scopes, IP restrictions,
+  additional access control".
+
+So the validated submission's "SSO is an add-on on Enterprise plans" was
+**imprecise** — SSO is bundled on both enterprise tiers. Genuine paid
+add-ons are the `$` rows: Preferred Data Center (Premium), Additional Data
+Center China (both), Managed Backup Service (both).
+
+## Commercial terms found on the official fact sheet
+- **Maximum Usage Breach Fee: $/€1,000** — an overage surcharge that applies
+  when a customer exceeds the API & traffic limit in **two consecutive
+  months**. Worth surfacing in any TCO/pricing-predictability answer; a
+  prospect asking about cost overrun protection will care.
+- Self-managed **S3 backups are Premium/Elite** (weekly on Premium, daily on
+  Elite) to the customer's own bucket; **Managed Backup Service** is a paid
+  add-on on both (Premium weekly/180 days, Elite daily/up to 7 years).
+- **Custom AI Tokens ✔ on both Premium and Elite** — note this sits in mild
+  tension with the pricing page's "Bring your own AI = Elite only" row; two
+  differently-named rows for adjacent things. Confirm which the prospect
+  actually needs before answering.
+- Legal entities confirmed: Storyblok GmbH (Linz), Storyblok Solutions GmbH
+  (Vienna), Storyblok Inc. (Wilmington, Delaware), Storyblok LTD (London).
 
 ## Licensing breakdown structure (what to itemise in a response)
 Platform: annual licensing (tier, seats, locales, spaces, API allowance,

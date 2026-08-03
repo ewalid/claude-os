@@ -18,10 +18,14 @@ a gap when it's really framework-native work.
 | XML sitemaps per locale | Requires custom development | `next-sitemap` or a script against the Links API |
 
 ## Native SEO/quality tooling worth naming
-- **Broken Links Checker** — a native app (Growth Plus / Premium+) that
-  scans for broken links and 404s. The right answer to "regular scanning of
-  redirects and 404s / don't waste crawl budget", and easy to miss because
-  it isn't part of the SEO app.
+- **Broken Links Checker** — a native app that scans and resolves broken
+  links across every story in a space. The right answer to "regular scanning
+  of redirects and 404s / don't waste crawl budget", and easy to miss because
+  it isn't part of the SEO app. **Gate: Premium/Elite** per the official fact
+  sheet's Apps table (an earlier note here said Growth Plus+, and a search
+  snippet claimed Growth Plus — the fact sheet is the better source; verify
+  on the live page if it's decision-relevant). Setup needs an admin to issue
+  a preview token.
 - **Field-level required validation** in content types — covers
   "enforceable rules before publication" (mandatory meta fields etc.).
   Heading structure (a single H1) stays authoring/template discipline; the

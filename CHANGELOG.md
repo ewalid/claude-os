@@ -200,6 +200,42 @@ allowed here.)
   (Stage/Priority/AE/Next call/Notes/MEDDPICC). MEDDPICC multi-select convention
   used = tag only the Confirmed elements; Partial/Gap detail lives in brief.md.
 
+## 2026-08-03 (targeted audit of the RFP library's unverified claims)
+- Provenance scan showed only two of ten category files were officially
+  grounded; the rest rested on validated submissions alone — the same
+  weakness that let a wrong certification claim propagate. Ran a targeted
+  verification of the four riskiest instead of a full re-audit.
+- **Found the official public fact sheet**, which turned out to be the
+  missing source and produced three corrections plus new commercial facts:
+  - **A dedicated China data centre IS offered** — a paid add-on on both
+    enterprise tiers, with an ICP license already in place and a custom
+    domain. A note added the same week had wrongly said China wasn't
+    available, based on the Trust Center listing only the four *standard*
+    regions. The Trust Center lists standard regions; the fact sheet lists
+    purchasable ones.
+  - **The "is SSO an add-on?" conflict is resolved**: the fact sheet's legend
+    separates included-in-licence from additional-fee, and SSO is included on
+    both enterprise tiers. The validated submission was imprecise.
+  - The broken-link checker's plan gate was wrong here (stated one tier too
+    low).
+  - New: a **usage-breach surcharge** applies after two consecutive months
+    over the API/traffic limit — relevant to any cost-predictability answer.
+    Also the self-managed vs managed backup split, and the four legal
+    entities.
+- **Company scale figures confirmed as genuinely unpublished.** Checked the
+  about page, the press page and the fact sheet: no headcount, customer
+  count, enterprise-customer count, user count or total-funding figure
+  appears on any of them. A validated submission asserted all five; a
+  third-party estimate contradicted the headcount. The file now refuses to
+  carry a number and instead routes the question to sales enablement or the
+  AE, while keeping what *is* citable (founding year, founders, entities,
+  named investors, a corroborated funding round, published leadership team).
+  Also flagged that a stated ARR ambition must never be quoted as revenue.
+- Migration tooling claims all verified as real (official importer repo,
+  CLI v4 pull/push, schema-as-code package) — with a note that the
+  schema-as-code package is very new, so it gets the same
+  don't-oversell-maturity treatment as other recent features.
+
 ## 2026-08-03 (SOC 2 conflict resolved against official docs — do not claim it)
 - Checked the two authoritative public security pages directly. The Trust
   Center's ISMS section lists **ISO 27001 and TISAX only**, and the dedicated

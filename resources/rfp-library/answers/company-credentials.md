@@ -4,13 +4,35 @@ Source: validated RFP submission, 2026-07-30. Trust: `validated`.
 **These are the numbers an earlier draft wrongly flagged as
 "needs SME input" — they were all obtainable. Use these.**
 
-## Company facts
-Founded 2017, Linz, Austria, by the CEO and CTO (co-founders, both still
-in post). Fully remote; legal entities in Austria, the USA and the UK.
-~350 employees across 45+ countries. Privately held, $138M total venture
-funding ($80M Series C led by Brighton Park Capital, June 2024).
+## Company facts — verified vs. unverified (audited 2026-08-03)
 
-Scale: 650+ enterprise customers, ~5,000 paying customers, ~200,000 users.
+**Confirmed on official pages** (`/about`, official fact sheet):
+- Founded **2017**; born in Austria; co-founders **Dominik Angerer (CEO)**
+  and **Alexander Feiglstorfer (CTO)**, both still in post (CTO based in
+  Brazil). Fully remote company.
+- Four legal entities: **Storyblok GmbH** (Linz, AT), **Storyblok Solutions
+  GmbH** (Vienna, AT), **Storyblok Inc.** (Wilmington, Delaware, US),
+  **Storyblok LTD** (London, UK).
+- Named investors: **Mubadala, HV Capital, 3VC, firstminute capital,
+  Founders Factory, Brighton Park Capital**. An **$80M Series C** is
+  corroborated by press coverage (TechCrunch, CMSCritic).
+- Stated ambition "scale to $100m ARR and beyond" — that is a **goal, not
+  current ARR**. Never quote it as revenue.
+- Full leadership team is published on `/about` (CEO, CTO, COO, CRO, VP
+  Marketing, SVP Operations, VP People, VP Engineering, VP Finance) — useful
+  when an RFP asks for named leads at vendor level.
+
+**⚠️ NOT published anywhere official — do not state as fact:**
+employee headcount, number of customers, number of enterprise customers,
+number of users, and total funding raised. Checked `/about`, `/press` and
+the official fact sheet on 2026-08-03: **none of them carry these numbers.**
+A validated submission asserted ~350 employees / 650+ enterprise / ~5,000
+paying / ~200k users / $138M total; third-party aggregators estimated
+252–314 employees. Those disagree, and none is citable.
+→ If an RFP asks for scale figures, **get them from internal sales
+enablement or the AE** and cite them as company-provided, or answer
+qualitatively (named enterprise logos, investor set, funding round). Do not
+pick a number from this file, because this file doesn't have one.
 
 Notable enterprise/B2B SaaS customers: Disney, Netflix, Oatly, Renault,
 Adidas, Autodesk, Virgin Media O2, Deliveroo, Education First.
