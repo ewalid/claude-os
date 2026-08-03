@@ -236,6 +236,33 @@ allowed here.)
   schema-as-code package is very new, so it gets the same
   don't-oversell-maturity treatment as other recent features.
 
+## 2026-08-03 (SOC 2 root cause found: it is the hosting provider's certification, not ours)
+- Checked a third official security page and found the source of the error.
+  Its data-protection section lists a long certificate set — SOC 1/2/3,
+  FedRAMP, PCI DSS L1, ISO 9001/27001, FIPS 140-2 and more — but the sentence
+  subject is **the AWS region the platform is hosted in**, not the platform
+  vendor. Someone read that list as the vendor's own, which is almost
+  certainly how "holds ISO 27001, SOC 2 Type II certifications" got into a
+  validated submission; the other submission's softer "Type I" looks like the
+  same misread.
+- Standing rule tightened accordingly: claim ISO 27001, TISAX, GDPR and the
+  EU-U.S. Data Privacy Framework as the vendor's own; cite the hosting
+  provider's certifications separately and explicitly as the *hosting layer's*
+  (legitimate and often reassuring in a security review); never present SOC 2
+  of any type as the vendor's own certification.
+- **Un-resolved a figure I had marked resolved:** the two official pages
+  disagree on transaction-log/backup retention (14 vs 30 days). The 30-day
+  page carries clear staleness tells — it still documents TLS 1.2 and a TLS
+  1.1 deprecation dated 2021, where the main page says TLS 1.3 — so 14 is
+  probably current, but the file now says confirm before quoting rather than
+  asserting either. Retention windows are exactly what a regulated prospect
+  holds you to.
+- Also captured for security questionnaires: scoped personal access tokens
+  for least-privilege integration access, the documented
+  reviewed/tested/approved change-management process, monthly recovery tests
+  covering point-in-time database and asset restore, and SSH-key-only
+  internal network access.
+
 ## 2026-08-03 (SOC 2 conflict resolved against official docs — do not claim it)
 - Checked the two authoritative public security pages directly. The Trust
   Center's ISMS section lists **ISO 27001 and TISAX only**, and the dedicated
