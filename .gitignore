@@ -24,3 +24,7 @@ resources/people.md
 # Real submitted/validated RFP documents — name real clients, stakeholders,
 # partners and deal specifics. Local-only, same class as accounts/. (2026-07-30)
 resources/rfp-library/validated-submissions/
+
+# Company-specific reference: Notion Case Study DB URLs + the internal win
+# case study process doc. Same class as people.md — local-only. (2026-08-04)
+resources/case-study-database.md

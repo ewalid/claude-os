@@ -14,6 +14,25 @@ local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
 2026-07-23 when the repo went fully agnostic — previously colleague names were
 allowed here.)
 
+## 2026-08-04
+
+- Added a local-only `resources/case-study-database.md` to the knowledge base:
+  the company's marketing-owned case study database (URL, data source id,
+  property schema, views) plus the internal six-section win case study video
+  format. Gitignored **at creation**, before any content went in — guardrail 10
+  applied proactively rather than reactively for the first time.
+- Ran a full cross-source evidence sweep on a won deal (Gong, Gmail, Slack,
+  Salesforce-for-Slack, the demo deck, local account notes) and produced a
+  bullet-form internal win case study video outline in that account's
+  local-only folder. Two unevidenced facts left as explicit VALIDATE flags
+  rather than filled in.
+- Learned: Gong's `ask_deal`/`ask_account` require the `workspace` parameter
+  on accounts with more than one workspace — the first call fails with
+  `WORKSPACE_NOT_FOUND` and lists the valid names.
+- Learned: the Storyblok Management API is unreachable from a cloud sandbox
+  session (connection failure, not auth) — `storyblok-content` needs a session
+  running on the operator's own machine.
+
 ## 2026-08-04 (RFP library: second validated automotive/AEM-migration harvest)
 - `resources/rfp-library/answers/` (8 category files): harvested a second
   validated RFP submission (automotive, large-scale AEM migration). Added a
