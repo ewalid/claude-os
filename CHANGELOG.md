@@ -14,6 +14,21 @@ local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
 2026-07-23 when the repo went fully agnostic — previously colleague names were
 allowed here.)
 
+## 2026-08-04 (RFP library: second validated automotive/AEM-migration harvest)
+- `resources/rfp-library/answers/` (8 category files): harvested a second
+  validated RFP submission (automotive, large-scale AEM migration). Added a
+  standing lesson that the AWS-certificate-list misattribution error has now
+  recurred twice — treat it as a contaminated paragraph in source material,
+  not a one-off. Corrected a stale "no dedicated/private-cloud option" claim
+  (a real BYOC option exists). Proposed a reconciliation of the 14- vs
+  30-day backup-retention conflict (two different mechanisms, not a
+  contradiction) — flagged as inference pending confirmation, not settled.
+  Added migration methodology detail, AI-credit token mechanics, AWS
+  Marketplace procurement route, GDPR processor/controller framing, and
+  named onboarding packages.
+- One case-study reference tightened to remove framing that sat too close
+  to the source submission's real prospect identity, per guardrail 6.
+
 ## 2026-07-30 (first Closed Won recorded; new win/revenue tracking + live impact dashboard)
 - First deal reached Closed Won. Recorded it end-to-end from real sources only:
   the Salesforce closed-won Slack notification for the booked annual figure, and
@@ -57,7 +72,7 @@ allowed here.)
   returned a result. Across the two builds the operator raised it as "I can't
   do this myself in the CMS" four separate times, each after the rendered site
   had been checked and reported as working.
-- `storyblok-content` (135 → 229 lines): new section documenting eleven of
+- `storyblok-content` (135 → 238 lines): new section documenting twelve of
   these semantics with the editor-side symptom stated first, since that is how
   each will be recognised next time — reference fields needing `use_uuid`,
   reference fields returning arrays at `max_options: 1`, `component_group_uuid`
@@ -66,11 +81,12 @@ allowed here.)
   declared, `resolve_relations` needing both the fetch and the bridge,
   `default_value` applying only to new stories, `translatable` being per-field
   and never on a bloks field, asset fields needing `id` + `meta_data` for the
-  focal-point picker, and deciding draft-vs-published deliberately. Plus a new
-  step 7 (open it in the editor and confirm it is editable — a re-fetch cannot
-  see any of the above) and two guardrails: never accept a proxy for the
-  surface a claim is about, and author through the path that will be demoed or
-  say plainly that the two write paths collide.
+  focal-point picker, the Experiments results-push endpoint, and deciding
+  draft-vs-published deliberately. Plus a new step 7 (open it in the editor and
+  confirm it is editable — a re-fetch cannot see any of the above) and two
+  guardrails: never accept a proxy for the surface a claim is about, and author
+  through the path that will be demoed or say plainly that the two write paths
+  collide.
 - `custom-storyblok-demo`: one existing bullet extended to name the inverse
   case and point at the above, rather than restating it.
 - `CLAUDE.md`: new guardrail 12 — verify on the surface the operator will
