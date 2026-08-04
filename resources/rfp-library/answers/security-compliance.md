@@ -58,6 +58,16 @@ company's posture (SOC 2 → SOC 2 *Type II*, FedRAMP, PCI DSS L1…). Useful
 practice: cite AWS's certifications separately and explicitly as **the
 hosting layer's**, which is both accurate and reassuring in a security review.
 
+⚠️ **This exact mistake recurred, verbatim, in the 2025-11-19 validated
+submission** — the same AWS-certificate paragraph was reproduced under
+Storyblok's own "Data Protection" security answer with no clarification
+that the subject is AWS, not Storyblok. Two data points now, not one: this
+is a standing risk in how the source material gets copied into RFP
+responses, not a one-off slip. **Always rewrite this paragraph explicitly
+as "our infrastructure provider AWS holds..." before it goes in a real
+submission** — don't copy it as-is even from a previously-validated
+document.
+
 ### ⚠️ Lesson recorded: absence from the website ≠ absence of the certification
 On 2026-08-03 this file briefly asserted "Storyblok has **no** SOC 2
 certification of its own" on the basis that three official pages didn't
@@ -173,6 +183,38 @@ figure is probably current and the 30-day page probably out of date — but
 retention windows are exactly the kind of number a regulated prospect will
 hold you to. Also documented: **monthly recovery tests** covering
 point-in-time database recovery and asset recovery via S3 versioning.
+
+**Likely reconciliation (2025-11-19 validated submission read both figures
+side by side):** the same document stated **30-day retention for daily S3
+backups** *and*, separately, **14-day point-in-time restore via the
+transaction log**. Read together, these look like **two different
+mechanisms, not a contradiction**: daily S3 backups are retained 30 days
+(coarser-grained, disaster-recovery snapshots), while the transaction log
+supports point-in-time restore for the most recent 14 days (finer-grained,
+any-timestamp restore). If this reading is right, the honest answer to a
+security questionnaire is "30-day backup retention; 14-day point-in-time
+restore granularity" rather than picking one number — but this is still an
+inference, not an operator-confirmed fact, so **confirm with the
+infrastructure team before it goes in a real submission.**
+
+## Vulnerability management MTTR (mean time to resolve), by severity
+From a validated submission's stated remediation targets, tested via
+vulnerability scans, screenings, penetration tests and failover tests:
+**Critical — 48 hours · High — 5 days · Medium — 10 days · Low — 14 days.**
+Vulnerabilities that can't be fully fixed are risk-assessed and either
+mitigated to an acceptable level or formally accepted, captured in an
+internal risk portfolio. Patch management is split into two tracks:
+libraries/dependencies (Dependabot-scanned continuously) and OS/environment
+(checked against AWS's release cadence, compatibility-tested before
+upgrading affected instances).
+
+## Data processor vs. controller — the precise GDPR framing
+Storyblok acts as a **processor** for personal data that customers include
+in their own content (typically marketing/editorial content meant for
+publication). For personal data tied to **access credentials** (e.g.
+employee accounts used to log into the platform), Storyblok acts as a
+**controller**. Use this distinction rather than a blanket "we are a
+processor" when a security review asks about GDPR roles.
 
 ## Accessibility (WCAG)
 Two dimensions, and they must be separated:

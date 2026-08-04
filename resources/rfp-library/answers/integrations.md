@@ -1,6 +1,27 @@
 # Integrations
 
-Source: validated RFP submission, 2026-07-30. Trust: `validated`.
+Sources: validated RFP submissions, 2026-07-30 and 2025-11-19. Trust:
+`validated`.
+
+## Forms handling PII — don't store it in Storyblok
+Form *configuration* (fields, CTAs, submission behaviour) lives as a Story,
+referenced by a form Block/component on the page. But when a user actually
+submits the form, the data should go **directly to the customer's own
+receiving system** (CRM/MAP/backend) — the validated guidance is explicit:
+**"We do not recommend storing form submission data containing PII within
+Storyblok."** Use this as the precise answer to "how do you handle PII from
+form submissions," rather than implying Storyblok is a data store for it.
+
+## Procurement route: AWS Marketplace
+Storyblok licenses can be procured via **AWS Marketplace**, including
+Private Offers, which Storyblok's team has extensive experience running.
+Selling points worth citing when the prospect is an AWS customer: the
+subscription can count toward an existing AWS Private Pricing Agreement/
+committed spend; procurement is simplified (added to the existing AWS
+account, no new contract/legal cycle); and Storyblok can sometimes help
+secure AWS promotional credits depending on contract value and eligibility
+(requires the prospect's AWS Customer ID to pursue). Cite this whenever an
+RFP specifically asks about marketplace/procurement-vehicle options.
 
 ## ⚠️ First question, every single time
 **Does our product have a native/first-party integration with the

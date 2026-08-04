@@ -125,6 +125,47 @@ list can change.
 integration is central to the deal it sets a **pricing floor** — say so
 early rather than discovering it in negotiation.
 
+## AI credits — how to explain the unit (validated, 2025-11-19)
+When an RFP asks what an "AI credit" actually is: credits are consumed
+based on **tokens** an AI model processes (small pieces of text or image
+data) — roughly **100 tokens ≈ 75 English words**. Both input (prompts,
+context, images) and output (the AI's response) consume credits. Each
+model has its own token-to-credit rate; a validated approximate rate was
+**~1 token = 2 AI Credits**, explicitly noted as subject to change — don't
+present it as a fixed formula. Usage varies meaningfully by task:
+translation/rewriting is roughly one-to-one (output ≈ input length),
+content generation produces more output than input, summarisation produces
+much less, and image-based tasks consume more credits than text (image
+data is heavier). More context in the prompt (brand guidelines, tone rules)
+increases input usage but typically improves output quality — frame this
+as a worthwhile trade-off, not a hidden cost. Point to a self-service
+usage dashboard and credits calculator as the tools for a customer to
+manage consumption.
+
+## Ramped/phased pricing for multi-year rollouts — a reusable structure
+For a prospect rolling out in phases across regions/markets, a validated
+commercial structure priced **Year 1 lower** (fewer Spaces, reflecting
+migration/enablement/setup activity) with **Years 2–3 scaling up** as more
+regions and Spaces come online — aligning cost with value realised over
+the rollout, rather than charging full run-rate from day one. Useful
+framing for "how does your pricing accommodate a phased go-live," but
+never insert an actual customer's € figures here — those stay in the
+gitignored `validated-submissions/` copy, per the guardrail below.
+
+## Guided Onboarding Services — named packages (validated)
+Two named onboarding tiers exist as an optional paid add-on, delivered by
+the Storyblok customer-success/product team (not implementation or
+development, which stays with the implementation partner) — typically
+offered to customers with their own in-house dev team:
+- **"Start Your Story"** — up to six one-hour sessions over 90 days:
+  core concepts, key features, content modelling, user management,
+  workflows, internationalisation, plus interactive technical workshops.
+- **"Continue Your Story"** — up to ten one-hour sessions: AMA sessions,
+  best-practice discussions, advanced-topic deep dives, focused demos —
+  for development, marketing and content teams.
+Cite these by name rather than describing onboarding generically; actual
+package pricing is deal-specific and stays out of this file.
+
 ## FlowMotion is a separately priced product line
 Not merely a roadmap item. Three tiers, all "contact sales": **Core** (40k
 workflow executions/mo, 10 concurrent runs) · **Advanced** (120k, 30) ·
@@ -159,6 +200,12 @@ Center China (both), Managed Backup Service (both).
   actually needs before answering.
 - Legal entities confirmed: Storyblok GmbH (Linz), Storyblok Solutions GmbH
   (Vienna), Storyblok Inc. (Wilmington, Delaware), Storyblok LTD (London).
+
+## Procurement vehicle
+Licenses can be procured via **AWS Marketplace** (including Private
+Offers) — see `integrations.md` for the full pitch (PPA/committed-spend
+credit, simplified procurement, possible AWS promotional credits). Worth
+raising proactively whenever the prospect is a large AWS customer.
 
 ## Licensing breakdown structure (what to itemise in a response)
 Platform: annual licensing (tier, seats, locales, spaces, API allowance,

@@ -34,3 +34,17 @@ a precise partial yes.
 
 Present both. Enterprise localisation questions usually assume a TMS is
 mandatory; showing a credible no-vendor path is a differentiator.
+
+## People-based translation via a customer's chosen vendor (not just TMS apps)
+A validated submission described integrating with a **customer-nominated
+human-translation vendor** (e.g. Claytablet) that isn't one of the official
+app-directory TMS integrations above — the pattern generalises to any
+similar vendor, and different vendors can be used per market (brand +
+country) in the same deployment. The mechanism: source-locale content is
+exported programmatically to the vendor via the **Management API's
+Translation Endpoints**; the vendor's translated content is re-imported via
+the same endpoints, populating the target locale on the existing Story
+within the relevant Space. Manual export/re-import via CSV is also
+supported for vendors without an API integration. Use this answer whenever
+an RFP names a specific human-translation vendor that isn't in the app
+directory — the API-first pattern still applies generically.

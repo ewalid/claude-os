@@ -44,6 +44,15 @@ honestly, and route the rest through automation.
    other. Video assets themselves are stored and CDN-delivered fine;
    video *SEO* optimisation is a frontend concern.
 
+## Embargo / hidden-until-ready assets
+An asset can be set to **"hidden"**, meaning it won't be served by the APIs
+at all until switched back to unhidden — a native way to hold an asset
+(e.g. embargoed product imagery) out of any delivery surface without
+deleting it. Combined with unpublished Stories and API-token-gated access
+(no public API tokens are exposed to end users, only to the customer's own
+frontend/build pipeline), this is the validated answer to "how do you
+handle embargoed assets and pages."
+
 ## Automation / workflow asks → FlowMotion
 Approval workflows on assets, AI-driven auto-tagging on upload, download
 approval flows for external partners, and replacing email-based access

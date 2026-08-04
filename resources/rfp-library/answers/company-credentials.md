@@ -1,8 +1,34 @@
 # Company credentials, case studies & references
 
-Source: validated RFP submission, 2026-07-30. Trust: `validated`.
+Sources: validated RFP submissions, 2026-07-30 and 2025-11-19 (automotive/
+AEM-migration profile). Trust: `validated`.
 **These are the numbers an earlier draft wrongly flagged as
 "needs SME input" — they were all obtainable. Use these.**
+
+## Financial-stability question — the reusable answer
+Storyblok is a **private company and does not publish financial statements
+or annual reports.** The validated line: confirm we are **profitable,
+scaling, and have secured external investment** (the $80M Series C, June
+2024, which underwent a large-scale financial audit as part of the raise).
+If a prospect's procurement process needs actual statements, the validated
+move is to **offer a direct meeting between the prospect and Storyblok's VP
+of Finance** post-submission rather than attaching figures to the document.
+A credit-rating data point used successfully: **CreditSafe rating for
+Storyblok Solutions GmbH — low risk, score 72 (rated A)**, citable when a
+procurement team specifically asks for third-party credit scoring.
+
+## Legal-entity nuance
+**Storyblok GmbH** (Linz, Austria) is the parent entity. RFP responses/
+delivery are typically submitted and delivered by **Storyblok Solutions
+GmbH**, a wholly-owned subsidiary established in **2023** as the dedicated
+solutions-and-delivery arm — useful detail when a procurement team asks
+which entity actually signs and delivers.
+
+## Implementation-partner ecosystem — a scale stat worth citing
+Storyblok collaborates with **2,500+ partner companies worldwide**,
+supported by dedicated Partner Success Managers, training and resources —
+a good answer whenever an RFP asks about implementation-partner breadth or
+whether Storyblok can recommend one.
 
 ## Company facts — verified vs. unverified (audited 2026-08-03)
 
@@ -72,6 +98,49 @@ Pick 3 based on the closest profile match to the prospect:
   multi-locale/multi-site. Good non-SaaS multi-locale proof point.
 - **Unified** — 84% LCP improvement post-rebuild. Use for Core Web Vitals
   questions, always labelled illustrative rather than guaranteed.
+
+## Case studies — automotive / large-scale AEM migration profile
+Use these instead when the prospect is automotive/enterprise and migrating
+off Adobe Experience Manager:
+- **Porsche** — global content backbone across markets; chose Storyblok for
+  flexible data/configuration across content types, clean documentation,
+  fast tree-structured UI, powerful global search, locale-based preview and
+  saved filters. The strongest "meets premium-automotive-brand standards
+  worldwide" reference.
+- **Nissan NISMO** (built with implementation partner Razorfish) — headless,
+  React-based rebuild that unified a previously fragmented web presence;
+  cut development time by 30–40%, and separately reduced development time by
+  40% with easier team training via flexible content-type management. A
+  genuinely proven deployment inside a major OEM's performance sub-brand —
+  strong reference for any automotive-group deal.
+- **Virgin Media O2** — "enabled us to achieve a multi-million-pound annual
+  saving, streamlining and centralizing multiple platforms and use cases
+  into one." Strong TCO-consolidation quote.
+- **Cavu** (UK/USA) — migrated 11,280 pages across five brands with zero
+  developer downtime. Best reference for large-scale, multi-brand migration
+  volume questions.
+- **Damen Shipyards** (Netherlands) — 75% cost savings moving to headless.
+  Good non-automotive enterprise/manufacturing TCO proof point.
+- **TableCheck** (Japan) — seamlessly customizing content for global
+  audiences. Useful for APAC/multi-market localisation questions.
+- **Automox** (USA) — general enterprise SaaS reference, use if a
+  cybersecurity/IT-ops-adjacent prospect needs a same-sector name.
+- **AEM-migration references collectively cited in one validated submission:**
+  Engel & Völkers, Group Barriere, DirecTV, Klöckner, Audemars Piguet, JT
+  International, Porsche — all successfully migrated AEM→Storyblok. Cite as
+  a group when a prospect specifically asks "who else have you migrated off
+  AEM."
+
+## Enterprise scale figures — repeated consistently across validated docs
+These numbers appear near-identically across multiple validated submissions
+(2026-07 and 2025-11), which raises confidence they're stable company
+talking points, though still self-reported rather than officially published
+— flag as company-provided if a prospect wants a source:
+2,500+ active enterprise users, 400,000+ live projects/websites, 70+
+languages supported, 250+ content spaces (each 500+ reusable components),
+60 million+ API calls/month, 70TB+ monthly data transfer, and a **Forrester-
+confirmed average ROI of 582%** for enterprise implementations. Each
+enterprise client gets a dedicated Customer Success Manager.
 
 ## References (contactable) vs case studies (public links)
 These are **different asks** and an RFP often requests both. Public case

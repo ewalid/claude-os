@@ -1,19 +1,69 @@
 # Platform architecture & developer experience
 
-Source: validated RFP submission, 2026-07-30. Trust: `validated`.
+Sources: validated RFP submissions, 2026-07-30 and 2025-11-19
+(automotive/AEM-migration, multi-region enterprise). Trust: `validated`.
 
 ## Core
 API-first/headless: REST Content Delivery API (primary), Management API,
 official SDKs and webhooks on **all** tiers. The **GraphQL** Content
 Delivery API is **Premium/Elite only** — don't present it as universally
-available. Multi-tenant SaaS — **no on-premise, dedicated single-tenant or
-private-cloud option, no customer-controlled server, and no mechanism for
-hosting customer application code** (see `integrations.md` for the
-plugin-hosting limit and what it means for "move our app into the CMS"
-requirements); strong
-separation needs are met via separate spaces + folder structure +
-fine-grained access control, not dedicated infrastructure. State this
-plainly when asked; don't imply otherwise.
+available. Multi-tenant SaaS is the default, and there is still **no
+mechanism for hosting customer application code** (see `integrations.md`
+for the plugin-hosting limit and what it means for "move our app into the
+CMS" requirements) — strong separation needs are normally met via separate
+spaces + folder structure + fine-grained access control, not dedicated
+infrastructure.
+
+⚠️ **Correction (2025-11-19 validated submission): a BYOC option exists.**
+An earlier note here said flatly "no dedicated single-tenant or
+private-cloud option, no customer-controlled server." A later validated
+submission offers two deployment models: **Public Cloud (SaaS)** —
+standard, fully Storyblok-hosted — and **Customer-Controlled Cloud (BYOC)**
+— full backend hosting inside the *customer's own* AWS account, still
+managed by Storyblok; GCP or Azure hosting can be offered as an option too.
+For a prospect with sovereignty/infrastructure-ownership requirements this
+is a real answer, not a flat no — but treat it as an enterprise/custom-deal
+capability to confirm with the account team before quoting, not a
+self-service option.
+
+## Multi-region / multi-brand architecture pattern (enterprise)
+Recommended pattern for a large multi-market rollout: **one regional Space
+per geography** (e.g. one Space per major region, shared across the
+markets in it), with individual markets organized as **folders within that
+Space**. A separate **dedicated dev/test Space** hosts centrally-built
+components and structural changes, which are then deployed to the regional
+Spaces via the CLI. The **Dimensions app** lets a Story's content be cloned
+into other market folders while retaining market-specific overrides —
+this is the mechanism for "global consistency, regional autonomy."
+Component/feature availability can be scoped per-Space and per-market via
+roles and permissions. Cite this whenever an RFP asks how the platform
+supports multiple regions, brands or country-specific styling at once.
+
+## Scaling — visibility answer
+Backend systems run on redundant EC2 instances across multiple AWS regions
+and availability zones via AWS Elastic Container Service, with load
+balancing inside the VPC and auto-scaling for traffic spikes. Use this when
+an RFP specifically asks for "visibility of scaling capability" rather than
+just asserting "it scales."
+
+## Transactional vs. non-transactional content — the architecture answer
+Storyblok's content model can reference (not duplicate) external
+transactional data: a component defines the API call/parameters needed, and
+at request time the frontend unifies Storyblok's content/config with
+live data from the customer's own systems (pricing, availability, user
+info) via API calls — avoiding data duplication and keeping the CMS as the
+single source of truth for the *marketing* content only. For pages that are
+almost entirely transactional (e.g. a configurator or checkout flow), the
+CMS may not be involved at all past a hand-off point in the user journey.
+Frame the split as "CMS content vs. transactional data" rather than
+implying the CMS stores transactional state.
+
+## Token scoping for multi-market access control
+Access tokens can be scoped to a region or folder (not just a whole Space),
+letting a central team grant a market or agency editor access only to their
+own folder/Story while enforcing global consistency centrally. Cite
+alongside the RBAC/custom-roles material in `security-compliance.md` for
+"how do you restrict who edits what by country/brand/market" questions.
 
 ## Framework integration
 Official Next.js SDK with dedicated docs and Visual Editor support; large

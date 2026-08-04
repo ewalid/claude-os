@@ -20,10 +20,12 @@ anything new.
    gating, quotas, SLA, published capabilities.
 3. **`validated`** — survived the operator's review and went out the door.
    Excellent for *framing* and commercial judgement, and it carries real
-   nuance the docs don't. But **not infallible on facts**: of the three
-   validated submissions harvested so far, two contained a wrong
-   certification claim and one mis-stated a licensing detail. Trust the
-   framing; verify the figures.
+   nuance the docs don't. But **not infallible on facts**: of the four
+   validated submissions harvested so far, three contained a wrong or
+   misattributed certification claim and one mis-stated a licensing detail.
+   Trust the framing; verify the figures — and see standing lesson 9 below,
+   the certification error specifically has now recurred twice with the
+   same root cause.
 
 ## Categories
 | File | Covers |
@@ -86,3 +88,26 @@ anything new.
    understatement would have damaged us in a security review just as much as
    the overstatement it was "fixing". When the web is silent on an internal
    fact, write "confirm with <team>" and ask a human — don't infer absence.
+9. **A wrong certification claim isn't a one-off — it recurred, verbatim,
+   in a second validated submission.** The exact "hosted on AWS which has
+   [SOC 2, FedRAMP, PCI DSS L1...]" paragraph — whose actual subject is
+   AWS's certificates, not Storyblok's own — was copied into a validated
+   RFP response a second time (2025-11-19), still attributing AWS's
+   certifications to Storyblok. Treat this specific paragraph as
+   contaminated wherever it's found in source material, and rewrite it
+   explicitly as "our infrastructure provider AWS holds..." every time,
+   rather than assuming a previously-validated document already fixed it.
+10. **Hosting-model answers can go stale fast.** One validated submission
+    stated flatly "no dedicated/private-cloud option, no customer-controlled
+    server." A later validated submission (2025-11-19) offered a genuine
+    **BYOC (customer-controlled cloud)** option — full backend hosting in
+    the customer's own AWS/GCP/Azure account, still Storyblok-managed.
+    Re-check this specific claim against the latest validated source or the
+    account team before repeating an older "no such option" answer.
+11. **A validated submission can be prose, not a grid — match what's asked.**
+    The Nissan submission (2025-11-19) was a narrative response organised
+    around the RFP's own "five key dimensions" (migration, integration,
+    operating model, product vision, AI strategy) rather than a line-item
+    requirements grid. Confirms standing lesson from `rfp-answer`'s own
+    guidance: read the incoming document's own structure and vocabulary
+    before drafting, rather than defaulting to a grid format.
