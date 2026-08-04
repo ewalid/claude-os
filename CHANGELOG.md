@@ -14,6 +14,45 @@ local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
 2026-07-23 when the repo went fully agnostic — previously colleague names were
 allowed here.)
 
+## 2026-08-04 (process-customer: a partner-sourced account, reopened after stalling)
+
+- Ran a full `process-customer` pass on an account with no prior Notion row.
+  The operator's reply to the Step-2 hard stop wasn't Salesforce detail but a
+  key strategic fact instead (the deal had previously stalled over a partner
+  alignment question and has just reopened) - treated as satisfying the hard
+  stop and proceeded on that basis rather than re-asking.
+- Hit the known missing-AE-select-option issue again (guardrail 8's
+  documented class of bug): added the option via `notion-update-data-source`
+  before the page write would succeed.
+- **Caught own mistake before announcing**: first pass wrote all
+  evidence-bearing MEDDPICC elements (Confirmed + Partial) into the Notion
+  multi-select, which contradicts this file's own 2026-07-23/08-04 written
+  convention (Confirmed only; Partial/Gap detail stays in the local brief).
+  Corrected before reporting out. Generalizing: check this file for standing
+  conventions on a skill's *output shape* before the first write, not just
+  for facts about the account.
+
+## 2026-08-04 (process-customer: a large, well-funded retail account)
+
+- Ran a full `process-customer` pass on a retail account whose Notion row
+  had been created from a Slack-evidence sweep only (no Gong/Salesforce
+  reviewed yet). Gong was connected this session and, combined with
+  public web research, resolved several open "need validation" items
+  from that earlier pass (stakeholder roles, and a copy-paste anomaly in
+  an AE's template email that turned out to be nothing). Rewrote the
+  whole Notion row (guardrail 4) and the local account brief.
+- Re-applied the MEDDPICC multi-select convention noted here on
+  2026-07-23: tag only Confirmed elements in the Notion property,
+  Partial/Gap detail stays in the local brief only.
+- **Caught and fixed a path-convention mix-up**: `device_bash`'s working
+  directory (the VM sandbox root) is not the same as the real device
+  path used by `device_stage_files`/`device_commit_files` — a `~`-relative
+  `mkdir` inside `device_bash` created a stray, harmless directory
+  outside the actual mounted repo instead of inside it. Caught before
+  anything was written there; cleaned up safely since it never touched
+  a real user file. Worth remembering for any future local file writes
+  through the device bridge.
+
 ## 2026-08-04
 
 - Added a local-only `resources/case-study-database.md` to the knowledge base:
