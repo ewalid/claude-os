@@ -14,6 +14,30 @@ local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
 2026-07-23 when the repo went fully agnostic — previously colleague names were
 allowed here.)
 
+## 2026-08-06 (process-customer: new inbound retail demo account; improve: AE-conflict + Slack-bot Amount evidence)
+
+- Ran `process-customer` on a new inbound EMEA retail account (~EUR41.7k
+  ARR, early Discovery stage) — first full run for this account. Notion
+  Accounts DB row created from scratch (Type, Stage, Priority, Owner,
+  AE, Next call, Deadline, MEDDPICC, Notes); the AE select list needed a
+  new option added via ALTER COLUMN (same known-issue class as
+  guardrail 8's history).
+- Real friction: a Salesforce-bot Slack notification named one person as
+  "Opportunity Owner" at deal-creation time, but the live Salesforce
+  record and the operator both confirmed a different person is the
+  actual AE — bot notifications can reflect an earlier sourcing/BDR
+  assignment rather than the current owner. `process-customer/SKILL.md`
+  Step 3's AE guidance now says to prefer a direct CRM record or the
+  operator's own confirmation over a bot's "Opportunity Owner" field
+  alone when the two disagree.
+- Also generalized Step 1's Slack scan: the Salesforce-bot's
+  opportunity-notification posts carry a real Amount field, usable as
+  ACV/TCV evidence even without checking Salesforce directly — this
+  session the bot's figure matched a real SF screenshot exactly.
+- Full brief written to the account's local-only file; MEDDPICC
+  currently Confirmed only on Decision Criteria/Identify Pain/
+  Competition, with Economic Buyer and Champion still open gaps.
+
 ## 2026-08-06 (improve: todo-sync becomes dynamic — suggests removals too, not just additions)
 
 - todo-sync previously only appended new personal to-do items and checked

@@ -32,7 +32,14 @@ Five phases, in order.
    deprecated — **Next call** / **Deadline** are the real fields).
 3. Calendar — past and upcoming events with this customer/account.
 4. Slack — search #se-requests, #se-sgm, and any other channel IDs
-   the operator has shared, for threads mentioning this account.
+   the operator has shared, for threads mentioning this account. The
+   Salesforce-for-Slack bot's opportunity-notification posts (in
+   #se-requests and #sf-new-opps-notification) carry a real **Amount**
+   field — capture it as deal-size evidence for the Notion ACV/TCV
+   fields even when Salesforce itself isn't checked directly. (2026-08-06,
+   Monica Vinader: the bot's Amount matched the operator's own SF
+   screenshot exactly — EUR 41,666 — so it's a reliable substitute when
+   the operator hasn't pasted a CRM extract yet.)
 5. **Gong, if a connector is present this session** (discover the real
    tool names/workspace at runtime — don't assume; check `memory.md`'s
    "Local config" section for a workspace name that worked before, but
@@ -107,7 +114,13 @@ one:
 - **Priority** — does the evidence justify a change (deal size, urgency,
   exec sponsorship signal)?
 - **AE** — does the evidence name the actual AE on this deal? Never
-  guess from role plausibility.
+  guess from role plausibility. Prefer a direct CRM screenshot/extract
+  or the operator's own confirmation over a Slack bot's "Opportunity
+  Owner" field alone if the two ever disagree — bot notifications can
+  reflect an earlier sourcing/BDR assignment rather than the current
+  owner (2026-08-06, Monica Vinader: an opp-creation bot post named one
+  person, but the live SF screenshot plus the operator both confirmed a
+  different person was the real AE).
 - **Next call / Deadline** — the concrete next milestone with a real
   date, labeled explicitly as CALL or DEADLINE.
 - **Notes** — a fresh, concise summary of where the deal actually
