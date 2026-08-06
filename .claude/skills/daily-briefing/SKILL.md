@@ -13,11 +13,17 @@ description: >
 Pulls together Google Calendar, Notion ("the operator's space"), Gmail, and both
 Slack channels (#se-requests and #se-sgm, or the operator's
 equivalents — channel IDs in local `memory.md`) into one
-scannable brief. Read-only — never modifies anything as part of the brief
-itself (Notion hygiene fixes are proposed/applied separately, not folded
-into this skill's own read-only pass — though if the operator reacts to the
-brief with new evidence, e.g. "X is mine" or forwards a thread, normal
-CLAUDE.md guardrail 4 applies to that follow-up).
+scannable brief. Read-only against accounts/calendar/email/Slack — never
+modifies those as part of the brief itself (Notion account-row hygiene
+fixes are proposed/applied separately, not folded into this skill's own
+read-only pass — though if the operator reacts to the brief with new
+evidence, e.g. "X is mine" or forwards a thread, normal CLAUDE.md
+guardrail 4 applies to that follow-up).
+
+The one exception is the operator's personal to-do list: `todo-sync` runs
+as a live step inside this skill (see Step 5) and DOES write — dynamically
+adding new personal action items and removing/checking off stale or
+completed ones, then announcing exactly what changed.
 
 ## Steps
 
@@ -59,7 +65,16 @@ CLAUDE.md guardrail 4 applies to that follow-up).
    (SaaS invites, digests, delivery notices, access-request emails)
    unless one of them is actually time-sensitive — don't pad the brief
    with noise.
-5. **Assemble** using the priority logic (CLAUDE.md): demo today first,
+5. **Todo sync** (runs `todo-sync` live, not just a mention-and-drop):
+   from everything surfaced in steps 1-4, identify (a) new personal
+   action items for the operator not tied to a specific account, and
+   (b) existing checklist items that now look done or no longer
+   relevant (a cancelled meeting, a request someone else already
+   handled, a superseded plan). Add the former, check off or remove the
+   latter (removals need a stated reason — see `todo-sync/SKILL.md`
+   step 4), and write the update to the Notion checklist in this same
+   pass — don't defer it to a separate ask.
+6. **Assemble** using the priority logic (CLAUDE.md): demo today first,
    deadline closing today/this week second, everything else after.
 
 ## Output format
@@ -87,7 +102,9 @@ actually scannable, not a wall of text.
   (or: "Nothing urgent.")
 
 ✅ TODOS
-- [from Notion ToDo checklist]
+- Added: [item] — [why] (or omit this line if nothing was added)
+- Removed: [item] — [why] (or omit this line if nothing was removed)
+- [current state of the list, or "No changes this run."]
 
 One-liner: [the single most important thing today, in one sentence]
 
@@ -121,7 +138,11 @@ itself, July 21).
   with a search/integration partner team — custom demo set for July 29.
 
 ✅ TODOS
-- Finish onboarding (Notion ToDo).
+- Added: follow up with <Account D>'s AE on custom demo scope — new,
+  not yet on the list.
+- Removed: "prep <Account A> intro call" — that call was cancelled per
+  today's Slack thread, no new date yet.
+- Finish onboarding (unchanged).
 
 One-liner: the <Account B> proposal is the tightest deadline this week — due July 17.
 ```
@@ -143,3 +164,8 @@ One-liner: the <Account B> proposal is the tightest deadline this week — due J
   default to fall back into.
 - Never draft or send emails from this skill or any other — CLAUDE.md
   guardrail 1 is absolute, read-only email access only.
+- **Standing preference (2026-08-06): todo-sync is dynamic, not just
+  additive.** Every run actively looks for stale/no-longer-relevant
+  items to remove, not only new ones to add — see `todo-sync/SKILL.md`
+  step 4. Don't revert to append-only; the operator explicitly asked
+  for suggest-and-update on both directions.

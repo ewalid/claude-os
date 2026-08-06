@@ -14,6 +14,24 @@ local, git-ignored files (`memory.md`, `resources/people.md`). (Tightened
 2026-07-23 when the repo went fully agnostic — previously colleague names were
 allowed here.)
 
+## 2026-08-06 (improve: todo-sync becomes dynamic — suggests removals too, not just additions)
+
+- todo-sync previously only appended new personal to-do items and checked
+  off completed ones; it never removed a stale/no-longer-relevant item,
+  only flagged it in chat. The operator asked for the routine to
+  dynamically suggest items to add OR remove, then actually update the
+  list in the same pass.
+- `todo-sync/SKILL.md`: added a real removal path (step 4) alongside
+  check-off — a line is deleted only when there is a stated reason
+  (cancelled, superseded, handled elsewhere), always announced in the
+  same output as the write. Guardrails updated to allow justified
+  removals while still forbidding guesses.
+- `daily-briefing/SKILL.md`: Step 5 (todo sync) now explicitly runs
+  live inside the briefing, not just as a mention; TODOS output section
+  gained Added:/Removed: lines.
+- A recurring scheduled brief (weekdays morning) was set up to run this
+  routine automatically going forward.
+
 ## 2026-08-04 (process-customer: a partner-sourced account, reopened after stalling)
 
 - Ran a full `process-customer` pass on an account with no prior Notion row.
