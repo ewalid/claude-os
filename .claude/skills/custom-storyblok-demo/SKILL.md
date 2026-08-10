@@ -146,7 +146,7 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
    reproduces** before editing (the upstream template may have been patched).
    On Path B skip the known list — a fresh boilerplate won't have those files.
 
-   **Then run these two audits on either path, before authoring any content.**
+   **Then run these three audits on either path, before authoring any content.**
    Both problems are invisible until an editor hits them live, which is the
    worst time to find out:
 
@@ -174,6 +174,28 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
       place — or nothing — once content lives under `<brand>/...`. Resolve
       the folder from the current route instead, in one shared composable
       that every call site uses.
+
+   c. **Asset & interactive rendering — components must honour the editor's
+      own controls.** Whenever a component renders a Storyblok `asset`/
+      `multiasset` or a dynamic element, check three things — each was a real,
+      separately-shipped bug in one build:
+      - **Focus point must drive the image.** With `object-cover`, never
+        hardcode `object-position`. Convert the asset's `image.focus`
+        ("x1xy1:x2xy2", original pixels) into a CSS `object-position` computed
+        from the image's natural size, recomputed on `@load` and on a `watch`
+        of the focus. Otherwise the editor's focus-point control silently does
+        nothing — a "why doesn't this work" the operator hits every time.
+      - **Images need a height or they collapse.** An `<img class="h-full">`
+        in a wrapper with no defined height renders ~80px tall. Give the
+        wrapper an explicit/responsive height (e.g. `h-72 md:h-[500px]`) or an
+        aspect ratio; don't rely on `h-full` alone.
+      - **Dynamic `:is` needs a resolved component, not a string.**
+        `<component :is="'NuxtLink'">` renders a dead `<nuxtlink>` tag with no
+        `href`. Use `resolveComponent('NuxtLink')` (or real `<NuxtLink>` /
+        `<div>` branches). Same for any component name passed to `:is`.
+      After any such change, verify on the DEPLOYED page that the rendered
+      `object-position` / height / `href` actually reflect the intent — a
+      successful build is not proof (guardrail 12).
 
    Commit and push the fixes.
 

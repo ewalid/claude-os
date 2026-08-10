@@ -6,6 +6,8 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- **improve:** custom-storyblok-demo step 4 gains a third component audit — asset & interactive rendering: image focus point must drive `object-position` (never hardcode it), images need a defined wrapper height (`h-full` alone collapses to ~80px), and dynamic `:is` needs a resolved component not a string (`:is="'NuxtLink'"` renders a dead tag).
+
 Convention (guardrail 6): this file is tracked in git and MUST contain zero real
 client/account names, deal figures, or real colleague/operator names — accounts
 are referred to generically ("an RFP deal", "an FR demo account") and people as
