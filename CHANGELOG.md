@@ -6,6 +6,7 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- **improve:** daily-briefing gains a read-only "calls to debrief" detection step (step 5) + output section, plus the manual "sweep yesterday's calls" trigger — surfaces last-working-day Gong calls with no matching Debriefs-DB row and OFFERS to run post-call-update per call (detection only; never pulls, summarizes, or writes — those stay inside post-call-update behind operator confirmation). Kept out of the brief's write path so daily-briefing stays read-only by design.
 - **improve:** custom-storyblok-demo step 4 gains a third component audit — asset & interactive rendering: image focus point must drive `object-position` (never hardcode it), images need a defined wrapper height (`h-full` alone collapses to ~80px), and dynamic `:is` needs a resolved component not a string (`:is="'NuxtLink'"` renders a dead tag).
 
 Convention (guardrail 6): this file is tracked in git and MUST contain zero real

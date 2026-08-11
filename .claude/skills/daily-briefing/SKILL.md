@@ -3,7 +3,9 @@ name: daily-briefing
 description: >
   Trigger: "morning brief", "daily brief", "give me the brief", or the
   start of a session with no other explicit ask. Produces the operator's daily
-  operational snapshot — scannable in under a minute.
+  operational snapshot — scannable in under a minute. Also hosts the
+  read-only "calls to debrief" detection (also runnable on demand via the
+  manual trigger "sweep yesterday's calls" / "any calls to debrief?").
 ---
 
 # daily-briefing
@@ -65,7 +67,20 @@ completed ones, then announcing exactly what changed.
    (SaaS invites, digests, delivery notices, access-request emails)
    unless one of them is actually time-sensitive — don't pad the brief
    with noise.
-5. **Todo sync** (runs `todo-sync` live, not just a mention-and-drop):
+5. **Calls to debrief** (READ-ONLY detection — never writes): if the Gong
+   MCP is connected this session (discover its tool names at runtime, and
+   pass the workspace param — the operator's Gong account has multiple
+   workspaces, so an omitted workspace errors), list any of the operator's
+   calls from the last WORKING day that don't already have a matching row
+   in the Notion Debriefs DB. Surface them as "calls to debrief" and OFFER
+   to run `post-call-update` on each. Do NOT pull transcripts, summarize,
+   or write anything in this step — detection only; the transcript pull and
+   all Notion/account-file/memory writes happen inside `post-call-update`,
+   and only after the operator says yes (that skill still confirms the
+   summary before writing). If Gong isn't connected, say so and skip. This
+   same detection is what the manual **"sweep yesterday's calls"** trigger
+   runs on demand, outside the brief.
+6. **Todo sync** (runs `todo-sync` live, not just a mention-and-drop):
    from everything surfaced in steps 1-4, identify (a) new personal
    action items for the operator not tied to a specific account, and
    (b) existing checklist items that now look done or no longer
@@ -74,7 +89,7 @@ completed ones, then announcing exactly what changed.
    latter (removals need a stated reason — see `todo-sync/SKILL.md`
    step 4), and write the update to the Notion checklist in this same
    pass — don't defer it to a separate ask.
-6. **Assemble** using the priority logic (CLAUDE.md): demo today first,
+7. **Assemble** using the priority logic (CLAUDE.md): demo today first,
    deadline closing today/this week second, everything else after.
 
 ## Output format
@@ -100,6 +115,11 @@ actually scannable, not a wall of text.
 📧 EMAIL
 - [account-relevant or urgent item, one line]
   (or: "Nothing urgent.")
+
+📞 CALLS TO DEBRIEF
+- [Account] ([call date]) — not yet debriefed. Run post-call-update?
+  (or: "None — recent calls already debriefed." Detection only, never
+  writes; skip the section entirely if Gong isn't connected.)
 
 ✅ TODOS
 - Added: [item] — [why] (or omit this line if nothing was added)
