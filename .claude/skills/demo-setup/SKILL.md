@@ -40,6 +40,16 @@ CMS-specific nouns for that product's equivalents.
    station actually needs to demonstrate — don't add generic product
    features that aren't part of this account's planned demo.
 
+1a. **Fork: custom frontend vs CMS-only.** Flag this to the operator
+   before listing Vercel/repo steps. A **custom site** (new repo,
+   template clone, deploy, preview URLs) is later executed by
+   `custom-storyblok-demo`. **Tweaking an existing space** (folders,
+   Dimensions, i18n, stories, no code) is later executed by
+   `storyblok-content`. A "small demo" can be CMS-only and still show
+   one live integration — do not assume every demo needs a new
+   frontend. (Learned 2026-08-06 on a small-demo pass; locked 2026-08-24
+   when an operator-created space was explicitly no-code / MCP-only.)
+
 2. **Decide space structure** (one shared space vs. space-per-brand/
    entity, folder structure, shared vs. duplicated component library).
    **Flag this decision to the operator before finalizing** if the account has

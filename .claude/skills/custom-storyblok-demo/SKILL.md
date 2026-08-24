@@ -2,10 +2,14 @@
 name: custom-storyblok-demo
 description: >
   Trigger: "let's create a custom [demo] for [customer]" — the word "custom"
-  matters, it's what distinguishes this from `demo-setup` (writes the planning
-  script) and `storyblok-content` (ongoing content writes into an existing
-  space). End-to-end pipeline for standing up a brand-new customer's Storyblok
-  demo: Path A duplicates a starter template repo the operator already uses;
+  matters, and it means a **custom frontend** (new repo, deploy, preview
+  URLs), not "customise content in a space we already have". Distinct from
+  `demo-setup` (writes the planning script) and `storyblok-content`
+  (folders/stories/Dimensions/i18n in an existing space — no code). If the
+  operator says they are not coding, hands a space id, or only wants CMS
+  tweaks, **stop and run `storyblok-content`**. End-to-end pipeline for
+  standing up a brand-new customer's Storyblok demo: Path A duplicates a
+  starter template repo the operator already uses;
   Path B (no such template / non-Storyblok operators) scaffolds their chosen
   framework via the Storyblok CLI. Then, both paths: clone+own a private repo,
   apply any template-specific fixes the operator tracks locally, deploy to
@@ -20,8 +24,10 @@ description: >
 
 Turns "let's create a custom for [customer]" into a deployed, CMS-wired demo,
 end to end and mostly hands-off. Distinct from `demo-setup` (planning/script)
-and `storyblok-content` (ongoing content writes into a working space). First
-real run 2026-07-24; reworked leaner the same day — see "Efficiency notes".
+and `storyblok-content` (CMS-only: architecture + content in a working
+space). **STOP if the operator is not shipping frontend code** — that is
+`storyblok-content`, even if they just created a new space. First real run
+2026-07-24; reworked leaner the same day — see "Efficiency notes".
 
 The shape: **the human-gated bits go up front** (a starter template choice
 and, if that template needs a pre-seeded CMS space, its creation — Darwin

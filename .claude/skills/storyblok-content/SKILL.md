@@ -2,14 +2,16 @@
 name: storyblok-content
 description: >
   Trigger: "set up the Storyblok space for [account]", "create these
-  stories/components in [space]". Writes real content into a
-  Storyblok space: dry-run preview → explicit OK → write → verify.
-  Checks for a live Storyblok MCP connector first (works today from
-  Claude Code on the operator's own machine); falls back to the Management
-  API token, which is blocked from inside a Cowork sandbox specifically
-  by network egress — see "Status". For standing up a brand-new customer's
-  ecommerce demo template from scratch (repo/Vercel/env vars), see
-  `custom-storyblok-demo` instead — that's a separate skill now.
+  stories/components in [space]", "reorganise this space", "set up
+  Dimensions / folders / i18n", or the operator hands a space id and
+  says they are NOT coding a frontend. Writes or restructures content
+  in an existing Storyblok space: architecture (if needed) → dry-run
+  → explicit OK → write → verify. Prefer the Storyblok MCP; fall back
+  to the Management API token (blocked inside Cowork by network egress
+  — see "Status"). This is CMS-only. A new custom site with a custom
+  frontend (clone a template, Vercel, env vars, preview URLs) is
+  `custom-storyblok-demo` — do not run that skill when the operator
+  says no code / existing space / content-only.
 ---
 
 # storyblok-content
@@ -66,6 +68,59 @@ not by session:
 Net effect: this skill is completable *today* from Claude Code (path
 1, or path 2 with normal network access) even though a Cowork
 session on its own is still blocked on path 2 specifically.
+
+## CMS-only vs custom frontend — pick this first
+
+These are two different jobs. Mixing them wastes a session.
+
+| Signal | Skill |
+|---|---|
+| New repo, Vercel, env vars, Visual Editor preview URL, "custom demo", Path A/B template | `custom-storyblok-demo` |
+| Space already exists; "we are not going to code"; MCP/CLI only; folders, Dimensions, i18n, stories, schemas in the CMS | **this skill** |
+| Written setup script only (no writes yet) | `demo-setup` |
+
+If the operator created a space and wants architecture or content in it,
+stay here. Do not clone a frontend or deploy unless they explicitly ask.
+
+**MCP first, Management API (`storyblok.env`) second, CLI third.** MCP
+has no `updateSpace` — language codes and Dimensions folder mapping are
+**UI** (Settings → Internationalization / Dimensions). Folders, stories,
+components, and duplicates go through MCP.
+
+## Space architecture (before any write, when the ask is structure)
+
+When the ask is regions, brands, shared content, or translations — **plan
+the tree in chat and get OK** before creating folders. Do not invent a
+frontend routing scheme.
+
+Standing facts (docs, not guesses):
+
+- Storyblok does **not** auto-copy or auto-translate a new story into
+  other languages. Field-level stores sibling keys (`field__i18n__code`)
+  on **one** story. Folder-level is separate trees. Dimensions **links
+  clones across top-level folders only** — locale folders nested under
+  a brand folder cannot be Dimension roots. Clone / merge / overwrite
+  match the same relative path in another root folder.
+- **`Blocks` fields are not translatable.** Same blok tree across
+  field-level locales; different structure per market needs folders +
+  Dimensions.
+- **Shared-across-brands content that still differs by market** lives
+  under each Dimension root (`en-gb/_shared/…`), referenced by brand
+  stories — not one global story unless copy is identical everywhere.
+- Duplicating a folder tree is **per-story** (`duplicateStory`). There
+  is no recursive tree duplicate. Duplicates get **new UUIDs**;
+  reference fields still point at the source — remap or the copies
+  resolve the wrong brand.
+- **CMS schema ≠ frontend code.** The Visual Editor lists Block Library
+  entries. The app renders whatever is registered under the same
+  `component` string. Creating a Vue/React file does not create a CMS
+  block; creating a CMS block does not ship a renderer. Schema sync
+  between spaces is CLI (`components pull` / `push`), not git-magic.
+- **GraphQL** is a read-only Content Delivery API (typed queries from
+  component names, e.g. `default-page` → `DefaultpageItem`). It does
+  not write content. Pricing lists it on Premium/Elite; REST CDN remains
+  the fuller API. Do not treat GraphQL as a reason to start a custom
+  frontend.
 
 ## What it will do
 

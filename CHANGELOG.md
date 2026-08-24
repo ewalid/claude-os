@@ -6,6 +6,7 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- **improve:** Storyblok demo work splits cleanly: CMS-only (folders, Dimensions, i18n, stories — `storyblok-content`, MCP first) vs a custom frontend (`custom-storyblok-demo`). `storyblok-content` now has an architecture-before-write pass (Dimensions = top-level folders only; no auto-translate on create; CMS schema does not sync from git). `demo-setup` asks that fork before listing Vercel/repo steps. No new skill — the two already existed; routing was the gap.
 - **improve:** daily-briefing gains a read-only "calls to debrief" detection step (step 5) + output section, plus the manual "sweep yesterday's calls" trigger — surfaces last-working-day Gong calls with no matching Debriefs-DB row and OFFERS to run post-call-update per call (detection only; never pulls, summarizes, or writes — those stay inside post-call-update behind operator confirmation). Kept out of the brief's write path so daily-briefing stays read-only by design.
 - **improve:** custom-storyblok-demo step 4 gains a third component audit — asset & interactive rendering: image focus point must drive `object-position` (never hardcode it), images need a defined wrapper height (`h-full` alone collapses to ~80px), and dynamic `:is` needs a resolved component not a string (`:is="'NuxtLink'"` renders a dead tag).
 
