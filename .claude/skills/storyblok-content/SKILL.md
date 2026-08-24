@@ -101,6 +101,17 @@ Standing facts (docs, not guesses):
   clones across top-level folders only** — locale folders nested under
   a brand folder cannot be Dimension roots. Clone / merge / overwrite
   match the same relative path in another root folder.
+- **Folder-per-locale (Dimensions) needs the space-level
+  `use_translated_stories` setting OFF.** With it ON, a `?language=<code>`
+  fetch of a story that lives in a locale FOLDER 404s — the API expects
+  field-level translations the folder content doesn't have. This 404'd
+  published locales on two separate builds before it was traced to one
+  space setting.
+- **`with_slug` (and any folder-path lookup) resolves to the FOLDER, not
+  its startpage.** Set a field on the id it returns and the value lands on
+  the folder story, not the page a visitor sees — invisible on the rendered
+  site. Target the startpage's own id for content writes (a residence field
+  was once set on the folder instead of the page this way).
 - **`Blocks` fields are not translatable.** Same blok tree across
   field-level locales; different structure per market needs folders +
   Dimensions.

@@ -28,7 +28,12 @@ the repo, so it never has to be corrected twice.
    2026-07-20's real fixes were self-caught); or the operator asking a
    reflection/status question about how I'm operating — if the honest
    answer reveals a gap, that IS the trigger, not just a question to
-   answer and move past.
+   answer and move past. A
+   reflection question can also be a **whole-engagement retrospective** ("that
+   project was chaotic, what should change?"), not just a single in-the-moment
+   correction — mine the relevant prior sessions (session-mgmt
+   `search`/`list_events`) to ground the fixes in what actually happened
+   before writing them.
 
 2. **Identify the friction.** What exactly was wrong or missing? Quote it
    back in your own head before acting — vague understanding produces a
@@ -54,6 +59,19 @@ the repo, so it never has to be corrected twice.
      logic, its Slack triage, etc.) → the artifact's HTML/JS itself, via
      `update_artifact`, THEN verify with `verify_artifact` before calling
      it done. A fix that isn't redeployed to the artifact isn't a fix.
+
+   **Before concluding "this needs a NEW skill," search every skill location
+   for one that already covers it** — `~/dev/darwin/.claude/skills/`,
+   `~/.claude/skills/`, the SE team repo `~/dev/tools/se-ai-tools/skills/`
+   (mature `replicate-*` site/section skills live there), and the current
+   project's own `.claude/skills/`. Near-miss: a Yugo retrospective almost
+   spawned a `replicate-site-demo` skill when a deep `replicate-site` already
+   existed in the team repo, and most of the "new" gotchas were already
+   captured inside `custom-storyblok-demo` / `storyblok-content`. Default to
+   folding a fix into the existing skill; a genuinely new skill is the
+   exception, not the reflex. (Per operator policy these SE-demo lessons land
+   in Darwin's own skills, not the team repo — but you still check the team
+   repo so you don't duplicate or contradict it.)
 
 4. **Apply it.** Read-before-Edit as usual. If the fix spans multiple
    files (it usually does — e.g. a people correction touches

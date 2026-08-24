@@ -106,7 +106,13 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
    as separate folders for one account). If something matches, use it. Only
    create `~/dev/accounts/<Customer>/` if genuinely nothing matches — **ask
    the operator to confirm** on any ambiguity. Never silently create a second
-   folder for the same customer under a different spelling.
+   folder for the same customer under a different spelling. The
+   same discipline covers the whole build: **one demo = one repo + one space
+   + one deploy.** Don't start a second, parallel build of the same demo on a
+   different space/repo/Vercel URL — the Yugo demo ran as two overlapping
+   builds on two deploys, never reconciled, and the duplication was a top
+   token sink. If a second one already exists, stop and reconcile to one
+   before continuing.
 
 3. **Get the code into an owned private repo** — path-dependent:
 
@@ -180,6 +186,19 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
       place — or nothing — once content lives under `<brand>/...`. Resolve
       the folder from the current route instead, in one shared composable
       that every call site uses.
+
+      **Same trap on the locale axis, and it is the expensive one.** A
+      folder-per-locale (Dimensions) site whose frontend hardcodes the
+      locale list (`LOCALE_FOLDERS = ['en-us','en-gb']`) 404s the moment an
+      editor adds a locale folder from the CMS — the demo's own "add a
+      market yourself" pitch breaks at the worst moment. Derive the locale
+      list dynamically (space `language_codes` via `cdn/spaces/me`, or the
+      top-level folders) so a CMS-only locale add needs zero frontend code.
+      And **lock the locale model before building the frontend**:
+      folder-per-locale (Dimensions) vs field-level i18n couples directly to
+      the routing, so switching after the frontend exists rewrites both the
+      tree and the router — the single biggest time sink on the Yugo build,
+      which decided the model twice.
 
    c. **Asset & interactive rendering — components must honour the editor's
       own controls.** Whenever a component renders a Storyblok `asset`/
@@ -390,3 +409,13 @@ descriptions.
   Editor). Mocking product data in code silently breaks those blocks. If the
   operator's template has such blocks (tracked in local memory), use real
   Shopify products rather than mocks. Generic caveat here; specifics in memory.
+- **Building a custom field plugin: use the official CLI, never hand-inject
+  it via the Management API.** Scaffold with `npx @storyblok/field-plugin
+  create`, build, and deploy it — the CLI registers `body`/`compiled_body`/
+  `space_ids` correctly. Writing those fields directly onto a `field_type`
+  via MAPI produces a plugin that silently never renders in the editor (the
+  Yugo `pms-picker` burned a long session exactly this way). A field plugin
+  also **cannot be verified headlessly** — it only renders inside the open
+  editor — so debugging needs the operator's editor console, and you keep a
+  datasource-backed `options` fallback ready (see the picker stand-in above)
+  so a residence/room choice is never lost while the plugin is in doubt.
