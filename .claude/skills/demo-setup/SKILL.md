@@ -40,16 +40,6 @@ CMS-specific nouns for that product's equivalents.
    station actually needs to demonstrate — don't add generic product
    features that aren't part of this account's planned demo.
 
-1a. **Fork: custom frontend vs CMS-only.** Flag this to the operator
-   before listing Vercel/repo steps. A **custom site** (new repo,
-   template clone, deploy, preview URLs) is later executed by
-   `custom-storyblok-demo`. **Tweaking an existing space** (folders,
-   Dimensions, i18n, stories, no code) is later executed by
-   `storyblok-content`. A "small demo" can be CMS-only and still show
-   one live integration — do not assume every demo needs a new
-   frontend. (Learned 2026-08-06 on a small-demo pass; locked 2026-08-24
-   when an operator-created space was explicitly no-code / MCP-only.)
-
 2. **Decide space structure** (one shared space vs. space-per-brand/
    entity, folder structure, shared vs. duplicated component library).
    **Flag this decision to the operator before finalizing** if the account has
@@ -61,10 +51,19 @@ CMS-specific nouns for that product's equivalents.
 3. **List components needed**, each tied to a specific station/pain
    point — fields, not just names, where that's known from the brief.
 
-4. **Front-end wiring** — what needs to be connected (e.g. a decoupled
-   React/Next.js front-end via the Content Delivery API) for an
-   architecture-focused station to actually work live, plus a note to
-   test the live-update loop before the call, not assume it works.
+4. **Front-end wiring — and which skill actually builds it.** Flag
+   explicitly whether the stations need:
+   - **Content-only:** the existing starter frontend already renders
+     every block; execution is `storyblok-content` (rebrand, folders,
+     pages from existing components).
+   - **Custom frontend:** a layout or block the starter cannot draw;
+     execution is `custom-storyblok-demo` (clone/scaffold + deploy),
+     then code work in that demo repo.
+   Don't bury this in a wiring note. The operator's "custom demo" often
+   means only the first case. Plus: what must be connected (e.g. a
+   decoupled front-end via the Content Delivery API) for an
+   architecture-focused station to work live, and a note to test the
+   live-update loop before the call.
 
 5. **Permissions/governance and AI features** — anything the demo needs
    to show on-screen to back up a talking point (e.g. a role/permission
@@ -106,8 +105,11 @@ steps 3-6. If asked to execute directly:
   (CLAUDE.md guardrail 3) — no exceptions, no matter how small the
   change. This only applies if/when direct execution is ever attempted;
   it has no bearing on writing the script itself.
-- Never invent a space structure without checking whether the account
+- **Never invent a space structure without checking whether the account
   has a multi-brand/multi-site Decision Criterion the structure itself
   needs to prove (step 2's confirmation gate exists for this).
+- **Never skip the content-only vs custom-frontend flag in step 4.**
+  Treating every "custom demo" as a repo clone wastes a cycle; treating
+  a missing renderer as a CMS write fails silently in the editor.
 - Never treat mock/fictional data as if it were live — always carried
   through as an explicit caveat, both here and in `demo-script`.

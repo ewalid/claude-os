@@ -122,6 +122,22 @@ it (dry-run → your OK → write → verify), but that's a bonus, not a depende
 
 ---
 
+## Storyblok demo work — pick the right skill first
+
+Two different jobs. The word "custom" is not enough to choose.
+
+| They need | Skill |
+|---|---|
+| A **customer-specific frontend** — clone/scaffold a repo, change how blocks render, deploy | `custom-storyblok-demo` |
+| **CMS content only** — rebrand, folders, site-config, pages from existing blocks, experiment charts, same starter frontend | `storyblok-content` |
+| A **written setup script** before either of the above | `demo-setup` |
+
+If the frontend repo already exists and they want more Vue/CSS, that is
+work in that repo — not a re-run of the standup skill, and not a CMS
+write. Content cannot invent a renderer the frontend does not have.
+
+---
+
 ## Heavy artillery
 
 ### `rfp-answer`
@@ -136,30 +152,23 @@ real problem. Official product docs outrank any unofficial answer library.
 
 ### `custom-storyblok-demo` *(opt-in — Storyblok CMS only)*
 Also tied to Storyblok specifically — ignore it unless your company uses
-Storyblok. **Trigger:** "let's create a custom [demo] for [customer]" (the
-word "custom" is what distinguishes it from `demo-setup` and
-`storyblok-content`). **Does:** the repeatable, mostly hands-off pipeline for
-standing up a brand-new customer's Storyblok demo. Two paths: **Path A**
-duplicates a starter template repo the operator already uses (which repo, and
-any of its fixes/CMS-seeding quirks, come from local memory — never named in
-git); **Path B** asks which framework/language and scaffolds it via the
-Storyblok CLI (`storyblok create`). Then both: own a private repo (never a
-public GitHub Fork), apply any template fixes (Path A, from local memory), set
-`.env` + Vercel env vars via CLI, deploy via CLI, one cheap content check on
-the deployed URL, and wire both preview URLs into the CMS (localhost as "dev",
-Vercel as default). Never creates a would-be-blank CMS space (asks the
-operator); fetches the Preview token itself; doesn't launch/verify localhost.
+Storyblok. **Trigger:** they need a **customer-specific frontend**
+("custom site", clone the template, a layout the starter cannot draw).
+The word "custom" alone is not enough — rebranding an existing space is
+`storyblok-content`. **Does:** Path A duplicates a starter template repo
+(from local memory); Path B scaffolds via Storyblok CLI. Then both: own a
+private repo, apply template fixes, deploy to Vercel, wire preview URLs.
+Ask frontend-vs-content before Path A/B. Never creates a would-be-blank
+CMS space (asks the operator).
 
 ### `storyblok-content` *(opt-in — Storyblok CMS only)*
 Darwin is otherwise product-agnostic; this is the one skill tied to a
 specific product. Ignore it unless your company uses **Storyblok** as its
-CMS. **Trigger:** "set up the Storyblok space for [account]", "create these
-stories/components". **Does:** writes real content into a Storyblok space via
-a Storyblok MCP connector if present (works from Claude Code), else the
-Management API, always dry-run → your OK → write → verify (production spaces
-need a second confirmation). *Status: from Cowork it needs a network path to
-storyblok.com — run from your own terminal, or have an admin allowlist the
-domain.*
+CMS. **Trigger:** "set up the Storyblok space", create stories/components,
+rebrand/restructure/populate. **Does:** CMS writes only (MCP or Management
+API), dry-run → OK → write → verify. Never clones a frontend or deploys
+Vercel. If they need a renderer the starter does not have, route to
+`custom-storyblok-demo` or the already-cloned demo repo.
 
 ---
 

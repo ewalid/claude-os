@@ -2,16 +2,13 @@
 name: storyblok-content
 description: >
   Trigger: "set up the Storyblok space for [account]", "create these
-  stories/components in [space]", "reorganise this space", "set up
-  Dimensions / folders / i18n", or the operator hands a space id and
-  says they are NOT coding a frontend. Writes or restructures content
-  in an existing Storyblok space: architecture (if needed) → dry-run
-  → explicit OK → write → verify. Prefer the Storyblok MCP; fall back
-  to the Management API token (blocked inside Cowork by network egress
-  — see "Status"). This is CMS-only. A new custom site with a custom
-  frontend (clone a template, Vercel, env vars, preview URLs) is
-  `custom-storyblok-demo` — do not run that skill when the operator
-  says no code / existing space / content-only.
+  stories/components in [space]", rebrand/restructure/populate an
+  existing demo space. Writes CMS content only (stories, components,
+  assets, experiment results): dry-run → explicit OK → write → verify.
+  Never clones a frontend, never edits Vue/Nuxt/React, never deploys
+  Vercel — if they need a customer-specific site or a layout the starter
+  cannot render, that is `custom-storyblok-demo` (standup) or work in
+  the already-cloned demo repo. MCP first, Management API fallback.
 ---
 
 # storyblok-content
@@ -69,18 +66,18 @@ Net effect: this skill is completable *today* from Claude Code (path
 1, or path 2 with normal network access) even though a Cowork
 session on its own is still blocked on path 2 specifically.
 
-## CMS-only vs custom frontend — pick this first
+## This skill does not touch a frontend
 
-These are two different jobs. Mixing them wastes a session.
+It writes **into a Storyblok space**. It does not clone a template repo,
+edit Vue/Nuxt/React/CSS, or run `vercel --prod`. Those belong to
+`custom-storyblok-demo` (first standup of a customer frontend) or to the
+already-cloned demo repo (later code changes).
 
-| Signal | Skill |
-|---|---|
-| New repo, Vercel, env vars, Visual Editor preview URL, "custom demo", Path A/B template | `custom-storyblok-demo` |
-| Space already exists; "we are not going to code"; MCP/CLI only; folders, Dimensions, i18n, stories, schemas in the CMS | **this skill** |
-| Written setup script only (no writes yet) | `demo-setup` |
-
-If the operator created a space and wants architecture or content in it,
-stay here. Do not clone a frontend or deploy unless they explicitly ask.
+If the operator asks for a layout the current frontend cannot render
+(a new block type, a full-bleed video hero that needs a new component),
+say so and route there. Authoring content cannot invent a renderer.
+Rebranding, folder architecture, site-config copies, Dimensions clones,
+and fake experiment charts **are** this skill.
 
 **MCP first, Management API (`storyblok.env`) second, CLI third.** MCP
 has no `updateSpace` — language codes and Dimensions folder mapping are
@@ -260,6 +257,9 @@ fails at exactly the moment someone tries.
 - Never write to a Storyblok space without the dry-run → OK step,
   regardless of which path (MCP or API) or which environment
   (Cowork or Claude Code) it's run from (CLAUDE.md guardrail 3).
+- **Never clone a frontend, edit app code, or deploy hosting from this
+  skill.** If the ask is a custom site or a layout the starter cannot
+  render, stop and route (see "This skill does not touch a frontend").
 - Production spaces need a second, explicit confirmation naming the
   space — a dev/test space does not.
 - The token lives only in `storyblok.env` (gitignored). Never commit

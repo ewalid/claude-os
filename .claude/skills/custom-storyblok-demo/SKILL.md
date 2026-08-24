@@ -1,33 +1,46 @@
 ---
 name: custom-storyblok-demo
 description: >
-  Trigger: "let's create a custom [demo] for [customer]" — the word "custom"
-  matters, and it means a **custom frontend** (new repo, deploy, preview
-  URLs), not "customise content in a space we already have". Distinct from
-  `demo-setup` (writes the planning script) and `storyblok-content`
-  (folders/stories/Dimensions/i18n in an existing space — no code). If the
-  operator says they are not coding, hands a space id, or only wants CMS
-  tweaks, **stop and run `storyblok-content`**. End-to-end pipeline for
-  standing up a brand-new customer's Storyblok demo: Path A duplicates a
-  starter template repo the operator already uses;
-  Path B (no such template / non-Storyblok operators) scaffolds their chosen
-  framework via the Storyblok CLI. Then, both paths: clone+own a private repo,
-  apply any template-specific fixes the operator tracks locally, deploy to
-  Vercel via CLI, set env vars via CLI, wire both preview URLs into the CMS.
-  Runs mostly hands-off. Template-specific specifics live in local memory,
-  never in this file.
+  Trigger: "let's create a custom [demo] for [customer]" AND they need a
+  customer-specific frontend (clone/scaffold a repo, change how blocks
+  render, deploy). The word "custom" is NOT enough on its own — if they
+  only want to rebrand, restructure folders, or author pages in an
+  existing space on the unchanged starter frontend, that is
+  `storyblok-content`, not this skill. Distinct from `demo-setup`
+  (writes the planning script). End-to-end pipeline: Path A duplicates a
+  starter template repo the operator already uses; Path B scaffolds via
+  the Storyblok CLI. Then both: clone+own a private repo, apply known
+  template fixes, deploy to Vercel, wire preview URLs. Template-specific
+  specifics live in local memory, never in this file.
 ---
 
 # custom-storyblok-demo
 
 ## What it does
 
-Turns "let's create a custom for [customer]" into a deployed, CMS-wired demo,
-end to end and mostly hands-off. Distinct from `demo-setup` (planning/script)
-and `storyblok-content` (CMS-only: architecture + content in a working
-space). **STOP if the operator is not shipping frontend code** — that is
-`storyblok-content`, even if they just created a new space. First real run
-2026-07-24; reworked leaner the same day — see "Efficiency notes".
+Turns "let's create a custom for [customer]" into a deployed, CMS-wired demo
+**with its own frontend**, end to end and mostly hands-off. Distinct from
+`demo-setup` (planning/script) and `storyblok-content` (CMS content only —
+no repo, no Vue/React, no Vercel). First real run 2026-07-24; reworked
+leaner the same day — see "Efficiency notes".
+
+## Fork first — custom frontend vs content-only
+
+"Custom demo" is ambiguous. **Ask this before Path A/B**, in the same
+batched turn as the other human-gated questions:
+
+- **Custom frontend (this skill):** they need a customer-specific site —
+  duplicate or scaffold a repo, change how components render (new blocks,
+  layouts the starter cannot draw), deploy that frontend. Words that
+  belong here: custom site, custom frontend, clone the template, a hero
+  / layout / component the starter does not have.
+- **Content-only (`storyblok-content`):** same starter frontend, different
+  CMS payload — rebrand, folders, site-config, Dimensions clones, pages
+  built from existing blocks, fake experiment results. **Stop this skill
+  and run `storyblok-content`.** Do not clone a repo.
+- **Frontend already cloned, more code work:** stay in that demo repo.
+  Do not re-run this standup pipeline. Do not try to invent a renderer
+  by writing CMS content.
 
 The shape: **the human-gated bits go up front** (a starter template choice
 and, if that template needs a pre-seeded CMS space, its creation — Darwin
